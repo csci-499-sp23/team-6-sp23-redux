@@ -15,7 +15,7 @@
 
 TEAM SDAAWS!!!
 - David Cai:Scrumlord
-- Kamil Piziak
+- Kamil Piziak: Scrumqueen
 - Jordan Sukhnandan
 - Jackie Chen
 - Chizaram Chibueze
