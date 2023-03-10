@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import SwipeableContainer from './SwipeableContainer';
 
 function App() {
@@ -15,7 +14,7 @@ function App() {
         <Navbar className="color-navbar" expand="lg">
           <Container>
             <Navbar.Brand href="#home">
-              <img className="nav-logo" src="easyhangoutlogo.png"></img>
+              <img className="nav-logo" src="easyhangoutlogo.png" alt="nav-logo"></img>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -28,7 +27,7 @@ function App() {
           </Container>
         </Navbar>
 
-        <img className="InfoButton" src=""></img>
+        <img className="InfoButton" src="" alt="info-button"></img>
         <div className="HangoutContainer">
           <SwipeableContainer></SwipeableContainer>
         </div>
