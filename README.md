@@ -14,7 +14,7 @@
 ## Authors and acknowledgment
 
 TEAM SDAAWS!!!
-- David Cai:Scrum Lord
+- David Cai:Scrumlord
 - Kamil Piziak
 - Jordan Sukhnandan
 - Jackie Chen
