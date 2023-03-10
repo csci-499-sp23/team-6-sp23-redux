@@ -15,7 +15,7 @@
 
 TEAM SDAAWS!!!
 - David Cai:Scrum Lord
-- Kamil Piziak
+- Kamil Piziak :)
 - Jordan Sukhnandan
 - Jackie Chen
 - Chizaram Chibueze
