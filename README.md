@@ -14,7 +14,7 @@
 ## Authors and acknowledgment
 
 - David Cai
-- Kamil Piziak
+- Kamil Piziak :)
 - Jordan Sukhnandan
 - Jackie Chen
 - Chizaram Chibueze
