@@ -13,7 +13,7 @@
 
 ## Authors and acknowledgment
 
-- David Cai
+- David Cai: The Scrum Lord
 - Kamil Piziak
 - Jordan Sukhnandan
 - Jackie Chen
