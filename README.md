@@ -13,6 +13,7 @@
 
 ## Authors and acknowledgment
 
+TEAM SDAAWS!!!
 - David Cai
 - Kamil Piziak
 - Jordan Sukhnandan
