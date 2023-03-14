@@ -1,0 +1,44 @@
+.Container {
+    color: #000000;
+    border: 0.5px black solid;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#Container-Title {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translate(-50%, -8px);
+    font-size: 5vh;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    white-space: nowrap;
+}
+
+#Container-Image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+
+}
+
+#Location {
+    position: absolute;
+    bottom: 6vh;
+    color: white;
+    left: 2vh;
+}
+
+#Distance {
+    position: absolute;
+    color: white;
+    bottom: 2vh;
+    left: 2vh;
+}
