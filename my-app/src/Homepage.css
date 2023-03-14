@@ -1,0 +1,17 @@
+.HangoutContainer {
+    position: relative;
+    overflow: hidden;
+    width: 60vh;
+    height: 70vh;
+    margin: auto;
+    top: 10vh;
+    border-radius: 5%;
+  }
+  
+  .InfoButton {
+    width: 7vh;
+    height: 7vh;
+    float: right;
+    margin-right: 16px;
+    margin-top: 16px;
+  }

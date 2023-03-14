@@ -1,28 +1,6 @@
-.App {
-}
-
 .App-header {
   background-color: white;
   min-height: 100vh;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.color-navbar{
-  background-color: orange;
-}
-
-.nav-logo{
-  width: 6vw;
-  height: 10vh;
-}
-
-.HangoutContainer {
-  position: relative;
-  overflow: hidden;
-  width: 60vh;
-  height: 70vh;
-  margin: auto;
-  top: 10vh;
-  border-radius: 5%;
 }
