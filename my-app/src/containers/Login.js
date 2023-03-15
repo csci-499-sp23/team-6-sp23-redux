@@ -16,7 +16,6 @@ const Login = () => {
             const user = userCredential.user;
             navigate("/homepage")
             console.log(user);
-            console.log("Signed in");
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -85,4 +84,4 @@ const Login = () => {
     )
 }
  
-export default Login
+export default Login;
