@@ -1,0 +1,26 @@
+
+  .FavoriteImages {
+    border-radius: 15px;
+  }
+  .FavoriteTitle {
+    text-align: center;
+    color: orange;
+    font-size: calc(10px + 2vmin);
+
+  }
+  .FavoriteTableDiv {
+    display:flex;
+    justify-content:center;
+    
+  }
+
+  img:hover{
+    filter: brightness(50%);
+
+  }
+  th, td {
+    padding: 15px;
+    border-radius: 25px;
+  }
+
+
