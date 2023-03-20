@@ -8,7 +8,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#Container-Title {
+#Title {
     position: absolute;
     top: 8px;
     left: 50%;
@@ -20,7 +20,7 @@
     white-space: nowrap;
 }
 
-#Container-Image {
+#Image {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
