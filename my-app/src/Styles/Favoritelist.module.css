@@ -8,10 +8,9 @@
     font-size: calc(10px + 2vmin);
 
   }
-  .FavoriteTableDiv {
-    display:flex;
-    justify-content:center;
-    
+
+  .FavoriteTable {
+    margin: auto;
   }
 
   img:hover{
