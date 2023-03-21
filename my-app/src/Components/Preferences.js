@@ -24,8 +24,7 @@ const geolocationClick = () => {
       }
 };
 
-const handleSubmit = () => {
-};
+
 
 function Preferences() {
     return (
@@ -76,7 +75,7 @@ function Preferences() {
 
                 <br></br>
 
-                <Button variant = "outline-dark" size = "sm" onClick = {handleSubmit}>
+                <Button variant = "outline-dark" size = "sm" >
                     Update Preferences
                 </Button> 
 
