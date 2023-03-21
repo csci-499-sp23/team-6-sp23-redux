@@ -1,0 +1,20 @@
+.PreferencesTitle{
+    text-align: left;
+    color: orange;
+    font-size: calc(10px + 2vmin);
+}
+
+.PreferencesHeader{
+    text-align: left;
+    color: black;
+    font-size: medium;
+}
+
+.PreferencesButtons{
+    text-align: left;
+}
+.PreferencesForms{
+    color:black;
+    width: 0%;
+    font-size:small;
+}
