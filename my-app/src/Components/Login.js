@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {  signInWithEmailAndPassword   } from 'firebase/auth';
 import { auth } from '../firebase';
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom';
+import LoginCSS from '../Styles/Login.module.css';
  
 const Login = () => {
     const navigate = useNavigate();
@@ -27,17 +28,19 @@ const Login = () => {
  
     return(
         <>
-            <main >        
-                <section>
-                    <div>                                            
+            <main class = {LoginCSS.login}>        
+                <section class = {LoginCSS.LoginContainer}>
+                    <div class = {LoginCSS.LoginDiv}>                                            
                                             
                                                        
                         <form>                                              
                             <div>
-                                <label htmlFor="email-address">
+                                <label htmlFor="email-address"
+                                       class = {LoginCSS.LoginText}>
                                     Email address
                                 </label>
                                 <input
+                                    class = {LoginCSS.LoginTextBox}
                                     id="email-address"
                                     name="email"
                                     type="email"                                    
@@ -48,7 +51,8 @@ const Login = () => {
                             </div>
 
                             <div>
-                                <label htmlFor="password">
+                                <label htmlFor="password"
+                                        class = {LoginCSS.LoginText}>
                                     Password
                                 </label>
                                 <input
@@ -58,19 +62,21 @@ const Login = () => {
                                     required                                                                                
                                     placeholder="Password"
                                     onChange={(e)=>setPassword(e.target.value)}
+                                    class = {LoginCSS.LoginTextBox}
                                 />
                             </div>
                                                 
                             <div>
-                                <button                                    
-                                    onClick={onLogin}                                        
+                                <button   
+                                    class = {LoginCSS.LoginButton}                                 
+                                    onClick={onLogin}                                       
                                 >      
                                     Login                                                                  
                                 </button>
                             </div>                               
                         </form>
                        
-                        <p className="text-sm text-white text-center">
+                        <p class = {LoginCSS.LoginText}>
                             No account yet? {' '}
                             <NavLink to="/signup">
                                 Sign up
