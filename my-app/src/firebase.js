@@ -21,8 +21,3 @@ const auth = getAuth(app);
 const analytics = getAnalytics(app);
 
 export { app, db, auth, analytics };
-
-// updated relative path in signup.js and login.js
-// from import { auth } from '../firebase'; to 
-// import { auth } from './../firebase'; 
-// to see if it solves the workflow error
