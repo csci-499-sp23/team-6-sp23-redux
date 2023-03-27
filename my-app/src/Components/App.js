@@ -4,6 +4,7 @@ import Homepage from './Homepage';
 import AppNavbar from './AppNavbar';
 import Login from './Login';
 import SignUp from './Signup';
+import Preferences from './Preferences';
 import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/favorites" element={<Favoritelist/>}/>
           <Route exact path = "/login" element = {<Login/>}/>
           <Route exact path = "/signup" element = {<SignUp/>}/>
+          <Route exact path="/preferences" element={<Preferences/>}/>
         </Routes>
       </Router>    
     </div>
