@@ -1,14 +1,11 @@
 import HomepageCSS from '../Styles/Homepage.module.css'
 import { useState, useEffect } from 'react';
 import SwipeableContainer from './SwipeableContainer';
-import HangoutDetail from './HangoutDetail';
 import { getHangoutLocations } from '../Services/HangoutService';
 
 function Homepage() {
 
-    const [isShown, setIsShown] = useState(false);
-    const [showDetail, setShowDetail] = useState(`${HomepageCSS.HangoutDetailInvis}`);
-    
+    const [isShown, setIsShown] = useState(false);    
     const [hangoutData, setHangoutData] = useState([]);
 
     useEffect( () => {
@@ -17,11 +14,6 @@ function Homepage() {
         console.log(data);
       })
     }, []);
-
-
-    const displayHangoutDetails = () => { 
-      setShowDetail(`${HomepageCSS.HangoutDetailContainer}`);
-    };
 
 
     return (
