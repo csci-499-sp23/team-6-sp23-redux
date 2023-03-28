@@ -1,44 +1,8 @@
-.HangoutContainer {
-    position: relative;
-    overflow: hidden;
-    width: 60vh;
-    height: 70vh;
-    margin: auto;
-    top: 10vh;
-    border-radius: 5%;
-    visibility: visible;
+.Homepage {
+  overflow: hidden;
+  height: 180vh;
 }
 
-.HangoutContainerInvis {
-  visibility: hidden;
-}
-
-.HangoutDetailInvis {
-  visibility: hidden;
-}
-
-.HangoutDetailContainer {
-  position: absolute;
-  top: 13vh;
-  visibility: visible;
-}
-
-.HangoutDetailBackButton {
-  background-color: transparent;
-  color: white;
-  font-weight: bold;
-  padding: 4px 16px;
-  position: absolute;
-  left: 0px;
-  top: 8px;
-  border: none;
-}
-
-#BackButtonImage {
-  height: 50%;
-  width: 50%;
-}
-  
 .InfoButton {
   width: 7vh;
   height: 7vh;

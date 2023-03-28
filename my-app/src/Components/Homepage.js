@@ -1,23 +1,28 @@
 import HomepageCSS from '../Styles/Homepage.module.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SwipeableContainer from './SwipeableContainer';
 import HangoutDetail from './HangoutDetail';
+import { getHangoutLocations } from '../Services/HangoutService';
 
 function Homepage() {
 
     const [isShown, setIsShown] = useState(false);
     const [showDetail, setShowDetail] = useState(`${HomepageCSS.HangoutDetailInvis}`);
-    const [toggleHangout, setToggleHangout] = useState(`${HomepageCSS.HangoutContainer}`);
     
+    const [hangoutData, setHangoutData] = useState([]);
+
+    useEffect( () => {
+      getHangoutLocations().then(data => {
+        setHangoutData(data);
+        console.log(data);
+      })
+    }, []);
+
+
     const displayHangoutDetails = () => { 
       setShowDetail(`${HomepageCSS.HangoutDetailContainer}`);
-      setToggleHangout(`${HomepageCSS.HangoutContainerInvis}`);
     };
 
-    const displayHangoutContainer = () => {
-      setShowDetail(`${HomepageCSS.HangoutDetailInvis}`);
-      setToggleHangout(`${HomepageCSS.HangoutContainer}`);
-    }
 
     return (
       <div className={HomepageCSS.Homepage}>
@@ -34,20 +39,29 @@ function Homepage() {
               </div>
             }
           </div>
-          
-          
 
-          <div className={toggleHangout} onClick={displayHangoutDetails}>
-            <SwipeableContainer />     
-          </div>
-          <div className={showDetail}>
-                <HangoutDetail />
-                <button className={HomepageCSS.HangoutDetailBackButton}
-                        onClick={displayHangoutContainer}>
-                  <img id={HomepageCSS.BackButtonImage} src="Images/back-button.png" alt="back"/>
-                </button>
-          </div>
-          
+          { hangoutData.length > 0 &&
+            hangoutData.map(function(hangoutData, index){
+              return(
+                <SwipeableContainer
+                  className={HomepageCSS.HangoutContainer}
+                  key={index}
+                  index={index} 
+                  title={hangoutData.name} 
+                  image={hangoutData.image_url} 
+                  distance={hangoutData.distance} 
+                  location={hangoutData.location.display_address[0]}
+                  location2={hangoutData.location.display_address[1]}
+                  phone={hangoutData.display_phone}
+                  rating={hangoutData.rating}
+                  price={hangoutData.price}
+                  details={hangoutData.categories}
+                  />
+              )
+                
+            })
+          } 
+                 
       </div>
     );
   }

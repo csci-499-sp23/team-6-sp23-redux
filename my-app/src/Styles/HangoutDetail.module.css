@@ -1,7 +1,7 @@
 .Container {
     position: relative;
-    width: 100vw;
-    height: 87vh;
+    width: 70vw;
+    height: 90vh;
     background-color: orange;
     color: white;
     border: outset gray 1.5px;
@@ -9,6 +9,7 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    margin: auto;
 }
 
 #Title {
@@ -35,6 +36,7 @@
     width: 60vw;
     margin: auto;
     margin-top: 16px;
+    margin-left: 24px;
 }
 
 #Image {
@@ -43,7 +45,7 @@
     background-position: center;
     height: 40vh;
     width: 20vw;
-    margin-left: 8px;
+    margin-left: 24px;
     border-radius: 5vh;
 }
 
@@ -57,4 +59,15 @@ li {
     margin-left: 8px;
     margin-bottom: 8px;
     font-size: 23px;
+    list-style-type: "-";
+}
+
+.Details {
+    margin-left: 20px;
+    font-size: 24px;
+}
+
+.ExtraInformation {
+    margin-top: 24px;
+    margin-left: 24px;
 }
