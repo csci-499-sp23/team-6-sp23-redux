@@ -18,7 +18,6 @@ function AppNavbar() {
                 <Nav.Link href="preferences">Preferences</Nav.Link>
                 <Nav.Link href="favorites">Favorites</Nav.Link>
                 <Nav.Link href="login">Login</Nav.Link>
-                <Nav.Link href="signup">Signup</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
