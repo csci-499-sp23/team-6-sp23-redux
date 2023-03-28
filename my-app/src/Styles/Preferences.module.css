@@ -1,20 +1,32 @@
 .PreferencesTitle{
-    text-align: left;
+    text-align: center;
     color: orange;
-    font-size: calc(10px + 2vmin);
+    font-size: 40px;
 }
 
 .PreferencesHeader{
-    text-align: left;
+    text-align: center;
     color: black;
-    font-size: medium;
+    font-size: 32px;
 }
 
 .PreferencesButtons{
-    text-align: left;
+        text-align: center;
+        height: 30px;
 }
 .PreferencesForms{
     color:black;
-    width: 0%;
-    font-size:small;
+    font-size:medium;
+    display: block;
+    text-align: center;
+}
+
+.PreferencesSwitches{
+    color:black;
+    text-align: center;
+    font-size:medium;
+}
+
+.customButton {
+    width: 125px;
 }
