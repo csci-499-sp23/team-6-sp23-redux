@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="FavoriteContainer"
+>
+  <div
+    className="FavoriteTitle"
+  >
+    Your Top Favorites
+  </div>
+  <div
+    className="Test"
+  >
+    <table
+      className="FavoriteTable"
+    >
+      <tr>
+        <td
+          onClick={[Function]}
+        >
+          <img
+            alt="hangoutspot1"
+            className="FavoriteImages"
+            src="Images/Hangoutspot1.jpeg"
+            width="300"
+          />
+        </td>
+        <td
+          onClick={[Function]}
+        >
+          <img
+            alt="hangoutspot2"
+            className="FavoriteImages"
+            src="Images/Hangoutspot2.png"
+            width="300"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td
+          onClick={[Function]}
+        >
+          <img
+            alt="hangoutspot3"
+            className="FavoriteImages"
+            src="Images/Hangoutspot2.png"
+            width="300"
+          />
+        </td>
+        <td
+          onClick={[Function]}
+        >
+          <img
+            alt="hangoutspot4"
+            className="FavoriteImages"
+            src="Images/Hangoutspot1.jpeg"
+            width="300"
+          />
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+`;
