@@ -4,6 +4,7 @@ import Homepage from './Homepage';
 import AppNavbar from './AppNavbar';
 import Login from './Login';
 import SignUp from './Signup';
+import HomepageWithCards from './HomepageWithCards'
 import Preferences from './Preferences';
 import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -14,8 +15,8 @@ function App() {
       <AppNavbar/>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Homepage/>}/>
-          <Route exact path="/homepage" element={<Homepage/>}/>
+          <Route exact path="/" element={<HomepageWithCards/>}/>
+          <Route exact path="/homepage" element={<HomepageWithCards/>}/>
           <Route exact path="/favorites" element={<Favoritelist/>}/>
           <Route exact path = "/login" element = {<Login/>}/>
           <Route exact path = "/signup" element = {<SignUp/>}/>
