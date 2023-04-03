@@ -1,6 +1,5 @@
 import '../Styles/App.css';
 import Favoritelist from './Favoritelist';
-import Homepage from './Homepage';
 import AppNavbar from './AppNavbar';
 import Login from './Login';
 import SignUp from './Signup';
