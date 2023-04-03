@@ -2,7 +2,7 @@ import HomepageCSS from '../Styles/Homepage.module.css'
 import { useState, useEffect } from 'react';
 import SwipeableContainer from './SwipeableContainer';
 //import { getHangoutLocations } from '../Services/HangoutService';
-import HangoutDataModel from '../DataModels/HangoutDataModel';
+import {HangoutDataModel} from '../DataModels/HangoutDataModel';
 import axios from 'axios';
 
 function Homepage(props) {

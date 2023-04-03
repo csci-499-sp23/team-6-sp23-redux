@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Card from './Card';
 import { getHangoutLocations } from '../Services/HangoutService';
-import CardDeckCSS from '../Styles/CardDeck.module.css';
 
 function CardDeck() {
 
