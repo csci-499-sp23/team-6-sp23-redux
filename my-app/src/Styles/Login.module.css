@@ -34,6 +34,17 @@
     cursor: pointer;
     border-radius: 5px;
   }
+
+  .GoogleSignInButton {
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    border: none;
+    color: white;
+    background-color: #4285f4;
+    cursor: pointer;
+    border-radius: 5px;
+  }
   
   .LoginText {
     color: black;
