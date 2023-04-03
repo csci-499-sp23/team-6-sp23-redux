@@ -1,20 +1,52 @@
-.Container {
-    color: #000000;
-    border: 0.5px black solid;
+/* // Some styling for the card
+const style = {
+backgroundImage: "URL(
+https://img.icons8.com/color/452/GeeksforGeeks.png)",
+backgroundRepeat: "no-repeat",
+backgroundSize: "contain",
+backgroundColor: "#55ccff",
+boxShadow: "5px 10px 18px #888888",
+borderRadius: 10,
+height: 300,
+}; */
+
+.MotionContainer{
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
     width: 60vh;
     height: 70vh;
     top: 10vh;
-    position: relative;
-    overflow: hidden;
+}
+
+.TopCard{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.Container{
+    width: 60vh;
+    height: 70vh;
+    top: 10vh;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: #000000;
+    border: 0.5px black solid;
+    position: relative;
     border-radius: 5%;
     margin: auto;
 }
 
 .DetailContainer {
-    position: relative;
-    top: 20vh;
+    position: absolute;
+    top: 95vh;
     z-index: 1;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: auto;
 }
 
 #Title {
