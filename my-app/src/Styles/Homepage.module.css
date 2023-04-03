@@ -52,4 +52,9 @@
     align-items: center;
   }
   
-  
+  .test {
+    font-size: 50px;
+    color: black;
+    position: absolute;
+    top: 20;
+  }

@@ -9,6 +9,9 @@ import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
+
+  // TO DO: - Add a state for location and terms to pass as props to Homepage. Get state data from database preferences 
+
   return (
     <div className="App">
       <AppNavbar/>
