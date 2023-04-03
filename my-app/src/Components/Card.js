@@ -89,7 +89,7 @@ function Card({onSwipe, ...props}) {
         style={{ x }}
         onClick={onClick}
       >
-        <div className={`${CardCSS.Container} ${(props.isTop ? CardCSS.TopCard : '')}`}>
+        <div className={`${CardCSS.Container} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}>
           <img draggable='false' id={CardCSS.Image} src={props.image} alt="hangout-suggestion"></img>
           <div id={CardCSS.Title}>{props.title}</div>
           <div id={CardCSS.Location}>Location: {props.location}, {props.location2}</div>
