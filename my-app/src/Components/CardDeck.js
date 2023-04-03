@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Card from './Card';
 import { getHangoutLocations } from '../Services/HangoutService';
+import CardDeckCSS from '../Styles/CardDeck.module.css';
 
 function CardDeck() {
 
@@ -11,6 +12,14 @@ function CardDeck() {
       setHangoutData(data);
     })
   }, []);
+  
+  // Start with a shuffled deck
+  const initializeDeck = () => {
+    let deck = hangoutData;
+      console.log(deck)
+      shuffleDeck(deck);
+      setHangoutData(deck);
+  }
 
   // return new array with last item removed
   const removeCard = (array) => {
@@ -19,9 +28,19 @@ function CardDeck() {
     })
     }
   
+  const shuffleDeck = (deck) => {
+    for(let i = deck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = deck[i];
+      deck[i] = deck[j];
+      deck[j] = temp;
+    }
+  }
+  
   const handleSwipe = (item, swipeDirection) => {
     // Update the deck
     let newCardDeck = removeCard(hangoutData)
+    shuffleDeck(newCardDeck)
     setHangoutData(newCardDeck)
 
     // TODO: Update function here to save item to favourites
@@ -29,7 +48,7 @@ function CardDeck() {
 
     return (
         <div>
-          { hangoutData.length > 0 &&
+          { initializeDeck && hangoutData.length > 0 &&
             hangoutData.map(function(item, index){
               let isTop = index === hangoutData.length - 1
               return (
