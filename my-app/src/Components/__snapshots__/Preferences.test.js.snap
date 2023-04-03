@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="PreferencesContainer"
+>
+  <div
+    className="PreferencesTitle"
+  >
+     Your User Preferences
+  </div>
+  <br />
+  <div
+    className="PreferencesHeader"
+  >
+    Location:
+  </div>
+  <div
+    className="PreferencesButtons"
+  >
+    <button
+      className="PreferencesButtons btn btn-outline-dark btn-sm"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Update User Location
+    </button>
+  </div>
+  <br />
+  <div
+    className="PreferencesHeader"
+  >
+    Preferences:
+  </div>
+  <div
+    className="PreferencesForms"
+  >
+    <form>
+      <label>
+        Location Range: 
+        <select>
+          <option
+            value="No limit"
+          >
+             No limit 
+          </option>
+          <option
+            value="5 miles"
+          >
+             Less than 5 miles
+          </option>
+          <option
+            value="10 miles"
+          >
+            Less than 10 miles
+          </option>
+        </select>
+      </label>
+    </form>
+    <br />
+    <form>
+      <label>
+        Yelp Rating: 
+        <select>
+          <option
+            value="No limit"
+          >
+             No filter 
+          </option>
+          <option
+            value="4 stars"
+          >
+             4+ Stars
+          </option>
+          <option
+            value="3 stars"
+          >
+             3+ Stars
+          </option>
+          <option
+            value="2 stars"
+          >
+             2+ Stars
+          </option>
+          <option
+            value="1 stars"
+          >
+             1+ Stars
+          </option>
+        </select>
+      </label>
+    </form>
+    <br />
+  </div>
+  <br />
+  <div
+    className="PreferencesHeader"
+  >
+    Filtered Categories:
+  </div>
+  <div
+    className="PreferencesSwitches"
+  >
+    <br />
+    <div
+      className="btn-group"
+      role="group"
+    >
+      <input
+        autoComplete="off"
+        checked={true}
+        className="btn-check"
+        disabled={false}
+        id="tbg-btn-1"
+        onChange={[Function]}
+        type="checkbox"
+        value={1}
+      />
+      <label
+        className="customButton btn btn-outline-warning"
+        disabled={false}
+        htmlFor="tbg-btn-1"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        tabIndex={0}
+      >
+        Restaurants
+      </label>
+         
+      <input
+        autoComplete="off"
+        checked={true}
+        className="btn-check"
+        disabled={false}
+        id="tbg-btn-2"
+        onChange={[Function]}
+        type="checkbox"
+        value={2}
+      />
+      <label
+        className="customButton btn btn-outline-warning"
+        disabled={false}
+        htmlFor="tbg-btn-2"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        tabIndex={0}
+      >
+        Theatres
+      </label>
+         
+      <input
+        autoComplete="off"
+        checked={true}
+        className="btn-check"
+        disabled={false}
+        id="tbg-btn-3"
+        onChange={[Function]}
+        type="checkbox"
+        value={3}
+      />
+      <label
+        className="customButton btn btn-outline-warning"
+        disabled={false}
+        htmlFor="tbg-btn-3"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        tabIndex={0}
+      >
+        Karaoke
+      </label>
+         
+      <input
+        autoComplete="off"
+        checked={true}
+        className="btn-check"
+        disabled={false}
+        id="tbg-btn-4"
+        onChange={[Function]}
+        type="checkbox"
+        value={4}
+      />
+      <label
+        className="customButton btn btn-outline-warning"
+        disabled={false}
+        htmlFor="tbg-btn-4"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        tabIndex={0}
+      >
+        Clubs
+      </label>
+    </div>
+  </div>
+  <br />
+  <div
+    className="PreferencesButtons"
+  >
+    <button
+      className="btn btn-outline-dark btn-sm"
+      disabled={false}
+      type="button"
+    >
+      Update Preferences
+    </button>
+  </div>
+</div>
+`;
