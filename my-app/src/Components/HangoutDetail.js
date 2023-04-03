@@ -1,5 +1,4 @@
 import HangoutDetailCSS from '../Styles/HangoutDetail.module.css';
-import './Homepage.js';
 
 function HangoutDetail(props) {
     if(props.details)
