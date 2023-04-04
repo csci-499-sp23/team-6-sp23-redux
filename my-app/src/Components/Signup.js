@@ -35,7 +35,7 @@ const Signup = () => {
 
         // Store information in firestore
         await setDoc(doc(db, 'users', userData.uid), userData);
-        navigate('/login');
+        navigate('/homepage');
       } else {
         console.log('User is not signed in');
       }
@@ -61,7 +61,7 @@ const Signup = () => {
   
       // Store information in firestore
       await setDoc(doc(db, 'users', userData.uid), userData);
-      navigate('/login');
+      navigate('/homepage');
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
