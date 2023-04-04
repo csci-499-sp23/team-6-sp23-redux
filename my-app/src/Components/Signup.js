@@ -34,7 +34,7 @@ const Signup = () => {
         // If the document does exist, its content will be overwritten with the provided data.
 
         // Store information in firestore
-        await setDoc(doc(db, 'users', userData.uid), userData);
+        await setDoc(doc(db, 'users', userData.uid), userData); // Hello World.
         navigate('/homepage');
       } else {
         console.log('User is not signed in');
