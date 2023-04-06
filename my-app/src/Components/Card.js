@@ -80,10 +80,10 @@ function Card({onSwipe, ...props}) {
       <motion.div
         className={CardCSS.MotionContainer}
         animate={controls}
-        dragConstraints={constrained && { left: 0, right: 0, top: 0, bottom: 0 }}
+        dragConstraints={constrained && { left: -75, right: 75, top: -5, bottom: 5 }}
         dragElastic={1}
         ref={cardElem}
-        drag='x'
+        drag
         onDrag={getTrajectory}
         onDragEnd={() => flyAway(100)}
         style={{ x }}
