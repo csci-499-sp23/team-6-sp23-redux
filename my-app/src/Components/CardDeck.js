@@ -43,6 +43,7 @@ function CardDeck() {
     setHangoutData(newCardDeck)
 
     // TODO: Update function here to save item to favourites
+    console.log(swipeDirection)
   }
 
     return (
