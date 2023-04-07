@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export async function getHangoutLocations(category1,category2,category3,location) {
+export async function getHangoutLocations(location = "nyc", category1 ,category2 = "",category3 = "") {
     try{
-        var hangout1, hangout2, hangout3; // Contains the modified fetched array including a category of the hangout
+        var hangout1 = [], hangout2 = [], hangout3 = []; // Contains the modified fetched array including a category of the hangout
         await axios.get(`https://yelp-backend.netlify.app/.netlify/functions/search?location=${location}&term=${category1}`).then((response) => {
             
             response.data.businesses.forEach((business, index) => {
@@ -12,19 +12,24 @@ export async function getHangoutLocations(category1,category2,category3,location
             
         }).catch((error) => {console.log(error)});
 
-        await axios.get(`https://yelp-backend.netlify.app/.netlify/functions/search?location=${location}&term=${category2}`).then((response) => {
+        if(category2 != "") {
+            await axios.get(`https://yelp-backend.netlify.app/.netlify/functions/search?location=${location}&term=${category2}`).then((response) => {
             response.data.businesses.forEach((business, index) => {
-                response.data.businesses[index] = {...business, ...{"category":`${category2}`}}
-            })
-            hangout2 = response.data.businesses;
-        }).catch((error) => {console.log(error)});
+                    response.data.businesses[index] = {...business, ...{"category":`${category2}`}}
+                })
+                hangout2 = response.data.businesses;
+            }).catch((error) => {console.log(error)});
+        }
 
-        await axios.get(`https://yelp-backend.netlify.app/.netlify/functions/search?location=${location}&term=${category3}`).then((response) => {
+        if(category3 != "") {
+            await axios.get(`https://yelp-backend.netlify.app/.netlify/functions/search?location=${location}&term=${category3}`).then((response) => {
             response.data.businesses.forEach((business, index) => {
-                response.data.businesses[index] = {...business, ...{"category":`${category3}`}}
-            })
-            hangout3 = response.data.businesses;
-        }).catch((error) => {console.log(error)});
+                    response.data.businesses[index] = {...business, ...{"category":`${category3}`}}
+                })
+                hangout3 = response.data.businesses;
+            }).catch((error) => {console.log(error)});
+        }
+        
 
         //Combines all the promise requests into a single array
         const hangouts = await Promise.all([ hangout1, hangout2, hangout3]);

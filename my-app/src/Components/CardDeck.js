@@ -7,7 +7,7 @@ function CardDeck() {
   const [hangoutData, setHangoutData] = useState([]);
 
   useEffect( () => {
-    getHangoutLocations("restaurant", "museum", "park", "40.712742, -74.013382").then(data => {
+    getHangoutLocations("40.712742, -74.013382", "restaurant", "park", "museum").then(data => {
       console.log(data)
       // Start with a shuffled deck
       shuffleDeck(data)
