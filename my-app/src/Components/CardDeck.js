@@ -15,18 +15,14 @@ function CardDeck() {
   });
 
   useEffect( () => {
-    getHangoutLocations().then(data => {
+    getHangoutLocations("restaurant", "museum", "park", "40.712742, -74.013382").then(data => {
+      console.log(data)
+      // Start with a shuffled deck
+      shuffleDeck(data)
       setHangoutData(data);
     })
   }, []);
   
-  // Start with a shuffled deck
-  const initializeDeck = () => {
-    let deck = hangoutData;
-      console.log(deck)
-      shuffleDeck(deck);
-      setHangoutData(deck);
-  }
 
   // return new array with last item removed
   const removeCard = (array) => {
@@ -71,7 +67,7 @@ function CardDeck() {
 
     return (
         <div>
-          { initializeDeck && hangoutData.length > 0 &&
+          { hangoutData.length > 0 &&
             hangoutData.map(function(item, index){
               let isTop = index === hangoutData.length - 1
               return (
@@ -88,6 +84,7 @@ function CardDeck() {
                   price={item.price}
                   details={item.categories}
                   isTop={isTop}
+                  category={item.category}
                 >
                 </Card>
               )
