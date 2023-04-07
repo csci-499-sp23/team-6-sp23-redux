@@ -40,11 +40,16 @@ function CardDeck() {
     const batch = writeBatch(db);
     const hangoutRef = doc(db, 'favorites', item.id);
     const userRef = doc(db, 'users', userId); 
+    const favoriteCategory = `favorites.${item.category}`
 
     batch.set(hangoutRef, item, {
       createdAt: serverTimestamp()
     });
-    batch.update(userRef, {"favorites": arrayUnion(hangoutRef.id)});
+
+    batch.update(userRef, {
+      [favoriteCategory]: arrayUnion(hangoutRef.id)
+    });
+
     await batch.commit(); 
 }
   
