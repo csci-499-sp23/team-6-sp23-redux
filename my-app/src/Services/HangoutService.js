@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export async function getHangoutLocations(location = "nyc", category1 ,category2 = "",category3 = "") {
+export async function getHangoutLocations(location, category1 ,category2 = "",category3 = "") {
     try{
         var hangout1 = [], hangout2 = [], hangout3 = []; // Contains the modified fetched array including a category of the hangout
         await axios.get(`https://yelp-backend.netlify.app/.netlify/functions/search?location=${location}&term=${category1}`).then((response) => {

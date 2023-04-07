@@ -8,11 +8,8 @@ import { db } from '../firebase';
 function CardDeck() {
 
   const [hangoutData, setHangoutData] = useState([]);
-  const [userId, setUserId] = useState(() => {
-    const id = localStorage.getItem("userId");
-    const value = JSON.parse(id);
-    return value || "";
-  });
+  const id = localStorage.getItem("userId");
+  const userId = JSON.parse(id) != null ? JSON.parse(id) : "";
 
   useEffect( () => {
     getHangoutLocations("40.712742, -74.013382", "restaurant", "park", "museum").then(data => {
@@ -53,8 +50,8 @@ function CardDeck() {
 }
   
   const handleSwipe = (item, swipeDirection) => {
-    // TODO: Update function here to save item to favourites
-    if(swipeDirection == "right") {
+    //Save item to favourites on swipe right
+    if(swipeDirection === "right") {
       saveOnSwipeRight(item)
     }
 
@@ -62,7 +59,6 @@ function CardDeck() {
     let newCardDeck = removeCard(hangoutData)
     shuffleDeck(newCardDeck)
     setHangoutData(newCardDeck)
-
   }
 
     return (
