@@ -1,10 +1,18 @@
 import { useState, useEffect } from 'react';
 import Card from './Card';
 import { getHangoutLocations } from '../Services/HangoutService';
+import { doc, serverTimestamp, writeBatch, arrayUnion } from "firebase/firestore";
+import { db } from '../firebase';
+
 
 function CardDeck() {
 
   const [hangoutData, setHangoutData] = useState([]);
+  const [userId, setUserId] = useState(() => {
+    const id = localStorage.getItem("userId");
+    const value = JSON.parse(id);
+    return value || "";
+  });
 
   useEffect( () => {
     getHangoutLocations().then(data => {
@@ -35,15 +43,30 @@ function CardDeck() {
       deck[j] = temp;
     }
   }
+
+  const saveOnSwipeRight = async(item) => {
+    const batch = writeBatch(db);
+    const hangoutRef = doc(db, 'favorites', item.id);
+    const userRef = doc(db, 'users', userId); 
+
+    batch.set(hangoutRef, item, {
+      createdAt: serverTimestamp()
+    });
+    batch.update(userRef, {"favorites": arrayUnion(hangoutRef.id)});
+    await batch.commit(); 
+}
   
   const handleSwipe = (item, swipeDirection) => {
+    // TODO: Update function here to save item to favourites
+    if(swipeDirection == "right") {
+      saveOnSwipeRight(item)
+    }
+
     // Update the deck
     let newCardDeck = removeCard(hangoutData)
     shuffleDeck(newCardDeck)
     setHangoutData(newCardDeck)
 
-    // TODO: Update function here to save item to favourites
-    console.log(swipeDirection)
   }
 
     return (
