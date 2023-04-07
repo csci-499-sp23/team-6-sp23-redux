@@ -12,8 +12,7 @@ function CardDeck() {
   const userId = JSON.parse(id) != null ? JSON.parse(id) : "";
 
   useEffect( () => {
-    getHangoutLocations("40.712742, -74.013382", "restaurant", "park", "museum").then(data => {
-      console.log(data)
+    getHangoutLocations("40.712742, -74.013382", ["museum", "park"]).then(data => {
       // Start with a shuffled deck
       shuffleDeck(data)
       setHangoutData(data);

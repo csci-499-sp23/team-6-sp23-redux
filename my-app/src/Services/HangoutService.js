@@ -1,43 +1,25 @@
 import axios from 'axios';
 
-export async function getHangoutLocations(location, category1 ,category2 = "",category3 = "") {
+// Params: Location is a string that refers to the user's search location, Categories is an array of strings for each search term
+export async function getHangoutLocations(location, categories) {
     try{
-        var hangout1 = [], hangout2 = [], hangout3 = []; // Contains the modified fetched array including a category of the hangout
-        await axios.get(`https://yelp-backend.netlify.app/.netlify/functions/search?location=${location}&term=${category1}`).then((response) => {
-            
-            response.data.businesses.forEach((business, index) => {
-                response.data.businesses[index] = {...business, ...{"category":`${category1}`}}
-            })
-            hangout1 = response.data.businesses;
-            
-        }).catch((error) => {console.log(error)});
-
-        if(category2 != "") {
-            await axios.get(`https://yelp-backend.netlify.app/.netlify/functions/search?location=${location}&term=${category2}`).then((response) => {
-            response.data.businesses.forEach((business, index) => {
-                    response.data.businesses[index] = {...business, ...{"category":`${category2}`}}
-                })
-                hangout2 = response.data.businesses;
-            }).catch((error) => {console.log(error)});
-        }
-
-        if(category3 != "") {
-            await axios.get(`https://yelp-backend.netlify.app/.netlify/functions/search?location=${location}&term=${category3}`).then((response) => {
-            response.data.businesses.forEach((business, index) => {
-                    response.data.businesses[index] = {...business, ...{"category":`${category3}`}}
-                })
-                hangout3 = response.data.businesses;
-            }).catch((error) => {console.log(error)});
-        }
-        
-
+        categories = categories.filter(category => category !== "");
+        const hangoutsPromises = categories.map(async (category) => {
+            try {
+                const response = await axios.get(`https://yelp-backend.netlify.app/.netlify/functions/search?location=${location}&term=${category}`);
+                return response.data.businesses.map(business => ({...business, ...{"category":`${category}`} }) );
+            } catch (error) {
+                console.log(`Error fetching hangout location for ${category}: ${error}`);
+            }            
+        });
+       
         //Combines all the promise requests into a single array
-        const hangouts = await Promise.all([ hangout1, hangout2, hangout3]);
+        const hangouts = await Promise.all([ ...hangoutsPromises]);
         return [].concat.apply([], hangouts);
       
     }
     catch(error) {
-        console.log(error);
+        console.log(`GetHangoutLocations Error: ${error}`);
         return [];
     }
 }
