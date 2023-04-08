@@ -8,25 +8,17 @@ import { db } from '../firebase';
 function CardDeck() {
 
   const [hangoutData, setHangoutData] = useState([]);
-  const [userId, setUserId] = useState(() => {
-    const id = localStorage.getItem("userId");
-    const value = JSON.parse(id);
-    return value || "";
-  });
+  const id = localStorage.getItem("userId");
+  const userId = JSON.parse(id) != null ? JSON.parse(id) : "";
 
   useEffect( () => {
-    getHangoutLocations().then(data => {
+    getHangoutLocations("40.712742, -74.013382", ["museum", "park"]).then(data => {
+      // Start with a shuffled deck
+      shuffleDeck(data)
       setHangoutData(data);
     })
   }, []);
   
-  // Start with a shuffled deck
-  const initializeDeck = () => {
-    let deck = hangoutData;
-      console.log(deck)
-      shuffleDeck(deck);
-      setHangoutData(deck);
-  }
 
   // return new array with last item removed
   const removeCard = (array) => {
@@ -48,17 +40,22 @@ function CardDeck() {
     const batch = writeBatch(db);
     const hangoutRef = doc(db, 'favorites', item.id);
     const userRef = doc(db, 'users', userId); 
+    const favoriteCategory = `favorites.${item.category}`
 
     batch.set(hangoutRef, item, {
       createdAt: serverTimestamp()
     });
-    batch.update(userRef, {"favorites": arrayUnion(hangoutRef.id)});
+
+    batch.update(userRef, {
+      [favoriteCategory]: arrayUnion(hangoutRef.id)
+    });
+
     await batch.commit(); 
 }
   
   const handleSwipe = (item, swipeDirection) => {
-    // TODO: Update function here to save item to favourites
-    if(swipeDirection == "right") {
+    //Save item to favourites on swipe right
+    if(swipeDirection === "right") {
       saveOnSwipeRight(item)
     }
 
@@ -66,12 +63,11 @@ function CardDeck() {
     let newCardDeck = removeCard(hangoutData)
     shuffleDeck(newCardDeck)
     setHangoutData(newCardDeck)
-
   }
 
     return (
         <div>
-          { initializeDeck && hangoutData.length > 0 &&
+          { hangoutData.length > 0 &&
             hangoutData.map(function(item, index){
               let isTop = index === hangoutData.length - 1
               return (
@@ -88,6 +84,7 @@ function CardDeck() {
                   price={item.price}
                   details={item.categories}
                   isTop={isTop}
+                  category={item.category}
                 >
                 </Card>
               )
