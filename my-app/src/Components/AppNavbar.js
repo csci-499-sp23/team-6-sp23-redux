@@ -17,8 +17,12 @@ function AppNavbar() {
                 <Nav.Link href="homepage">Home</Nav.Link>
                 <Nav.Link href="preferences">Preferences</Nav.Link>
                 <Nav.Link href="favorites">Favorites</Nav.Link>
-                <Nav.Link href="login">Login</Nav.Link>
-                <Nav.Link href="signup">Signup</Nav.Link>
+                <div id={AppNavbarCSS.LoginContainer}>
+                  <Nav.Link href="login">Login</Nav.Link>
+                  <span className={AppNavbarCSS.LineSeperator}>|</span>
+                  <Nav.Link href="signup">Signup</Nav.Link>
+                </div>
+                
               </Nav>
             </Navbar.Collapse>
           </Container>
