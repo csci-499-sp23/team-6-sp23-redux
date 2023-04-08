@@ -6,3 +6,18 @@
   width: 6vw;
   height: 10vh;
 }
+
+#LoginContainer {
+  display: flex;
+  position: absolute;
+  right: 8px;
+  font-size: 20px;
+  border: 0.8px solid black;
+  border-radius: 5%;
+}
+
+.LineSeperator {
+  margin-top: 8px;
+  font-size: 20px;
+  color: black;
+}
