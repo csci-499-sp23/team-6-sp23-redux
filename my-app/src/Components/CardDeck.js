@@ -14,6 +14,7 @@ function CardDeck() {
   useEffect( () => {
     getHangoutLocations("40.712742, -74.013382", ["museum", "park"]).then(data => {
       // Start with a shuffled deck
+      console.log(data)
       shuffleDeck(data)
       setHangoutData(data);
     })
@@ -85,6 +86,7 @@ function CardDeck() {
                   details={item.categories}
                   isTop={isTop}
                   category={item.category}
+                  closed={item.is_closed}
                 >
                 </Card>
               )

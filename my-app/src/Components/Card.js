@@ -15,6 +15,8 @@ function Card({onSwipe, ...props}) {
   const [flyAwayComplete, setFlyAwayComplete] = useState(false);
   const [showCardDetails, setShowCardDetails] = useState(false)
 
+  const locationDetail = props.location2 ? props.location + ", \n" + props.location2 : props.location;
+
   const getSwipeResult = (childNode, parentNode) => {
     const childRect = childNode.getBoundingClientRect();
     const parentRect = parentNode.getBoundingClientRect();
@@ -78,7 +80,7 @@ function Card({onSwipe, ...props}) {
   return (
     <div>
       <motion.div
-        className={CardCSS.MotionContainer}
+        className={`${CardCSS.MotionContainer} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}
         animate={controls}
         dragConstraints={constrained && { left: -75, right: 75, top: -5, bottom: 5 }}
         dragElastic={1}
@@ -91,9 +93,22 @@ function Card({onSwipe, ...props}) {
       >
         <div className={`${CardCSS.Container} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}>
           <img draggable='false' id={CardCSS.Image} src={props.image} alt="hangout-suggestion"></img>
+         
           <div id={CardCSS.Title}>{props.title}</div>
-          <div id={CardCSS.Location}>Location: {props.location}, {props.location2}</div>
-          <div id={CardCSS.Distance}>Distance: {props.distance.toFixed(2)} km away</div>
+          
+            <div id={CardCSS.BottomContainer}>
+            <div id={CardCSS.LocationContainer}>
+              <div className={CardCSS.DetailLabel}>Location: </div>
+              <div className={CardCSS.Detail}>{locationDetail}</div>
+            </div>
+            
+            <div id={CardCSS.DistanceContainer}>
+              <div className={CardCSS.DetailLabel}>Distance: </div>
+              <div className={CardCSS.Detail}>{props.distance.toFixed(2)} km away</div>
+            </div>
+          </div>
+          
+          
         </div>
       </motion.div>
 
@@ -109,6 +124,8 @@ function Card({onSwipe, ...props}) {
               location2={props.location2}
               details={props.details}
               rating={props.rating}
+              price={props.price}
+              closed={props.closed}
             />
         </div>
         : null

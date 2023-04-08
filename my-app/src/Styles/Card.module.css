@@ -10,14 +10,16 @@ borderRadius: 10,
 height: 300,
 }; */
 
+
 .MotionContainer{
     position: absolute;
     margin: auto;
     left: 0;
     right: 0;
-    width: 60vh;
+    width: 25vw;
     height: 70vh;
-    top: 10vh;
+    top: 20vh;
+    border-radius: 5%;
 }
 
 .TopCard{
@@ -25,13 +27,12 @@ height: 300,
 }
 
 .OtherCards{
-    visibility: hidden;
+    display: none;
 }
 
 .Container{
-    width: 60vh;
-    height: 70vh;
-    top: 10vh;
+    width: 100%;
+    height: 100%;
     align-items: center;
     justify-content: center;
     overflow: hidden;
@@ -49,21 +50,24 @@ height: 300,
     margin: auto;
     left: 0;
     right: 0;
-    width: 100%;
+    width: 99vw;
+    height: 100vh;
     margin: auto;
 }
 
 #Title {
     position: absolute;
     top: 8px;
-    left: 50%;
-    transform: translate(-50%, -8px);
-    font-size: 5vh;
+    left: 8px;
+    right: 8px;
+    font-size: 1.3em;
     font-weight: bold;
     text-align: center;
     color: white;
-    white-space: nowrap;
+    word-wrap: break-word;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px #000;
 }
+
 
 #Image {
     background-repeat: no-repeat;
@@ -71,18 +75,47 @@ height: 300,
     background-position: center;
     height: 100%;
     width: 100%;
+    opacity: 0.9;
 }
 
-#Location {
+#BottomContainer {
     position: absolute;
-    bottom: 6vh;
-    color: white;
-    left: 2vh;
+    bottom: 0px;
+    width: 100%;
+    height: 18vh;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
 }
 
-#Distance {
-    position: absolute;
+#LocationContainer {
     color: white;
-    bottom: 2vh;
-    left: 2vh;
+    font-size: 18px;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    padding-top: 4%;
 }
+
+#DistanceContainer {
+    color: white;
+    font-size: 18px;
+    bottom: 0px;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 4%;
+}
+
+.DetailLabel {
+    padding-left: 16px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px #000;
+}
+
+.Detail {
+    padding-left: 8px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px #000;
+    white-space: pre-wrap;
+}
+
+
