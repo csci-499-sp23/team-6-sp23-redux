@@ -22,8 +22,6 @@ function Preferences() {
 
     //Run retrievePreferences when page is loaded
     useEffect( () => {
-        const id = localStorage.getItem("userId");
-        const userId = JSON.parse(id) != null ? JSON.parse(id) : "";
 
         //Function that retrieves the user preferences from firestore
         //Sets the corresponding buttons to active based on preferences and sets preferencesMaps based on preexisting preferences
@@ -67,7 +65,7 @@ function Preferences() {
 
         retrievePreferences();
 
-    }, []);
+    }, [userId]);
 
     //Function that obtains the current geolocation and logs it as latitude and longitude 
     const geolocationClick = () => {
