@@ -8,17 +8,22 @@ import { db } from '../firebase';
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 
 
-//A map for storing the user's preferences
-//The keys are the category, and the values correspond to whether that category is enabled
-//Set as a global variable because inserting it in Preferences breaks the code
-const preferencesMap = new Map();
-
 function Preferences() {
 
     //Use localStorage to keep track of current logged in user
     //NOTE: Preferences should not be accessible unless user is logged in
     const id = localStorage.getItem("userId");
     const userId = JSON.parse(id) != null ? JSON.parse(id) : "";
+
+
+    //Used to handle the toggle buttonss, active buttons in the array of useState
+    const [value, setValue] = useState([]);
+    const handleChange = ((val) => setValue(val) ) ;
+
+    const [userLocation, setUserLocation] = useState("");
+
+    const [rangeLimit, setRangeLimit] = useState("");
+    const [ratingLimit, setRatingLimit] = useState("");
 
     //Run retrievePreferences when page is loaded
     useEffect( () => {
@@ -33,7 +38,16 @@ function Preferences() {
             try {
                 //Use getDoc to load the document for user, and retrieve the preferences field
                 await getDoc(userRef).then( (docData) => {
-                    const loadedPrefs = docData.data().preferences;
+                    //Retrieve preferences for user location
+                    setUserLocation(docData.data().preferences.userLocation);
+                    
+                    //Retrieve preferences for the dropdown settings
+                    setRangeLimit(docData.data().preferences.rangeLimit);
+
+                    setRatingLimit(docData.data().preferences.ratingLimit);
+                    
+                    //Retrieve categorical preferences
+                    const loadedPrefs = docData.data().preferences.value;
 
                     //Information from preferences field is stored in preloadedPrefs, and is used to set the state of the active buttons
                     var preloadedPrefs = [];
@@ -41,21 +55,19 @@ function Preferences() {
                     //Since the preference field is stored as an object, use .entries to store the information in an array
                     const arr = Object.entries(loadedPrefs);
 
-                    //Iterate through the array, each category will be an array with index 0 being the category and index 1 being the value
+                    //Iterate through the array, each category will be an array with index 0 being the index in that 2d array and index 1 being the value
                     arr.forEach((category ) => {
-                        //Set map with information
-                        preferencesMap.set(category[0],category[1]);
-                        //Only the active category button states need to be recorded
-                        if (category[1])
-                        {
-                            preloadedPrefs.push(category[0]);
-                        }
+                        preloadedPrefs.push(category[1]);
                     })
 
+
                     setValue (preloadedPrefs);
+
                 }
 
                 )
+                
+
             }
             catch (error) {
                 console.log("No such document!");
@@ -77,7 +89,11 @@ function Preferences() {
             navigator.geolocation.getCurrentPosition(
                 function(position) {
                     alert("Location successfully updated!") 
-                    console.log(position);
+                    var latitude = position.coords.latitude;
+
+                    var longitude = position.coords.longitude;
+
+                    setUserLocation(latitude + ", " + longitude);
     
                 },
                 function(error) {
@@ -90,7 +106,15 @@ function Preferences() {
           }
     };
     
+    //Function that handles drop down functionality for location range preference
+    const getLocationRange = (e) => {
+        setRangeLimit(e.target.value);
+    }
 
+    //Function that handles drop down functionality for yelp rating preferences
+    const getYelpRating = (e) => {
+        setRatingLimit(e.target.value);
+    }
 
     //Function that is called when the user wants to update their preferences
     //Information in preferencesMap is retrieved and uploaded to firestore using updateDoc
@@ -101,22 +125,17 @@ function Preferences() {
         await updateDoc (userRef, 
             {
                 preferences: 
-                {restaurants: preferencesMap.get('restaurants'),
-                theaters: preferencesMap.get('theaters'),
-                karaoke: preferencesMap.get('karaoke'), 
-                clubs: preferencesMap.get('clubs')}
+                {
+                    value, 
+                    userLocation,
+                    rangeLimit,
+                    ratingLimit
+                }
             });
 
     }
 
 
-    //Used to handle the toggle buttonss, active buttons in the array of useState
-    const [value, setValue] = useState([]);
-    const handleChange = ((val) => setValue(val) ) ;
-
-    const handleClick = (e) => {
-        preferencesMap.set(e.target.value, e.target.checked);
-    }
 
     return (
 
@@ -143,11 +162,11 @@ function Preferences() {
 
 
          <div className = {PreferencesCSS.PreferencesForms}>
-              <form> 
+              <form onClick = {getLocationRange} id = "locationForm"> 
                    <label>
                      Location Range:&nbsp;
                         <select>
-                         <option value= "No limit"> No limit </option>
+                         <option value= "No limit" > No limit </option>
                          <option value = "5 miles"> Less than 5 miles</option>
                          <option value = "10 miles">Less than 10 miles</option>
                      </select>
@@ -156,15 +175,15 @@ function Preferences() {
                 </form>
 
             <br></br>
-             <form>
+             <form onClick = {getYelpRating} id = "ratingForm">
                  <label>
                     Yelp Rating:&nbsp;
                      <select>
                          <option value= "No limit"> No filter </option>
-                         <option value = "4 stars"> 4+ Stars</option>
-                         <option value = "3 stars"> 3+ Stars</option>
-                         <option value = "2 stars"> 2+ Stars</option>
-                         <option value = "1 stars"> 1+ Stars</option>
+                         <option value = "4"> 4+ Stars</option>
+                         <option value = "3"> 3+ Stars</option>
+                         <option value = "2"> 2+ Stars</option>
+                         <option value = "1"> 1+ Stars</option>
                         </select>        
                     </label>
                 </form>
@@ -183,7 +202,7 @@ function Preferences() {
             <div className= {PreferencesCSS.PreferencesSwitches}>
             <br></br>
 
-            <ToggleButtonGroup type="checkbox" value={value} onChange={handleChange} onClick = {handleClick}> 
+            <ToggleButtonGroup type="checkbox" value={value} onChange={handleChange}> 
                 <ToggleButton variant = "outline-warning" id="restaurants" value={"restaurants"} className = {PreferencesCSS.customButton} >
                     Restaurants
                 </ToggleButton>
