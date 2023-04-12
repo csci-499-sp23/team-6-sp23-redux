@@ -14,8 +14,8 @@ function Map(props) {
         height: '100%'
     };
     const userLocation = {
-        lat: 40.712742,
-        lng: -74.013382
+        lat: props.userLatitude,
+        lng: props.userLongitude
     };
 
     const hangoutDestination = {

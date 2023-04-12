@@ -78,6 +78,8 @@ function HangoutDetail(props) {
                         mapKey={travelModeChanged}
                         durationDetail={duration}
                         handleCallback={mapCallBack}
+                        userLatitude={props.userLatitude}
+                        userLongitude={props.userLongitude}
                         >
                     </Map>
                 </div>

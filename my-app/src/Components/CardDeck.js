@@ -4,21 +4,21 @@ import { getHangoutLocations } from '../Services/HangoutService';
 import { doc, serverTimestamp, writeBatch, arrayUnion } from "firebase/firestore";
 import { db } from '../firebase';
 
-
-function CardDeck() {
+function CardDeck(props) {
 
   const [hangoutData, setHangoutData] = useState([]);
   const id = localStorage.getItem("userId");
   const userId = JSON.parse(id) != null ? JSON.parse(id) : "";
 
   useEffect( () => {
-    getHangoutLocations("40.712742, -74.013382", ["museum"]).then(data => {
-      // Start with a shuffled deck
-      console.log(data)
-      let deck = shuffleDeck(data)
-      setHangoutData(deck);
-    })
-  }, []);
+    if(props.location) {
+      getHangoutLocations(props.location, ["restaurant"]).then(data => {
+        // Start with a shuffled deck
+        let deck = shuffleDeck(data)
+        setHangoutData(deck);
+      })
+    }
+  }, [props.location]);
   
 
   // return new array with last item removed
@@ -91,6 +91,8 @@ function CardDeck() {
                   closed={item.is_closed}
                   latitude={item.coordinates.latitude}
                   longitude={item.coordinates.longitude}
+                  userLatitude={parseFloat(props.location.split(',')[0])}
+                  userLongitude={parseFloat(props.location.split(',')[1])}
                 >
                 </Card>
               )

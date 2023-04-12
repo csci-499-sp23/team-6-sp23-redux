@@ -128,6 +128,8 @@ function Card({onSwipe, ...props}) {
               closed={props.closed}
               latitude={props.latitude}
               longitude={props.longitude}
+              userLatitude={props.userLatitude}
+              userLongitude={props.userLongitude}
             />
         </div>
         : null
