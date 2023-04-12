@@ -12,11 +12,11 @@ function CardDeck() {
   const userId = JSON.parse(id) != null ? JSON.parse(id) : "";
 
   useEffect( () => {
-    getHangoutLocations("40.712742, -74.013382", ["museum", "park"]).then(data => {
+    getHangoutLocations("40.712742, -74.013382", ["museum"]).then(data => {
       // Start with a shuffled deck
       console.log(data)
-      shuffleDeck(data)
-      setHangoutData(data);
+      let deck = shuffleDeck(data)
+      setHangoutData(deck);
     })
   }, []);
   
@@ -29,12 +29,14 @@ function CardDeck() {
     }
   
   const shuffleDeck = (deck) => {
-    for(let i = deck.length - 1; i > 0; i--) {
+    let newDeck = deck.slice()
+    for(let i = newDeck.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      const temp = deck[i];
-      deck[i] = deck[j];
-      deck[j] = temp;
+      const temp = newDeck[i];
+      newDeck[i] = newDeck[j];
+      newDeck[j] = temp;
     }
+    return newDeck
   }
 
   const saveOnSwipeRight = async(item) => {
@@ -62,8 +64,8 @@ function CardDeck() {
 
     // Update the deck
     let newCardDeck = removeCard(hangoutData)
-    shuffleDeck(newCardDeck)
-    setHangoutData(newCardDeck)
+    let shuffledDeck = shuffleDeck(newCardDeck)
+    setHangoutData(shuffledDeck)
   }
 
     return (
@@ -87,6 +89,8 @@ function CardDeck() {
                   isTop={isTop}
                   category={item.category}
                   closed={item.is_closed}
+                  latitude={item.coordinates.latitude}
+                  longitude={item.coordinates.longitude}
                 >
                 </Card>
               )
