@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import LoginCSS from '../Styles/Login.module.css';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
-const Login = ({ updateUser }) => {
+const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,7 +19,6 @@ const Login = ({ updateUser }) => {
       const user = userCredential.user;
 
       //Save the user id to local storage for later use in the app when accessing user data
-      // TODO: Remove?? Since user object is passed as a prop from app.js and should already be available in profile.js without having to access local storage
       localStorage.setItem("userId", JSON.stringify(user.uid));
 
 
@@ -39,8 +38,6 @@ const Login = ({ updateUser }) => {
 
 
       // Navigate to the homepage after successfully signing in and retrieving user data from Firestore
-      console.log('Email/password login userData: ', userData); // Log the user data - Remove this line after testing
-      updateUser(userData);
       navigate('/homepage');
       console.log(user);
     } catch (error) {
@@ -58,7 +55,6 @@ const Login = ({ updateUser }) => {
       // Sign in with the GoogleAuthProvider using signInWithPopup
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      // TODO: Remove?? Since user object is passed as a prop from app.js and should already be available in profile.js without having to access local storage
       localStorage.setItem("userId", JSON.stringify(user.uid));
       // Check if the user exists in Firestore
       const userDocRef = doc(db, 'users', user.uid);
@@ -77,8 +73,6 @@ const Login = ({ updateUser }) => {
       }
   
       // Navigate to the homepage after successfully signing in and retrieving user data from Firestore
-      console.log('Google login userData: ', userDoc.data()); // Log the user data - Remove this line after testing
-      updateUser(userDoc.data());
       navigate('/homepage');
     } catch (error) {
       console.log(error.code, error.message);
