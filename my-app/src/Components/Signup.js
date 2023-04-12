@@ -5,7 +5,7 @@ import { auth, db } from '../firebase';
 import LoginCSS from '../Styles/Login.module.css';
 import { doc, setDoc } from 'firebase/firestore';
 
-const Signup = () => {
+const Signup = ({ onSignup }) => { // Pass the onSignup function as a prop
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -19,7 +19,8 @@ const Signup = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       // Signed in
       console.log('Authenticated user:', userCredential.user); // Log the authenticated user object
-      localStorage.setItem("userId", JSON.stringify(userCredential.user.uid));
+      // TODO: Remove?? Since user object is passed as a prop from app.js and should already be available in profile.js without having to access local storage
+      localStorage.setItem("userId", JSON.stringify(userCredential.user.uid)); 
 
       // Check if user is signed in
       if (userCredential.user) {
@@ -37,7 +38,9 @@ const Signup = () => {
 
         // Store information in firestore
         await setDoc(doc(db, 'users', userData.uid), userData);
-        navigate('/login');
+        console.log('Email/password signup userData: ', userData); // Log the user data - Remove this line after testing
+        onSignup(userData); // Added this line
+        navigate('/homepage');
       } else {
         console.log('User is not signed in');
       }
@@ -54,6 +57,7 @@ const Signup = () => {
     try {
       const userCredential = await signInWithPopup(auth, provider);
       const user = userCredential.user;
+      // TODO: Remove?? Since user object is passed as a prop from app.js and should already be available in profile.js without having to access local storage
       localStorage.setItem("userId", JSON.stringify(userCredential.user.uid));
       // Create user data object containing the user's UID and email
       const userData = {
@@ -63,7 +67,9 @@ const Signup = () => {
       
       // Store information in firestore
       await setDoc(doc(db, 'users', userData.uid), userData);
-      navigate('/login');
+      console.log('Google signup userData: ', userData); // Log the user data - Remove this line after testing
+      onSignup(userData); // Added this line
+      navigate('/homepage');
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
