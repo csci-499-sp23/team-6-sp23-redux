@@ -3,7 +3,7 @@ import CardDeckCSS from '../Styles/CardDeck.module.css'
 import { useState } from 'react';
 import CardDeck from './CardDeck';
 
-function HomepageWithCards() {
+function HomepageWithCards(props) {
 
   const [isShown, setIsShown] = useState(false);    
 
@@ -22,7 +22,7 @@ function HomepageWithCards() {
           </div>
         }
       </div>
-      <CardDeck className={CardDeckCSS.Container}>
+      <CardDeck className={CardDeckCSS.Container} location={props.location}>
       </CardDeck>
     </div>
   );

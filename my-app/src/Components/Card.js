@@ -126,6 +126,10 @@ function Card({onSwipe, ...props}) {
               rating={props.rating}
               price={props.price}
               closed={props.closed}
+              latitude={props.latitude}
+              longitude={props.longitude}
+              userLatitude={props.userLatitude}
+              userLongitude={props.userLongitude}
             />
         </div>
         : null
