@@ -35,7 +35,7 @@ function App() {
               case "preferences":
                 setPreferences(data[1])
                 setLocation(data[1].userLocation)
-                setCategories(data[1].value)
+                setCategories(data[1].categories)
                 return
               case "favorites":
                 setFavorites(data[1])
