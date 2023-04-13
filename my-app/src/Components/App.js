@@ -16,10 +16,11 @@ import { doc, onSnapshot } from "firebase/firestore";
 function App() {
   const id = localStorage.getItem("userId");
   const userId = JSON.parse(id) !== null ? JSON.parse(id) : "";
-  const [navigated, setNavigated] = useState(false);
-  const [location, setLocation] = useState("");
-  const [preferences, setPreferences] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  const [navigated, setNavigated] = useState(false); // check to see if navigated from login
+  const [location, setLocation] = useState(""); // user location
+  const [preferences, setPreferences] = useState([]); // preferences data
+  const [favorites, setFavorites] = useState([]); // list of hangouts the user liked
+  const [categories, setCategories] = useState([]); // category preferences
   
   // will mount
   useEffect( () => {
@@ -34,6 +35,7 @@ function App() {
               case "preferences":
                 setPreferences(data[1])
                 setLocation(data[1].userLocation)
+                setCategories(data[1].value)
                 return
               case "favorites":
                 setFavorites(data[1])
@@ -52,7 +54,6 @@ function App() {
     }
 }, [userId])
 
-  
   useEffect(() => {
     getUserData().then(data => {
       let userLocation = data.preferences.userLocation
@@ -66,7 +67,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Login setNavigated={setNavigated}/>}/>
-          <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated}/>}/>
+          <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories}/>}/>
           <Route exact path="/favorites" element={<Favoritelist favorites={favorites} />}/>
           <Route exact path = "/login" element = {<Login setNavigated={setNavigated}/>}/>
           <Route exact path = "/signup" element = {<SignUp/>}/>

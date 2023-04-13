@@ -12,14 +12,13 @@ function CardDeck(props) {
 
   useEffect( () => {
     if(props.location) {
-      getHangoutLocations(props.location, ["restaurant"]).then(data => {
+      getHangoutLocations(props.location, props.categories).then(data => {
         // Start with a shuffled deck
         let deck = shuffleDeck(data)
         setHangoutData(deck);
       })
     }
-  }, [props.location]);
-  
+  }, [props.location, props.categories]);
 
   // return new array with last item removed
   const removeCard = (array) => {
