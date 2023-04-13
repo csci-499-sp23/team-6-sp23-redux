@@ -5,21 +5,20 @@ import { doc, serverTimestamp, writeBatch, arrayUnion } from "firebase/firestore
 import { db } from '../firebase';
 
 function CardDeck(props) {
-
+  
   const [hangoutData, setHangoutData] = useState([]);
   const id = localStorage.getItem("userId");
-  const userId = JSON.parse(id) != null ? JSON.parse(id) : "";
+  const userId = JSON.parse(id) !== null && JSON.parse(id) !== "undefined" ? JSON.parse(id) : "";
 
   useEffect( () => {
     if(props.location) {
-      getHangoutLocations(props.location, ["restaurant"]).then(data => {
+      getHangoutLocations(props.location, props.categories).then(data => {
         // Start with a shuffled deck
         let deck = shuffleDeck(data)
         setHangoutData(deck);
       })
     }
-  }, [props.location]);
-  
+  }, [props.location, props.categories]);
 
   // return new array with last item removed
   const removeCard = (array) => {

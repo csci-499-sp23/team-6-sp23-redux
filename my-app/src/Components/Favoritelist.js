@@ -5,7 +5,7 @@ const handleClick = () => {
     alert('Redirect to Hangout place coming soon...');
 };
 
-function Favoritelist() {
+function Favoritelist(props) {
     return(
         <div className={FavoriteListCSS.FavoriteContainer}>
             <div className={FavoriteListCSS.FavoriteTitle}>Your Top Favorites</div>

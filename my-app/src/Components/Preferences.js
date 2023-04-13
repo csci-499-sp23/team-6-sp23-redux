@@ -8,7 +8,7 @@ import { db } from '../firebase';
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 
 
-function Preferences() {
+function Preferences(props) {
 
     //Use localStorage to keep track of current logged in user
     //NOTE: Preferences should not be accessible unless user is logged in

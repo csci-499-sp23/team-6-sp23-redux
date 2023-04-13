@@ -1,9 +1,9 @@
 import { db } from '../firebase';
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc} from "firebase/firestore";
 
 export async function getUserData() {
     const id = localStorage.getItem("userId");
-    const userId = JSON.parse(id) != null ? JSON.parse(id) : "";
+    const userId = JSON.parse(id) !== null ? JSON.parse(id) : "";
     const userRef = doc(db, 'users', userId);
 
     try {
@@ -17,3 +17,4 @@ export async function getUserData() {
         return []
     }
 }
+
