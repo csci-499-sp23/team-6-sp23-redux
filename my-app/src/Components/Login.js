@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import LoginCSS from '../Styles/Login.module.css';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
-const Login = () => {
+const Login = (props) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,6 +38,7 @@ const Login = () => {
 
 
       // Navigate to the homepage after successfully signing in and retrieving user data from Firestore
+      props.setNavigated(true)
       navigate('/homepage');
       console.log(user);
     } catch (error) {
@@ -73,7 +74,8 @@ const Login = () => {
       }
   
       // Navigate to the homepage after successfully signing in and retrieving user data from Firestore
-      navigate('/homepage');
+      props.setNavigated(true)
+      navigate('/homepage')
     } catch (error) {
       console.log(error.code, error.message);
     }

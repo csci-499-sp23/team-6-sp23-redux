@@ -1,11 +1,20 @@
 import HomepageCSS from '../Styles/Homepage.module.css'
 import CardDeckCSS from '../Styles/CardDeck.module.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CardDeck from './CardDeck';
+import { useNavigate } from 'react-router-dom';
 
 function HomepageWithCards(props) {
 
   const [isShown, setIsShown] = useState(false);    
+  const navigate = useNavigate();
+
+  // Refreshes page when navigated from login page to force retrieval of props data from app.js 
+  useEffect( () => {
+    if(props.navigated) {
+      navigate(0)
+    }
+  }, [props.navigated])
 
   return (
     <div className={HomepageCSS.Homepage}>
@@ -22,7 +31,7 @@ function HomepageWithCards(props) {
           </div>
         }
       </div>
-      <CardDeck className={CardDeckCSS.Container} location={props.location}>
+      <CardDeck className={CardDeckCSS.Container} location={props.location} >
       </CardDeck>
     </div>
   );

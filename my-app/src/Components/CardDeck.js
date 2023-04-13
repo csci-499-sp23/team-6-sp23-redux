@@ -5,10 +5,10 @@ import { doc, serverTimestamp, writeBatch, arrayUnion } from "firebase/firestore
 import { db } from '../firebase';
 
 function CardDeck(props) {
-
+  
   const [hangoutData, setHangoutData] = useState([]);
   const id = localStorage.getItem("userId");
-  const userId = JSON.parse(id) != null ? JSON.parse(id) : "";
+  const userId = JSON.parse(id) !== null && JSON.parse(id) !== "undefined" ? JSON.parse(id) : "";
 
   useEffect( () => {
     if(props.location) {

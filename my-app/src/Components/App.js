@@ -7,14 +7,51 @@ import HomepageWithCards from './HomepageWithCards'
 import Preferences from './Preferences';
 import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { getUserData } from '../Services/UserService';
+import { db } from '../firebase';
+import { doc, onSnapshot } from "firebase/firestore";
 
 
 function App() {
-
-  // TO DO: - Add a state for location and terms to pass as props to Homepage. Get state data from database preferences
+  const id = localStorage.getItem("userId");
+  const userId = JSON.parse(id) !== null ? JSON.parse(id) : "";
+  const [navigated, setNavigated] = useState(false);
   const [location, setLocation] = useState("");
+  const [preferences, setPreferences] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  
+  // will mount
+  useEffect( () => {
+    var unsubscribe;
+    // Event handler used to listen for any changes to user document and return it
+    if(userId !== "" && userId !== "undefined" && userId !== null) {
+      unsubscribe = onSnapshot(doc(db, 'users', userId), (doc) => {
+          var dataArray = Object.entries(doc.data())
+          
+          dataArray.forEach((data) => {
+            switch(data[0]) {
+              case "preferences":
+                setPreferences(data[1])
+                setLocation(data[1].userLocation)
+                return
+              case "favorites":
+                setFavorites(data[1])
+                return
+              default:
+                return 
+            }
+          })
+    }
+     
+      
+    )};
+    // unmount 
+    return () => {
+      unsubscribe()
+    }
+}, [userId])
+
   
   useEffect(() => {
     getUserData().then(data => {
@@ -28,12 +65,12 @@ function App() {
       <AppNavbar/>
       <Router>
         <Routes>
-          <Route exact path="/" element={<HomepageWithCards location={location}/>}/>
-          <Route exact path="/homepage" element={<HomepageWithCards location={location}/>}/>
-          <Route exact path="/favorites" element={<Favoritelist/>}/>
-          <Route exact path = "/login" element = {<Login/>}/>
+          <Route exact path="/" element={<Login setNavigated={setNavigated}/>}/>
+          <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated}/>}/>
+          <Route exact path="/favorites" element={<Favoritelist favorites={favorites} />}/>
+          <Route exact path = "/login" element = {<Login setNavigated={setNavigated}/>}/>
           <Route exact path = "/signup" element = {<SignUp/>}/>
-          <Route exact path="/preferences" element={<Preferences/>}/>
+          <Route exact path="/preferences" element={<Preferences preferences={preferences}/>}/>
         </Routes>
       </Router>    
     </div>
