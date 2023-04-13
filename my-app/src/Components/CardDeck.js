@@ -8,8 +8,9 @@ function CardDeck(props) {
   
   const [hangoutData, setHangoutData] = useState([]);
   const id = localStorage.getItem("userId");
-  const userId = JSON.parse(id) !== null && JSON.parse(id) !== "undefined" ? JSON.parse(id) : "";
-
+  //const userId = JSON.parse(id) !== null && JSON.parse(id) !== "undefined" ? JSON.parse(id) : "";
+  const userId = id !== null && id !== "undefined" ? JSON.parse(id) : ""; // remove after test.
+  
   useEffect( () => {
     if(props.location) {
       getHangoutLocations(props.location, props.categories).then(data => {

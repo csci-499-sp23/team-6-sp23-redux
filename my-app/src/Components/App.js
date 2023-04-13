@@ -7,11 +7,6 @@ import HomepageWithCards from './HomepageWithCards'
 import Preferences from './Preferences';
 import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
-import { useState, useEffect } from 'react';
-import { getUserData } from '../Services/UserService';
-import { db } from '../firebase';
-import { doc, onSnapshot } from "firebase/firestore";
-
 
 function App() {
   const id = localStorage.getItem("userId");
@@ -35,7 +30,7 @@ function App() {
               case "preferences":
                 setPreferences(data[1])
                 setLocation(data[1].userLocation)
-                setCategories(data[1].value)
+                setCategories(data[1].categories)
                 return
               case "favorites":
                 setFavorites(data[1])
@@ -54,24 +49,19 @@ function App() {
     }
 }, [userId])
 
-  useEffect(() => {
-    getUserData().then(data => {
-      let userLocation = data.preferences.userLocation
-      setLocation(userLocation)
-    })
-  }, [])
+  // TO DO: - Add a state for location and terms to pass as props to Homepage. Get state data from database preferences 
 
   return (
     <div className="App">
       <AppNavbar/>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Login setNavigated={setNavigated}/>}/>
-          <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories}/>}/>
-          <Route exact path="/favorites" element={<Favoritelist favorites={favorites} />}/>
-          <Route exact path = "/login" element = {<Login setNavigated={setNavigated}/>}/>
+          <Route exact path="/" element={<HomepageWithCards/>}/>
+          <Route exact path="/homepage" element={<HomepageWithCards/>}/>
+          <Route exact path="/favorites" element={<Favoritelist/>}/>
+          <Route exact path = "/login" element = {<Login/>}/>
           <Route exact path = "/signup" element = {<SignUp/>}/>
-          <Route exact path="/preferences" element={<Preferences preferences={preferences}/>}/>
+          <Route exact path="/preferences" element={<Preferences/>}/>
         </Routes>
       </Router>    
     </div>

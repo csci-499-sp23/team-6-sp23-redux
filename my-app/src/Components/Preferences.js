@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import { db } from '../firebase';
-import { doc, updateDoc, getDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 
 function Preferences(props) {
@@ -17,67 +17,24 @@ function Preferences(props) {
 
 
     //Used to handle the toggle buttonss, active buttons in the array of useState
-    const [value, setValue] = useState([]);
-    const handleChange = ((val) => setValue(val) ) ;
+    const [categories, setCategories] = useState([]);
+
+    //To add limit between 1 < x < 3 categories
+    const handleChange = ((val) => setCategories(val) ) ;
 
     const [userLocation, setUserLocation] = useState("");
 
     const [rangeLimit, setRangeLimit] = useState("");
     const [ratingLimit, setRatingLimit] = useState("");
 
-    //Run retrievePreferences when page is loaded
+
     useEffect( () => {
-
-        //Function that retrieves the user preferences from firestore
-        //Sets the corresponding buttons to active based on preferences and sets preferencesMaps based on preexisting preferences
-        const retrievePreferences = async (e) => {
-
-            //Reference to the document for users based on the userID
-            const userRef = doc(db, 'users', userId);
+        setCategories(props.preferences.categories);
+        setUserLocation(props.preferences.userLocation);
+        setRangeLimit(props.preferences.rangeLimit);
+        setRatingLimit(props.preferences.ratingLimit);
+    }, [props])
     
-            try {
-                //Use getDoc to load the document for user, and retrieve the preferences field
-                await getDoc(userRef).then( (docData) => {
-                    //Retrieve preferences for user location
-                    setUserLocation(docData.data().preferences.userLocation);
-                    
-                    //Retrieve preferences for the dropdown settings
-                    setRangeLimit(docData.data().preferences.rangeLimit);
-
-                    setRatingLimit(docData.data().preferences.ratingLimit);
-                    
-                    //Retrieve categorical preferences
-                    const loadedPrefs = docData.data().preferences.value;
-
-                    //Information from preferences field is stored in preloadedPrefs, and is used to set the state of the active buttons
-                    var preloadedPrefs = [];
-
-                    //Since the preference field is stored as an object, use .entries to store the information in an array
-                    const arr = Object.entries(loadedPrefs);
-
-                    //Iterate through the array, each category will be an array with index 0 being the index in that 2d array and index 1 being the value
-                    arr.forEach((category ) => {
-                        preloadedPrefs.push(category[1]);
-                    })
-
-
-                    setValue (preloadedPrefs);
-
-                }
-
-                )
-                
-
-            }
-            catch (error) {
-                console.log("No such document!");
-            }
-
-        }
-
-        retrievePreferences();
-
-    }, [userId]);
 
     //Function that obtains the current geolocation and logs it as latitude and longitude 
     const geolocationClick = () => {
@@ -120,18 +77,25 @@ function Preferences(props) {
     //Information in preferencesMap is retrieved and uploaded to firestore using updateDoc
     const updateData = async (e)=> {
 
-        const userRef = doc(db, 'users', userId);
+        if (categories.length > 0) {
 
-        await updateDoc (userRef, 
-            {
-                preferences: 
+            const userRef = doc(db, 'users', userId);
+
+            await updateDoc (userRef, 
                 {
-                    value, 
-                    userLocation,
-                    rangeLimit,
-                    ratingLimit
-                }
-            });
+                    preferences: 
+                    {
+                        categories, 
+                        userLocation,
+                        rangeLimit,
+                        ratingLimit
+                    }
+                });
+        }
+        else {
+            alert("Must select at least one category")
+        }
+
 
     }
 
@@ -161,14 +125,14 @@ function Preferences(props) {
          </div>
 
 
-         <div className = {PreferencesCSS.PreferencesForms}>
-              <form onClick = {getLocationRange} id = "locationForm"> 
+         <div className = {PreferencesCSS.PreferencesForms} >
+              <form onClick = {getLocationRange} id = "locationForm" > 
                    <label>
                      Location Range:&nbsp;
-                        <select>
-                         <option value= "No limit" > No limit </option>
-                         <option value = "5 miles"> Less than 5 miles</option>
-                         <option value = "10 miles">Less than 10 miles</option>
+                        <select value={rangeLimit}>
+                         <option value="No limit" > No limit </option>
+                         <option value="5 miles"> Less than 5 miles</option>
+                         <option value="10 miles">Less than 10 miles</option>
                      </select>
                       
                    </label>
@@ -178,12 +142,12 @@ function Preferences(props) {
              <form onClick = {getYelpRating} id = "ratingForm">
                  <label>
                     Yelp Rating:&nbsp;
-                     <select>
-                         <option value= "No limit"> No filter </option>
-                         <option value = "4"> 4+ Stars</option>
-                         <option value = "3"> 3+ Stars</option>
-                         <option value = "2"> 2+ Stars</option>
-                         <option value = "1"> 1+ Stars</option>
+                     <select value={ratingLimit}>
+                         <option value="No limit"> No filter </option>
+                         <option value="4"> 4+ Stars</option>
+                         <option value="3"> 3+ Stars</option>
+                         <option value="2"> 2+ Stars</option>
+                         <option value="1"> 1+ Stars</option>
                         </select>        
                     </label>
                 </form>
@@ -202,7 +166,7 @@ function Preferences(props) {
             <div className= {PreferencesCSS.PreferencesSwitches}>
             <br></br>
 
-            <ToggleButtonGroup type="checkbox" value={value} onChange={handleChange}> 
+            <ToggleButtonGroup type="checkbox" value={categories} onChange={handleChange}> 
                 <ToggleButton variant = "outline-warning" id="restaurants" value={"restaurants"} className = {PreferencesCSS.customButton} >
                     Restaurants
                 </ToggleButton>
