@@ -14,7 +14,7 @@ function HomepageWithCards(props) {
     if(props.navigated) {
       navigate(0)
     }
-  }, [props.navigated])
+  }, [props.navigated, navigate])
 
   return (
     <div className={HomepageCSS.Homepage}>
