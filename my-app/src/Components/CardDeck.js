@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Card from './Card';
 import { getHangoutLocations } from '../Services/HangoutService';
-import { doc, serverTimestamp, writeBatch, arrayUnion } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from '../firebase';
 
 function CardDeck(props) {
@@ -19,7 +19,7 @@ function CardDeck(props) {
         setHangoutData(deck);
       })
     }
-  }, [props.location, props.categories]);
+  }, [props]);
 
   // return new array with last item removed
   const removeCard = (array) => {
@@ -40,20 +40,12 @@ function CardDeck(props) {
   }
 
   const saveOnSwipeRight = async(item) => {
-    const batch = writeBatch(db);
-    const hangoutRef = doc(db, 'favorites', item.id);
     const userRef = doc(db, 'users', userId); 
     const favoriteCategory = `favorites.${item.category}`
 
-    batch.set(hangoutRef, item, {
-      createdAt: serverTimestamp()
+    await updateDoc(userRef, {
+      [favoriteCategory]: arrayUnion(item)
     });
-
-    batch.update(userRef, {
-      [favoriteCategory]: arrayUnion(hangoutRef.id)
-    });
-
-    await batch.commit(); 
 }
   
   const handleSwipe = (item, swipeDirection) => {

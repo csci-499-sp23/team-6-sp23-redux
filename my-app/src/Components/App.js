@@ -8,14 +8,13 @@ import Preferences from './Preferences';
 import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { useState, useEffect } from 'react';
-import { getUserData } from '../Services/UserService';
 import { db } from '../firebase';
 import { doc, onSnapshot } from "firebase/firestore";
 
 
 function App() {
   const id = localStorage.getItem("userId");
-  const userId = JSON.parse(id) !== null ? JSON.parse(id) : "";
+  const userId = JSON.parse(id) !== null && JSON.parse(id) !== "undefined" && JSON.parse(id) !== "" ? JSON.parse(id) : "";
   const [navigated, setNavigated] = useState(false); // check to see if navigated from login
   const [location, setLocation] = useState(""); // user location
   const [preferences, setPreferences] = useState([]); // preferences data
@@ -38,28 +37,19 @@ function App() {
                 setCategories(data[1].categories)
                 return
               case "favorites":
-                setFavorites(data[1])
+                setFavorites(Object.entries(data[1]))
                 return
               default:
                 return 
             }
           })
-    }
-     
-      
+      }  
     )};
     // unmount 
     return () => {
       unsubscribe()
     }
 }, [userId])
-
-  useEffect(() => {
-    getUserData().then(data => {
-      let userLocation = data.preferences.userLocation
-      setLocation(userLocation)
-    })
-  }, [])
 
   return (
     <div className="App">
