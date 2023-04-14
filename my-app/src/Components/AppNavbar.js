@@ -4,33 +4,53 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-function AppNavbar({ isAuthenticated }) {
-    return(
+function AppNavbar({isAuthenticated}) {
+  const userID = localStorage.getItem('userID') // used for when isAuthenticated status is null on initial render
+  // The user is logged in
+    if(userID || isAuthenticated) {
+      return(
         <Navbar className={AppNavbarCSS.colorNavbar} expand="lg">
           <Container>
-            <Navbar.Brand href="homepage">
+            <Navbar.Brand>
               <img className={AppNavbarCSS.navLogo} src="Images/easyhangoutlogo.png" alt="nav-logo"></img>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="homepage">Home</Nav.Link>
-                <Nav.Link href="preferences">Preferences</Nav.Link>
-                <Nav.Link href="favorites">Favorites</Nav.Link>
-                {!isAuthenticated ? (
+                <div id={AppNavbarCSS.mainContainer}>
+                  <Nav.Link href="homepage">Home</Nav.Link>
+                  <Nav.Link href="preferences">Preferences</Nav.Link>
+                  <Nav.Link href="favorites">Favorites</Nav.Link>
+                  <Nav.Link href="profile">Profile</Nav.Link>
+                </div>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+      )
+    } // User not logged in yet
+    else { 
+      return(
+        <Navbar className={AppNavbarCSS.colorNavbar} expand="lg">
+          <Container>
+            <Navbar.Brand>
+              <img className={AppNavbarCSS.navLogo} src="Images/easyhangoutlogo.png" alt="nav-logo"></img>
+              <span id={AppNavbarCSS.welcomeLogo}>Welcome to EasyHangout!</span>
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
                 <div id={AppNavbarCSS.LoginContainer}>
                   <Nav.Link href="login">Login</Nav.Link>
                   <span className={AppNavbarCSS.LineSeperator}>|</span>
                   <Nav.Link href="signup">Signup</Nav.Link>
                 </div>
-                ) : (
-                  <Nav.Link href="profile">Profile</Nav.Link>
-                )}
               </Nav>
             </Navbar.Collapse>
           </Container>
         </Navbar>
-    );
+      )
+    }
 }
 
 export default AppNavbar;

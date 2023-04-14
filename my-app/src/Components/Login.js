@@ -18,10 +18,6 @@ const Login = (props) => {
       // Signed in
       const user = userCredential.user;
 
-      //Save the user id to local storage for later use in the app when accessing user data
-      localStorage.setItem("userId", JSON.stringify(user.uid));
-
-
       // Retrieve user information from firestore
       // `doc(db, 'users', user.uid)` creates a document reference for the 'users' collection,
       // using the user's UID as the document ID.
@@ -56,7 +52,6 @@ const Login = (props) => {
       // Sign in with the GoogleAuthProvider using signInWithPopup
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      localStorage.setItem("userId", JSON.stringify(user.uid));
       // Check if the user exists in Firestore
       const userDocRef = doc(db, 'users', user.uid);
       const userDoc = await getDoc(userDocRef);

@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import ProfileCSS from '../Styles/Profile.module.css';
-import { db } from '../firebase';
+import { auth, db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
-const Profile = ({ userId }) => {
+const Profile = () => {
+  const userID = auth.currentUser?.uid
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
-      if (userId) {
-        const userDocRef = doc(db, 'users', userId);
+      if (userID) {
+        const userDocRef = doc(db, 'users', userID);
         const userDoc = await getDoc(userDocRef);
         if (userDoc.exists()) {
           setUserData(userDoc.data());
@@ -18,7 +19,7 @@ const Profile = ({ userId }) => {
     };
 
     fetchUserData();
-  }, [userId]);
+  }, [userID]);
 
   if (!userData) {
     return <div>Loading...</div>;
