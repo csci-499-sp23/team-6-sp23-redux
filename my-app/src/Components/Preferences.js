@@ -34,7 +34,7 @@ function Preferences(props) {
         setRangeLimit(props.preferences.rangeLimit);
         setRatingLimit(props.preferences.ratingLimit);
     }, [props])
-    
+
 
     //Function that obtains the current geolocation and logs it as latitude and longitude 
     const geolocationClick = () => {
@@ -129,10 +129,12 @@ function Preferences(props) {
               <form onClick = {getLocationRange} id = "locationForm" > 
                    <label>
                      Location Range:&nbsp;
-                        <select value={rangeLimit}>
-                         <option value="No limit" > No limit </option>
-                         <option value="5 miles"> Less than 5 miles</option>
-                         <option value="10 miles">Less than 10 miles</option>
+                        <select value={rangeLimit} onChange={getLocationRange}>
+                         <option value="-1"> No limit </option>
+                         <option value="1">Less than 1 mile</option>
+                         <option value="5"> Less than 5 miles</option>
+                         <option value="10">Less than 10 miles</option>
+                         <option value ="15">Less than 15 miles</option>
                      </select>
                       
                    </label>
@@ -142,8 +144,8 @@ function Preferences(props) {
              <form onClick = {getYelpRating} id = "ratingForm">
                  <label>
                     Yelp Rating:&nbsp;
-                     <select value={ratingLimit}>
-                         <option value="No limit"> No filter </option>
+                     <select value={ratingLimit} onChange={getYelpRating}>
+                         <option value="-1"> No filter </option>
                          <option value="4"> 4+ Stars</option>
                          <option value="3"> 3+ Stars</option>
                          <option value="2"> 2+ Stars</option>
