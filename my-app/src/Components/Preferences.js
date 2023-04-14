@@ -4,26 +4,20 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-import { db } from '../firebase';
+import { auth, db } from '../firebase';
 import { doc, updateDoc } from "firebase/firestore";
 
 
 function Preferences(props) {
-
-    //Use localStorage to keep track of current logged in user
     //NOTE: Preferences should not be accessible unless user is logged in
-    const id = localStorage.getItem("userId");
-    const userId = JSON.parse(id) != null ? JSON.parse(id) : "";
-
+    //NOTE: User category and location preferences should be set during the sign up process
+    const userID = auth.currentUser?.uid
 
     //Used to handle the toggle buttonss, active buttons in the array of useState
     const [categories, setCategories] = useState([]);
-
     //To add limit between 1 < x < 3 categories
     const handleChange = ((val) => setCategories(val) ) ;
-
     const [userLocation, setUserLocation] = useState("");
-
     const [rangeLimit, setRangeLimit] = useState("");
     const [ratingLimit, setRatingLimit] = useState("");
 
@@ -79,7 +73,7 @@ function Preferences(props) {
 
         if (categories.length > 0) {
 
-            const userRef = doc(db, 'users', userId);
+            const userRef = doc(db, 'users', userID);
 
             await updateDoc (userRef, 
                 {

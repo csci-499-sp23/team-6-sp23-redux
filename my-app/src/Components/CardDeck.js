@@ -2,14 +2,12 @@ import { useState, useEffect } from 'react';
 import Card from './Card';
 import { getHangoutLocations } from '../Services/HangoutService';
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
-import { db } from '../firebase';
+import { auth, db } from '../firebase';
 
 function CardDeck(props) {
   
   const [hangoutData, setHangoutData] = useState([]);
-  const id = localStorage.getItem("userId");
-  //const userId = JSON.parse(id) !== null && JSON.parse(id) !== "undefined" ? JSON.parse(id) : "";
-  const userId = id !== null && id !== "undefined" ? JSON.parse(id) : ""; // remove after test.
+  const userID = auth.currentUser?.uid
   
   useEffect( () => {
     if(props.location) {
@@ -40,7 +38,7 @@ function CardDeck(props) {
   }
 
   const saveOnSwipeRight = async(item) => {
-    const userRef = doc(db, 'users', userId); 
+    const userRef = doc(db, 'users', userID); 
     const favoriteCategory = `favorites.${item.category}`
 
     await updateDoc(userRef, {

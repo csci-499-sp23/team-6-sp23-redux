@@ -3,21 +3,39 @@
   }
   
 .navLogo{
-  width: 6vw;
-  height: 10vh;
+  position: relative;
+  width: 20%;
+  height: 20%;
+}
+
+#welcomeLogo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  font-family: 'Apple Chancery'
 }
 
 #LoginContainer {
   display: flex;
   position: absolute;
-  right: 8px;
+  right: 16px;
+  bottom: 25%;
   font-size: 20px;
   border: 0.8px solid black;
   border-radius: 5%;
 }
 
+#mainContainer {
+  display: flex;
+  position: relative;
+  right: 100%;
+  font-size: 20px;
+}
+
 .LineSeperator {
-  margin-top: 8px;
+  margin-top: 4%;
   font-size: 20px;
   color: black;
 }

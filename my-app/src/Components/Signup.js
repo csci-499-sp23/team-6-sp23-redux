@@ -19,7 +19,6 @@ const Signup = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       // Signed in
       console.log('Authenticated user:', userCredential.user); // Log the authenticated user object
-      localStorage.setItem("userId", JSON.stringify(userCredential.user.uid));
 
       // Check if user is signed in
       if (userCredential.user) {
@@ -54,7 +53,6 @@ const Signup = () => {
     try {
       const userCredential = await signInWithPopup(auth, provider);
       const user = userCredential.user;
-      localStorage.setItem("userId", JSON.stringify(userCredential.user.uid));
       // Create user data object containing the user's UID and email
       const userData = {
         uid: user.uid,

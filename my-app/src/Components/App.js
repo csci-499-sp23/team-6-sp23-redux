@@ -9,14 +9,12 @@ import Profile from './Profile';
 import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { useState, useEffect } from 'react';
-import { getUserData } from '../Services/UserService';
 import { auth, db } from '../firebase';
 import { doc, onSnapshot } from "firebase/firestore";
 
 
 function App() {
-  const id = localStorage.getItem("userId");
-  const userId = JSON.parse(id) !== null && JSON.parse(id) !== "undefined" && JSON.parse(id) !== "" ? JSON.parse(id) : "";
+  const userID = auth.currentUser?.uid
   const [navigated, setNavigated] = useState(false); // check to see if navigated from login
   const [location, setLocation] = useState(""); // user location
   const [preferences, setPreferences] = useState([]); // preferences data
@@ -28,8 +26,8 @@ function App() {
   useEffect( () => {
     var unsubscribe;
     // Event handler used to listen for any changes to user document and return it
-    if(userId !== "" && userId !== "undefined" && userId !== null) {
-      unsubscribe = onSnapshot(doc(db, 'users', userId), (doc) => {
+    if(userID) {
+      unsubscribe = onSnapshot(doc(db, 'users', userID), (doc) => {
           var dataArray = Object.entries(doc.data())
           
           dataArray.forEach((data) => {
@@ -51,6 +49,7 @@ function App() {
     // Check if user is authenticated
     const authUnsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
+        localStorage.setItem('userID', JSON.stringify(user.uid))
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);
@@ -63,7 +62,7 @@ function App() {
       }
       authUnsubscribe();
     };
-  }, [userId]);
+  }, [userID]);
 
   return (
     <div className="App">
@@ -76,7 +75,7 @@ function App() {
           <Route exact path = "/login" element = {<Login setNavigated={setNavigated}/>}/>
           <Route exact path = "/signup" element = {<SignUp/>}/>
           <Route exact path="/preferences" element={<Preferences preferences={preferences}/>}/>
-          <Route exact path="/profile" element={<Profile userId={auth.currentUser?.uid} />} />
+          <Route exact path="/profile" element={<Profile/>} />
         </Routes>
       </Router>    
     </div>
