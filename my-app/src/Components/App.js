@@ -5,10 +5,12 @@ import Login from './Login';
 import SignUp from './Signup';
 import HomepageWithCards from './HomepageWithCards'
 import Preferences from './Preferences';
+import Profile from './Profile';
 import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { useState, useEffect } from 'react';
-import { db } from '../firebase';
+import { getUserData } from '../Services/UserService';
+import { auth, db } from '../firebase';
 import { doc, onSnapshot } from "firebase/firestore";
 
 
@@ -20,6 +22,7 @@ function App() {
   const [preferences, setPreferences] = useState([]); // preferences data
   const [favorites, setFavorites] = useState([]); // list of hangouts the user liked
   const [categories, setCategories] = useState([]); // category preferences
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // check if user is authenticated
   
   // will mount
   useEffect( () => {
@@ -45,15 +48,26 @@ function App() {
           })
       }  
     )};
+    // Check if user is authenticated
+    const authUnsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+    });
     // unmount 
     return () => {
-      unsubscribe()
-    }
-}, [userId])
+      if (unsubscribe) {
+        unsubscribe();
+      }
+      authUnsubscribe();
+    };
+  }, [userId]);
 
   return (
     <div className="App">
-      <AppNavbar/>
+      <AppNavbar isAuthenticated={isAuthenticated}/>
       <Router>
         <Routes>
           <Route exact path="/" element={<Login setNavigated={setNavigated}/>}/>
@@ -62,6 +76,7 @@ function App() {
           <Route exact path = "/login" element = {<Login setNavigated={setNavigated}/>}/>
           <Route exact path = "/signup" element = {<SignUp/>}/>
           <Route exact path="/preferences" element={<Preferences preferences={preferences}/>}/>
+          <Route exact path="/profile" element={<Profile userId={auth.currentUser?.uid} />} />
         </Routes>
       </Router>    
     </div>
