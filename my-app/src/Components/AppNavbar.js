@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-function AppNavbar() {
+function AppNavbar({ isAuthenticated }) {
     return(
         <Navbar className={AppNavbarCSS.colorNavbar} expand="lg">
           <Container>
@@ -17,12 +17,15 @@ function AppNavbar() {
                 <Nav.Link href="homepage">Home</Nav.Link>
                 <Nav.Link href="preferences">Preferences</Nav.Link>
                 <Nav.Link href="favorites">Favorites</Nav.Link>
+                {!isAuthenticated ? (
                 <div id={AppNavbarCSS.LoginContainer}>
                   <Nav.Link href="login">Login</Nav.Link>
                   <span className={AppNavbarCSS.LineSeperator}>|</span>
                   <Nav.Link href="signup">Signup</Nav.Link>
                 </div>
-                
+                ) : (
+                  <Nav.Link href="profile">Profile</Nav.Link>
+                )}
               </Nav>
             </Navbar.Collapse>
           </Container>
