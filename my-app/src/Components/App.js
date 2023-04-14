@@ -9,7 +9,6 @@ import Profile from './Profile';
 import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { useState, useEffect } from 'react';
-import { getUserData } from '../Services/UserService';
 import { auth, db } from '../firebase';
 import { doc, onSnapshot } from "firebase/firestore";
 
