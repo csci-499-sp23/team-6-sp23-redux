@@ -1,25 +1,64 @@
 import FavoriteListCSS from '../Styles/Favoritelist.module.css';
-
-const handleClick = () => {
-    //Will contain the redirect based on element that initially called it.
-    alert('Redirect to Hangout place coming soon...');
-};
+import FavoriteCard from './FavoriteCard';
 
 function Favoritelist(props) {
+
+    // Helper function used to capitalize the first letter of each word in a string 
+    const toTitleCase = (phrase) => {
+        return phrase
+          .toLowerCase()
+          .split(' ')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+      };
+
+    const makeTable = () => {
+        return props.favorites.map((favoritesMap, index) => {
+                        //We want the category for the first column of each row stored in favoritesMap[0]
+                        //favoritesMap[1] contains the array of hangouts for each category
+                        return(
+                           <tr key={index}>
+                            <td key={index} id={FavoriteListCSS.CategoryName}>{toTitleCase(favoritesMap[0])}:</td>
+                             <div className={FavoriteListCSS.FavoriteHangoutContainer}>
+                                {
+                                    //Table columns for each hangout
+                                    favoritesMap[1].map((hangout, index) => {
+                                        return(
+                                           
+                                            <td key={index}>
+                                            {
+                                                <FavoriteCard
+                                                    key={index}
+                                                    title={hangout.name} 
+                                                    image={hangout.image_url} 
+                                                    distance={hangout.distance} 
+                                                    location={hangout.location.display_address[0]}
+                                                    location2={hangout.location.display_address[1]}
+                                                    phone={hangout.display_phone}
+                                                    category={hangout.category}
+                                                    closed={hangout.is_closed}
+                                                >
+                                                </FavoriteCard>
+                                            }
+                                            </td>
+                                           
+                                        )
+                                    }) // End of inner for each loop
+                                }
+                                </div>
+                           </tr> 
+                        )
+                    }) // End of first for each loop
+    }
+
     return(
         <div className={FavoriteListCSS.FavoriteContainer}>
             <div className={FavoriteListCSS.FavoriteTitle}>Your Top Favorites</div>
             <div className={FavoriteListCSS.Test}>
             <table className={FavoriteListCSS.FavoriteTable}>
-                <tr>
-                 <td onClick={handleClick}><img src="Images/Hangoutspot1.jpeg" width="300" alt="hangoutspot1" className={FavoriteListCSS.FavoriteImages}></img></td>
-                 <td onClick={handleClick}><img src="Images/Hangoutspot2.png" width="300" alt="hangoutspot2"  className={FavoriteListCSS.FavoriteImages}></img></td>
-                </tr>
-  
-                <tr>
-                 <td onClick={handleClick}><img src="Images/Hangoutspot2.png" width="300" alt="hangoutspot3"  className={FavoriteListCSS.FavoriteImages}></img></td>
-                 <td onClick={handleClick}><img src="Images/Hangoutspot1.jpeg" width="300" alt="hangoutspot4" className={FavoriteListCSS.FavoriteImages}></img></td>
-                </tr>
+                <tbody>
+                    {props.favorites && makeTable()}
+                </tbody>
             </table>
             </div>
         </div>
