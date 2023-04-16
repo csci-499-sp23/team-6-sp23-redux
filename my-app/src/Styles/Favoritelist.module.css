@@ -5,12 +5,29 @@
   .FavoriteTitle {
     text-align: center;
     color: orange;
-    font-size: calc(10px + 2vmin);
-
+    font-size: 40px;
+    font-weight: bold;
   }
 
   .FavoriteTable {
-    margin: auto;
+    color: black;
+    border-collapse: separate;
+    border-spacing: 20px 8px;
+  }
+  
+  #CategoryName {
+    font-weight: 600;
+    font-size: 25px;
+    color: orange;
+  }
+
+  .FavoriteHangoutContainer {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    width: 83vw;
+    max-width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
   }
 
   img:hover{
@@ -19,7 +36,11 @@
   }
   th, td {
     padding: 15px;
-    border-radius: 25px;
+  }
+
+  td {
+    max-width: 20vw;
+    max-height: 50vh;
   }
 
 
