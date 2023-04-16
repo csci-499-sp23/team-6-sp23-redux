@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
 import { doc, onSnapshot } from "firebase/firestore";
 
-
+// Just a comment to make a commit/delete later
 function App() {
   const userID = auth.currentUser?.uid
   const [navigated, setNavigated] = useState(false); // check to see if navigated from login
