@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Card from './Card';
-import { getHangoutLocations } from '../Services/HangoutService';
+import { getHangouts } from '../Services/HangoutService';
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { auth, db } from '../firebase';
 
@@ -10,13 +10,13 @@ function CardDeck(props) {
   const userID = auth.currentUser?.uid
   
   useEffect( () => {
-    if(props.location) {
-      getHangoutLocations(props.location, props.categories).then(data => {
+    if(props.location && props.categories){
+      getHangouts(props.location, props.categories).then((data) => {
         // Start with a shuffled deck
         let deck = shuffleDeck(data)
         setHangoutData(deck);
       })
-    }
+    } 
   }, [props]);
 
   // return new array with last item removed

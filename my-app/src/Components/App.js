@@ -49,7 +49,7 @@ function App() {
     // Check if user is authenticated
     const authUnsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        localStorage.setItem('userID', JSON.stringify(user.uid))
+        sessionStorage.setItem('userID', JSON.stringify(user.uid))
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);

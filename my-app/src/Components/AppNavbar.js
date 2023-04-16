@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 function AppNavbar({isAuthenticated}) {
-  const userID = localStorage.getItem('userID') // used for when isAuthenticated status is null on initial render
+  const userID = sessionStorage.getItem('userID') // used for when isAuthenticated status is null on initial render
   // The user is logged in
     if(userID || isAuthenticated) {
       return(
