@@ -53,7 +53,24 @@
 }
 
 #MapDetailsContainer {
-    width: 31vw;
+    width: 32vw;
+    background-color: white;
+    color: black;
+    overflow-y: scroll;
+}
+
+#MapDetailsContainer::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+#MapDetailsContainer::-webkit-scrollbar-track-piece  {
+    background-color: white;
+}
+
+#MapDetailsContainer::-webkit-scrollbar-thumb:vertical {
+    border-radius: 10px;
+    background-color: orange;
 }
 
 #Image {
@@ -94,7 +111,7 @@ li {
 }
 
 .MapInstructions {
-    font-size: medium;
+    font-size: 20px;
 }
 
 .WalkingButton {
@@ -152,3 +169,4 @@ li {
 .DrivingButton:focus {
     background-color: #d3d3d3;
 }
+

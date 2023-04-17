@@ -50,16 +50,16 @@
   }
 
 
-  ::-webkit-scrollbar {
+  .FavoriteHangoutContainer::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
 
-  ::-webkit-scrollbar-track-piece  {
+  .FavoriteHangoutContainer::-webkit-scrollbar-track-piece  {
     background-color: white;
   }
 
-  ::-webkit-scrollbar-thumb:horizontal {
+  .FavoriteHangoutContainer::-webkit-scrollbar-thumb:horizontal {
     border-radius: 10px;
     background-color: orange;
   }
