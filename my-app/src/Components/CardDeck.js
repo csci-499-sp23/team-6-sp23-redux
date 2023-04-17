@@ -8,12 +8,28 @@ function CardDeck(props) {
   
   const [hangoutData, setHangoutData] = useState([]);
   const userID = auth.currentUser?.uid
-  
+
   useEffect( () => {
+    // Initialize a set with the ids of all of the user's favorited hangout locations
+    const favoritesSet = new Set(); 
+    const initializeFavorites = () => {
+      props.favoriteHangouts.forEach((map) => {
+        map[1].forEach((hangout) => {
+          favoritesSet.add(hangout.id)
+        })
+      })
+    }
+
+    initializeFavorites()
+    
     if(props.location && props.categories){
       getHangouts(props.location, props.categories).then((data) => {
+        // Filter the data to remove any locations the user has already liked
+        var filteredDeck = data.filter((hangout) => {
+          return !favoritesSet.has(hangout.id)
+        })
         // Start with a shuffled deck
-        let deck = shuffleDeck(data)
+        let deck = shuffleDeck(filteredDeck)
         setHangoutData(deck);
       })
     } 

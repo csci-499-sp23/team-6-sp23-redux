@@ -70,7 +70,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Login setNavigated={setNavigated}/>}/>
-          <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories}/>}/>
+          <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites}/>}/>
           <Route exact path="/favorites" element={<Favoritelist favorites={favorites} />}/>
           <Route exact path = "/login" element = {<Login setNavigated={setNavigated}/>}/>
           <Route exact path = "/signup" element = {<SignUp/>}/>
