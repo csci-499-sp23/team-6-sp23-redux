@@ -12,7 +12,7 @@
   .FavoriteTable {
     color: black;
     border-collapse: separate;
-    border-spacing: 20px 8px;
+    border-spacing: 8px 8px;
   }
   
   #CategoryName {
@@ -24,10 +24,16 @@
   .FavoriteHangoutContainer {
     border: 1px solid #e0e0e0;
     border-radius: 10px;
-    width: 83vw;
-    max-width: 100%;
-    overflow-x: scroll;
+    width: 100%;
+    height: auto;
     overflow-y: hidden;
+    white-space: nowrap;
+    overflow-x: scroll;
+  }
+
+  .FavoriteCard {
+    display: inline-block;
+    margin-right: 24px;
   }
 
   img:hover{
@@ -44,3 +50,16 @@
   }
 
 
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track-piece  {
+    background-color: white;
+  }
+
+  ::-webkit-scrollbar-thumb:horizontal {
+    border-radius: 10px;
+    background-color: orange;
+  }
