@@ -6,6 +6,7 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import { auth, db } from '../firebase';
 import { doc, updateDoc } from "firebase/firestore";
+import axios from 'axios';
 
 
 function Preferences(props) {
@@ -56,6 +57,25 @@ function Preferences(props) {
             console.log("Not Available");
           }
     };
+
+    const getSearchLocation = async (e) => {
+        // Get input values for location and region
+        let locationInput = document.getElementById(PreferencesCSS.LocationInput);
+        let regionInput = document.getElementById(PreferencesCSS.RegionInput);
+        if(locationInput.value !== "" && regionInput.value !== "") {
+            await axios.get(`https://geocode.search.hereapi.com/v1/geocode?q=${locationInput.value}&qq=city=${regionInput.value}&apiKey=${process.env.REACT_APP_GEO_API_KEY}`).then((res) => {
+                const { lat, lng } = res.data.items[0].position
+                setUserLocation(lat + ", " + lng);
+            }).catch(error => {
+                console.log(error)
+                alert("Location could not be found")
+            }) 
+        }
+        else {
+            alert("Please enter a valid location and region")
+        }
+        
+    }
     
     //Function that handles drop down functionality for location range preference
     const getLocationRange = (e) => {
@@ -103,19 +123,25 @@ function Preferences(props) {
             <br></br>
 
             <div className = {PreferencesCSS.PreferencesHeader}>
-                Location:
+                Search Location:
             </div>
 
             <div className = {PreferencesCSS.PreferencesButtons}>
                 <Button variant = "outline-dark" size = "sm" onClick = {geolocationClick} className = {PreferencesCSS.PreferencesButtons}> 
-                Update User Location
+                    My Location
                 </Button>
             </div>
 
-            <br></br>
+            <div className={PreferencesCSS.Text}>or</div>
 
+            <div className={PreferencesCSS.SearchBar}>
+                <input id={PreferencesCSS.LocationInput} type='search' placeholder='Enter a location'></input>
+                <input id={PreferencesCSS.RegionInput}placeholder='Region'></input>
+                <button id={PreferencesCSS.SearchButton} onClick={getSearchLocation}></button>
+            </div>
+            
         <div className = {PreferencesCSS.PreferencesHeader}>
-                Preferences:
+                Filter Preferences:
          </div>
 
 
@@ -156,7 +182,7 @@ function Preferences(props) {
 
             <br></br>
             <div className = {PreferencesCSS.PreferencesHeader}>
-            Filtered Categories:
+            Filter Categories:
             </div>
 
             <div className= {PreferencesCSS.PreferencesSwitches}>
@@ -186,10 +212,11 @@ function Preferences(props) {
 
             <br></br>
             <div className = {PreferencesCSS.PreferencesButtons}>
-            <Button variant = "outline-dark" size = "sm" onClick = {updateData} >
-                    Update Preferences
+            <Button className={PreferencesCSS.SaveButton} variant = "outline-dark" size = "sm" onClick = {updateData} >
+                    Save Preferences
              </Button> 
             </div>
+            <br></br>
         </div>
         
 
