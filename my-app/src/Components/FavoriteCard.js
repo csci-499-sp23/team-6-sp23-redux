@@ -23,7 +23,7 @@ function FavoriteCard(props) {
                     <div className={FavoriteCardCSS.DetailLabel}>Distance: </div>
                     <div className={FavoriteCardCSS.Detail}>{props.distance.toFixed(2)} km away</div>
                 </div>
-                <FavoriteDetails id="TestID" props={props}/>
+                <FavoriteDetails {...props}/>
 
             </div>
             

@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 
 function Favoritedetails(props) {
 
-  //console.log(props.props); //I'm assuming this is due to the way props have to be passed.
+  //console.log((props));
   //console.log((props.location+' ' +props.location2));
   const [show, setShow] = useState(false);
 
@@ -20,7 +20,8 @@ function Favoritedetails(props) {
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
   };
-                             
+
+                     
                             
   return (
     <>
@@ -32,17 +33,17 @@ function Favoritedetails(props) {
         
       >
         <Modal.Header>
-          <Modal.Title>{props.props.title}</Modal.Title>
+          <Modal.Title>{toTitleCase(props.title)}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <div className={FavoriteModal.modalInfo} onClick={() => handleClose()}>
 
-                <div>Categories: {toTitleCase(props.props.category)}</div>
-                <div>Rating: {props.props.rating + " Stars"}</div>
-                <div>Location: {props.props.location + ' ' + props.props.location2}</div>
+                <div>Categories: {(toTitleCase(props.category))}</div>
+                <div>Rating: {props.rating + " Stars"}</div>
+                <div>Location: {props.location + ' \n' + props.location2}</div>
 
             </div>
-            <div><img className={FavoriteModal.modalImage} src={props.props.image}></img></div>
+            <div><img className={FavoriteModal.modalImage} src={props.image}></img></div>
             
 
         </Modal.Body>
