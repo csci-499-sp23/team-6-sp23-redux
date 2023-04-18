@@ -1,0 +1,27 @@
+.favoriteModal{
+
+    text-align: center;
+}
+
+
+.modalInfo{
+    text-align: center;
+    vertical-align: text-top;
+    font-size: 24px;
+}
+
+.modalCloseButton{
+    vertical-align: text-top;
+}
+
+.modalInfoButton{
+    vertical-align: text-top;
+}
+
+.modalImage{
+    height: 50%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}

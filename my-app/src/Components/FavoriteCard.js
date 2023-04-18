@@ -1,4 +1,5 @@
 import FavoriteCardCSS from '../Styles/FavoriteCard.module.css';
+import FavoriteDetails from './FavoriteDetails';
 
 function FavoriteCard(props) {
 
@@ -6,9 +7,10 @@ function FavoriteCard(props) {
 
     return(
         <div className={FavoriteCardCSS.Container}>
+            
             <img id={FavoriteCardCSS.Image} src={props.image} alt="hangout-suggestion"></img>
          
-            <div id={FavoriteCardCSS.Title}>{props.title}</div>
+            <div id={FavoriteCardCSS.Title} >{props.title}</div>
           
             <div id={FavoriteCardCSS.BottomContainer}>
 
@@ -16,13 +18,17 @@ function FavoriteCard(props) {
                     <div className={FavoriteCardCSS.DetailLabel}>Location: </div>
                     <div className={FavoriteCardCSS.Detail}>{locationDetail}</div>
                 </div>
-            
+                
                 <div id={FavoriteCardCSS.DistanceContainer}>
                     <div className={FavoriteCardCSS.DetailLabel}>Distance: </div>
                     <div className={FavoriteCardCSS.Detail}>{props.distance.toFixed(2)} km away</div>
                 </div>
+                <FavoriteDetails id="TestID" props={props}/>
 
             </div>
+            
+            
+            
         </div>
     )
 }
