@@ -1,20 +1,83 @@
 /* Profile.module.css */
 
 .profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: #000;
+}
 
-  .welcome {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
+.welcome {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
 
-  .user-info {
-    font-size: 1.2rem;
-    color: #444;
-  }
+.user-info {
+  font-size: 1.2rem;
+  color: #444;
+}
+
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;  
+  background: #fff;
+  margin-bottom: 1rem;
+}
+
+.profile-card-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.profile-image {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.profile-location {
+  font-size: 18px;
+}
+
+.new-password-form {
+  width: 100%;
+}
+
+.new-password-form input {
+  width: 100%;
+}
+
+.new-password-form button {
+  background-color: #ffa012; 
+  width: 100%;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  /* font-size: 16px; */
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.new-password-form button:hover {
+  background-color: #e18d0e;
+}
