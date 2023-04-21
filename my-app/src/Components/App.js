@@ -66,8 +66,9 @@ function App() {
 
   return (
     <div className="App">
-      <AppNavbar isAuthenticated={isAuthenticated}/>
+      
       <Router>
+        <AppNavbar isAuthenticated={isAuthenticated}/>
         <Routes>
           <Route exact path="/" element={<Login setNavigated={setNavigated}/>}/>
           <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites}/>}/>
