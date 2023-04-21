@@ -43,7 +43,10 @@ function Favoritedetails(props) {
                 <div>Location: {props.location + ' \n' + props.location2}</div>
 
             </div>
-            <div><img className={FavoriteModal.modalImage} src={props.image} alt="Awesome!" />
+
+            <div>
+              {/* eslint-disable-next-line jsx-a11y/alt-text */}
+              <img className={FavoriteModal.modalImage} src={props.image} alt="" />
             </div>
             
 
