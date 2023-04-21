@@ -12,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: 'Create env file'
+        run: |
+          cd my-app
+          echo "${{ secrets.ENV_FILE }}" > .env
       - run: (cd my-app && npm ci)
       - run: (cd my-app && npm run build)
       - uses: FirebaseExtended/action-hosting-deploy@v0
@@ -20,3 +24,11 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EASY_HANGOUT_68597 }}'
           projectId: easy-hangout-68597
           entrypoint: "./my-app"
+
+      - name: Send Discord notification on success
+        if: ${{ success() }}
+        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Pull Request Actions Successful"
+
+      - name: Send Discord notification on failure
+        if: ${{ failure() }}
+        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 Pull Request Actions Failed"
