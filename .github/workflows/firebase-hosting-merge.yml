@@ -15,11 +15,6 @@ jobs:
         run: |
           cd my-app
           echo "${{ secrets.ENV_FILE }}" > .env
-      - name: 'Sync package-lock.json'
-        run: |
-          cd my-app
-          rm -rf node_modules package-lock.json
-          npm install
       - run: (cd my-app && npm ci)
       - run: (cd my-app && npm run build)
       - uses: FirebaseExtended/action-hosting-deploy@v0
