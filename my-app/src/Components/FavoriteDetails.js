@@ -45,7 +45,6 @@ function Favoritedetails(props) {
             </div>
 
             <div>
-              {/* eslint-disable-next-line jsx-a11y/alt-text */}
               <img className={FavoriteModal.modalImage} src={props.image} alt="" />
             </div>
             
