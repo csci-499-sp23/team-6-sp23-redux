@@ -77,6 +77,10 @@ function Card({onSwipe, ...props}) {
     }
   }, [x, flyAwayComplete, onSwipe])
 
+  function toMiles(meters)
+  {
+    return parseInt(meters) * 0.000621371;
+  }
   return (
     <div>
       <motion.div
@@ -104,7 +108,7 @@ function Card({onSwipe, ...props}) {
             
             <div id={CardCSS.DistanceContainer}>
               <div className={CardCSS.DetailLabel}>Distance: </div>
-              <div className={CardCSS.Detail}>{props.distance.toFixed(2)} km away</div>
+              <div className={CardCSS.Detail}>{toMiles(props.distance).toFixed(2)} miles away</div>
             </div>
           </div>
           

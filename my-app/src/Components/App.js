@@ -21,7 +21,9 @@ function App() {
   const [favorites, setFavorites] = useState([]); // list of hangouts the user liked
   const [categories, setCategories] = useState([]); // category preferences
   const [isAuthenticated, setIsAuthenticated] = useState(false); // check if user is authenticated
+  const [rangeLimit, setRangeLimit] = useState("");
   
+
   // will mount
   useEffect( () => {
     var unsubscribe;
@@ -36,6 +38,7 @@ function App() {
                 setPreferences(data[1])
                 setLocation(data[1].userLocation)
                 setCategories(data[1].categories)
+                setRangeLimit(data[1].rangeLimit)
                 return
               case "favorites":
                 setFavorites(Object.entries(data[1]))
@@ -70,7 +73,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Login setNavigated={setNavigated}/>}/>
-          <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites}/>}/>
+          <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit = {rangeLimit}/>}/>
           <Route exact path="/favorites" element={<Favoritelist favorites={favorites} />}/>
           <Route exact path = "/login" element = {<Login setNavigated={setNavigated}/>}/>
           <Route exact path = "/signup" element = {<SignUp/>}/>

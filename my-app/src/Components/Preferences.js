@@ -150,7 +150,7 @@ function Preferences(props) {
                    <label>
                      Location Range:&nbsp;
                         <select value={rangeLimit} onChange={getLocationRange}>
-                         <option value="-1"> No limit </option>
+                         <option value="0"> No limit </option>
                          <option value="1">Less than 1 mile</option>
                          <option value="5"> Less than 5 miles</option>
                          <option value="10">Less than 10 miles</option>
