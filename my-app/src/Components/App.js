@@ -22,10 +22,7 @@ function App() {
   const [categories, setCategories] = useState([]); // category preferences
   const [isAuthenticated, setIsAuthenticated] = useState(false); // check if user is authenticated
   const [rangeLimit, setRangeLimit] = useState("");
-<<<<<<< Updated upstream
-=======
   
->>>>>>> Stashed changes
   
 
   // will mount
