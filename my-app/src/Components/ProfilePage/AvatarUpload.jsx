@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { storage } from './firebase';
+import { storage } from '../../firebase';
 
 function UploadImage() {
   const [image, setImage] = useState(null);

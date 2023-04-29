@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth, signOut,updatePassword } from 'firebase/auth';
+import { getStorage } from 'firebase/storage';
  
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -17,6 +18,7 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 const auth = getAuth(app);
+const storage = getStorage(app);
 
 export const signOutUser = async () => await signOut(auth).then(r => r).catch(e => ({ error: e }));
 
@@ -29,4 +31,4 @@ export const updateUserPassword = async (newPassword) => {
   });
 }
 // export { app, db, auth };
-export { db, auth };
+export { db, auth, storage };

@@ -22,6 +22,7 @@ function App() {
   const [categories, setCategories] = useState([]); // category preferences
   const [isAuthenticated, setIsAuthenticated] = useState(false); // check if user is authenticated
   const [rangeLimit, setRangeLimit] = useState("");
+  const [username, setUsername] = useState('');
   
   
 
@@ -72,12 +73,12 @@ function App() {
     <div className="App">
       
       <Router>
-        <AppNavbar isAuthenticated={isAuthenticated}/>
+        <AppNavbar isAuthenticated={isAuthenticated} username={username} setNavigated={setNavigated} />
         <Routes>
-          <Route exact path="/" element={<Login setNavigated={setNavigated}/>}/>
+          <Route exact path="/" element={<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
           <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit = {rangeLimit}/>}/>
           <Route exact path="/favorites" element={<Favoritelist favorites={favorites} />}/>
-          <Route exact path = "/login" element = {<Login setNavigated={setNavigated}/>}/>
+          <Route exact path = "/login" element = {<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
           <Route exact path = "/signup" element = {<SignUp/>}/>
           <Route exact path="/preferences" element={<Preferences preferences={preferences}/>}/>
           <Route exact path="/profile" element={<Profile/>} />

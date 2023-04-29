@@ -7,7 +7,7 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import { auth, db } from '../firebase';
 import { doc, updateDoc } from "firebase/firestore";
 import axios from 'axios';
-
+import { defaultPreferences } from './Signup';
 
 function Preferences(props) {
     //NOTE: Preferences should not be accessible unless user is logged in
@@ -24,6 +24,7 @@ function Preferences(props) {
 
 
     useEffect( () => {
+        setCategories(Object.keys(defaultPreferences).filter(category => defaultPreferences[category]));
         setCategories(props.preferences.categories);
         setUserLocation(props.preferences.userLocation);
         setRangeLimit(props.preferences.rangeLimit);

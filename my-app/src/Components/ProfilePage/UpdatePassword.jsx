@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { updateUserPassword } from '../../firebase'
-
 import styles from '../../Styles/Profile.module.css';
 
 const schema = yup.object().shape({
