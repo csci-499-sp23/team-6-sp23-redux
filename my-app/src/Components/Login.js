@@ -82,7 +82,15 @@ const Login = (props) => {
 
   return (
     <>
-      <main className={LoginCSS.login}>
+      <main 
+        className={LoginCSS.login}
+        style={{
+          backgroundImage: `url(${process.env.PUBLIC_URL}/Images/background.jpg)`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <section className={LoginCSS.LoginContainer}>
           <div className={LoginCSS.LoginDiv}>
             <form onSubmit={onLogin}> {/* Add onSubmit attribute */}
