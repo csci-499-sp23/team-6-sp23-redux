@@ -1,4 +1,14 @@
-/* Profile.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+  --primary-color: #ffa012;
+  --secondary-color: #e18d0e;
+  --border-color: #eaeaea;
+  --text-color: #444;
+  --background-color: #fff;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --font-family: 'Roboto', sans-serif;
+}
 
 .profile-container {
   display: flex;
@@ -6,9 +16,10 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  color: #000;
+  color: var(--text-color);
   max-width: 400px;
   margin: 0 auto;
+  font-family: var(--font-family);
 }
 
 .welcome {
@@ -19,7 +30,7 @@
 
 .user-info {
   font-size: 1.2rem;
-  color: #444;
+  color: var(--text-color);
 }
 
 .profile-card {
@@ -28,11 +39,11 @@
   align-items: center;
   justify-content: center;
   width: 300px;
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--border-color);
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   padding: 20px;
-  background: #fff;
+  background: var(--background-color);
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
@@ -56,11 +67,21 @@
 .new-password-form input {
   width: 100%;
   margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  outline: none;
+  font-family: var(--font-family);
+}
+
+.new-password-form input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 1px var(--primary-color);
 }
 
 .new-password-form button {
   width: 100%;
-  background-color: #ffa012;
+  background-color: var(--primary-color);
   border: none;
   color: white;
   padding: 15px 32px;
@@ -70,8 +91,12 @@
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 12px;
+  font-family: var(--font-family);
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s;
 }
 
 .new-password-form button:hover {
-  background-color: #e18d0e;
+  background-color: var(--secondary-color);
 }
