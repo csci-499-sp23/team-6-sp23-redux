@@ -1,10 +1,33 @@
+import React from 'react';
 import AppNavbarCSS from '../Styles/AppNavbar.module.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Dropdown from 'react-bootstrap/Dropdown';
 import { signOutUser } from '../firebase';
 import { useNavigate } from "react-router-dom";
+
+const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+  <button
+    ref={ref}
+    onClick={(e) => {
+      e.preventDefault();
+      onClick(e);
+    }}
+    style={{
+      background: "none",
+      border: "none",
+      padding: 0,
+      font: "inherit",
+      cursor: "pointer",
+      outline: "inherit"
+    }}
+  >
+    {children}
+  </button>
+));
+
 
 function AppNavbar({ isAuthenticated }) {
   const navigate = useNavigate();
@@ -12,14 +35,13 @@ function AppNavbar({ isAuthenticated }) {
   const logoutUser = async () => {
     const res = await signOutUser()
     if (!res?.error) {
-      // setIsAuthenticated(false)
       sessionStorage.removeItem('userID');
       navigate("/");
     }
   };
   
-  const userID = sessionStorage.getItem('userID') // used for when isAuthenticated status is null on initial render
-  // The user is logged in
+  const userID = sessionStorage.getItem('userID')
+
   if (userID || isAuthenticated) {
     return (
       <Navbar className={AppNavbarCSS.colorNavbar} expand="lg">
@@ -34,16 +56,22 @@ function AppNavbar({ isAuthenticated }) {
                 <Nav.Link href="homepage">Home</Nav.Link>
                 <Nav.Link href="preferences">Preferences</Nav.Link>
                 <Nav.Link href="favorites">Favorites</Nav.Link>
-                <Nav.Link href="profile">Profile</Nav.Link>
-                <button style={{ margin: "4px", color: "black" }} onClick={logoutUser}>Logout</button>
+                <Dropdown>
+                  <Dropdown.Toggle as={CustomToggle} id="dropdown-basic">
+                  <img src="https://via.placeholder.com/150" alt="Profile Avatar" width={30} height={30} className="rounded-circle" />
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="profile">Profile</Dropdown.Item>
+                    <Dropdown.Item onClick={logoutUser}>Logout</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </div>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
     )
-  } // User not logged in yet
-  else {
+  } else {
     return (
       <Navbar className={AppNavbarCSS.colorNavbar} expand="lg">
         <Container>

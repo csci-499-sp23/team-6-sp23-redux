@@ -32,6 +32,7 @@ const Login = (props) => {
       const userData = userDoc.data();
       console.log(userData);
 
+      props.setUsername(userData.username); // Pass the username to the parent component
 
       // Navigate to the homepage after successfully signing in and retrieving user data from Firestore
       props.setNavigated(true)
@@ -58,23 +59,25 @@ const Login = (props) => {
   
       // If the user does not exist, create a new user document with the required data
       if (!userDoc.exists()) {
+        const username = user.email.split('@')[0]; // Generate a username from the user's email
+  
         const userData = {
           uid: user.uid,
-          email: user.email
+          email: user.email,
+          username: username
         };
-
+  
         // Store information in Firestore
         await setDoc(doc(db, 'users', userData.uid), userData);
-        
+  
       }
   
       // Navigate to the homepage after successfully signing in and retrieving user data from Firestore
-      props.setNavigated(true)
       navigate('/homepage')
     } catch (error) {
       console.log(error.code, error.message);
     }
-  };  
+  };   
   
 
   return (

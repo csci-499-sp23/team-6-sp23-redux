@@ -5,27 +5,64 @@ import { auth, db } from '../firebase';
 import LoginCSS from '../Styles/Login.module.css';
 import { doc, setDoc } from 'firebase/firestore';
 
+//defaultPreferences object for new users
+export const defaultPreferences = {
+    categories: ['restaurants', 'theaters', 'clubs'],
+    userLocation: "",
+    rangeLimit: "0",
+    ratingLimit: "-1",
+};
+
 const Signup = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState(''); // Added username state
+
+  const getGeolocation = async () => {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          resolve(`${latitude},${longitude}`);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      // Get geolocation before signup
+      const geolocation = await getGeolocation();
+
+      // Check if user shared location
+      if (!geolocation) {
+        console.log('Location not shared. Signup denied.');
+        return;
+      }
+
       // Attempt to create a new user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       // Signed in
-      console.log('Authenticated user:', userCredential.user); // Log the authenticated user object
+      console.log('Authenticated user:', userCredential.user);
 
       // Check if user is signed in
       if (userCredential.user) {
         // Create user data object containing the user's UID and email
         const userData = {
           uid: userCredential.user.uid,
-          email: userCredential.user.email
+          email: userCredential.user.email,
+          username: username,
+          preferences: {
+            ...defaultPreferences,
+            userLocation: geolocation,
+          },
         };
 
         // `doc(db, 'users', userData.uid)` creates a document reference for the 'users' collection,
@@ -51,14 +88,30 @@ const Signup = () => {
     const provider = new GoogleAuthProvider();
   
     try {
+      // Get geolocation before signup
+      const geolocation = await getGeolocation();
+
+      // Check if user shared location
+      if (!geolocation) {
+        console.log('Location not shared. Signup denied.');
+        return;
+      }
+
       const userCredential = await signInWithPopup(auth, provider);
       const user = userCredential.user;
-      // Create user data object containing the user's UID and email
+      // Create user data object containing the user's UID, email, and generated username
+      const username = user.email.split('@')[0]; // Generate a username from the user's email
+  
       const userData = {
         uid: user.uid,
-        email: user.email
+        email: user.email,
+        username: username,
+        preferences: {
+          ...defaultPreferences,
+          userLocation: geolocation,
+        },
       };
-      
+  
       // Store information in firestore
       await setDoc(doc(db, 'users', userData.uid), userData);
       navigate('/login');
@@ -67,7 +120,7 @@ const Signup = () => {
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
     }
-  };  
+  };
 
 
   return (
@@ -75,7 +128,21 @@ const Signup = () => {
       <section className={LoginCSS.LoginContainer}>
         <div className={LoginCSS.LoginDiv}>
           <div>
-            <form onSubmit={onSubmit}> {/* Add onSubmit here */}
+            <form onSubmit={onSubmit}>
+              <div>
+                <label htmlFor="username" className={LoginCSS.LoginText}>
+                  Username
+                </label>
+                <input
+                  type="text"
+                  label="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                  placeholder="Username"
+                  className={LoginCSS.LoginTextBox}
+                />
+              </div>
               <div>
                 <label htmlFor="email-address" className={LoginCSS.LoginText}>
                   Email address
@@ -90,7 +157,6 @@ const Signup = () => {
                   className={LoginCSS.LoginTextBox}
                 />
               </div>
-
               <div>
                 <label htmlFor="password" className={LoginCSS.LoginText}>
                   Password
@@ -105,15 +171,13 @@ const Signup = () => {
                   className={LoginCSS.LoginTextBox}
                 />
               </div>
-
               <button className={LoginCSS.LoginButton} type="submit">
                 Sign up
               </button>
             </form>
-              <button className={LoginCSS.GoogleSignInButton} onClick={signInWithGoogle}>
-                Sign up with Google
-              </button>
-
+            <button className={LoginCSS.GoogleSignInButton} onClick={signInWithGoogle}>
+              Sign up with Google
+            </button>
             <p className={LoginCSS.LoginText}>
               Already have an account?{' '}
               <NavLink to="/login" className={LoginCSS.LoginLink}>
@@ -125,6 +189,7 @@ const Signup = () => {
       </section>
     </main>
   );
+  
 };
 
 export default Signup;
