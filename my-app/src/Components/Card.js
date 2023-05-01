@@ -1,6 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react';
 import HangoutDetail from './HangoutDetail';
 import CardCSS from '../Styles/Card.module.css';
+import CheckMark from './CheckMark';
+import CrossMark from './CrossMark';
 import { motion, useMotionValue, useAnimation } from "framer-motion";
 
 function Card({onSwipe, ...props}) {
@@ -13,7 +15,9 @@ function Card({onSwipe, ...props}) {
   const [direction, setDirection] = useState();
   const [velocity, setVelocity] = useState();
   const [flyAwayComplete, setFlyAwayComplete] = useState(false);
-  const [showCardDetails, setShowCardDetails] = useState(false)
+  const [showCardDetails, setShowCardDetails] = useState(false);
+  const [showCheckMark, setShowCheckMark] = useState(false);
+  const [showCrossMark, setShowCrossMark] = useState(false);
 
   const locationDetail = props.location2 ? props.location + ", \n" + props.location2 : props.location;
 
@@ -37,6 +41,7 @@ function Card({onSwipe, ...props}) {
     if (x.getVelocity() > 0 || x.getVelocity() < 0) {
       setVelocity(x.getVelocity());
       setDirection(getDirection());
+      console.log('Direction:', getDirection());
     }
   };
 
@@ -54,7 +59,9 @@ function Card({onSwipe, ...props}) {
       controls.start({
         x: flyAwayDistance(direction)
       });
-      setFlyAwayComplete(true)
+      setFlyAwayComplete(true);
+      setShowCheckMark(direction === "right");
+      setShowCrossMark(direction === "left");
     }
   };
 
@@ -77,6 +84,20 @@ function Card({onSwipe, ...props}) {
     }
   }, [x, flyAwayComplete, onSwipe])
 
+  useEffect(() => {
+    let timer;
+    if (flyAwayComplete) {
+      timer = setTimeout(() => {
+        setShowCheckMark(false);
+        setShowCrossMark(false);
+      }, 300);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [flyAwayComplete]);
+  
+
   function toMiles(meters)
   {
     return parseInt(meters) * 0.000621371;
@@ -96,6 +117,8 @@ function Card({onSwipe, ...props}) {
         onClick={onClick}
       >
         <div className={`${CardCSS.Container} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}>
+          {showCheckMark && <CheckMark className={CardCSS.icon} />}
+          {showCrossMark && <CrossMark className={CardCSS.icon} />}
           <img draggable='false' id={CardCSS.Image} src={props.image} alt="hangout-suggestion"></img>
          
           <div id={CardCSS.Title}>{props.title}</div>
@@ -111,9 +134,30 @@ function Card({onSwipe, ...props}) {
               <div className={CardCSS.Detail}>{toMiles(props.distance).toFixed(2)} miles away</div>
             </div>
           </div>
+          {direction === 'right' && (
+            <motion.div
+              className={CardCSS.icon}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <CheckMark />
+            </motion.div>
+          )}
+          {direction === 'left' && (
+            <motion.div
+              className={CardCSS.icon}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <CrossMark />
+            </motion.div>
+          )}
+          </div>
           
-          
-        </div>
       </motion.div>
 
       {showCardDetails ?

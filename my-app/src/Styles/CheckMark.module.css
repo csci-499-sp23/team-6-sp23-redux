@@ -1,0 +1,29 @@
+.checkmark-container {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 52px;
+    height: 52px;
+  }
+  
+  .checkmark {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #4CAF50;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+  }
+  
+  .checkmark-circle {
+    opacity: 0.25;
+  }
+  
+  .checkmark-check {
+    transform-origin: 50% 50%;
+    stroke-dashoffset: 166;
+  }
+  

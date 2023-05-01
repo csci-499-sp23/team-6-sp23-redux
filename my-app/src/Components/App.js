@@ -25,6 +25,9 @@ function App() {
   const [username, setUsername] = useState('');
   
   
+  useEffect(() => {
+    document.title = 'EasyHangout';
+  }, []);  
 
   // will mount
   useEffect( () => {
