@@ -3,21 +3,25 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import styles from '../../Styles/Profile.module.css';
-import { getAuth, updateProfile } from "firebase/auth";
 import { collection, doc, updateDoc, query, where, getDocs } from "firebase/firestore";
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
+import { updateProfile } from 'firebase/auth';
 
 
 const schema = yup.object().shape({
     username: yup.string().required()
   });
 
-  async function updateUserUsername(newUsername) {
-    const auth = getAuth();
+  async function updateFirebaseUsername(newUsername) {
     const user = auth.currentUser;
     const usersRef = collection(db, "users");
   
     // Check if the new username already exists
+
+    if (user.displayName === newUsername) {
+      return {error: "You cannot change your username to be the same. Please choose a different username."};
+    }
+
     const q = query(usersRef, where("username", "==", newUsername));
     const querySnapshot = await getDocs(q);
   
@@ -25,7 +29,7 @@ const schema = yup.object().shape({
       // The username already exists, return an error
       return { error: "The username already exists. Please choose a different username." };
     }
-  
+    
     // Update the username in the authentication profile
     try {
       await updateProfile(user, { displayName: newUsername });
@@ -37,12 +41,13 @@ const schema = yup.object().shape({
     try {
       const userDoc = doc(db, "users", user.uid);
       await updateDoc(userDoc, { username: newUsername });
+      console.log("Update successful.")
     } catch (error) {
       return { error: "Error updating the username in the Firestore database." };
     }
   
     // Username updated successfully
-    return { success: true };
+    return { success: "Username updated successfully" };
   }
   
 
@@ -59,14 +64,16 @@ const schema = yup.object().shape({
       setSubmitting(true);
       setError(null);
   
-      const res = await updateUserUsername(data.username);
-  
-      if (res?.error) setError(error.message);
-      else {
-        setSuccess("Username updated successfully");
-        setTimeout(() => setSuccess(null), 4000);
+      const res = await updateFirebaseUsername(data.username)
+
+      if (res?.error){
+        setError(res.error);
+        setTimeout(() => setError(null), 3000);
       }
-  
+      else {
+        setSuccess(res.success);
+        setTimeout(() => setSuccess(null), 3000);
+      }
       setSubmitting(false);
     };
   
@@ -75,10 +82,12 @@ const schema = yup.object().shape({
         <label htmlFor="username">New Username</label>
         <input id="username" {...register('username')} type="text" placeholder="New username" />
         {errors.username && <p>{errors.username.message}</p>}
-  
-        <p style={{ color: 'red', fontWeight: 600 }}>{error}</p>
-        <p style={{ color: 'green', fontWeight: 600 }}>{success}</p>
-  
+
+        {error ? <p style={{ color: 'red', fontWeight: 600 }}>{error}</p>
+               :
+                 <p style={{ color: 'green', fontWeight: 600 }}>{success}</p>
+        }
+
         <button disabled={submitting} type="submit">Update Username</button>
       </form>
     );
