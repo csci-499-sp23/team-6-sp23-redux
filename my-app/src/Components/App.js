@@ -81,7 +81,7 @@ function App() {
           <Route exact path = "/login" element = {<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
           <Route exact path = "/signup" element = {<SignUp/>}/>
           <Route exact path="/preferences" element={<Preferences preferences={preferences}/>}/>
-          <Route exact path="/profile" element={<Profile/>} />
+          <Route exact path="/profile" element={<Profile preferences={preferences} isAuthenticated={isAuthenticated}/>} />
         </Routes>
       </Router>    
     </div>
