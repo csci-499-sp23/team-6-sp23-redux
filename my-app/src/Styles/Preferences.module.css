@@ -91,3 +91,61 @@
 .SaveButton:hover{
     background-color: orange;
 }
+
+#check {
+    fill: none;
+    stroke: orange;
+    stroke-width: 20;
+    stroke-linecap: round;
+    stroke-dasharray: 300;
+    stroke-dashoffset: 270;
+    animation: draw 2s ease;
+  }
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  #ShowShadowLayer {
+    position: fixed;
+    overflow: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(0,0,0);
+    opacity: 0.5;
+    z-index: 1000;
+  }
+
+  #HideShadowLayer {
+    flex: 1;
+  }
+
+  #PopoverContainer{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    opacity: 1;
+    background-color: white;
+    width: 30%;
+    height: 40%;
+    /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow:  0px 0px 5px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+  }
+
+  #PopoverTitle {
+    position: relative;
+    top: 8%;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  #CheckmarkContainer {
+    position: relative;
+    height: 80%;
+  }

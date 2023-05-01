@@ -75,7 +75,14 @@ function App() {
       <Router>
         <AppNavbar isAuthenticated={isAuthenticated} username={username} setNavigated={setNavigated} />
         <Routes>
-          <Route exact path="/" element={<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
+          {
+            isAuthenticated &&
+            <Route exact path="/" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit = {rangeLimit}/>}/>
+          }
+          {
+            !isAuthenticated &&
+            <Route exact path="/" element={<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
+          }
           <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit = {rangeLimit}/>}/>
           <Route exact path="/favorites" element={<Favoritelist favorites={favorites} />}/>
           <Route exact path = "/login" element = {<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
