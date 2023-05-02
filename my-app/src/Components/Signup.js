@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } f
 import { auth, db } from '../firebase';
 import LoginCSS from '../Styles/Login.module.css';
 import { doc, setDoc } from 'firebase/firestore';
+import { updateProfile } from 'firebase/auth';
 
 //defaultPreferences object for new users
 export const defaultPreferences = {
@@ -13,7 +14,7 @@ export const defaultPreferences = {
     ratingLimit: "-1",
 };
 
-const Signup = () => {
+const Signup = (props) => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -65,6 +66,13 @@ const Signup = () => {
           },
         };
 
+        // Update the username in the authentication profile
+        try {
+        await updateProfile(userCredential.user, { displayName: username });
+        } catch (error) {
+        return { error: "Error updating the username in the authentication profile." };
+        }
+
         // `doc(db, 'users', userData.uid)` creates a document reference for the 'users' collection,
         // using the user's UID as the document ID.
         // `setDoc()` sets the document to the data specified in userData.
@@ -73,7 +81,10 @@ const Signup = () => {
 
         // Store information in firestore
         await setDoc(doc(db, 'users', userData.uid), userData);
-        navigate('/login');
+
+        // Navigate to the homepage after successfully signing in and retrieving user data from Firestore
+        props.setNavigated(true)
+        navigate('/homepage');
       } else {
         console.log('User is not signed in');
       }
@@ -101,7 +112,7 @@ const Signup = () => {
       const user = userCredential.user;
       // Create user data object containing the user's UID, email, and generated username
       const username = user.email.split('@')[0]; // Generate a username from the user's email
-  
+      
       const userData = {
         uid: user.uid,
         email: user.email,
@@ -114,7 +125,10 @@ const Signup = () => {
   
       // Store information in firestore
       await setDoc(doc(db, 'users', userData.uid), userData);
-      navigate('/login');
+
+      // Navigate to the homepage after successfully signing in and retrieving user data from Firestore
+      props.setNavigated(true)
+      navigate('/homepage');
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;

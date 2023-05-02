@@ -73,6 +73,7 @@ const Login = (props) => {
       }
   
       // Navigate to the homepage after successfully signing in and retrieving user data from Firestore
+      props.setNavigated(true)
       navigate('/homepage')
     } catch (error) {
       console.log(error.code, error.message);
