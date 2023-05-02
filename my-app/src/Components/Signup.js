@@ -11,7 +11,7 @@ export const defaultPreferences = {
     categories: ['restaurants', 'theaters', 'clubs'],
     userLocation: "",
     rangeLimit: "0",
-    ratingLimit: "-1",
+    ratingLimit: "0",
 };
 
 const Signup = (props) => {

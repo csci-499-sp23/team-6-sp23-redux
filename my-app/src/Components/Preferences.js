@@ -42,7 +42,7 @@ function Preferences(props) {
             //Obtain user location
             navigator.geolocation.getCurrentPosition(
                 function(position) {
-                    alert("Location successfully updated!") 
+                    alert("Location recorded! Remember to save preferences.") 
                     var latitude = position.coords.latitude;
 
                     var longitude = position.coords.longitude;
@@ -129,15 +129,14 @@ function Preferences(props) {
 
         <div className = {PreferencesCSS.PreferencesContainer}>
 
-            <div className = {PreferencesCSS.PreferencesTitle}> Your User Preferences </div>
-            <br></br>
+            <div className = {PreferencesCSS.PreferencesTitle}> {props.username}'s User Preferences </div>
 
             <div className = {PreferencesCSS.PreferencesHeader}>
                 Search Location:
             </div>
 
-            <div className = {PreferencesCSS.PreferencesButtons}>
-                <Button variant = "outline-dark" size = "sm" onClick = {geolocationClick} className = {PreferencesCSS.PreferencesButtons}> 
+            <div>
+                <Button variant = "outline-dark"  onClick = {geolocationClick} className = {PreferencesCSS.PreferencesButtons}> 
                     My Location
                 </Button>
             </div>
@@ -190,17 +189,16 @@ function Preferences(props) {
                  <label>
                     Yelp Rating:&nbsp;
                      <select value={ratingLimit} onChange={getYelpRating}>
-                         <option value="-1"> No filter </option>
+                         <option value="0"> No filter </option>
+                         <option value="4.5"> 4.5+ Stars</option>
                          <option value="4"> 4+ Stars</option>
+                         <option value="3.5"> 3.5+ Stars</option>
                          <option value="3"> 3+ Stars</option>
-                         <option value="2"> 2+ Stars</option>
-                         <option value="1"> 1+ Stars</option>
                         </select>        
                     </label>
                 </form>
  
 
-                <br></br>
 
 
             </div>
@@ -211,7 +209,6 @@ function Preferences(props) {
             </div>
 
             <div className= {PreferencesCSS.PreferencesSwitches}>
-            <br></br>
 
             <ToggleButtonGroup type="checkbox" value={categories} onChange={handleChange}> 
                 <ToggleButton variant = "outline-warning" id="restaurants" value={"restaurants"} className = {PreferencesCSS.customButton} >
@@ -232,11 +229,39 @@ function Preferences(props) {
                 <ToggleButton variant = "outline-warning" id="clubs" value={"clubs" } className = {PreferencesCSS.customButton}>
                     Clubs
                 </ToggleButton>
+
             </ToggleButtonGroup>
-            </div>
 
             <br></br>
-            <div className = {PreferencesCSS.PreferencesButtons}>
+            <br></br>
+            
+            <ToggleButtonGroup type="checkbox" value={categories} onChange={handleChange}> 
+                <ToggleButton variant = "outline-warning" id="cafes" value={"cafes"} className = {PreferencesCSS.customButton}>
+                        Cafes
+                </ToggleButton>
+                &nbsp;&nbsp;&nbsp;
+
+                <ToggleButton variant = "outline-warning" id="Parks" value={"parks"} className = {PreferencesCSS.customButton}>
+                        Parks
+                </ToggleButton>
+                &nbsp;&nbsp;&nbsp;
+
+
+                <ToggleButton variant = "outline-warning" id="games" value={"games"} className = {PreferencesCSS.customButton}>
+                        Games
+                </ToggleButton>
+                &nbsp;&nbsp;&nbsp;
+
+                <ToggleButton variant = "outline-warning" id="Shopping" value={"shopping"} className = {PreferencesCSS.customButton}>
+                        Shops
+                </ToggleButton>
+
+            </ToggleButtonGroup>
+
+            </div>
+            <br></br>
+
+            <div>
             <Button className={PreferencesCSS.SaveButton} variant = "outline-dark" size = "sm" onClick = {updateData} >
                     Save Preferences
              </Button> 

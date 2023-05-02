@@ -35,6 +35,12 @@ function CardDeck(props) {
         var filteredDeck = data.filter((hangout) => {
           return !favoritesSet.has(hangout.id)
         })
+
+       //Filter based on hangout.rating for yelp rating
+       if (props.ratingLimit > 0)
+       {
+        filteredDeck = filteredDeck.filter ((hangout) => hangout.rating >= props.ratingLimit);
+       }
         // Start with a shuffled deck
         let deck = shuffleDeck(filteredDeck)
         setHangoutData(deck);
