@@ -216,36 +216,11 @@ function Preferences(props) {
                 </ToggleButton>
                 
                 &nbsp;&nbsp;&nbsp;
-                <ToggleButton variant = "outline-warning" id="theaters" value={"theaters" } className = {PreferencesCSS.customButton}>
-                    Theaters
-                </ToggleButton>
-                &nbsp;&nbsp;&nbsp;
-         
-                <ToggleButton variant = "outline-warning" id="karaoke" value={"karaoke"} className = {PreferencesCSS.customButton}>
-                    Karaoke
-                </ToggleButton>
 
-                &nbsp;&nbsp;&nbsp;
-                <ToggleButton variant = "outline-warning" id="clubs" value={"clubs" } className = {PreferencesCSS.customButton}>
-                    Clubs
-                </ToggleButton>
-
-            </ToggleButtonGroup>
-
-            <br></br>
-            <br></br>
-            
-            <ToggleButtonGroup type="checkbox" value={categories} onChange={handleChange}> 
                 <ToggleButton variant = "outline-warning" id="cafes" value={"cafes"} className = {PreferencesCSS.customButton}>
                         Cafes
                 </ToggleButton>
                 &nbsp;&nbsp;&nbsp;
-
-                <ToggleButton variant = "outline-warning" id="Parks" value={"parks"} className = {PreferencesCSS.customButton}>
-                        Parks
-                </ToggleButton>
-                &nbsp;&nbsp;&nbsp;
-
 
                 <ToggleButton variant = "outline-warning" id="games" value={"games"} className = {PreferencesCSS.customButton}>
                         Games
@@ -253,11 +228,82 @@ function Preferences(props) {
                 &nbsp;&nbsp;&nbsp;
 
                 <ToggleButton variant = "outline-warning" id="Shopping" value={"shopping"} className = {PreferencesCSS.customButton}>
-                        Shops
+                        Shopping
                 </ToggleButton>
+
+                &nbsp;&nbsp;&nbsp;
+                <ToggleButton variant = "outline-warning" id="spa" value={"spa"} className = {PreferencesCSS.customButton}>
+                        Spas
+                </ToggleButton>
+
 
             </ToggleButtonGroup>
 
+            <br></br>
+            <br></br>
+            
+            <ToggleButtonGroup type="checkbox" value={categories} onChange={handleChange}> 
+        
+                <ToggleButton variant = "outline-warning" id="bowling" value={"bowling"} className = {PreferencesCSS.customButton}>
+                        Bowling
+                </ToggleButton>
+                &nbsp;&nbsp;&nbsp;
+
+                <ToggleButton variant = "outline-warning" id="karaoke" value={"karaoke"} className = {PreferencesCSS.customButton}>
+                    Karaoke
+                </ToggleButton>
+
+                &nbsp;&nbsp;&nbsp;
+
+                <ToggleButton variant = "outline-warning" id="bar" value={"bars"} className = {PreferencesCSS.customButton}>
+                        Bars
+                </ToggleButton>
+                &nbsp;&nbsp;&nbsp;
+
+                <ToggleButton variant = "outline-warning" id="clubs" value={"clubs" } className = {PreferencesCSS.customButton}>
+                    Clubs
+                </ToggleButton>
+
+                &nbsp;&nbsp;&nbsp;
+
+                <ToggleButton variant = "outline-warning" id="billiards" value={"billiards" } className = {PreferencesCSS.customButton}>
+                    Billiards
+                </ToggleButton>
+
+
+            </ToggleButtonGroup>
+
+            <br></br>
+            <br></br>
+
+            <ToggleButtonGroup type="checkbox" value={categories} onChange={handleChange}> 
+            <ToggleButton variant = "outline-warning" id="theaters" value={"theaters" } className = {PreferencesCSS.customButton}>
+                    Theaters
+                </ToggleButton>
+                &nbsp;&nbsp;&nbsp;
+
+                 <ToggleButton variant = "outline-warning" id="zoo" value={"zoo"} className = {PreferencesCSS.customButton}>
+                        Zoos
+                </ToggleButton>
+                &nbsp;&nbsp;&nbsp;
+
+
+                <ToggleButton variant = "outline-warning" id="amusement parks" value={"amusement parks"} className = {PreferencesCSS.customButton}>
+                        Amusement
+                </ToggleButton>
+                &nbsp;&nbsp;&nbsp;
+
+                <ToggleButton variant = "outline-warning" id="Parks" value={"parks"} className = {PreferencesCSS.customButton}>
+                        Parks
+                </ToggleButton>
+
+                &nbsp;&nbsp;&nbsp;
+
+                <ToggleButton variant = "outline-warning" id="swimming" value={"beach and pool"} className = {PreferencesCSS.customButton}>
+                        Swimming
+                </ToggleButton>
+
+            </ToggleButtonGroup>
             </div>
             <br></br>
 
