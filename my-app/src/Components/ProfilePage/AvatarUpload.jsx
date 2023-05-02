@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { storage } from '../../firebase';
+import { storage, auth } from '../../firebase';
 
 function UploadImage() {
+  const user = auth.currentUser
   const [image, setImage] = useState(null);
 
   const handleChange = e => {
@@ -11,7 +12,7 @@ function UploadImage() {
   };
 
   const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    const uploadTask = storage.ref(`images/${user.uid}/userAvatar`).put(image);
     uploadTask.on(
       "state_changed",
       snapshot => {},
@@ -25,6 +26,8 @@ function UploadImage() {
           .getDownloadURL()
           .then(url => {
             console.log(url);
+
+            // SAVE URL to userDoc
           });
       }
     );
