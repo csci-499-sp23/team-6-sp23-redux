@@ -47,9 +47,6 @@ function App() {
               case "favorites":
                 setFavorites(Object.entries(data[1]))
                 return
-              case "username":
-                setUsername(data[1]);
-                return
               default:
                 return 
             }
@@ -92,7 +89,7 @@ function App() {
           <Route exact path="/favorites" element={<Favoritelist favorites={favorites} />}/>
           <Route exact path = "/login" element = {<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
           <Route exact path = "/signup" element = {<SignUp setNavigated={setNavigated}/>}/>
-          <Route exact path="/preferences" element={<Preferences preferences={preferences} username={username}/>}/>
+          <Route exact path="/preferences" element={<Preferences preferences={preferences} />}/>
           <Route exact path="/profile" element={<Profile preferences={preferences} isAuthenticated={isAuthenticated}/>} />
         </Routes>
       </Router>    

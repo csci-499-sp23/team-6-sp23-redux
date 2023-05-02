@@ -13,6 +13,7 @@ function Preferences(props) {
     //NOTE: Preferences should not be accessible unless user is logged in
     //NOTE: User category and location preferences should be set during the sign up process
     const userID = auth.currentUser?.uid
+    const username = auth.currentUser?.displayName;
 
     //Used to handle the toggle buttonss, active buttons in the array of useState
     const [categories, setCategories] = useState([]);
@@ -110,7 +111,7 @@ function Preferences(props) {
                     setUpdatedPreferences(true)
                     setTimeout(() => {
                         setUpdatedPreferences(false)
-                    }, 2000)
+                    }, 1500)
             }
             catch (error) {
                 alert("Error updating preferences! Please try again...")
@@ -129,7 +130,7 @@ function Preferences(props) {
 
         <div className = {PreferencesCSS.PreferencesContainer}>
 
-            <div className = {PreferencesCSS.PreferencesTitle}> {props.username}'s User Preferences </div>
+            <div className = {PreferencesCSS.PreferencesTitle}> {username}'s User Preferences </div>
 
             <div className = {PreferencesCSS.PreferencesHeader}>
                 Search Location:
