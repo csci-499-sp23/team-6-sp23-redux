@@ -8,6 +8,8 @@ import UpdateUsername from './ProfilePage/UpdateUsername';
 
 const ProfilePage = (props) => {
   const user = auth.currentUser;
+  // Used to check if the user signed in with email&password (val = password) or google (val = google.com)
+  const userType = user?.providerData[0]["providerId"]; 
 
   if (!props.isAuthenticated) {
     return <div>Loading...</div>;
@@ -30,10 +32,17 @@ const ProfilePage = (props) => {
       <div>
       <UpdateUsername />
       </div>
-      <div className={ProfileCSS['profile-card']}>
+
+      {
+        userType === "password" ?
+        <div className={ProfileCSS['profile-card']}>
         <p className={ProfileCSS['profile-card-title']}>Update Password</p>
-        <UpdatePassword />
-      </div>
+          <UpdatePassword />
+        </div>
+        :
+        null
+      }
+      
     </section>
   );
 };
