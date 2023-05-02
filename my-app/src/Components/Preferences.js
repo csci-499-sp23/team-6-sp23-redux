@@ -13,6 +13,7 @@ function Preferences(props) {
     //NOTE: Preferences should not be accessible unless user is logged in
     //NOTE: User category and location preferences should be set during the sign up process
     const userID = auth.currentUser?.uid
+    const username = auth.currentUser?.displayName;
 
     //Used to handle the toggle buttonss, active buttons in the array of useState
     const [categories, setCategories] = useState([]);
@@ -42,7 +43,7 @@ function Preferences(props) {
             //Obtain user location
             navigator.geolocation.getCurrentPosition(
                 function(position) {
-                    alert("Location successfully updated!") 
+                    alert("Location recorded! Remember to save preferences.") 
                     var latitude = position.coords.latitude;
 
                     var longitude = position.coords.longitude;
@@ -110,7 +111,7 @@ function Preferences(props) {
                     setUpdatedPreferences(true)
                     setTimeout(() => {
                         setUpdatedPreferences(false)
-                    }, 2000)
+                    }, 1500)
             }
             catch (error) {
                 alert("Error updating preferences! Please try again...")
@@ -129,15 +130,14 @@ function Preferences(props) {
 
         <div className = {PreferencesCSS.PreferencesContainer}>
 
-            <div className = {PreferencesCSS.PreferencesTitle}> Your User Preferences </div>
-            <br></br>
+            <div className = {PreferencesCSS.PreferencesTitle}> {username}'s User Preferences </div>
 
             <div className = {PreferencesCSS.PreferencesHeader}>
                 Search Location:
             </div>
 
-            <div className = {PreferencesCSS.PreferencesButtons}>
-                <Button variant = "outline-dark" size = "sm" onClick = {geolocationClick} className = {PreferencesCSS.PreferencesButtons}> 
+            <div>
+                <Button variant = "outline-dark"  onClick = {geolocationClick} className = {PreferencesCSS.PreferencesButtons}> 
                     My Location
                 </Button>
             </div>
@@ -190,17 +190,16 @@ function Preferences(props) {
                  <label>
                     Yelp Rating:&nbsp;
                      <select value={ratingLimit} onChange={getYelpRating}>
-                         <option value="-1"> No filter </option>
+                         <option value="0"> No filter </option>
+                         <option value="4.5"> 4.5+ Stars</option>
                          <option value="4"> 4+ Stars</option>
+                         <option value="3.5"> 3.5+ Stars</option>
                          <option value="3"> 3+ Stars</option>
-                         <option value="2"> 2+ Stars</option>
-                         <option value="1"> 1+ Stars</option>
                         </select>        
                     </label>
                 </form>
  
 
-                <br></br>
 
 
             </div>
@@ -211,7 +210,6 @@ function Preferences(props) {
             </div>
 
             <div className= {PreferencesCSS.PreferencesSwitches}>
-            <br></br>
 
             <ToggleButtonGroup type="checkbox" value={categories} onChange={handleChange}> 
                 <ToggleButton variant = "outline-warning" id="restaurants" value={"restaurants"} className = {PreferencesCSS.customButton} >
@@ -219,24 +217,98 @@ function Preferences(props) {
                 </ToggleButton>
                 
                 &nbsp;&nbsp;&nbsp;
-                <ToggleButton variant = "outline-warning" id="theaters" value={"theaters" } className = {PreferencesCSS.customButton}>
-                    Theaters
+
+                <ToggleButton variant = "outline-warning" id="cafes" value={"cafes"} className = {PreferencesCSS.customButton}>
+                        Cafes
                 </ToggleButton>
                 &nbsp;&nbsp;&nbsp;
-         
+
+                <ToggleButton variant = "outline-warning" id="games" value={"games"} className = {PreferencesCSS.customButton}>
+                        Games
+                </ToggleButton>
+                &nbsp;&nbsp;&nbsp;
+
+                <ToggleButton variant = "outline-warning" id="Shopping" value={"shopping"} className = {PreferencesCSS.customButton}>
+                        Shopping
+                </ToggleButton>
+
+                &nbsp;&nbsp;&nbsp;
+                <ToggleButton variant = "outline-warning" id="spa" value={"spa"} className = {PreferencesCSS.customButton}>
+                        Spas
+                </ToggleButton>
+
+
+            </ToggleButtonGroup>
+
+            <br></br>
+            <br></br>
+            
+            <ToggleButtonGroup type="checkbox" value={categories} onChange={handleChange}> 
+        
+                <ToggleButton variant = "outline-warning" id="bowling" value={"bowling"} className = {PreferencesCSS.customButton}>
+                        Bowling
+                </ToggleButton>
+                &nbsp;&nbsp;&nbsp;
+
                 <ToggleButton variant = "outline-warning" id="karaoke" value={"karaoke"} className = {PreferencesCSS.customButton}>
                     Karaoke
                 </ToggleButton>
 
                 &nbsp;&nbsp;&nbsp;
+
+                <ToggleButton variant = "outline-warning" id="bar" value={"bars"} className = {PreferencesCSS.customButton}>
+                        Bars
+                </ToggleButton>
+                &nbsp;&nbsp;&nbsp;
+
                 <ToggleButton variant = "outline-warning" id="clubs" value={"clubs" } className = {PreferencesCSS.customButton}>
                     Clubs
                 </ToggleButton>
+
+                &nbsp;&nbsp;&nbsp;
+
+                <ToggleButton variant = "outline-warning" id="billiards" value={"billiards" } className = {PreferencesCSS.customButton}>
+                    Billiards
+                </ToggleButton>
+
+
             </ToggleButtonGroup>
-            </div>
 
             <br></br>
-            <div className = {PreferencesCSS.PreferencesButtons}>
+            <br></br>
+
+            <ToggleButtonGroup type="checkbox" value={categories} onChange={handleChange}> 
+            <ToggleButton variant = "outline-warning" id="theaters" value={"theaters" } className = {PreferencesCSS.customButton}>
+                    Theaters
+                </ToggleButton>
+                &nbsp;&nbsp;&nbsp;
+
+                 <ToggleButton variant = "outline-warning" id="zoo" value={"zoo"} className = {PreferencesCSS.customButton}>
+                        Zoos
+                </ToggleButton>
+                &nbsp;&nbsp;&nbsp;
+
+
+                <ToggleButton variant = "outline-warning" id="amusement parks" value={"amusement parks"} className = {PreferencesCSS.customButton}>
+                        Amusement
+                </ToggleButton>
+                &nbsp;&nbsp;&nbsp;
+
+                <ToggleButton variant = "outline-warning" id="Parks" value={"parks"} className = {PreferencesCSS.customButton}>
+                        Parks
+                </ToggleButton>
+
+                &nbsp;&nbsp;&nbsp;
+
+                <ToggleButton variant = "outline-warning" id="swimming" value={"beach and pool"} className = {PreferencesCSS.customButton}>
+                        Swimming
+                </ToggleButton>
+
+            </ToggleButtonGroup>
+            </div>
+            <br></br>
+
+            <div>
             <Button className={PreferencesCSS.SaveButton} variant = "outline-dark" size = "sm" onClick = {updateData} >
                     Save Preferences
              </Button> 

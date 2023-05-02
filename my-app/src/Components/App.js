@@ -22,6 +22,7 @@ function App() {
   const [categories, setCategories] = useState([]); // category preferences
   const [isAuthenticated, setIsAuthenticated] = useState(false); // check if user is authenticated
   const [rangeLimit, setRangeLimit] = useState("");
+  const [ratingLimit, setRatingLimit] = useState("")
   const [username, setUsername] = useState('');
   
   
@@ -41,6 +42,7 @@ function App() {
                 setLocation(data[1].userLocation)
                 setCategories(data[1].categories)
                 setRangeLimit(data[1].rangeLimit)
+                setRatingLimit(data[1].ratingLimit)
                 return
               case "favorites":
                 setFavorites(Object.entries(data[1]))
@@ -83,11 +85,11 @@ function App() {
             !isAuthenticated &&
             <Route exact path="/" element={<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
           }
-          <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit = {rangeLimit}/>}/>
+          <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit = {rangeLimit} ratingLimit = {ratingLimit}/>}/>
           <Route exact path="/favorites" element={<Favoritelist favorites={favorites} />}/>
           <Route exact path = "/login" element = {<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
           <Route exact path = "/signup" element = {<SignUp setNavigated={setNavigated}/>}/>
-          <Route exact path="/preferences" element={<Preferences preferences={preferences}/>}/>
+          <Route exact path="/preferences" element={<Preferences preferences={preferences} />}/>
           <Route exact path="/profile" element={<Profile preferences={preferences} isAuthenticated={isAuthenticated}/>} />
         </Routes>
       </Router>    

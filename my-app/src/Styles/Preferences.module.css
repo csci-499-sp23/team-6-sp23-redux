@@ -7,17 +7,23 @@
     text-align: center;
     color: orange;
     font-size: 40px;
+    font-weight: 500;
+    padding-top: 5px;
+    padding-bottom:10px;
 }
 
 .PreferencesHeader{
     text-align: center;
     color: black;
-    font-size: 32px;
+    font-size: 30px;
+    padding-bottom: 15px;
 }
 
 .PreferencesButtons{
         text-align: center;
-        height: 30px;
+        height: 40px;
+        border-radius: 8px;
+        background-color: white;
 }
 .PreferencesForms{
     color:black;
@@ -34,7 +40,9 @@
 
 .customButton {
     width: 125px;
+    color:rgb(109, 107, 107);
 }
+
 
 .Text {
     padding: 16px 0px;
@@ -42,20 +50,22 @@
 
 .SearchBar {
     position: relative;
-    padding-bottom: 24px;
+    padding-bottom: 30px;
     display: flex;
     justify-content: center;
+    font-size: 18px;
 }
 
 #LocationInput {
+    border-style: solid;
     border-right: none;
-    border-radius: 8px 0px 0px 8px;
+    border-radius: 5px 0px 0px 5px;
     height: 35px;
     width: 25vw;
 }
 
 #RegionInput {
-    border-left: black solid 2px;
+    border-style:solid;
     border-right: none;
     border-radius: 0px 0px 0px 0px;
     height: 35px;
