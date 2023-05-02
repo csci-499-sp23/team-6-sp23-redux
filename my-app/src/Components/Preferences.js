@@ -21,6 +21,7 @@ function Preferences(props) {
     const [userLocation, setUserLocation] = useState("");
     const [rangeLimit, setRangeLimit] = useState("");
     const [ratingLimit, setRatingLimit] = useState("");
+    const [updatedPreferences, setUpdatedPreferences] = useState(false); // State for when the user updated the preferences successfully
 
 
     useEffect( () => {
@@ -95,17 +96,27 @@ function Preferences(props) {
         if (categories.length > 0) {
 
             const userRef = doc(db, 'users', userID);
-
-            await updateDoc (userRef, 
-                {
-                    preferences: 
+            try {
+                await updateDoc (userRef, 
                     {
-                        categories, 
-                        userLocation,
-                        rangeLimit,
-                        ratingLimit
-                    }
-                });
+                        preferences: 
+                        {
+                            categories, 
+                            userLocation,
+                            rangeLimit,
+                            ratingLimit
+                        }
+                    })
+                    setUpdatedPreferences(true)
+                    setTimeout(() => {
+                        setUpdatedPreferences(false)
+                    }, 2000)
+            }
+            catch (error) {
+                alert("Error updating preferences! Please try again...")
+                console.log(`Error saving user preferences: ${error}`)
+                setUpdatedPreferences(false)
+            }
         }
         else {
             alert("Must select at least one category")
@@ -113,9 +124,7 @@ function Preferences(props) {
 
 
     }
-
-
-
+    /*M100,150 165,180 245, 40 stroke: 250/250*/
     return (
 
         <div className = {PreferencesCSS.PreferencesContainer}>
@@ -140,6 +149,21 @@ function Preferences(props) {
                 <input id={PreferencesCSS.RegionInput}placeholder='Region'></input>
                 <button id={PreferencesCSS.SearchButton} onClick={getSearchLocation}></button>
             </div>
+
+            <div id={updatedPreferences ? PreferencesCSS.ShowShadowLayer : PreferencesCSS.HideShadowLayer} />
+            {
+                updatedPreferences ?
+                <div id={PreferencesCSS.PopoverContainer}>
+                   <div id={PreferencesCSS.PopoverTitle}>Changes Saved!</div>
+                   <div id={PreferencesCSS.CheckmarkContainer}>
+                        <svg width="310" height="310">
+                            <path id={PreferencesCSS.check} d="M60,120 125,180 400, -10"/>
+                        </svg>  
+                   </div>     
+                </div>
+                :
+                null
+            }
             
         <div className = {PreferencesCSS.PreferencesHeader}>
                 Filter Preferences:
