@@ -1,49 +1,84 @@
-  .login {
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:600|Work+Sans:400,500,600,700&display=swap');
+
+body {
+  background: rgb(34, 193, 195);
+  background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+  font-family: "Work Sans", sans-serif;
+}
+
+.login {
   height: 100vh;
   width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  }
+}
 
-  .LoginContainer {
+.LoginContainer {
   display: flex;
   flex-direction: column;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.7);
+  /* background-color: #FFFFFF; */
+  background-color: rgba(255, 255, 255, 0.85);
   padding: 30px;
-  border-radius: 10px;
+  border-radius: 25px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   color: #222;
-  }
+  max-width: 500px;
+  min-width: 300px;
+  width: 30%;
+}
 
-  .LoginTextBox {
+.LoginTextBox {
+  width: 80%;
   padding: 10px;
-  font-size: 18px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  background-color: #ffffff;
-  }
-
-  .LoginButton {
-  padding: 10px;
-  font-size: 18px;
+  font-size: 1.3rem;
   margin-bottom: 10px;
   border: none;
-  color: white;
-  background-color: #007bff;
-  cursor: pointer;
   border-radius: 5px;
-  transition: all 0.3s ease;
-  }
+  background-color: #ffffff;
+  box-sizing: border-box;
+  padding-left: 1.5rem;
+  padding-bottom: 1rem;
+  box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
+  transition: box-shadow 0.2s ease-in;
+}
 
-  .LoginButton:hover {
-  background-color: #0056b3;
-  }
+.LoginTextBox:focus {
+  box-shadow: inset 0px -3px 0px 0px rgba(34, 193, 195, 0.7);
+  outline: none;
+}
 
-  .GoogleSignInButton {
+.LoginTextBox::-webkit-input-placeholder {
+  opacity: 1;
+  transition: opacity 0.25s ease-out;
+}
+
+.LoginTextBox:hover::-webkit-input-placeholder,
+.LoginTextBox:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+.LoginButton {
+  border-radius: 25px;
+  width: 80%;
+  padding: 10px;
+  font-size: 1.3rem;
+  color: white;
+  font-weight: 700;
+  background: rgb(34, 193, 195);
+  background: linear-gradient(90deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+  border: 0px;
+  cursor: pointer;
+  transition: opacity 0.25s ease-out;
+  margin-bottom: 10px;
+}
+
+.LoginButton:hover {
+  opacity: 0.8;
+}
+
+.GoogleSignInButton {
   transition: background-color .3s, box-shadow .3s;
   padding: 12px 16px 12px 42px;
   border: none;
@@ -52,29 +87,51 @@
   color: #757575;
   font-size: 14px;
   font-weight: 500;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
   background-color: white;
   background-repeat: no-repeat;
   background-position: 12px 11px;
-  }
+}
 
-  .GoogleSignInButton:hover {
+.GoogleSignInButton:hover {
   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
-  }
+}
 
-  .GoogleSignInButton:active {
+.GoogleSignInButton:active {
   background-color: #eeeeee;
-  }
+}
 
-  .GoogleSignInButton:focus {
+.GoogleSignInButton:focus {
   outline: none;
   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25), 0 0 0 3px #c8dafc;
-  }
+}
 
-  .GoogleSignInButton:disabled {
+.GoogleSignInButton:disabled {
   filter: grayscale(100%);
   background-color: #ebebeb;
   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
   cursor: not-allowed;
-  }
+}
+
+.TextLogin {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.1rem;
+  /* color: #fff; */
+  color: #1a4b73;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.LinkLogin {
+  /* color: #fff; */
+  color: #1a4b73;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.LinkLogin:hover {
+  color: rgba(253, 187, 45, 1);
+  text-decoration: underline;
+}
