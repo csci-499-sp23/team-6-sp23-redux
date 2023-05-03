@@ -200,9 +200,9 @@ const Signup = (props) => {
             <button className={LoginCSS.GoogleSignInButton} onClick={signInWithGoogle}>
               Sign up with Google
             </button>
-            <p className={LoginCSS.LoginText}>
+            <p className={LoginCSS.TextLogin}>
               Already have an account?{' '}
-              <NavLink to="/login" className={LoginCSS.LoginLink}>
+              <NavLink to="/login" className={LoginCSS.LinkLogin}>
                 Sign in
               </NavLink>
             </p>

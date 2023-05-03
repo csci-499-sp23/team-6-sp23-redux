@@ -135,9 +135,9 @@ const Login = (props) => {
                   Login with Google
                 </button>
 
-            <p className={LoginCSS.LoginText}>
+            <p className={LoginCSS.TextLogin}>
               No account yet?{' '}
-              <NavLink to="/signup" className={LoginCSS.LoginLink}>
+              <NavLink to="/signup" className={LoginCSS.LinkLogin}>
                 Sign up
               </NavLink>
             </p>
