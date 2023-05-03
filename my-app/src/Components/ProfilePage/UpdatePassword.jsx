@@ -24,14 +24,11 @@ export default function PasswordResetForm() {
   });
  
   const onSubmit = async data => {
-    console.log(data.current_password)
-    console.log(data.confirm_password)
-    console.log(data.password)
     setSubmitting(true)
     setError(null)
 
-    if(data.current_password !== data.confirm_password) {
-      setError("Your current passwords do not match!")
+    if(data.password !== data.confirm_password) {
+      setError("Your new password and confirmation password does not match!")
       setSubmitting(false)
       return
     }
@@ -75,9 +72,9 @@ export default function PasswordResetForm() {
     <form onSubmit={handleSubmit(onSubmit)} className={styles['new-password-form']}>
       <label htmlFor="password">Current Password</label>
       <input id="current_password" {...register('current_password')} type="password" placeholder="Current Password"/>
-      <input id="confirm_password" {...register('confirm_password')} type="password" placeholder="Confirm Password"/>
       <label htmlFor="password">New Password</label>
       <input id="password" {...register('password')} type="password" placeholder="New Password" />
+      <input id="confirm_password" {...register('confirm_password')} type="password" placeholder="Confirm Password"/>
       {errors.password && <p>{errors.password.message}</p>}
 
       <p style={{ color: 'red', fontWeight: 600 }}>{error}</p>
