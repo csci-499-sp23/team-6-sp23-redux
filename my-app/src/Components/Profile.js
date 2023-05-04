@@ -4,7 +4,7 @@ import { auth } from '../firebase';
 import UpdatePassword from './ProfilePage/UpdatePassword';
 import UserInfo from './ProfilePage/UserInfo';
 import UpdateUsername from './ProfilePage/UpdateUsername';
-//import UploadImage from './ProfilePage/AvatarUpload';
+import UploadImage from './ProfilePage/AvatarUpload';
 
 const ProfilePage = (props) => {
   const user = auth.currentUser;
@@ -14,7 +14,7 @@ const ProfilePage = (props) => {
   if (!props.isAuthenticated) {
     return <div>Loading...</div>;
   }
-
+  
   return (
     <section className={ProfileCSS['profile-container']}>
       <h1 className={ProfileCSS.welcome}>Welcome, {user.displayName}!</h1>
@@ -26,9 +26,9 @@ const ProfilePage = (props) => {
         <p className={ProfileCSS['profile-card-title']}>Profile</p>
         <UserInfo email={user.email} username={user.displayName} userLocation={props.userLocation} /> {/* Added userLocation prop */}
       </div>
-      {/* <div>
+       <div>
       <UploadImage />
-      </div> */}
+      </div> 
       <div>
       <UpdateUsername />
       </div>
