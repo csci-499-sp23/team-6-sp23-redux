@@ -8,8 +8,8 @@ export default function UserInfo({ email, username, userLocation }) {
   const [city, setCity] = useState('');
 
   const storage = getStorage();
-  const profileURL = `images/${user.uid}/profile.jpeg`;
-  const pathReference = ref(storage, profileURL);
+  const profileURLPath = `images/${user.uid}/profile.jpeg`;
+  const pathReference = ref(storage, profileURLPath);
   const profileImage = document.getElementById(`${ProfileCSS.ProfileImage}`);
   
   const latitude = userLocation.split(',')[0]
@@ -17,7 +17,7 @@ export default function UserInfo({ email, username, userLocation }) {
     
    // Set the profile image from firebase if the user uploaded one
   useEffect(() => {
-    if (profileImage != null) {
+    if (profileImage !== null) {
       getDownloadURL(pathReference)
       .then((url) => {
         profileImage.setAttribute('src', url);
@@ -27,7 +27,7 @@ export default function UserInfo({ email, username, userLocation }) {
       });
     }
    
-  }, [profileImage, profileURL, storage, pathReference]);
+  }, [profileImage, pathReference]);
 
   // Fetch user City Location based on their set location
   useEffect(() => {
