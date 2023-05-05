@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
 import { doc, onSnapshot } from "firebase/firestore";
+import PageTitle from './PageTitle';
 
 
 function App() {
@@ -23,9 +24,7 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // check if user is authenticated
   const [rangeLimit, setRangeLimit] = useState("");
   const [ratingLimit, setRatingLimit] = useState("")
-  const [username, setUsername] = useState('');
-  
-  
+  const [username, setUsername] = useState(''); 
 
   // will mount
   useEffect( () => {
@@ -76,6 +75,7 @@ function App() {
       
       <Router>
         <AppNavbar isAuthenticated={isAuthenticated} username={username} setNavigated={setNavigated} />
+        <PageTitle />
         <Routes>
           {
             isAuthenticated &&
