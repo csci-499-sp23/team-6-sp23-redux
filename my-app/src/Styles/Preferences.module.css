@@ -171,21 +171,6 @@ select::-ms-expand { display: none; }
     background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
 }
 
-#check {
-    fill: none;
-    stroke: orange;
-    stroke-width: 20;
-    stroke-linecap: round;
-    stroke-dasharray: 300;
-    stroke-dashoffset: 270;
-    animation: draw 2s ease;
-  }
-  @keyframes draw {
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-
   #ShowShadowLayer {
     position: fixed;
     overflow: auto;
@@ -209,23 +194,51 @@ select::-ms-expand { display: none; }
     transform: translate(-50%, -50%);
     z-index: 1001;
     opacity: 1;
-    background-color: white;
-    width: 30%;
-    height: 40%;
+    background-color: #3b4a51;
+    width: 300px;
+    height: 300px;
     /* offset-x | offset-y | blur-radius | spread-radius | color */
     box-shadow:  0px 0px 5px 5px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid #5cb3d9;
+  }
+
+  #PopoverTitleContainer {
+    height: 20%;
+    text-align: center;
+    width: 100%;
   }
 
   #PopoverTitle {
-    position: relative;
-    top: 8%;
     font-size: 30px;
     font-weight: 600;
+    color: white;
+    font-family: 'louis-george-cafe-bold';
+    margin-top: 20px;
+  }
+
+  #check {
+    fill: none;
+    stroke: #668ac0;
+    stroke-width: 20;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 2s ease forwards;
+  }
+  @keyframes draw {
+    from {
+        stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0.2;
+    }
   }
 
   #CheckmarkContainer {
-    position: relative;
     height: 80%;
+    width: 100%;
   }
 

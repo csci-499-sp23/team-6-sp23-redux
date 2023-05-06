@@ -189,10 +189,10 @@ function Preferences(props) {
             {
                 updatedPreferences ?
                 <div id={PreferencesCSS.PopoverContainer}>
-                   <div id={PreferencesCSS.PopoverTitle}>Changes Saved!</div>
+                   <div id={PreferencesCSS.PopoverTitleContainer}><h4 id={PreferencesCSS.PopoverTitle}>Changes Saved!</h4></div>
                    <div id={PreferencesCSS.CheckmarkContainer}>
-                        <svg width="310" height="310">
-                            <path id={PreferencesCSS.check} d="M60,120 125,180 400, -10"/>
+                        <svg width="100%" height="100%">
+                            <path id={PreferencesCSS.check} d="M40,130 105,190 300, 0" pathLength={"1"}/>
                         </svg>  
                    </div>     
                 </div>
