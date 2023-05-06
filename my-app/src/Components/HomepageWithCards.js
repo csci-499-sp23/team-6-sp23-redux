@@ -1,12 +1,11 @@
 import HomepageCSS from '../Styles/Homepage.module.css'
 import CardDeckCSS from '../Styles/CardDeck.module.css'
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import CardDeck from './CardDeck';
 import { useNavigate } from 'react-router-dom';
 
 function HomepageWithCards(props) {
 
-  const [isShown, setIsShown] = useState(false);    
   const navigate = useNavigate();
 
   // Refreshes page when navigated from login page to force retrieval of props data from app.js 
@@ -18,7 +17,15 @@ function HomepageWithCards(props) {
 
   return (
     <div className={HomepageCSS.Homepage}>
-      <div className={HomepageCSS.InfoButtonContainer} 
+      <CardDeck className={CardDeckCSS.Container} location={props.location} categories={props.categories} favoriteHangouts={props.favorites} rangeLimit = {props.rangeLimit} ratingLimit ={props.ratingLimit} >
+      </CardDeck>
+    </div>
+  );
+}
+  
+export default HomepageWithCards;
+
+/*<div className={HomepageCSS.InfoButtonContainer} 
             onMouseEnter={() => setIsShown(true)}
             onMouseLeave={() => setIsShown(false)}>
         <img className={HomepageCSS.InfoButton} src="Images/info-button.png" alt="info"/>
@@ -30,11 +37,4 @@ function HomepageWithCards(props) {
             <li>Click to View More Details</li>
           </div>
         }
-      </div>
-      <CardDeck className={CardDeckCSS.Container} location={props.location} categories={props.categories} favoriteHangouts={props.favorites} rangeLimit = {props.rangeLimit} ratingLimit ={props.ratingLimit} >
-      </CardDeck>
-    </div>
-  );
-}
-  
-export default HomepageWithCards;
+      </div> */

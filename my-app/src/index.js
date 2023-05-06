@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './Components/App';
 import reportWebVitals from './reportWebVitals';
+import './Fonts/louis-george-cafe/Louis George Cafe Bold.ttf'
+import './Fonts/louis-george-cafe/Louis George Cafe.ttf'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render( 

@@ -17,3 +17,16 @@ html, body {
   height: 100%;
   width: 100%;
 }
+
+@font-face {
+  font-family: "louis-george-cafe";
+  src: local("louis-george-cafe"),
+   url("./Fonts/louis-george-cafe/Louis George Cafe.ttf") format("truetype");
+  font-weight: normal;
+ }
+
+ @font-face {
+  font-family: "louis-george-cafe";
+  src: local("louis-george-cafe"), url("./Fonts/louis-george-cafe/Louis George Cafe Bold.ttf") format("truetype");
+  font-weight: bold;
+ }
