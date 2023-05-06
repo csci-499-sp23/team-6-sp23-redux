@@ -7,3 +7,10 @@
     position: relative;
     margin: auto;
 }
+
+.refreshButton {
+    width: 125px;
+    color:rgb(109, 107, 107) !important;
+    background-color: white !important;
+    border-color: aqua;
+}

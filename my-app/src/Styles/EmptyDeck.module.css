@@ -1,0 +1,39 @@
+.Image
+{
+    display:block;
+    margin-left: auto; 
+    margin-right: auto;
+    height:600px;
+    width:600px;
+    margin-bottom: 0px;
+}
+
+.Text {
+    color:white;
+    text-align:center;
+    font-family: 'louis-george-cafe';
+}
+
+.RefreshButton {
+    padding: 0px 56px;
+    font-weight: bold;
+    color: black;
+    background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
+    font-size: 25px;
+    border-radius: 15px;
+    font-family: 'louis-george-cafe';
+    height: 75px;
+    min-width : 250px;
+    max-width: 450px;
+    width:100%;
+    border-radius: 37px;
+}
+
+.RefreshButtonImage {
+    height: 50px;
+    width: 50px;
+}
+
+.ButtonContainer {
+    text-align:center;
+}
