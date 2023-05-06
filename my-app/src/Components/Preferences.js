@@ -12,14 +12,18 @@ function Preferences(props) {
     const userID = auth.currentUser?.uid
     const username = auth.currentUser?.displayName;
 
-    //Used to handle the toggle buttonss, active buttons in the array of useState
-    //const [categories, setCategories] = useState([]);
+    
     //To add limit between 1 < x < 3 categories
     const [userLocation, setUserLocation] = useState("");
     const [rangeLimit, setRangeLimit] = useState("");
     const [ratingLimit, setRatingLimit] = useState("");
     const [updatedPreferences, setUpdatedPreferences] = useState(false); // State for when the user updated the preferences successfully
     const buttonVariant = "outline-info"
+
+    // List of all the current queryable categories
+    const categoryList = ["restaurants", "cafes", "games", "shopping", "spa",
+                          "bowling", "karaoke", "bars", "clubs", "billiards",
+                          "theaters", "zoo", "amusement parks", "parks", "beach and pool"]
 
     // Enum for category values
     const Categories = Object.freeze({
@@ -40,25 +44,15 @@ function Preferences(props) {
         Swimming: "beach and pool"
     })
 
-    const [categoriesMap, setCategoriesMap] = useState({
-        "restaurants": false,
-        "cafes": false,
-        "games": false,
-        "shopping": false,
-        "spa": false,
-        "bowling": false,
-        "karaoke": false,
-        "bars": false,
-        "clubs": false,
-        "billiards": false,
-        "theaters": false,
-        "zoo": false,
-        "amusement parks": false,
-        "parks": false,
-        "beach and pool": false
+    //Used to handle the toggle buttonss, active buttons in the array of useState
+    const [categoriesMap, setCategoriesMap] = useState(() => {
+        let map = {}
+        categoryList.forEach((category) => {
+            map[category] = false
+        })
+        return map
     })
-
-    
+        
     useEffect( () => {
         setUserLocation(props.preferences.userLocation);
         setRangeLimit(props.preferences.rangeLimit);
@@ -128,69 +122,10 @@ function Preferences(props) {
         setRatingLimit(e.target.value);
     }
 
+    // Function used to toggle the category button and update the map accordingly
     const toggleButton = (e) => {
         let category = e.target.value
-        assignCategory(category)
-    }
-
-    // Helper Function
-    function assignCategory(category) {
-        switch (category) {
-            case Categories.Restaurant:
-                setCategoriesMap({...categoriesMap, restaurants: !categoriesMap[category]})
-                break
-            case Categories.Cafe:
-                setCategoriesMap({...categoriesMap, cafes: !categoriesMap[category]})
-                break
-            
-            case Categories.Game:
-                setCategoriesMap({...categoriesMap, games: !categoriesMap[category]})
-                break
-            
-            case Categories.Shopping:
-                setCategoriesMap({...categoriesMap, shopping: !categoriesMap[category]})
-                break
-            case Categories.Spa:
-                setCategoriesMap({...categoriesMap, spa: !categoriesMap[category]})
-                break
-            case Categories.Bowling:
-                setCategoriesMap({...categoriesMap, bowling: !categoriesMap[category]})
-                break
-            case Categories.Karaoke:
-                setCategoriesMap({...categoriesMap, karaoke: !categoriesMap[category]})
-                break
-            
-            case Categories.Bar:
-                setCategoriesMap({...categoriesMap, bars: !categoriesMap[category]})
-                break
-            
-            case Categories.Club:
-                setCategoriesMap({...categoriesMap, clubs: !categoriesMap[category]})
-                break
-            case Categories.Billiards:
-                setCategoriesMap({...categoriesMap, billiards: !categoriesMap[category]})
-                break
-            case Categories.Theater:
-                setCategoriesMap({...categoriesMap, theaters: !categoriesMap[category]})
-                break
-            case Categories.Zoo:
-                setCategoriesMap({...categoriesMap, zoo: !categoriesMap[category]})
-                break
-            
-            case Categories.Amusement:
-                setCategoriesMap({...categoriesMap, "amusement parks": !categoriesMap[category]})
-                break
-            
-            case Categories.Park:
-                setCategoriesMap({...categoriesMap, parks: !categoriesMap[category]})
-                break
-            case Categories.Swimming:
-                setCategoriesMap({...categoriesMap, "beach and pool": !categoriesMap[category]})
-                break
-            default:
-                console.log("Default")
-                break
-            }
+        setCategoriesMap({...categoriesMap ,[category]: !categoriesMap[category]})
     }
   
     //Function that is called when the user wants to update their preferences
