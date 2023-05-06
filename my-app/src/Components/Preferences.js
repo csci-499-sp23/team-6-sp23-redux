@@ -2,12 +2,9 @@ import React, { useState, useEffect} from 'react';
 import PreferencesCSS from '../Styles/Preferences.module.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button';
-import ToggleButton from 'react-bootstrap/ToggleButton';
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import { auth, db } from '../firebase';
 import { doc, updateDoc } from "firebase/firestore";
 import axios from 'axios';
-import { defaultPreferences } from './Signup';
 
 function Preferences(props) {
     //NOTE: Preferences should not be accessible unless user is logged in
@@ -15,24 +12,59 @@ function Preferences(props) {
     const userID = auth.currentUser?.uid
     const username = auth.currentUser?.displayName;
 
-    //Used to handle the toggle buttonss, active buttons in the array of useState
-    const [categories, setCategories] = useState([]);
+    
     //To add limit between 1 < x < 3 categories
-    const handleChange = ((val) => setCategories(val) ) ;
     const [userLocation, setUserLocation] = useState("");
     const [rangeLimit, setRangeLimit] = useState("");
     const [ratingLimit, setRatingLimit] = useState("");
     const [updatedPreferences, setUpdatedPreferences] = useState(false); // State for when the user updated the preferences successfully
+    const buttonVariant = "outline-info"
 
+    // List of all the current queryable categories
+    const categoryList = ["restaurants", "cafes", "games", "shopping", "spa",
+                          "bowling", "karaoke", "bars", "clubs", "billiards",
+                          "theaters", "zoo", "amusement parks", "parks", "beach and pool"]
 
+    // Enum for category values
+    const Categories = Object.freeze({
+        Restaurant: "restaurants",
+        Cafe: "cafes",
+        Game: "games",
+        Shopping: "shopping",
+        Spa: "spa",
+        Bowling: "bowling",
+        Karaoke: "karaoke",
+        Bar: "bars",
+        Club: "clubs",
+        Billiards: "billiards",
+        Theater: "theaters",
+        Zoo: "zoo",
+        Amusement: "amusement parks",
+        Park: "parks",
+        Swimming: "beach and pool"
+    })
+
+    //Used to handle the toggle buttonss, active buttons in the array of useState
+    const [categoriesMap, setCategoriesMap] = useState(() => {
+        let map = {}
+        categoryList.forEach((category) => {
+            map[category] = false
+        })
+        return map
+    })
+        
     useEffect( () => {
-        setCategories(Object.keys(defaultPreferences).filter(category => defaultPreferences[category]));
-        setCategories(props.preferences.categories);
         setUserLocation(props.preferences.userLocation);
         setRangeLimit(props.preferences.rangeLimit);
         setRatingLimit(props.preferences.ratingLimit);
-    }, [props])
 
+        if(props.preferences.categories) {
+            props.preferences.categories.forEach((category) => {
+                categoriesMap[category] = true
+            })
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props])
 
     //Function that obtains the current geolocation and logs it as latitude and longitude 
     const geolocationClick = () => {
@@ -66,7 +98,7 @@ function Preferences(props) {
         let locationInput = document.getElementById(PreferencesCSS.LocationInput);
         let regionInput = document.getElementById(PreferencesCSS.RegionInput);
         if(locationInput.value !== "" && regionInput.value !== "") {
-            await axios.get(`https://geocode.search.hereapi.com/v1/geocode?q=${locationInput.value}&qq=city=${regionInput.value}&apiKey=${process.env.REACT_APP_GEO_API_KEY}`).then((res) => {
+            await axios.get(`https://geocode.search.hereapi.com/v1/geocode?q=${locationInput.value}&apiKey=${process.env.REACT_APP_GEO_API_KEY}`).then((res) => {
                 const { lat, lng } = res.data.items[0].position
                 setUserLocation(lat + ", " + lng);
             }).catch(error => {
@@ -90,12 +122,24 @@ function Preferences(props) {
         setRatingLimit(e.target.value);
     }
 
+    // Function used to toggle the category button and update the map accordingly
+    const toggleButton = (e) => {
+        let category = e.target.value
+        setCategoriesMap({...categoriesMap ,[category]: !categoriesMap[category]})
+    }
+  
     //Function that is called when the user wants to update their preferences
     //Information in preferencesMap is retrieved and uploaded to firestore using updateDoc
     const updateData = async (e)=> {
-
+        // Bool used to check whether there is at least one category selected
+        var categories = []
+        for(let category of Object.keys(categoriesMap)){
+            if(categoriesMap[category]) {
+                categories.push(category)
+            }
+        }
+        console.log(categories)
         if (categories.length > 0) {
-
             const userRef = doc(db, 'users', userID);
             try {
                 await updateDoc (userRef, 
@@ -125,39 +169,30 @@ function Preferences(props) {
 
 
     }
+
     /*M100,150 165,180 245, 40 stroke: 250/250*/
     return (
 
         <div className = {PreferencesCSS.PreferencesContainer}>
 
-            <div className = {PreferencesCSS.PreferencesTitle}> {username}'s User Preferences </div>
+            <div className = {PreferencesCSS.PreferencesTitle}> {username}'s Preferences </div>
 
-            <div className = {PreferencesCSS.PreferencesHeader}>
-                Search Location:
-            </div>
+            <div className={PreferencesCSS.HeaderText}>Location</div>
 
-            <div>
-                <Button variant = "outline-dark"  onClick = {geolocationClick} className = {PreferencesCSS.PreferencesButtons}> 
-                    My Location
-                </Button>
-            </div>
-
-            <div className={PreferencesCSS.Text}>or</div>
-
-            <div className={PreferencesCSS.SearchBar}>
-                <input id={PreferencesCSS.LocationInput} type='search' placeholder='Enter a location'></input>
-                <input id={PreferencesCSS.RegionInput}placeholder='Region'></input>
+            <div className={PreferencesCSS.SearchBar} >
                 <button id={PreferencesCSS.SearchButton} onClick={getSearchLocation}></button>
+                <input id={PreferencesCSS.LocationInput} className={PreferencesCSS.SearchBarFrame} type='search' placeholder='Search a location'></input>
+                <button id={PreferencesCSS.GeoLocatorButton} onClick={geolocationClick}></button>
             </div>
 
             <div id={updatedPreferences ? PreferencesCSS.ShowShadowLayer : PreferencesCSS.HideShadowLayer} />
             {
                 updatedPreferences ?
                 <div id={PreferencesCSS.PopoverContainer}>
-                   <div id={PreferencesCSS.PopoverTitle}>Changes Saved!</div>
+                   <div id={PreferencesCSS.PopoverTitleContainer}><h4 id={PreferencesCSS.PopoverTitle}>Changes Saved!</h4></div>
                    <div id={PreferencesCSS.CheckmarkContainer}>
-                        <svg width="310" height="310">
-                            <path id={PreferencesCSS.check} d="M60,120 125,180 400, -10"/>
+                        <svg width="100%" height="100%">
+                            <path id={PreferencesCSS.check} d="M40,130 105,190 300, 0" pathLength={"1"}/>
                         </svg>  
                    </div>     
                 </div>
@@ -165,17 +200,11 @@ function Preferences(props) {
                 null
             }
             
-        <div className = {PreferencesCSS.PreferencesHeader}>
-                Filter Preferences:
-         </div>
-
-
-         <div className = {PreferencesCSS.PreferencesForms} >
-              <form onClick = {getLocationRange} id = "locationForm" > 
-                   <label>
-                     Location Range:&nbsp;
-                        <select value={rangeLimit} onChange={getLocationRange}>
-                         <option value="0"> No limit </option>
+            <div className = {PreferencesCSS.HeaderText}>Location Range</div>
+              <form onClick = {getLocationRange} /*id = "locationForm"*/> 
+                   <label className={PreferencesCSS.DropdownLabel}>
+                        <select value={rangeLimit} onChange={getLocationRange} className={PreferencesCSS.DropdownSelectFrame}>
+                         <option value="0"> No Limit </option>
                          <option value="1">Less than 1 mile</option>
                          <option value="5"> Less than 5 miles</option>
                          <option value="10">Less than 10 miles</option>
@@ -185,12 +214,11 @@ function Preferences(props) {
                    </label>
                 </form>
 
-            <br></br>
+            <div className = {PreferencesCSS.HeaderText}>Yelp Rating</div>
              <form onClick = {getYelpRating} id = "ratingForm">
-                 <label>
-                    Yelp Rating:&nbsp;
-                     <select value={ratingLimit} onChange={getYelpRating}>
-                         <option value="0"> No filter </option>
+                 <label className={PreferencesCSS.DropdownLabel}>
+                     <select value={ratingLimit} onChange={getYelpRating} className={PreferencesCSS.DropdownSelectFrame}>
+                         <option value="0"> No Filter </option>
                          <option value="4.5"> 4.5+ Stars</option>
                          <option value="4"> 4+ Stars</option>
                          <option value="3.5"> 3.5+ Stars</option>
@@ -198,119 +226,97 @@ function Preferences(props) {
                         </select>        
                     </label>
                 </form>
- 
 
-
-
-            </div>
-
-            <br></br>
-            <div className = {PreferencesCSS.PreferencesHeader}>
-            Filter Categories:
-            </div>
-
+            <div id={PreferencesCSS.CategoriesHeader}>Category Filters</div>
+            <br/>
             <div className= {PreferencesCSS.PreferencesSwitches}>
 
-            <ToggleButtonGroup type="checkbox" value={categories} onChange={handleChange}> 
-                <ToggleButton variant = "outline-warning" id="restaurants" value={"restaurants"} className = {PreferencesCSS.customButton} >
-                    Restaurants
-                </ToggleButton>
-                
-                &nbsp;&nbsp;&nbsp;
+                <div className={PreferencesCSS.ButtonGroup}>
+                    <button value={Categories.Restaurant} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Restaurant] ? `${PreferencesCSS.customButtonActive} ${PreferencesCSS.FirstButton}` : `${PreferencesCSS.customButton} ${PreferencesCSS.FirstButton}`} >
+                        Restaurants
+                    </button>
 
-                <ToggleButton variant = "outline-warning" id="cafes" value={"cafes"} className = {PreferencesCSS.customButton}>
+                    <button value={Categories.Cafe} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Cafe] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
                         Cafes
-                </ToggleButton>
-                &nbsp;&nbsp;&nbsp;
+                    </button>
 
-                <ToggleButton variant = "outline-warning" id="games" value={"games"} className = {PreferencesCSS.customButton}>
+                    <button value={Categories.Game} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Game] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
                         Games
-                </ToggleButton>
-                &nbsp;&nbsp;&nbsp;
+                    </button>
 
-                <ToggleButton variant = "outline-warning" id="Shopping" value={"shopping"} className = {PreferencesCSS.customButton}>
+                    <button value={Categories.Shopping} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Shopping] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
                         Shopping
-                </ToggleButton>
+                    </button>
 
-                &nbsp;&nbsp;&nbsp;
-                <ToggleButton variant = "outline-warning" id="spa" value={"spa"} className = {PreferencesCSS.customButton}>
+                    <button value={Categories.Spa} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Spa] ? `${PreferencesCSS.customButtonActive} ${PreferencesCSS.LastButton}` : `${PreferencesCSS.customButton} ${PreferencesCSS.LastButton}`} >
                         Spas
-                </ToggleButton>
+                    </button>
+                </div>
 
-
-            </ToggleButtonGroup>
-
-            <br></br>
-            <br></br>
-            
-            <ToggleButtonGroup type="checkbox" value={categories} onChange={handleChange}> 
-        
-                <ToggleButton variant = "outline-warning" id="bowling" value={"bowling"} className = {PreferencesCSS.customButton}>
+                <div className={PreferencesCSS.ButtonGroup}>
+                    <button value={Categories.Bowling} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Bowling] ? `${PreferencesCSS.customButtonActive} ${PreferencesCSS.FirstButton}` : `${PreferencesCSS.customButton} ${PreferencesCSS.FirstButton}`} >
                         Bowling
-                </ToggleButton>
-                &nbsp;&nbsp;&nbsp;
+                    </button>
 
-                <ToggleButton variant = "outline-warning" id="karaoke" value={"karaoke"} className = {PreferencesCSS.customButton}>
-                    Karaoke
-                </ToggleButton>
+                    <button value={Categories.Karaoke} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Karaoke] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
+                        Karaoke
+                    </button>
 
-                &nbsp;&nbsp;&nbsp;
-
-                <ToggleButton variant = "outline-warning" id="bar" value={"bars"} className = {PreferencesCSS.customButton}>
+                    <button value={Categories.Bar} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Bar] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
                         Bars
-                </ToggleButton>
-                &nbsp;&nbsp;&nbsp;
+                    </button>
 
-                <ToggleButton variant = "outline-warning" id="clubs" value={"clubs" } className = {PreferencesCSS.customButton}>
-                    Clubs
-                </ToggleButton>
+                    <button value={Categories.Club} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Club] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
+                        Clubs
+                    </button>
 
-                &nbsp;&nbsp;&nbsp;
+                    <button value={Categories.Billiards} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Billiards] ? `${PreferencesCSS.customButtonActive} ${PreferencesCSS.LastButton}` : `${PreferencesCSS.customButton} ${PreferencesCSS.LastButton}`} >
+                        Billiards
+                    </button>
+                </div>
 
-                <ToggleButton variant = "outline-warning" id="billiards" value={"billiards" } className = {PreferencesCSS.customButton}>
-                    Billiards
-                </ToggleButton>
+                <div className={PreferencesCSS.ButtonGroup}>
+                    <button value={Categories.Theater} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Theater] ? `${PreferencesCSS.customButtonActive} ${PreferencesCSS.FirstButton}` : `${PreferencesCSS.customButton} ${PreferencesCSS.FirstButton}`} >
+                        Theaters
+                    </button>
 
-
-            </ToggleButtonGroup>
-
-            <br></br>
-            <br></br>
-
-            <ToggleButtonGroup type="checkbox" value={categories} onChange={handleChange}> 
-            <ToggleButton variant = "outline-warning" id="theaters" value={"theaters" } className = {PreferencesCSS.customButton}>
-                    Theaters
-                </ToggleButton>
-                &nbsp;&nbsp;&nbsp;
-
-                 <ToggleButton variant = "outline-warning" id="zoo" value={"zoo"} className = {PreferencesCSS.customButton}>
+                    <button value={Categories.Zoo} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Zoo] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
                         Zoos
-                </ToggleButton>
-                &nbsp;&nbsp;&nbsp;
+                    </button>
 
+                    <button value={Categories.Amusement} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Amusement] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
+                        Theme Park
+                    </button>
 
-                <ToggleButton variant = "outline-warning" id="amusement parks" value={"amusement parks"} className = {PreferencesCSS.customButton}>
-                        Amusement
-                </ToggleButton>
-                &nbsp;&nbsp;&nbsp;
-
-                <ToggleButton variant = "outline-warning" id="Parks" value={"parks"} className = {PreferencesCSS.customButton}>
+                    <button value={Categories.Park} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Park] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
                         Parks
-                </ToggleButton>
+                    </button>
 
-                &nbsp;&nbsp;&nbsp;
-
-                <ToggleButton variant = "outline-warning" id="swimming" value={"beach and pool"} className = {PreferencesCSS.customButton}>
+                    <button value={Categories.Swimming} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
+                    className={ categoriesMap[Categories.Swimming] ? `${PreferencesCSS.customButtonActive} ${PreferencesCSS.LastButton}` : `${PreferencesCSS.customButton} ${PreferencesCSS.LastButton}`} >
                         Swimming
-                </ToggleButton>
-
-            </ToggleButtonGroup>
+                    </button>
+                </div>
             </div>
             <br></br>
 
-            <div>
-            <Button className={PreferencesCSS.SaveButton} variant = "outline-dark" size = "sm" onClick = {updateData} >
-                    Save Preferences
+            <div id={PreferencesCSS.SaveButtonContainer}>
+            <Button id={PreferencesCSS.SaveButton} variant={buttonVariant} size = "sm" onClick = {updateData} >
+                    Save 
              </Button> 
             </div>
             <br></br>

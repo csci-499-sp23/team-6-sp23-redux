@@ -7,6 +7,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { signOutUser } from '../firebase';
 import { useNavigate } from "react-router-dom";
+import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import { auth } from '../firebase';
+import { useEffect } from 'react';
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <button
@@ -41,26 +44,45 @@ function AppNavbar({ isAuthenticated }) {
   };
   
   const userID = sessionStorage.getItem('userID')
+  const user = auth.currentUser
+  const storage = getStorage();
+  const profileURLPath = `images/${user?.uid}/profile.jpeg`;
+  const pathReference = ref(storage, profileURLPath);
+  const profileImage = document.getElementById(`${AppNavbarCSS.ProfilePicture}`);
+
+   // Set the profile image from firebase if the user uploaded one
+   useEffect(() => {
+    if (profileImage !== null) {
+      getDownloadURL(pathReference)
+      .then((url) => {
+        profileImage.setAttribute('src', url);
+      })
+      .catch((error) => {
+        console.log(`Error downloading profile image ${error}`)
+      });
+    }
+   
+  }, [profileImage, pathReference]);
 
   if (userID || isAuthenticated) {
     return (
-      <Navbar className={AppNavbarCSS.colorNavbar} expand="lg">
+      <Navbar id={AppNavbarCSS.Navbar} expand="lg">
         <Container>
           <Navbar.Brand>
             <img className={AppNavbarCSS.navLogo} src="Images/easyhangoutlogo.png" alt="nav-logo"></img>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Collapse id="basic-navbar-nav" className={AppNavbarCSS.NavbarCollapse}>
             <Nav className="me-auto">
-              <div id={AppNavbarCSS.mainContainer}>
-                <Nav.Link href="homepage">Home</Nav.Link>
-                <Nav.Link href="preferences">Preferences</Nav.Link>
-                <Nav.Link href="favorites">Favorites</Nav.Link>
+              <div id={AppNavbarCSS.RoutesContainer}>
+                <Nav.Link className={AppNavbarCSS.Link} href="homepage"><h4 className={AppNavbarCSS.LinkText}>Home</h4></Nav.Link>
+                <Nav.Link className={AppNavbarCSS.Link} href="preferences"><h4 className={AppNavbarCSS.LinkText}>Preferences</h4></Nav.Link>
+                <Nav.Link className={AppNavbarCSS.Link} href="favorites"><h4 className={AppNavbarCSS.LinkText}>Favorites</h4></Nav.Link>
                 <Dropdown>
                   <Dropdown.Toggle as={CustomToggle} id="dropdown-basic">
-                  <img src="https://via.placeholder.com/150" alt="Profile Avatar" width={30} height={30} className="rounded-circle" />
+                  <img src="https://via.placeholder.com/150" alt="Profile Avatar" width={50} height={50} className="rounded-circle" id={AppNavbarCSS.ProfilePicture} />
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
+                  <Dropdown.Menu align={"end"}>
                     <Dropdown.Item href="profile">Profile</Dropdown.Item>
                     <Dropdown.Item onClick={logoutUser}>Logout</Dropdown.Item>
                   </Dropdown.Menu>

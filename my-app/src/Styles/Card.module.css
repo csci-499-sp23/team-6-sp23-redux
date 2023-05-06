@@ -66,6 +66,7 @@ height: 300,
     color: white;
     word-wrap: break-word;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px #000;
+    font-family: 'louis-george-cafe-bold';
 }
 
 
@@ -86,6 +87,8 @@ height: 300,
     background: rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
+    /*font-family: 'Courier New', Courier, monospace;*/
+    font-family: 'louis-george-cafe';
 }
 
 #LocationContainer {

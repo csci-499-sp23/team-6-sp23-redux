@@ -1,22 +1,14 @@
 .PreferencesContainer {
-    color: black;
-    text-align: center;
+    color: white;
+    text-align: left;
 }
 
 .PreferencesTitle{
     text-align: center;
-    color: orange;
     font-size: 40px;
-    font-weight: 500;
     padding-top: 5px;
-    padding-bottom:10px;
-}
-
-.PreferencesHeader{
-    text-align: center;
-    color: black;
-    font-size: 30px;
     padding-bottom: 15px;
+    font-family: 'louis-george-cafe';
 }
 
 .PreferencesButtons{
@@ -25,11 +17,12 @@
         border-radius: 8px;
         background-color: white;
 }
-.PreferencesForms{
-    color:black;
-    font-size:medium;
-    display: block;
+
+#CategoriesHeader {
     text-align: center;
+    font-weight: 600;
+    font-size: 25px;
+    font-family: 'louis-george-cafe';
 }
 
 .PreferencesSwitches{
@@ -38,84 +31,145 @@
     font-size:medium;
 }
 
-.customButton {
-    width: 125px;
-    color:rgb(109, 107, 107);
+.ButtonGroup {
+    margin-bottom: 16px;
 }
 
+.FirstButton {
+    border-radius: 8px 0px 0px 8px;
+}
 
-.Text {
-    padding: 16px 0px;
+.LastButton {
+    border-radius: 0px 8px 8px 0px;
+}
+
+#ButtonInsets {
+    margin-right: 16px;
+    padding: 4px 16px;
+}
+
+.customButton {
+    width: 125px;
+    color:rgb(109, 107, 107) !important;
+    background-color: white !important;
+    border-color: aqua;
+}
+
+.customButtonActive {
+    width: 125px;
+    color: white !important;
+    background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
+    border-color: aqua;
+}
+
+.HeaderText {
+    font-family: 'louis-george-cafe';
+    margin-left: 36.5%;
+    margin-right: auto;
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.SearchBarFrame {
+    margin-bottom: 30px;
+    border-style: solid;
+    border-radius: 2px 0px 0px 2px;
+    width: 100%;
+    padding-top: 6px;
+    padding-bottom: 9px;
 }
 
 .SearchBar {
-    position: relative;
-    padding-bottom: 30px;
     display: flex;
+    text-align: center;
     justify-content: center;
     font-size: 18px;
+    width: 27%;
+    margin: auto;
 }
 
 #LocationInput {
-    border-style: solid;
+    border-left: none;
     border-right: none;
-    border-radius: 5px 0px 0px 5px;
-    height: 35px;
-    width: 25vw;
-}
-
-#RegionInput {
-    border-style:solid;
-    border-right: none;
-    border-radius: 0px 0px 0px 0px;
-    height: 35px;
-    width: 8vw;
+    font-size: 16px;
 }
 
 #LocationInput:focus {
     outline: none !important;
 }
 
-#RegionInput:focus {
-    outline: none !important;
-}
-
 #SearchButton {
-    border-top: black 2px solid;
-    border-left: none;
-    border-radius: 0px 8px 8px 0px;
+    border-style: solid;
+    border-right: none;
+    border-radius: 2px 0px 0px 2px;
     background-color: transparent;
     background: url('../../public/Images/search_icon.png') no-repeat center transparent;
     background-size: cover;
     width: 45px;
-    height: 35px;
+    height: 43px;
+    margin-left: 0px;
 }
 
-.SaveButton {
-    padding: 12px 16px;
+#GeoLocatorButton {
+    border-style: solid;
+    border-left: none;
+    border-radius: 2px 0px 0px 2px;
+    background-color: transparent;
+    background: url('../../public/Images/geolocator_icon.png') no-repeat center transparent;
+    background-size: contain;
+    background-color: white;
+    width: 45px;
+    height: 43px;
+}
+
+.DropdownLabel {
+    width: 100%;
+    font-family: 'louis-george-cafe';
+    font-size: 18px;
+    text-align: center;
+}
+
+.DropdownSelectFrame {
+    margin-bottom: 30px;
+    border-style: solid;
+    border-radius: 2px 0px 0px 2px;
+    width: 27%;
+    padding-top: 6px;
+    padding-bottom: 7px;
+    padding-left: 16px;
+    color: #8e8e8e;
+}
+
+.DropdownSelectFrame:focus {
+    outline: none !important;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat 96% !important;
+  }
+  
+select::-ms-expand { display: none; }
+
+#SaveButtonContainer {
+    text-align: center;
+}
+
+#SaveButton {
+    padding: 0px 56px;
     font-weight: bold;
-    background-color: black;
+    color: #8e8e8e;
+    background-color: white;
+    font-size: 25px;
+    border-radius: 15px;
+}
+
+#SaveButton:hover{
     color: white;
+    background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
 }
-
-.SaveButton:hover{
-    background-color: orange;
-}
-
-#check {
-    fill: none;
-    stroke: orange;
-    stroke-width: 20;
-    stroke-linecap: round;
-    stroke-dasharray: 300;
-    stroke-dashoffset: 270;
-    animation: draw 2s ease;
-  }
-  @keyframes draw {
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
 
   #ShowShadowLayer {
     position: fixed;
@@ -140,22 +194,51 @@
     transform: translate(-50%, -50%);
     z-index: 1001;
     opacity: 1;
-    background-color: white;
-    width: 30%;
-    height: 40%;
+    background-color: #3b4a51;
+    width: 300px;
+    height: 300px;
     /* offset-x | offset-y | blur-radius | spread-radius | color */
     box-shadow:  0px 0px 5px 5px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid #5cb3d9;
+  }
+
+  #PopoverTitleContainer {
+    height: 20%;
+    text-align: center;
+    width: 100%;
   }
 
   #PopoverTitle {
-    position: relative;
-    top: 8%;
     font-size: 30px;
     font-weight: 600;
+    color: white;
+    font-family: 'louis-george-cafe-bold';
+    margin-top: 20px;
+  }
+
+  #check {
+    fill: none;
+    stroke: #668ac0;
+    stroke-width: 20;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 2s ease forwards;
+  }
+  @keyframes draw {
+    from {
+        stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0.2;
+    }
   }
 
   #CheckmarkContainer {
-    position: relative;
     height: 80%;
+    width: 100%;
   }
+

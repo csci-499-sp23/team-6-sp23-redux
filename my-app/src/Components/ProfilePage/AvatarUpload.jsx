@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { auth } from '../../firebase';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import ProfileCSS from '../../Styles/Profile.module.css';
+import AppNavbarCSS from '../../Styles/AppNavbar.module.css';
 
 function UploadImage() {
   const user = auth.currentUser
@@ -42,10 +43,12 @@ function UploadImage() {
     }, () => {
       //successful upload
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        console.log('File available at', downloadURL);
-
         const profileImage = document.getElementById(`${ProfileCSS.ProfileImage}`)
-        profileImage.setAttribute('src', downloadURL)
+        profileImage.setAttribute('src', downloadURL);
+        
+        const navbarProfileImage = document.getElementById(`${AppNavbarCSS.ProfilePicture}`);
+        navbarProfileImage.setAttribute('src', downloadURL);
+
       });
     });
 

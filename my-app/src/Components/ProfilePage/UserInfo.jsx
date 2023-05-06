@@ -8,7 +8,7 @@ export default function UserInfo({ email, username, userLocation }) {
   const [city, setCity] = useState('');
 
   const storage = getStorage();
-  const profileURLPath = `images/${user.uid}/profile.jpeg`;
+  const profileURLPath = `images/${user?.uid}/profile.jpeg`;
   const pathReference = ref(storage, profileURLPath);
   const profileImage = document.getElementById(`${ProfileCSS.ProfileImage}`);
   

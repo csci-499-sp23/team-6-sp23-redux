@@ -1,8 +1,13 @@
 .App {
-  background-color: rgb(242, 243, 249);
-  min-height: 100vh;
+  background-color: #3b4a51;
   font-size: calc(10px + 2vmin);
   color: white;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  font-family: 'louis-george-cafe';
 }
 
 .test {

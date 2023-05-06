@@ -1,5 +1,6 @@
-.colorNavbar{
-    background-color: rgb(243, 173, 61);
+#Navbar{
+    /*background-color: rgb(243, 173, 61);*/
+    background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
   }
   
 .navLogo{
@@ -27,10 +28,21 @@
   border-radius: 5%;
 }
 
-#mainContainer {
+.NavbarCollapse {
+  position: absolute;
+  right: 16px;
+}
+
+#RoutesContainer {
   display: flex;
-  position: relative;
-  right: 100%;
+}
+
+.Link {
+  margin-right: 60px;
+}
+
+.LinkText {
+  color: white;
   font-size: 20px;
 }
 
@@ -38,4 +50,10 @@
   margin-top: 4%;
   font-size: 20px;
   color: black;
+}
+
+#ProfilePicture {
+  width: 55px;
+  height: 55px;
+  object-fit: fill;
 }

@@ -13,7 +13,6 @@ import { auth, db } from '../firebase';
 import { doc, onSnapshot } from "firebase/firestore";
 import PageTitle from './PageTitle';
 
-
 function App() {
   const userID = auth.currentUser?.uid
   const [navigated, setNavigated] = useState(false); // check to see if navigated from login
