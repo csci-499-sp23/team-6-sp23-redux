@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
 import { doc, onSnapshot } from "firebase/firestore";
 import PageTitle from './PageTitle';
+import ForgotPassword from './ForgotPassword';
 
 function App() {
   const userID = auth.currentUser?.uid
@@ -90,6 +91,7 @@ function App() {
           <Route exact path = "/signup" element = {<SignUp setNavigated={setNavigated}/>}/>
           <Route exact path="/preferences" element={<Preferences preferences={preferences}/>}/>
           <Route exact path="/profile" element={<Profile preferences={preferences} isAuthenticated={isAuthenticated} userLocation={location}/>} />
+          <Route exact path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
       </Router>    
     </div>

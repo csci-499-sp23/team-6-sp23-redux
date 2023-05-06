@@ -130,6 +130,11 @@ const Login = (props) => {
                   Login
                 </button>
               </div>
+              <div className="ForgotPasswordWrapper">
+                <NavLink to="/forgot-password" className={LoginCSS.LinkLogin}>
+                  Forgot password?
+                </NavLink>
+              </div>
             </form>
                 <button className={LoginCSS.GoogleSignInButton} onClick={signInWithGoogle}>
                   Login with Google
