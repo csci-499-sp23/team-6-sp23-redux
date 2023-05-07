@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Card from './Card';
+import EmptyDeck from './EmptyDeck';
 import { getHangouts } from '../Services/HangoutService';
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { auth, db } from '../firebase';
@@ -7,6 +8,8 @@ import { auth, db } from '../firebase';
 function CardDeck(props) {
   
   const [hangoutData, setHangoutData] = useState([]);
+  const [empty, setEmpty] = useState(true);
+  const [displayEmptyDeck, setDisplayEmptyDeck] = useState (false);
   const userID = auth.currentUser?.uid
 
   function toMeters(miles)
@@ -28,7 +31,7 @@ function CardDeck(props) {
 
     initializeFavorites()
     
-    if(props.location && props.categories){
+    if(props.location && props.categories && empty){
       getHangouts(props.location, props.categories, toMeters(props.rangeLimit)).then((data) => {
         // Filter the data to remove any locations the user has already liked
 
@@ -41,12 +44,16 @@ function CardDeck(props) {
        {
         filteredDeck = filteredDeck.filter ((hangout) => hangout.rating >= props.ratingLimit);
        }
+
         // Start with a shuffled deck
         let deck = shuffleDeck(filteredDeck)
         setHangoutData(deck);
+        setEmpty(false);
+        setDisplayEmptyDeck(false);
       })
     } 
-  }, [props]);
+    
+  }, [props, empty]);
 
   // return new array with last item removed
   const removeCard = (array) => {
@@ -85,39 +92,53 @@ function CardDeck(props) {
     let newCardDeck = removeCard(hangoutData)
     let shuffledDeck = shuffleDeck(newCardDeck)
     setHangoutData(shuffledDeck)
+
+    //when deck is about to run out, display the empty deck
+    if (hangoutData.length === 1)
+    {
+      setDisplayEmptyDeck(true);
+    }
   }
 
-    return (
+    if (displayEmptyDeck) {
+      return (
         <div>
-          { hangoutData.length > 0 &&
-            hangoutData.map(function(item, index){
-              let isTop = index === hangoutData.length - 1
-              return (
-                <Card
-                  key={item.key || index}
-                  onSwipe={(swipeDirection) => handleSwipe(item, swipeDirection)}
-                  title={item.name} 
-                  image={item.image_url} 
-                  distance={item.distance} 
-                  location={item.location.display_address[0]}
-                  location2={item.location.display_address[1]}
-                  phone={item.display_phone}
-                  rating={item.rating}
-                  price={item.price}
-                  details={item.categories}
-                  isTop={isTop}
-                  category={item.category}
-                  closed={item.is_closed}
-                  latitude={item.coordinates.latitude}
-                  longitude={item.coordinates.longitude}
-                  userLatitude={parseFloat(props.location.split(',')[0])}
-                  userLongitude={parseFloat(props.location.split(',')[1])}
-                >
-                </Card>
-              )
-            })
-          }
+          <EmptyDeck setEmpty = {setEmpty}></EmptyDeck>
         </div>
+      )
+    }
+
+    return (
+      <div>
+        { hangoutData.length > 0 &&
+          hangoutData.map(function(item, index){
+            let isTop = index === hangoutData.length - 1
+            return (
+              <Card
+                key={item.key || index}
+                onSwipe={(swipeDirection) => handleSwipe(item, swipeDirection)}
+                title={item.name} 
+                image={item.image_url} 
+                distance={item.distance} 
+                location={item.location.display_address[0]}
+                location2={item.location.display_address[1]}
+                phone={item.display_phone}
+                rating={item.rating}
+                price={item.price}
+                details={item.categories}
+                isTop={isTop}
+                category={item.category}
+                closed={item.is_closed}
+                latitude={item.coordinates.latitude}
+                longitude={item.coordinates.longitude}
+                userLatitude={parseFloat(props.location.split(',')[0])}
+                userLongitude={parseFloat(props.location.split(',')[1])}
+              >
+              </Card>
+            )
+          })
+        }
+      </div>
     );
   }
   
