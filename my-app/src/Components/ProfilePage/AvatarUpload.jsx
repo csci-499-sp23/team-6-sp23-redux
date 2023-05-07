@@ -3,6 +3,8 @@ import { auth } from '../../firebase';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import ProfileCSS from '../../Styles/Profile.module.css';
 import AppNavbarCSS from '../../Styles/AppNavbar.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 function UploadImage() {
   const user = auth.currentUser
@@ -55,9 +57,12 @@ function UploadImage() {
   };
 
   return (
-    <div>
-      <input type="file" onChange={handleChange} />
-      <button onClick={handleUpload}>Upload</button>
+    <div id={ProfileCSS.UploadImageContainer}>
+      <div id={ProfileCSS.FileName}>{ image ? image.name : "N/A"}</div>
+      <label for={ProfileCSS.ChooseFileButton} className={ProfileCSS.CustomFileButton}>
+      <FontAwesomeIcon id={ProfileCSS.UploadFileIcon} icon={faCloudArrowUp}></FontAwesomeIcon>Choose File</label>
+      <input id={ProfileCSS.ChooseFileButton} type="file" onChange={handleChange} />
+      <button id={ProfileCSS.UploadFileButton} onClick={handleUpload}>Upload</button>
     </div>
   );
 }

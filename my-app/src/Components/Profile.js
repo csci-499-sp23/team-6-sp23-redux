@@ -16,34 +16,44 @@ const ProfilePage = (props) => {
   }
   
   return (
-    <section className={ProfileCSS['profile-container']}>
-      <h1 className={ProfileCSS.welcome}>Welcome, {user.displayName}!</h1>
-      {/* Add more user information or functionality as needed */}
-      <div className={ProfileCSS.userInfo}>
-        {/* Add other user information here, such as user preferences, favorite places, etc. */}
-      </div>
-      <div className={ProfileCSS['profile-card']}>
-        <p className={ProfileCSS['profile-card-title']}>Profile</p>
-        <UserInfo email={user.email} username={user.displayName} userLocation={props.userLocation} /> {/* Added userLocation prop */}
-      </div>
-       <div>
-      <UploadImage />
-      </div> 
-      <div>
-      <UpdateUsername />
-      </div>
+    <div className={ProfileCSS['profile-container']}>
+      <div id={ProfileCSS.PageTitle}>Profile</div>
 
-      {
-        userType === "password" ?
-        <div className={ProfileCSS['profile-card']}>
-        <p className={ProfileCSS['profile-card-title']}>Update Password</p>
-          <UpdatePassword />
+      <div id={ProfileCSS.FlexContainer}>
+        <div id={ProfileCSS.LeftContainer}>
+          <div className={ProfileCSS['profile-card']}>
+            <UserInfo email={user.email} username={user.displayName} userLocation={props.userLocation} />
+          </div>
         </div>
-        :
-        null
-      }
+        
+        <div id={ProfileCSS.RightContainer}>
+          <h2 id={ProfileCSS.RightSubTitle}>Edit Details</h2>
+
+          <div className={ProfileCSS.RightContainerCell}>
+            <div className={ProfileCSS.EditFormHeader}>File Upload</div>
+            <UploadImage />
+          </div>
+
+          <div className={ProfileCSS.RightContainerCell}>
+            <div className={ProfileCSS.EditFormHeader}>Update Username</div> 
+            <UpdateUsername />     
+          </div>
+
+          
+            {  userType === "password" ?
+              <div className={ProfileCSS.RightContainerCell}>
+                <div className={ProfileCSS.EditFormHeader}>Update Password</div> 
+                <UpdatePassword />
+              </div>
+              :
+              null
+            }
+          
+        </div>
+        
+      </div>
       
-    </section>
+    </div>
   );
 };
 

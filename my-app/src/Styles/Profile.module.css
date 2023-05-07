@@ -1,13 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
 :root {
-  --primary-color: #ffa012;
-  --secondary-color: #e18d0e;
   --border-color: #eaeaea;
-  --text-color: #444;
+  --text-color: white;
   --background-color: #fff;
   --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --font-family: 'Roboto', sans-serif;
+  --font-family: 'louis-george-cafe';
 }
 
 .profile-container {
@@ -15,44 +11,237 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
   color: var(--text-color);
-  max-width: 400px;
-  margin: 0 auto;
-  font-family: var(--font-family);
+  height: 100%;
+  width: 100%;
+  margin-bottom: 1em;
 }
 
-.welcome {
-  font-size: 2rem;
+#PageTitle {
+  font-size: 3rem;
   font-weight: bold;
-  margin-bottom: 1rem;
   color: white;
+  height: 10%;
 }
 
-.user-info {
-  font-size: 1.2rem;
-  color: var(--text-color);
+#FlexContainer {
+  display: flex;
+  width: 80%;
+  height: 90%;
+  justify-content: space-between;
+  padding-bottom: 1em;
+  padding-top: 1em;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
 }
+
+#LeftContainer {
+  color: black;
+  width: 35%;
+  margin-left: 5em;
+}
+
+#RightContainer {
+  margin-right: 5em;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Left Container */
 
 .profile-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 300px;
+  width: 100%;
   border: 1px solid var(--border-color);
   border-radius: 10px;
   box-shadow: var(--box-shadow);
-  padding: 20px;
   background: var(--background-color);
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+  height: 100%;
 }
 
-.profile-card-title {
-  font-size: 24px;
-  font-weight: bold;
+.UserInfoContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
+
+#ProfileImage {
+  height: 70%;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 5%;
+  border-radius: 10px 10px 0px 0px;
+  object-fit: cover;
+  border-bottom: none;
+}
+
+#Username {
+  font-family: 'louis-george-cafe';
+  font-size: 1.8em;
+  font-weight: bold;
+  position: relative;
+  top: -6%;
+  text-align: center;
+  margin-left: 5%;
+  margin-right: 5%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 0px 0px 10px 10px;
+  overflow-x: scroll;
+}
+
+#UserDetailsBox {
+  height: 20%;
+  text-align: left;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 5%;
+  position: relative;
+  bottom: 2.5%;
+}
+
+#Location {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+#Email {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+/* Right Container */
+
+#RightSubTitle {
+  font-size: 1.5em;
+  text-align: center;
+  background-color: white;
+  color: black;
+  font-weight: 700;
+}
+
+.RightContainerCell {
+  margin-bottom: 16px;
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+}
+
+.EditFormHeader {
+  background-color: white;
+  color: black;
+  border-bottom: 1px solid #C7C7CD;
+  font-size: 1.2em;
+  font-weight: 600;
+  padding-left: 1em;
+  border-radius: 10px 10px 0px 0px;
+}
+
+/* Upload Image */
+
+#UploadImageContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: white;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.CustomFileButton {
+  color: black;
+  border: 1px #ccc solid;
+  font-size: 1.1em;
+  padding: 0px 8px;
+  border-radius: 10px;
+}
+
+.CustomFileButton:hover {
+  background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
+  color: white;
+}
+
+#UploadFileIcon {
+  margin-right: 8px;
+}
+
+#ChooseFileButton {
+  display: none;
+}
+
+#FileName {
+  color: black;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 150px;
+  text-align: center;
+}
+
+#UploadFileButton {
+  border-radius: 10px;
+  border: 1px #ccc solid;
+  background-color: white;
+  font-size: 1.1em;
+}
+
+#UploadFileButton:hover {
+  background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
+  color: white;
+}
+
+/* Update Username */
+
+.ErrorBox {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+#UpdateUsernameContainer {
+  background-color: white;
+  border-radius: 0px 0px 10px 10px;
+  
+}
+
+#UpdateBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.UsernameInput {
+  border: 1px #ccc solid;
+  border-radius: 10px;
+  font-size: 1.1em;
+  margin-top: 8px;
+  margin-left: 8px;
+  margin-bottom: 8px;
+}
+
+.UsernameButton {
+  margin-right: 16px;
+  font-size: 1.1em;
+  border-radius: 10px;
+  border: 1px #ccc solid;
+  background-color: white;
+}
+
+.UsernameButton:hover {
+  background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
+  color: white;
+}
+
+/* Update Password */
 
 .new-password-form {
   display: flex;
@@ -102,5 +291,3 @@
   background-color: var(--secondary-color);
 }
 
-#ProfileImage {
-}

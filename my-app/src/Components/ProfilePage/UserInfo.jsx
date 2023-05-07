@@ -55,12 +55,15 @@ export default function UserInfo({ email, username, userLocation }) {
   }, [latitude, longitude]);
   
   return (
-    <div className={ProfileCSS['']}>
+    <div className={ProfileCSS.UserInfoContainer}>
       <img src="https://via.placeholder.com/150" alt="Profile Avatar" id={ProfileCSS.ProfileImage} width={60} height={60} />
-      <p>Name: {username || ''}</p>
-      <p>Location: {city}</p>
-      <p style={{ marginBottom: "0" }}>Email:</p>
-      <p>{email}</p>
+      <div id={ProfileCSS.Username}>{username}</div>
+
+      <div id={ProfileCSS.UserDetailsBox}>
+        <div id={ProfileCSS.Location}>Location: {city}</div>
+        <div id={ProfileCSS.Email}>Email: {email}</div>
+      </div>
+      
     </div>
   );
 }
