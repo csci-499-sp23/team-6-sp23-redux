@@ -28,7 +28,7 @@ function FavoriteCard(props) {
             var delCatorHangout = arrayRemove(hangoutObj);
             
             //checks if this is the last hangout in the category
-            if(docSnap.data().favorites[category].length == 1 ){
+            if(docSnap.data().favorites[category].length === 1 ){
                 
                 delCatorHangout = deleteField()
             }
