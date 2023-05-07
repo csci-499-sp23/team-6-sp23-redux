@@ -6,10 +6,6 @@
   --font-family: 'louis-george-cafe';
 }
 
-button, input, label {
-  height: 2em;
-}
-
 .profile-container {
   display: flex;
   flex-direction: column;
@@ -19,6 +15,10 @@ button, input, label {
   height: 100%;
   width: 100%;
   margin-bottom: 1em;
+}
+
+.profile-container button, .profile-container input, .profile-container label {
+  height: 2em;
 }
 
 #PageTitle {
