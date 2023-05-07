@@ -80,11 +80,15 @@ function AppNavbar({ isAuthenticated }) {
                 <Nav.Link className={AppNavbarCSS.Link} href="favorites"><h4 className={AppNavbarCSS.LinkText}>Favorites</h4></Nav.Link>
                 <Dropdown>
                   <Dropdown.Toggle as={CustomToggle} id="dropdown-basic">
-                  <img src="https://via.placeholder.com/150" alt="Profile Avatar" width={50} height={50} className="rounded-circle" id={AppNavbarCSS.ProfilePicture} />
+                  <div id={AppNavbarCSS.ProfileDropdownContainer}>
+                    <img src="https://via.placeholder.com/150" alt="Profile Avatar" width={50} height={50} className="rounded-circle" id={AppNavbarCSS.ProfilePicture} />
+                    <div id={AppNavbarCSS.NavbarUsername}>{user?.displayName}</div>
+                    <img src="http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png" alt="Dropdown"></img>
+                  </div>
                   </Dropdown.Toggle>
-                  <Dropdown.Menu align={"end"}>
-                    <Dropdown.Item href="profile">Profile</Dropdown.Item>
-                    <Dropdown.Item onClick={logoutUser}>Logout</Dropdown.Item>
+                  <Dropdown.Menu className={AppNavbarCSS.DropdownMenu} align={"end"}>
+                    <Dropdown.Item className={AppNavbarCSS.DropdownItem} href="profile"><div className={AppNavbarCSS.ItemTitle}>Profile</div></Dropdown.Item>
+                    <Dropdown.Item className={AppNavbarCSS.DropdownItem} onClick={logoutUser}><div className={AppNavbarCSS.ItemTitle}>Logout</div></Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </div>

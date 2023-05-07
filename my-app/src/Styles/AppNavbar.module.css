@@ -1,5 +1,4 @@
 #Navbar{
-    /*background-color: rgb(243, 173, 61);*/
     background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
   }
   
@@ -38,7 +37,8 @@
 }
 
 .Link {
-  margin-right: 60px;
+  margin-top: 0.2em;
+  margin-right: 1em;
 }
 
 .LinkText {
@@ -52,8 +52,39 @@
   color: black;
 }
 
+#ProfileDropdownContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 9em;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+}
+
 #ProfilePicture {
-  width: 55px;
-  height: 55px;
-  object-fit: fill;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+#NavbarUsername {
+  font-size: 1em;
+  color: white;
+}
+
+.DropdownMenu {
+  background-color: white;
+}
+
+.DropdownItem {
+  color: black;
+  font-size: 1.2em;
+}
+
+.DropdownItem:hover {
+  background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
+}
+
+.ItemTitle:hover {
+  color: white;
 }
