@@ -25,6 +25,8 @@ function Favoritedetails(props) {
                             
   return (
     <>
+      <div>
+      </div>
       <Modal
         show={show}
         onHide={handleClose}
@@ -53,10 +55,9 @@ function Favoritedetails(props) {
         Close
         </Button> 
       </Modal>
-      <Button className={FavoriteModal.modalInfoButton} variant="warning" onClick={handleShow} size="sm">
+      <Button class={"btn btn-link"}className={FavoriteModal.modalInfoButton} variant="warning" onClick={handleShow} size="sm">
         More Info!
       </Button> 
-
     </>
 
   );

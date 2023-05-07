@@ -66,3 +66,9 @@
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px #000;
     white-space: pre-wrap;
 }
+
+.FavoriteModal {
+    position: absolute;
+    bottom:3%;
+    left:33%;
+}

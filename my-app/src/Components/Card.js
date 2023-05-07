@@ -76,7 +76,7 @@ function Card({onSwipe, ...props}) {
       unsubscribeX()
     }
   }, [x, flyAwayComplete, onSwipe])
-
+  //To miles function
   function toMiles(meters)
   {
     return parseInt(meters) * 0.000621371;
