@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
-import styles from '../../Styles/Profile.module.css';
+import ProfileCSS from '../../Styles/Profile.module.css';
 import { collection, doc, updateDoc, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { updateProfile } from 'firebase/auth';
@@ -78,17 +78,22 @@ const schema = yup.object().shape({
     };
   
     return (
-      <form onSubmit={handleSubmit(onSubmit)} className={styles['new-password-form']}>
-        <label htmlFor="username">New Username</label>
-        <input id="username" {...register('username')} type="text" placeholder="New username" />
-        {errors.username && <p>{errors.username.message}</p>}
+      <form onSubmit={handleSubmit(onSubmit)} id={ProfileCSS.UpdateUsernameContainer}>
+        <div id={ProfileCSS.UpdateBox}>
+          <input className={ProfileCSS.UsernameInput} id="username" {...register('username')} type="text" placeholder="New username" />
+          <button className={ProfileCSS.UsernameButton} disabled={submitting} type="submit">Update</button>
+        </div>
+        
+        <div className={ProfileCSS.ErrorBox}>
+          {errors.username && <p>{errors.username.message}</p>}
 
-        {error ? <p style={{ color: 'red', fontWeight: 600 }}>{error}</p>
+        {error ? <p style={{ color: 'red', fontWeight: 600, textAlign: 'left' }}>{error}</p>
                :
-                 <p style={{ color: 'green', fontWeight: 600 }}>{success}</p>
+                 <p style={{ color: 'green', fontWeight: 600, textAlign: 'left' }}>{success}</p>
         }
 
-        <button disabled={submitting} type="submit">Update Username</button>
+        </div>
+        
       </form>
     );
   }

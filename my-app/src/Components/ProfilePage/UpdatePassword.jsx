@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { updateUserPassword } from '../../firebase'
-import styles from '../../Styles/Profile.module.css';
+import ProfileCSS from '../../Styles/Profile.module.css';
 import { EmailAuthProvider, getAuth, reauthenticateWithCredential } from 'firebase/auth';
 
 const schema = yup.object().shape({
@@ -29,12 +29,14 @@ export default function PasswordResetForm() {
 
     if(data.password !== data.confirm_password) {
       setError("Your new password and confirmation password does not match!")
+      setTimeout(() => setError(null), 3000)
       setSubmitting(false)
       return
     }
 
     if(data.password === data.current_password) {
       setError("Please choose a different password than your current password.")
+      setTimeout(() => setError(null), 3000)
       setSubmitting(false)
       return
     }
@@ -69,18 +71,28 @@ export default function PasswordResetForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles['new-password-form']}>
-      <label htmlFor="password">Current Password</label>
-      <input id="current_password" {...register('current_password')} type="password" placeholder="Current Password"/>
-      <label htmlFor="password">New Password</label>
-      <input id="password" {...register('password')} type="password" placeholder="New Password" />
-      <input id="confirm_password" {...register('confirm_password')} type="password" placeholder="Confirm Password"/>
-      {errors.password && <p>{errors.password.message}</p>}
+    <form onSubmit={handleSubmit(onSubmit)} id={ProfileCSS.UpdatePasswordContainer}>
 
-      <p style={{ color: 'red', fontWeight: 600 }}>{error}</p>
-      <p style={{ color: 'green', fontWeight: 600 }}>{success}</p>
+    
+      <div id={ProfileCSS.CurrentPasswordBox}> 
+        <input className={ProfileCSS.CurrentPasswordInput} id="current_password" {...register('current_password')} type="password" placeholder="Current Password"/>
+      </div>
 
-      <button disabled={submitting} type="submit">Reset Password</button>
+      <div id={ProfileCSS.NewPasswordBox}>
+        <input className={ProfileCSS.NewPasswordInput} id="password" {...register('password')} type="password" placeholder="New Password" />
+        <input className={ProfileCSS.NewPasswordInput} id="confirm_password" {...register('confirm_password')} type="password" placeholder="Confirm Password"/>
+      </div>
+      
+      <div id={ProfileCSS.ResetPasswordBox}>
+        <button id={ProfileCSS.ResetPasswordButton} disabled={submitting} type="submit">Reset Password</button>
+      </div>
+
+      <div className={ProfileCSS.ErrorBox}>
+          {errors.password && <p>{errors.password.message}</p>}
+          <p style={{ color: 'red', fontWeight: 600 }}>{error}</p>
+          <p style={{ color: 'green', fontWeight: 600 }}>{success}</p>
+      </div>
+
     </form>
   );
 }
