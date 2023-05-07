@@ -57,6 +57,10 @@
     border-color: aqua;
 }
 
+.customButton img{
+    filter: grayscale(100%) brightness(0%);
+}
+
 .customButtonActive {
     width: 100%;
     min-width: 50px;
