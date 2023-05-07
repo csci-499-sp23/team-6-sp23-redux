@@ -6,6 +6,10 @@
   --font-family: 'louis-george-cafe';
 }
 
+button, input, label {
+  height: 2em;
+}
+
 .profile-container {
   display: flex;
   flex-direction: column;
@@ -26,7 +30,7 @@
 
 #FlexContainer {
   display: flex;
-  width: 80%;
+  width: 90%;
   height: 90%;
   justify-content: space-between;
   padding-bottom: 1em;
@@ -39,6 +43,7 @@
   color: black;
   width: 35%;
   margin-left: 5em;
+  height: 100%;
 }
 
 #RightContainer {
@@ -47,6 +52,23 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  gap: 0.5em;
+  overflow-y: scroll;
+  padding-right: 1em;
+}
+
+#RightContainer::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+#RightContainer::-webkit-scrollbar-track-piece {
+  background-color: white;
+}
+
+#RightContainer::-webkit-scrollbar-thumb:vertical {
+  border-radius: 10px;
+  background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
 }
 
 /* Left Container */
@@ -94,7 +116,15 @@
   color: white;
   border-radius: 0px 0px 10px 10px;
   overflow-x: scroll;
+  overflow-y: hidden;
+  height: 1.6em;
 }
+
+#Username::-webkit-scrollbar {
+  height: 0px;
+  width: 0px; 
+  background: transparent;
+  }
 
 #UserDetailsBox {
   height: 20%;
@@ -120,49 +150,87 @@
 
 /* Right Container */
 
-#RightSubTitle {
+#RightContainerHeader {
+  display: flex;
+  height: 10%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+#RightHeaderTitle {
   font-size: 1.5em;
-  text-align: center;
-  background-color: white;
-  color: black;
+  color: white;
   font-weight: 700;
+  text-align: center;
+}
+
+#RightHeaderIcon {
+}
+
+#EditFormsBox {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1em;
 }
 
 .RightContainerCell {
-  margin-bottom: 16px;
   border-radius: 10px;
-  height: 100%;
+  height: 10em;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.RightContainerCellGoogle {
+  border-radius: 10px;
+  height: 5em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .EditFormHeader {
   background-color: white;
   color: black;
   border-bottom: 1px solid #C7C7CD;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 600;
   padding-left: 1em;
   border-radius: 10px 10px 0px 0px;
+  height: 2em;
+  display: flex;
+  align-items: center;
 }
 
 /* Upload Image */
 
 #UploadImageContainer {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   background-color: white;
   padding-top: 5%;
   padding-bottom: 5%;
   border-radius: 0px 0px 10px 10px;
+  height: 70%;
+  width: 100%;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .CustomFileButton {
   color: black;
   border: 1px #ccc solid;
-  font-size: 1.1em;
+  font-size: 0.8em;
   padding: 0px 8px;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .CustomFileButton:hover {
@@ -185,13 +253,14 @@
   white-space: nowrap;
   width: 150px;
   text-align: center;
+  font-size: 0.8em;
 }
 
 #UploadFileButton {
   border-radius: 10px;
   border: 1px #ccc solid;
   background-color: white;
-  font-size: 1.1em;
+  font-size: 0.8em;
 }
 
 #UploadFileButton:hover {
@@ -201,15 +270,12 @@
 
 /* Update Username */
 
-.ErrorBox {
-  margin-left: 8px;
-  margin-right: 8px;
-}
-
 #UpdateUsernameContainer {
   background-color: white;
   border-radius: 0px 0px 10px 10px;
-  
+  font-size: 0.8em;
+  height: 70%;
+  padding-top: 1em;
 }
 
 #UpdateBox {
@@ -217,20 +283,16 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 .UsernameInput {
   border: 1px #ccc solid;
   border-radius: 10px;
-  font-size: 1.1em;
-  margin-top: 8px;
-  margin-left: 8px;
-  margin-bottom: 8px;
 }
 
 .UsernameButton {
-  margin-right: 16px;
-  font-size: 1.1em;
   border-radius: 10px;
   border: 1px #ccc solid;
   background-color: white;
@@ -243,51 +305,61 @@
 
 /* Update Password */
 
-.new-password-form {
+#UpdatePasswordContainer {
+  background-color: white;
+  border-radius: 0px 0px 10px 10px;
+  font-size: 0.8em;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  gap: 1em;
+  padding-top: 1em;
+}
+
+#CurrentPasswordBox {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  width: 100%;
 }
 
-.new-password-form label {
-  width: 100%;
+#NewPasswordBox  {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px 1em;
 }
 
-.new-password-form input {
-  width: 100%;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  outline: none;
-  font-family: var(--font-family);
+.CurrentPasswordInput {
+  width: 45%;
 }
 
-.new-password-form input:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 1px var(--primary-color);
+.NewPasswordInput {
+  width: 45%;
 }
 
-.new-password-form button {
-  width: 100%;
-  background-color: var(--primary-color);
-  border: none;
+#ResetPasswordBox {
+  display: flex;
+  justify-content: center;
+}
+
+#ResetPasswordButton {
+  width: 45%;
+  border: 1px #ccc solid;
+  border-radius: 10px;
+  background-color: white;
+}
+
+#ResetPasswordButton:hover {
+  background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
   color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 12px;
-  font-family: var(--font-family);
-  font-weight: bold;
-  font-size: 1rem;
-  transition: background-color 0.3s;
 }
 
-.new-password-form button:hover {
-  background-color: var(--secondary-color);
+.ErrorBox {
+  margin-left: 1em;
+  margin-right: 1em;
+  font-size: 1em;
+  text-align: center;
 }
 

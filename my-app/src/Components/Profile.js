@@ -5,6 +5,8 @@ import UpdatePassword from './ProfilePage/UpdatePassword';
 import UserInfo from './ProfilePage/UserInfo';
 import UpdateUsername from './ProfilePage/UpdateUsername';
 import UploadImage from './ProfilePage/AvatarUpload';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserPen } from '@fortawesome/free-solid-svg-icons';
 
 const ProfilePage = (props) => {
   const user = auth.currentUser;
@@ -27,14 +29,18 @@ const ProfilePage = (props) => {
         </div>
         
         <div id={ProfileCSS.RightContainer}>
-          <h2 id={ProfileCSS.RightSubTitle}>Edit Details</h2>
-
-          <div className={ProfileCSS.RightContainerCell}>
+          <div id={ProfileCSS.RightContainerHeader}>
+            <h2 id={ProfileCSS.RightHeaderTitle}>Edit Details</h2>
+            <FontAwesomeIcon id={ProfileCSS.RightHeaderIcon} icon={faUserPen}></FontAwesomeIcon>
+          </div>
+         
+          <div id={ProfileCSS.EditFormsBox}>
+          <div className={userType === "password" ? ProfileCSS.RightContainerCell : ProfileCSS.RightContainerCellGoogle}>
             <div className={ProfileCSS.EditFormHeader}>File Upload</div>
             <UploadImage />
           </div>
 
-          <div className={ProfileCSS.RightContainerCell}>
+          <div className={userType === "password" ? ProfileCSS.RightContainerCell : ProfileCSS.RightContainerCellGoogle}>
             <div className={ProfileCSS.EditFormHeader}>Update Username</div> 
             <UpdateUsername />     
           </div>
@@ -48,6 +54,7 @@ const ProfilePage = (props) => {
               :
               null
             }
+          </div>
           
         </div>
         
