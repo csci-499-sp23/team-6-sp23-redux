@@ -49,17 +49,29 @@
 }
 
 .customButton {
-    width: 125px;
+    width: 100%;
+    min-width: 50px;
+    max-width: 155px;
     color:rgb(109, 107, 107) !important;
     background-color: white !important;
     border-color: aqua;
 }
 
 .customButtonActive {
-    width: 125px;
+    width: 100%;
+    min-width: 50px;
+    max-width: 155px;
     color: white !important;
     background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
     border-color: aqua;
+}
+
+.customButtomImage{
+    width: 22px;
+    height: 22x;
+    margin-right:3px;
+    object-fit: fill;
+    float:left;
 }
 
 .HeaderText {
