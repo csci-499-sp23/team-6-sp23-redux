@@ -1,5 +1,9 @@
-.favoriteModal{
+#FavoriteDetailsContainer {
+    height: 100%;
+    width: 100%;
+}
 
+.favoriteModal{
     text-align: center;
 }
 
@@ -15,7 +19,9 @@
 }
 
 .modalInfoButton{
-    vertical-align: text-top;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
 }
 
 .modalImage{
