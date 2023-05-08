@@ -115,7 +115,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border-radius: 0px 0px 10px 10px;
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
   height: 1.6em;
 }
