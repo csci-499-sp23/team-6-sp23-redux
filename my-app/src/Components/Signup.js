@@ -5,6 +5,8 @@ import { auth, db } from '../firebase';
 import LoginCSS from '../Styles/Login.module.css';
 import { doc, setDoc } from 'firebase/firestore';
 import { updateProfile } from 'firebase/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 //defaultPreferences object for new users
 export const defaultPreferences = {
@@ -20,6 +22,7 @@ const Signup = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState(''); // Added username state
+  const [showPassword, setShowPassword] = useState(false);
 
   const getGeolocation = async () => {
     return new Promise((resolve, reject) => {
@@ -149,12 +152,12 @@ const Signup = (props) => {
     >
       <section className={LoginCSS.LoginContainer}>
         <div className={LoginCSS.LoginDiv}>
+          <label className={LoginCSS.LoginTitle}>
+              Sign up
+          </label>
           <div>
             <form onSubmit={onSubmit}>
               <div>
-                <label htmlFor="username" className={LoginCSS.LoginText}>
-                  Username
-                </label>
                 <input
                   type="text"
                   label="Username"
@@ -166,9 +169,6 @@ const Signup = (props) => {
                 />
               </div>
               <div>
-                <label htmlFor="email-address" className={LoginCSS.LoginText}>
-                  Email address
-                </label>
                 <input
                   type="email"
                   label="Email address"
@@ -179,12 +179,9 @@ const Signup = (props) => {
                   className={LoginCSS.LoginTextBox}
                 />
               </div>
-              <div>
-                <label htmlFor="password" className={LoginCSS.LoginText}>
-                  Password
-                </label>
+              <div style={{ position: "relative" }}>
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   label="Create password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -192,11 +189,17 @@ const Signup = (props) => {
                   placeholder="Password"
                   className={LoginCSS.LoginTextBox}
                 />
+                <FontAwesomeIcon
+                  icon={showPassword ? faEyeSlash : faEye}
+                  className={LoginCSS.PasswordToggle}
+                  onClick={() => setShowPassword(!showPassword)}
+                />
               </div>
               <button className={LoginCSS.LoginButton} type="submit">
                 Sign up
               </button>
             </form>
+            <div className={LoginCSS.Separator}>or</div>
             <button className={LoginCSS.GoogleSignInButton} onClick={signInWithGoogle}>
               Sign up with Google
             </button>
