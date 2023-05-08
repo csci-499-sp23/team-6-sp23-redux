@@ -8,3 +8,60 @@
     margin: auto;
 }
 
+.loader_container{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+.loader_text{
+    color:white;
+    text-align:center;
+    font-family: 'louis-george-cafe';
+    margin-top: 15px;
+}
+
+.loader_subtext{
+    color:white;
+    text-align:center;
+    font-size:small;
+    font-family: 'louis-george-cafe';
+    margin-top: 5px;
+}
+
+.loader {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 10rem;
+    border: 3px solid #3b4a51;;
+    background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
+    box-shadow: 0px 0px 100px -50px black;
+    animation: animate 1s linear infinite;
+  }
+  
+  .loader::before {
+    position: absolute;
+    content: "";
+    background: #3b4a51;;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    border-radius: 10rem;
+    border: 3px solid #3b4a51;
+    box-shadow: inset 0px 0px 100px -70px #111;
+  }
+  
+  @keyframes animate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }

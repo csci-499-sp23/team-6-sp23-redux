@@ -4,6 +4,7 @@ function EmptyDeck(props) {
     
     function handleClick ()
     {
+        props.setLoading(true);
         props.setEmpty(true);
     }
     return (

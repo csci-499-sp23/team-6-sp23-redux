@@ -4,12 +4,14 @@ import EmptyDeck from './EmptyDeck';
 import { getHangouts } from '../Services/HangoutService';
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { auth, db } from '../firebase';
+import CardDeckCSS from '../Styles/CardDeck.module.css'
 
 function CardDeck(props) {
   
   const [hangoutData, setHangoutData] = useState([]);
   const [empty, setEmpty] = useState(true);
   const [displayEmptyDeck, setDisplayEmptyDeck] = useState (false);
+  const [loading, setLoading] = useState(true);
   const userID = auth.currentUser?.uid
 
   function toMeters(miles)
@@ -48,8 +50,10 @@ function CardDeck(props) {
         // Start with a shuffled deck
         let deck = shuffleDeck(filteredDeck)
         setHangoutData(deck);
+
         setEmpty(false);
         setDisplayEmptyDeck(false);
+        setLoading(false);
       })
     } 
     
@@ -100,10 +104,25 @@ function CardDeck(props) {
     }
   }
 
+    //Display for waiting on the fetch request
+    if (loading) {
+      return (
+        <div className= {CardDeckCSS.loader_container}>
+          <div className={CardDeckCSS.loader}></div>
+          <div className={CardDeckCSS.loader_text}> 
+            Loading
+          <br></br>
+            <div className={CardDeckCSS.loader_subtext}>If loading is slow, try less categories.</div>
+          </div>
+        </div>
+      )
+    }
+
+    //Display for when no cards left
     if (displayEmptyDeck) {
       return (
         <div>
-          <EmptyDeck setEmpty = {setEmpty}></EmptyDeck>
+          <EmptyDeck setEmpty = {setEmpty} setLoading = {setLoading}></EmptyDeck>
         </div>
       )
     }
