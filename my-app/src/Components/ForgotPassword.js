@@ -44,9 +44,6 @@ const ForgotPassword = () => {
             <h2>Forgot Password</h2>
             <form onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="email-address" className={LoginCSS.LoginText}>
-                  Email address
-                </label>
                 <input
                   className={LoginCSS.LoginTextBox}
                   id="email-address"

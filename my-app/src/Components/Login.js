@@ -4,11 +4,14 @@ import { auth, db } from '../firebase';
 import { NavLink, useNavigate } from 'react-router-dom';
 import LoginCSS from '../Styles/Login.module.css';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Login = (props) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -94,11 +97,11 @@ const Login = (props) => {
       >
         <section className={LoginCSS.LoginContainer}>
           <div className={LoginCSS.LoginDiv}>
+            <label className={LoginCSS.LoginTitle}>
+              Login
+            </label>
             <form onSubmit={onLogin}> {/* Add onSubmit attribute */}
               <div>
-                <label htmlFor="email-address" className={LoginCSS.LoginText}>
-                  Email address
-                </label>
                 <input
                   className={LoginCSS.LoginTextBox}
                   id="email-address"
@@ -110,19 +113,26 @@ const Login = (props) => {
                 />
               </div>
 
-              <div>
-                <label htmlFor="password" className={LoginCSS.LoginText}>
-                  Password
-                </label>
+              <div style={{ position: "relative" }}>
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"} 
                   required
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
                   className={LoginCSS.LoginTextBox}
                 />
+                <FontAwesomeIcon
+                  icon={showPassword ? faEyeSlash : faEye} 
+                  className={LoginCSS.PasswordToggle}
+                  onClick={() => setShowPassword(!showPassword)}
+                />
+              </div>
+              <div className="ForgotPasswordWrapper">
+                <NavLink to="/forgot-password" className={`${LoginCSS.LinkLogin} ${LoginCSS.ForgotPassword}`}>
+                  Forgot password?
+                </NavLink>
               </div>
 
               <div>
@@ -130,12 +140,8 @@ const Login = (props) => {
                   Login
                 </button>
               </div>
-              <div className="ForgotPasswordWrapper">
-                <NavLink to="/forgot-password" className={LoginCSS.LinkLogin}>
-                  Forgot password?
-                </NavLink>
-              </div>
             </form>
+            <div className={LoginCSS.Separator}>or</div>
                 <button className={LoginCSS.GoogleSignInButton} onClick={signInWithGoogle}>
                   Login with Google
                 </button>
