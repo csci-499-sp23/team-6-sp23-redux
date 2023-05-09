@@ -1,0 +1,35 @@
+#AlertContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#ModalTitle {
+    text-align: center;
+    width: 100%;
+}
+
+#ModalBody {
+    text-align: center;
+}
+
+#ModalFooter {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#CancelButton {
+    background-color: black;
+    color: white;
+    border: black 1px solid;
+    border-radius: 0.5em;
+}
+
+#DeleteButton {
+    background-color: red;
+    color: white;
+    border: red 1px solid;
+    border-radius: 0.5em;
+}
