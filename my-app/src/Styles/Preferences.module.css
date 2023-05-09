@@ -102,40 +102,79 @@
     font-size: 18px;
     width: 27%;
     margin: auto;
+    background-color: white;
+    border: 1px solid gray;
+    height: 43px;
+    margin-bottom: 1.5em;
 }
 
 #LocationInput {
-    border-left: none;
-    border-right: none;
     font-size: 16px;
+    height: 100%;
+    border: none;
+    padding-left: 1em;
 }
 
 #LocationInput:focus {
     outline: none !important;
 }
 
-#SearchButton {
-    border-style: solid;
-    border-right: none;
+.SearchIcon {
     border-radius: 2px 0px 0px 2px;
-    background-color: transparent;
+    background-color: white;
     background: url('../../public/Images/search_icon.png') no-repeat center transparent;
     background-size: cover;
-    width: 45px;
-    height: 43px;
+    width: 50px;
+    height: 100%;
     margin-left: 0px;
 }
 
-#GeoLocatorButton {
+.GeoLocatorButton {
     border-style: solid;
-    border-left: none;
+    border: none;
     border-radius: 2px 0px 0px 2px;
     background-color: transparent;
     background: url('../../public/Images/geolocator_icon.png') no-repeat center transparent;
     background-size: contain;
     background-color: white;
     width: 45px;
-    height: 43px;
+    height: 100%;
+    margin-left: 8px;
+}
+
+.Separator {
+    margin-top: 0.4em;
+    width: 1.4px;
+    height: 60%;
+    background-color: #cfcfcf;
+}
+
+#SearchIdentifier {
+    position: absolute;
+    left: 56%;
+    margin-top: 4em;
+    border-radius: 0.45em;
+    background-color: black;
+    font-weight: 600;
+    font-size: 0.6em;
+    width: 9em;
+    height: 1.8em;
+    line-height: 1.8em;
+    text-align: center;
+}
+
+#GeoLocatorIdentifier {
+    position: absolute;
+    left: 59%;
+    margin-top: 4em;
+    border-radius: 0.45em;
+    background-color: black;
+    font-weight: 600;
+    font-size: 0.6em;
+    width: 9em;
+    height: 1.8em;
+    line-height: 1.8em;
+    text-align: center;
 }
 
 .DropdownLabel {
@@ -146,7 +185,7 @@
 }
 
 .DropdownSelectFrame {
-    margin-bottom: 30px;
+    margin-bottom: 1.5em;
     border-style: solid;
     border-radius: 2px 0px 0px 2px;
     width: 27%;
