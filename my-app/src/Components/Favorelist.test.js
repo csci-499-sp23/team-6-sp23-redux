@@ -1,5 +1,5 @@
 import renderer from "react-test-renderer";
-import Favoritelist from "../../Components/Favoritelist";
+import Favoritelist from "./Favoritelist";
 
 
 it('renders correctly', () => {
