@@ -1,11 +1,13 @@
+import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import FavoriteModal from '../Styles/FavoriteModal.module.css';
-import { Rating } from '@mui/material';
 import React, { useState } from 'react';
 
 
 function Favoritedetails(props) {
 
+  //console.log((props));
+  //console.log((props.location+' ' +props.location2));
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -23,43 +25,36 @@ function Favoritedetails(props) {
                             
   return (
     <div id={FavoriteModal.FavoriteDetailsContainer}>
-  
+      
       <Modal
         show={show}
         onHide={handleClose}
+        backdrop={"static"}
         keyboard={false}
-        className={FavoriteModal.ModalContainer}
+        
       >
-        <Modal.Header id={FavoriteModal.ModalHeader}>
-          <button className={FavoriteModal.ModalCloseButton} onClick={handleClose} size="sm">
-            <div className={FavoriteModal.CloseButtonImage}></div>
-          </button> 
-          <div className={FavoriteModal.ModalImageContainer}>
-              <img className={FavoriteModal.modalImage} src={props.image} alt="Hangout modal" />
-          </div>
+        <Modal.Header>
+          <Modal.Title>{toTitleCase(props.title)}</Modal.Title>
         </Modal.Header>
-        <Modal.Body id={FavoriteModal.ModalBody}>
-            <div className={FavoriteModal.ModalInfo}>
-                <div id={FavoriteModal.TitleBox}>
-                <Modal.Title id={FavoriteModal.ModalTitle}><div id={FavoriteModal.TitleText}>{toTitleCase(props.title)}</div></Modal.Title>
-                <Rating className={FavoriteModal.Rating} defaultValue={0} value={props.rating} precision={0.5} size={"large"} readOnly></Rating>
-                </div>
-                
-                
-                <div className={FavoriteModal.DetailsBox}>
-                  <div className={FavoriteModal.InfoBox}><span className={FavoriteModal.InfoLabel}>Category</span> 
-                      <span className={FavoriteModal.InfoDetail}>{(toTitleCase(props.category))}</span>
-                  </div>
+        <Modal.Body>
+            <div className={FavoriteModal.modalInfo} onClick={() => handleClose()}>
 
-                  <div className={FavoriteModal.InfoBox}><span className={FavoriteModal.InfoLabel}>Location</span> 
-                      <span className={FavoriteModal.InfoDetail}>{props.location + ' \n' + props.location2}</span>
-                  </div>
-                </div>
-            </div>   
+                <div>Categories: {(toTitleCase(props.category))}</div>
+                <div>Rating: {props.rating + " Stars"}</div>
+                <div>Location: {props.location + ' \n' + props.location2}</div>
+
+            </div>
+            <div>
+              <img className={FavoriteModal.modalImage} src={props.image} alt="Hangout modal" />
+            </div>
+            
 
         </Modal.Body>
+        <Button className={FavoriteModal.modalCloseButton} variant="danger" onClick={handleClose} size="sm">
+        Close
+        </Button> 
       </Modal>
-      <button className={FavoriteModal.ModalInfoButton}  onClick={handleShow} size="sm">
+      <button className={FavoriteModal.modalInfoButton}  onClick={handleShow} size="sm">
       </button> 
     </div>
 
