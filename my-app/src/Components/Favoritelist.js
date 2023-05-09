@@ -48,6 +48,7 @@ function Favoritelist(props) {
                                                     closed={hangout.is_closed}
                                                     details={hangout.details}
                                                     rating={hangout.rating}
+                                                    url={hangout.url}
                                                 >
                                                 </FavoriteCard>
                                             }
