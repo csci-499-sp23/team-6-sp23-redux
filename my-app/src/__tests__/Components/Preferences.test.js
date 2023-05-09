@@ -1,5 +1,5 @@
 import renderer from "react-test-renderer";
-import PreferenceLink from "./Preferences";
+import PreferenceLink from "../../Components/Preferences";
 
 it('renders correctly', () => {
     const tree = renderer
