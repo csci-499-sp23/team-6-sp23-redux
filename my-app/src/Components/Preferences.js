@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import PreferencesCSS from '../Styles/Preferences.module.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button';
+import Alert from './SubComponents/Alert';
 import { auth, db } from '../firebase';
 import { doc, updateDoc } from "firebase/firestore";
 import axios from 'axios';
@@ -18,6 +19,13 @@ function Preferences(props) {
     const [rangeLimit, setRangeLimit] = useState("");
     const [ratingLimit, setRatingLimit] = useState("");
     const [updatedPreferences, setUpdatedPreferences] = useState(false); // State for when the user updated the preferences successfully
+    const [showAlert, setShowAlert] = useState({
+        show: false,
+        title: "",
+        message: ""
+    });
+    const [isHovered, setIsHovered] = useState(null);
+
     const buttonVariant = "outline-info"
 
     // List of all the current queryable categories
@@ -92,12 +100,11 @@ function Preferences(props) {
                     var latitude = position.coords.latitude;
 
                     var longitude = position.coords.longitude;
-                    setTimeout((alert("Location recorded! Remember to save preferences.") ), 3000)
                     setUserLocation(latitude + ", " + longitude);
-    
+                    setShowAlert({show: true, title: "Current Location", message: "Location recorded! Remember to save preferences."})
                 },
                 function(error) {
-                    alert ("Failed to obtain access to location. Check your access settings.")
+                    setShowAlert({show: true, title: "Current Location", message: "Failed to obtain access to location. Check your access settings."})
                     console.error("Error#" + error.code + ", " + error.message);
                 }
             );
@@ -113,14 +120,14 @@ function Preferences(props) {
             await axios.get(`https://geocode.search.hereapi.com/v1/geocode?q=${locationInput.value}&apiKey=${process.env.REACT_APP_GEO_API_KEY}`).then((res) => {
                 const { lat, lng } = res.data.items[0].position
                 setUserLocation(lat + ", " + lng);
-                setTimeout((alert("Location recorded! Remember to save preferences.") ), 3000)
+                setShowAlert({show: true, title: `Location: ${locationInput.value}`, message: "Location recorded! Remember to save preferences."})
             }).catch(error => {
                 console.log(error)
-                alert("Location could not be found")
+                setShowAlert({show: true, title: `Location: ${locationInput.value}`, message: "Location could not be found!"})
             }) 
         }
         else {
-            alert("Please enter a valid location and region")
+            setShowAlert({show: true, title: "Invalid Location", message: "Please enter a valid location."})
         }
         
     }
@@ -179,11 +186,21 @@ function Preferences(props) {
         else {
             alert("Must select at least one category")
         }
-
-
     }
 
-    /*M100,150 165,180 245, 40 stroke: 250/250*/
+    const handleMouseOver = (e) => {
+        switch(e.target.id) {
+            case "1":
+                setIsHovered(1)
+                break
+            case "2":
+                setIsHovered(2)
+                break
+            default:
+                break
+        }
+    }
+    
     return (
 
         <div className = {PreferencesCSS.PreferencesContainer}>
@@ -193,10 +210,18 @@ function Preferences(props) {
             <div className={PreferencesCSS.HeaderText}>Location</div>
 
             <div className={PreferencesCSS.SearchBar} >
-                <div id={PreferencesCSS.SearchIcon}></div>
-                <input id={PreferencesCSS.LocationInput} className={PreferencesCSS.SearchBarFrame} type='search' placeholder='Search a location'></input>
-                <button id={PreferencesCSS.GeoLocatorButton} onClick={geolocationClick}></button>
+                <input id={PreferencesCSS.LocationInput} className={PreferencesCSS.SearchBarFrame} type='search' placeholder='Search a Location'></input>
+                <div id={1} className={PreferencesCSS.SearchIcon} onMouseOver={handleMouseOver} onMouseOut={() => setIsHovered(null)}></div>
+                <div className={PreferencesCSS.Separator}></div>
+                <button id={2} className={PreferencesCSS.GeoLocatorButton} onClick={geolocationClick} 
+                        onMouseOver={handleMouseOver} onMouseOut={() => setIsHovered(null)}></button>
+                {isHovered && isHovered === 1 ? <div id={PreferencesCSS.SearchIdentifier}>Search Location</div> : null}
+                {isHovered && isHovered === 2 ? <div id={PreferencesCSS.GeoLocatorIdentifier}>Current Location</div> : null}
             </div>
+
+            {
+                showAlert.show ? <Alert title={showAlert.title} message={showAlert.message} setShowAlert={setShowAlert}></Alert> : null
+            }
 
             <div id={updatedPreferences ? PreferencesCSS.ShowShadowLayer : PreferencesCSS.HideShadowLayer} />
             {
