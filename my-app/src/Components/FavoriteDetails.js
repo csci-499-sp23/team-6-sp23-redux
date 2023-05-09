@@ -1,5 +1,7 @@
 import Modal from 'react-bootstrap/Modal';
 import FavoriteModal from '../Styles/FavoriteModal.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 import { Rating } from '@mui/material';
 import React, { useState } from 'react';
 
@@ -18,6 +20,16 @@ function Favoritedetails(props) {
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
   };
+
+  const isOpen = (status) => {
+    if(!status){
+      return "Open"
+    }
+    else{
+      return "Closed"
+    }
+  }
+
 
                      
                             
@@ -53,7 +65,12 @@ function Favoritedetails(props) {
 
                   <div className={FavoriteModal.InfoBox}><span className={FavoriteModal.InfoLabel}>Location</span> 
                       <span className={FavoriteModal.InfoDetail}>{props.location + ' \n' + props.location2}</span>
+                      <span className={FavoriteModal.InfoDetail}>{"This location is " + isOpen(props.closed)}</span>
+                      <div className={FavoriteModal.urlDiv}><label className={FavoriteModal.urlBox}>{props.url}</label>
+                      <FontAwesomeIcon className={FavoriteModal.ClipboardIcon} icon={faClipboard} onClick={() =>  navigator.clipboard.writeText(props.url)}/></div>
+                      
                   </div>
+                  
                 </div>
             </div>   
 

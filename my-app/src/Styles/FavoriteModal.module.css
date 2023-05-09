@@ -55,6 +55,7 @@
     border-radius: 6px;
 }
 
+
 .ModalInfo{
     text-align: left;
     width: 100%;
@@ -67,6 +68,7 @@
 
 .Rating {
     color: var(--secondaryColor) !important;
+    padding-top: 0.5%;
 }
 
 .DetailsBox {
@@ -122,3 +124,37 @@
     height: 100%;
     width: 100%;
 }
+
+.ClipboardIcon{
+    color: white;
+}
+
+.ClipboardIcon:hover{
+    color: #668ac0;
+}
+
+.urlBox{
+    width:80%;
+    overflow-x: auto;
+    white-space: nowrap;
+    overflow-y: hidden;
+    color: white;
+}
+.urlBox::-webkit-scrollbar  {
+    background-color: #3b4a51;
+    width: 0.7em;
+    background: transparent;
+  }
+
+  .urlBox::-webkit-scrollbar-thumb:horizontal {
+    border-radius: 10px;
+    background-color: #668ac0;
+  }
+
+  .urlDiv{
+      display:flex;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-right: 1em;
+    
+  }
