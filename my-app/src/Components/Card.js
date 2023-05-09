@@ -5,15 +5,13 @@ import { motion, useMotionValue, useAnimation } from "framer-motion";
 
 function Card({onSwipe, ...props}) {
   const cardElem = useRef(null);
-  const [isLeft, setIsLeft] = useState(false);
-  const [isRight, setIsRight] = useState(false);
-  const [isDragging, setisDragging] =  useState(false);
 
   const x = useMotionValue(0);
   const controls = useAnimation();
 
   const [constrained, setConstrained] = useState(true);
   const [direction, setDirection] = useState();
+  const [velocity, setVelocity] = useState();
   const [flyAwayComplete, setFlyAwayComplete] = useState(false);
   const [showCardDetails, setShowCardDetails] = useState(false)
 
@@ -32,36 +30,17 @@ function Card({onSwipe, ...props}) {
 
   // Determine direction of swipe based on velocity
   const getDirection = () => {
-    return isRight ? "right" : isLeft ? "left" : undefined;
+    return velocity >= 1 ? "right" : velocity <= -1 ? "left" : undefined;
   };
 
   const getTrajectory = () => {
-    let rect = cardElem.current.getBoundingClientRect()
-
-    let halfViewPortWidth = window.innerWidth/2;
-    setisDragging(true);
-    if(rect.x < halfViewPortWidth - rect.width){
-        setIsLeft(true)
-        setIsRight(false)
-    }else{
-      setIsLeft(false)
-    }
-    if(rect.x > halfViewPortWidth){
-        setIsLeft(false)
-        setIsRight(true)
-    }else{
-      setIsRight(false)
-    }
-
-    // if (x.getVelocity() > 0 || x.getVelocity() < 0) {
-      // setVelocity(x.getVelocity());
+    if (x.getVelocity() > 0 || x.getVelocity() < 0) {
+      setVelocity(x.getVelocity());
       setDirection(getDirection());
-    // }
+    }
   };
 
-  const flyAway = () => {
-    setisDragging(false);
-
+  const flyAway = (min) => {
     const flyAwayDistance = (direction) => {
       const parentWidth = cardElem.current.parentNode.getBoundingClientRect()
         .width;
@@ -70,7 +49,7 @@ function Card({onSwipe, ...props}) {
         : parentWidth + childWidth;
     };
 
-    if (direction) {
+    if (direction && Math.abs(velocity) > min) {
       setConstrained(false);
       controls.start({
         x: flyAwayDistance(direction)
@@ -105,15 +84,14 @@ function Card({onSwipe, ...props}) {
   return (
     <div>
       <motion.div
-        className={`${CardCSS.MotionContainer} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)} ${((isDragging && isLeft)? CardCSS.TopCardLeft:'')} ${(( isDragging && isRight) ? CardCSS.TopCardRight:'')}`}
+        className={`${CardCSS.MotionContainer} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}
         animate={controls}
-        transition={{duration:5}}
         dragConstraints={constrained && { left: -75, right: 75, top: -5, bottom: 5 }}
         dragElastic={1}
         ref={cardElem}
         drag
         onDrag={getTrajectory}
-        onDragEnd={() => flyAway()}
+        onDragEnd={() => flyAway(100)}
         style={{ x }}
         onClick={onClick}
       >
