@@ -30,3 +30,12 @@ html, body {
   src: local("louis-george-cafe"), url("./Fonts/louis-george-cafe/Louis George Cafe Bold.ttf") format("truetype");
   font-weight: bold;
  }
+
+:root {
+  --gradient: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
+  --textColor: white;
+  --backgroundColor: #3b4a51;
+  --font: "louis-george-cafe";
+  --primaryColor: #668ac0;
+  --secondaryColor: #5cb3d9;
+}
