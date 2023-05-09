@@ -66,6 +66,20 @@ function Preferences(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props])
 
+    // Adds an event listen for the search location field 
+    useEffect(() => {
+        let searchLocationInput = document.getElementById(`${PreferencesCSS.LocationInput}`);
+
+        if(searchLocationInput) {
+            searchLocationInput.addEventListener("keydown", function(e) {
+                // Checks to see if the user pressed enter after typing input into the field
+                if (e.code === "Enter") {
+                    getSearchLocation()
+                }
+            });
+        }
+    }, [])
+
     //Function that obtains the current geolocation and logs it as latitude and longitude 
     const geolocationClick = () => {
         //If geolocation is usable 
@@ -75,11 +89,10 @@ function Preferences(props) {
             //Obtain user location
             navigator.geolocation.getCurrentPosition(
                 function(position) {
-                    alert("Location recorded! Remember to save preferences.") 
                     var latitude = position.coords.latitude;
 
                     var longitude = position.coords.longitude;
-
+                    setTimeout((alert("Location recorded! Remember to save preferences.") ), 3000)
                     setUserLocation(latitude + ", " + longitude);
     
                 },
@@ -96,11 +109,11 @@ function Preferences(props) {
     const getSearchLocation = async (e) => {
         // Get input values for location and region
         let locationInput = document.getElementById(PreferencesCSS.LocationInput);
-        let regionInput = document.getElementById(PreferencesCSS.RegionInput);
-        if(locationInput.value !== "" && regionInput.value !== "") {
+        if(locationInput.value !== "") {
             await axios.get(`https://geocode.search.hereapi.com/v1/geocode?q=${locationInput.value}&apiKey=${process.env.REACT_APP_GEO_API_KEY}`).then((res) => {
                 const { lat, lng } = res.data.items[0].position
                 setUserLocation(lat + ", " + lng);
+                setTimeout((alert("Location recorded! Remember to save preferences.") ), 3000)
             }).catch(error => {
                 console.log(error)
                 alert("Location could not be found")
@@ -180,7 +193,7 @@ function Preferences(props) {
             <div className={PreferencesCSS.HeaderText}>Location</div>
 
             <div className={PreferencesCSS.SearchBar} >
-                <button id={PreferencesCSS.SearchButton} onClick={getSearchLocation}></button>
+                <div id={PreferencesCSS.SearchIcon}></div>
                 <input id={PreferencesCSS.LocationInput} className={PreferencesCSS.SearchBarFrame} type='search' placeholder='Search a location'></input>
                 <button id={PreferencesCSS.GeoLocatorButton} onClick={geolocationClick}></button>
             </div>

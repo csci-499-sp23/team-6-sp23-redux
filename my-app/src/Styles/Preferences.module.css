@@ -114,11 +114,12 @@
     outline: none !important;
 }
 
-#SearchButton {
+#SearchIcon {
     border-style: solid;
+    border: 2px solid gray;
     border-right: none;
     border-radius: 2px 0px 0px 2px;
-    background-color: transparent;
+    background-color: white;
     background: url('../../public/Images/search_icon.png') no-repeat center transparent;
     background-size: cover;
     width: 45px;
