@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import Card from './Card';
+import { useState, useEffect} from 'react';
+import SwipeableCard from './SwipeableCard';
 import EmptyDeck from './EmptyDeck';
 import { getHangouts } from '../Services/HangoutService';
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
@@ -12,6 +12,7 @@ function CardDeck(props) {
   const [empty, setEmpty] = useState(true);
   const [displayEmptyDeck, setDisplayEmptyDeck] = useState (false);
   const [loading, setLoading] = useState(true);
+
   const userID = auth.currentUser?.uid
 
   function toMeters(miles)
@@ -86,23 +87,22 @@ function CardDeck(props) {
     });
 }
   
-  const handleSwipe = (item, swipeDirection) => {
-    //Save item to favourites on swipe right
-    if(swipeDirection === "right") {
-      saveOnSwipeRight(item)
-    }
-
-    // Update the deck
-    let newCardDeck = removeCard(hangoutData)
-    let shuffledDeck = shuffleDeck(newCardDeck)
-    setHangoutData(shuffledDeck)
-
-    //when deck is about to run out, display the empty deck
-    if (hangoutData.length === 1)
-    {
-      setDisplayEmptyDeck(true);
-    }
+const handleSwipe = (item, swipeDirection) => {
+  //Save item to favourites on swipe right
+  if(swipeDirection === "right") {
+    saveOnSwipeRight(item)
   }
+
+  // Update the deck
+  let newCardDeck = removeCard(hangoutData)
+  let shuffledDeck = shuffleDeck(newCardDeck)
+  setHangoutData(shuffledDeck)
+  //when deck is about to run out, display the empty deck
+  if (hangoutData.length === 1)
+  {
+    setDisplayEmptyDeck(true);
+  }
+}
 
     //Display for waiting on the fetch request
     if (loading) {
@@ -128,14 +128,15 @@ function CardDeck(props) {
     }
 
     return (
-      <div>
+      <div className={CardDeckCSS.CardDeckContainer}>
         { hangoutData.length > 0 &&
           hangoutData.map(function(item, index){
             let isTop = index === hangoutData.length - 1
             return (
-              <Card
+              <SwipeableCard
                 key={item.key || index}
-                onSwipe={(swipeDirection) => handleSwipe(item, swipeDirection)}
+                item={item}
+                handleSwipe={handleSwipe}
                 title={item.name} 
                 image={item.image_url} 
                 distance={item.distance} 
@@ -153,7 +154,7 @@ function CardDeck(props) {
                 userLatitude={parseFloat(props.location.split(',')[0])}
                 userLongitude={parseFloat(props.location.split(',')[1])}
               >
-              </Card>
+              </SwipeableCard>
             )
           })
         }
