@@ -1,15 +1,8 @@
-/* // Some styling for the card
-const style = {
-backgroundImage: "URL(
-https://img.icons8.com/color/452/GeeksforGeeks.png)",
-backgroundRepeat: "no-repeat",
-backgroundSize: "contain",
-backgroundColor: "#55ccff",
-boxShadow: "5px 10px 18px #888888",
-borderRadius: 10,
-height: 300,
-}; */
-
+.TinderCard {
+    position: absolute;
+    width: 15em;
+    height: 20em;
+}
 
 
 .TopCard{
@@ -111,11 +104,4 @@ height: 300,
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px #000;
     white-space: pre-wrap;
 }
-
-.TinderCard {
-    position: absolute;
-    width: 15em;
-    height: 20em;
-}
-
 

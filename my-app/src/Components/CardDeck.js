@@ -2,6 +2,8 @@ import { useState, useEffect} from 'react';
 import SwipeableCard from './SwipeableCard';
 import EmptyDeck from './EmptyDeck';
 import { getHangouts } from '../Services/HangoutService';
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { auth, db } from '../firebase';
 import CardDeckCSS from '../Styles/CardDeck.module.css'
 
 function CardDeck(props) {
@@ -10,6 +12,8 @@ function CardDeck(props) {
   const [empty, setEmpty] = useState(true);
   const [displayEmptyDeck, setDisplayEmptyDeck] = useState (false);
   const [loading, setLoading] = useState(true);
+
+  const userID = auth.currentUser?.uid
 
   function toMeters(miles)
   {
@@ -56,6 +60,12 @@ function CardDeck(props) {
     
   }, [props, empty]);
 
+  // return new array with last item removed
+  const removeCard = (array) => {
+    return array.filter((_, index) => {
+      return index < array.length - 1
+    })
+    }
   
   const shuffleDeck = (deck) => {
     let newDeck = deck.slice()
@@ -67,6 +77,32 @@ function CardDeck(props) {
     }
     return newDeck
   }
+
+  const saveOnSwipeRight = async(item) => {
+    const userRef = doc(db, 'users', userID); 
+    const favoriteCategory = `favorites.${item.category}`
+
+    await updateDoc(userRef, {
+      [favoriteCategory]: arrayUnion(item)
+    });
+}
+  
+const handleSwipe = (item, swipeDirection) => {
+  //Save item to favourites on swipe right
+  if(swipeDirection === "right") {
+    saveOnSwipeRight(item)
+  }
+
+  // Update the deck
+  let newCardDeck = removeCard(hangoutData)
+  let shuffledDeck = shuffleDeck(newCardDeck)
+  setHangoutData(shuffledDeck)
+  //when deck is about to run out, display the empty deck
+  if (hangoutData.length === 1)
+  {
+    setDisplayEmptyDeck(true);
+  }
+}
 
     //Display for waiting on the fetch request
     if (loading) {
@@ -100,9 +136,7 @@ function CardDeck(props) {
               <SwipeableCard
                 key={item.key || index}
                 item={item}
-                hangoutData={hangoutData}
-                setHangoutData={setHangoutData}
-                setDisplayEmptyDeck={setDisplayEmptyDeck}
+                handleSwipe={handleSwipe}
                 title={item.name} 
                 image={item.image_url} 
                 distance={item.distance} 
