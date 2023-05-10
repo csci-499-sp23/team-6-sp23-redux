@@ -68,7 +68,7 @@ function AppNavbar({ isAuthenticated }) {
     return (
       <Navbar id={AppNavbarCSS.Navbar} expand="lg">
         <Container>
-          <Navbar.Brand href="/">
+          <Navbar.Brand>
             <img className={AppNavbarCSS.navLogo} src="Images/easyhangoutlogo.png" alt="nav-logo"></img>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

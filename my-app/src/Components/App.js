@@ -80,7 +80,7 @@ function App() {
         <Routes>
           {
             isAuthenticated &&
-            <Route exact path="/" element={<SwipeableCard></SwipeableCard>} /*element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit = {rangeLimit}/>}*//>
+            <Route exact path="/" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit = {rangeLimit}/>}/>
           }
           {
             !isAuthenticated &&
