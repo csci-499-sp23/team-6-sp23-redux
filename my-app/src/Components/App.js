@@ -13,6 +13,7 @@ import { auth, db } from '../firebase';
 import { doc, onSnapshot } from "firebase/firestore";
 import PageTitle from './PageTitle';
 import ForgotPassword from './ForgotPassword';
+import SwipeableCard from './SwipeableCard';
 
 function App() {
   const userID = auth.currentUser?.uid
@@ -79,7 +80,7 @@ function App() {
         <Routes>
           {
             isAuthenticated &&
-            <Route exact path="/" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit = {rangeLimit}/>}/>
+            <Route exact path="/" element={<SwipeableCard></SwipeableCard>} /*element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit = {rangeLimit}/>}*//>
           }
           {
             !isAuthenticated &&

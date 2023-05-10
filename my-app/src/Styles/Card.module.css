@@ -11,16 +11,6 @@ height: 300,
 }; */
 
 
-.MotionContainer{
-    position: absolute;
-    margin: auto;
-    left: 0;
-    right: 0;
-    width: 25vw;
-    height: 70vh;
-    top: 20vh;
-    border-radius: 5%;
-}
 
 .TopCard{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -30,9 +20,9 @@ height: 300,
     display: none;
 }
 
-.Container{
-    width: 100%;
-    height: 100%;
+.CardContainer{
+    width: 15em;
+    height: 20em;
     align-items: center;
     justify-content: center;
     overflow: hidden;
@@ -41,6 +31,7 @@ height: 300,
     position: relative;
     border-radius: 5%;
     margin: auto;
+
 }
 
 .DetailContainer {
@@ -119,6 +110,12 @@ height: 300,
     padding-left: 8px;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px #000;
     white-space: pre-wrap;
+}
+
+.TinderCard {
+    position: absolute;
+    width: 15em;
+    height: 20em;
 }
 
 
