@@ -13,7 +13,6 @@ import { auth, db } from '../firebase';
 import { doc, onSnapshot } from "firebase/firestore";
 import PageTitle from './PageTitle';
 import ForgotPassword from './ForgotPassword';
-import SwipeableCard from './SwipeableCard';
 
 function App() {
   const userID = auth.currentUser?.uid
