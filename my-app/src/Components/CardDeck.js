@@ -62,9 +62,7 @@ function CardDeck(props) {
 
   // return new array with last item removed
   const removeCard = (array) => {
-    return array.filter((_, index) => {
-      return index < array.length - 1
-    })
+      array.pop()
     }
   
   const shuffleDeck = (deck) => {
@@ -92,10 +90,12 @@ const handleSwipe = (item, swipeDirection) => {
   if(swipeDirection === "right") {
     saveOnSwipeRight(item)
   }
+}
 
+const nextCard = () => {
   // Update the deck
-  let newCardDeck = removeCard(hangoutData)
-  let shuffledDeck = shuffleDeck(newCardDeck)
+  removeCard(hangoutData)
+  let shuffledDeck = shuffleDeck(hangoutData)
   setHangoutData(shuffledDeck)
   //when deck is about to run out, display the empty deck
   if (hangoutData.length === 1)
@@ -137,6 +137,7 @@ const handleSwipe = (item, swipeDirection) => {
                 key={item.key || index}
                 item={item}
                 handleSwipe={handleSwipe}
+                nextCard={nextCard}
                 title={item.name} 
                 image={item.image_url} 
                 distance={item.distance} 

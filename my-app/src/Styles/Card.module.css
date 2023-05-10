@@ -1,9 +1,21 @@
-.TinderCard {
-    position: absolute;
-    width: 15em;
-    height: 20em;
-}
 
+@media (orientation: landscape) {
+    .TinderCard {
+        position: absolute;
+        width: 30vw;
+        height: 90vh;
+        overflow: hidden;
+    }
+  }
+  
+  @media (orientation: portrait) {
+    .TinderCard {
+        position: absolute;
+        width: 70vw;
+        height: 50vh;
+        overflow: hidden;
+    }
+  }
 
 .TopCard{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -14,8 +26,8 @@
 }
 
 .CardContainer{
-    width: 15em;
-    height: 20em;
+    width: 100%;
+    height: 100%;
     align-items: center;
     justify-content: center;
     overflow: hidden;
@@ -71,7 +83,6 @@
     background: rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
-    /*font-family: 'Courier New', Courier, monospace;*/
     font-family: 'louis-george-cafe';
 }
 
