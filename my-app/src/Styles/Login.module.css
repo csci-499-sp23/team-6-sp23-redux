@@ -12,7 +12,6 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  /* background-color: #FFFFFF; */
   background-color: rgba(255, 255, 255, 0.85);
   padding: 30px;
   border-radius: 25px;
@@ -23,11 +22,17 @@
   width: 30%;
 }
 
+.InputFields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin-bottom: 0.8em;
+}
+
 .LoginTextBox {
   width: 80%;
   padding: 10px;
   font-size: 1.3rem;
-  margin-bottom: 10px;
   border: none;
   border-radius: 5px;
   background-color: #ffffff;
@@ -111,30 +116,34 @@
 }
 
 .TextLogin {
-  font-family: 'Work Sans', sans-serif;
-  font-size: 1.1rem;
-  /* color: #fff; */
-  color: #1a4b73;
-  text-align: center;
-  margin-top: 20px;
+  text-align: left;
+  margin-top: 0.5rem;
+  margin-left: 1.5em;
+}
+
+.ForgotPasswordWrapper {
+  margin-bottom: 0.8em;
+  text-align: left;
+  margin-left: 1.5em;
+  height: 2.2rem;
+  display: flex;
+  justify-content: left;
+  align-items: center;
 }
 
 .LinkLogin {
-  /* color: #fff; */
+  font-family: 'Work Sans', sans-serif;
   color: #1a4b73;
   text-decoration: none;
   cursor: pointer;
   transition: color 0.3s ease;
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 .LinkLogin:hover {
   color: rgba(253, 187, 45, 1);
   text-decoration: underline;
-}
-
-.ForgotPasswordWrapper {
-  margin-top: 7px;
-  text-align: center;
 }
 
 .Separator {
@@ -154,19 +163,13 @@
   margin: 0 10px;
 }
 
-.LinkLogin.ForgotPassword {
-  display: block;
-  text-align: left;
-  margin-top: 3px;
-  width: 90%;
-  padding-left: 2.7rem;
-  font-size: 1.5rem;
-}
-
 .LoginTitle {
   text-align: left;
   width: 90%;
   padding-left: 1.5rem;
+  font-weight: bold;
+  font-size: 1.3em;
+  margin-bottom: 0.8em;
 }
 
 .PasswordToggle {
