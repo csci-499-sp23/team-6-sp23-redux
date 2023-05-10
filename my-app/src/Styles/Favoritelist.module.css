@@ -32,9 +32,8 @@
     border-radius: 10px;
     height: 16em;
     width: 54em;
-    overflow-y: hidden;
     white-space: nowrap;
-    overflow-x: auto;
+    overflow:hidden;
   }
 
   .FavoriteCard {
@@ -42,13 +41,22 @@
     height: 100%;
     width: 22%;
     padding: 8px;
+    pointer-events: auto;
+  }
+  
+  .FavoriteCardDrag {
+    display: inline-block;
+    height: 100%;
+    width: 22%;
+    padding: 8px;
+    pointer-events: none;
   }
 
   img:hover{
     filter: brightness(50%);
   }
 
-  .FavoriteHangoutContainer::-webkit-scrollbar {
+  /*.FavoriteHangoutContainer::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
@@ -61,3 +69,4 @@
     border-radius: 10px;
     background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
   }
+  */
