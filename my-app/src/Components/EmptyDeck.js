@@ -18,7 +18,7 @@ function EmptyDeck(props) {
             <div className = {EmptyDeckCSS.ButtonContainer}>
                 <button className = {EmptyDeckCSS.RefreshButton} onClick = {handleClick}> 
                     <img src = "Images/refresh.png" alt = "refresh-symbol" className = {EmptyDeckCSS.RefreshButtonImage}></img>
-                    Refresh
+                    <div className={EmptyDeckCSS.ButtonText}>Refresh</div>
                 </button>
             </div>
 
