@@ -3,7 +3,7 @@ import TinderCard from 'react-tinder-card'
 import Card from './Card.js'
 import CardCSS from "../Styles/Card.module.css"
 
-function SwipeableCard(props) {
+function SwipeableCard({handleSwipe, item, ...props}) {
     let screenWidth = window.screen.availWidth
     let swipeThresholdValue = screenWidth / 2.5 
 
@@ -12,13 +12,13 @@ function SwipeableCard(props) {
     }
 
     const onSwipeRequirementFulfilled = (direction, item) => {
-        props.handleSwipe(item, direction)
+        handleSwipe(item, direction)
     }
 
     return(
         <TinderCard
         onSwipe={onSwipe}
-        onSwipeRequirementFulfilled={(direction) => onSwipeRequirementFulfilled(direction, props.item)}
+        onSwipeRequirementFulfilled={(direction) => onSwipeRequirementFulfilled(direction, item)}
         preventSwipe={['up', 'down']}
         swipeRequirementType="position"
         swipeThreshold={swipeThresholdValue}
