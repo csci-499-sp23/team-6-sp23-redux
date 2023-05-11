@@ -79,9 +79,11 @@ function CardDeck(props) {
   const saveOnSwipeRight = async(item) => {
     const userRef = doc(db, 'users', userID); 
     const favoriteCategory = `favorites.${item.category}`
+    const mostRecentFavorites = 'mostRecentFavorites'
 
     await updateDoc(userRef, {
-      [favoriteCategory]: arrayUnion(item)
+      [favoriteCategory]: arrayUnion(item),
+      [mostRecentFavorites]: arrayUnion(item)
     });
 }
   

@@ -56,6 +56,12 @@
     filter: brightness(50%);
   }
 
+  #SegmentedControlContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   /*.FavoriteHangoutContainer::-webkit-scrollbar {
     width: 10px;
     height: 10px;
