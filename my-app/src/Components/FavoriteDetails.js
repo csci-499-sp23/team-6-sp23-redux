@@ -1,4 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import FavoriteModal from '../Styles/FavoriteModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +10,7 @@ import React, { useState } from 'react';
 function Favoritedetails(props) {
 
   const [show, setShow] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -67,7 +69,21 @@ function Favoritedetails(props) {
                       <span className={FavoriteModal.InfoDetail}>{props.location + ' \n' + props.location2}</span>
                       <span className={FavoriteModal.InfoDetail}>{"This location is " + isOpen(props.closed)}</span>
                       <div className={FavoriteModal.urlDiv}><label className={FavoriteModal.urlBox}>{props.url}</label>
-                      <FontAwesomeIcon className={FavoriteModal.ClipboardIcon} icon={faClipboard} onClick={() =>  navigator.clipboard.writeText(props.url)}/></div>
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>
+                            {copied ? "Link copied to clipboard" : "Copy to clipboard"}
+                          </Tooltip>
+                        }
+                      >
+                      <FontAwesomeIcon className={FavoriteModal.ClipboardIcon} icon={faClipboard} onClick={() =>  {
+                        navigator.clipboard.writeText(props.url);
+                        setCopied(true); 
+                        setTimeout(() => setCopied(false), 2000);
+                        }}/>
+                      </OverlayTrigger>
+                      </div>
                       
                   </div>
                   
