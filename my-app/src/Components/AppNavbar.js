@@ -99,24 +99,7 @@ function AppNavbar({ isAuthenticated }) {
     )
   } else {
     return (
-      <Navbar className={AppNavbarCSS.colorNavbar} expand="lg">
-        <Container>
-          <Navbar.Brand>
-            <img className={AppNavbarCSS.navLogo} src="Images/easyhangoutlogo.png" alt="nav-logo"></img>
-            <span id={AppNavbarCSS.welcomeLogo}>Welcome to EasyHangout!</span>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <div id={AppNavbarCSS.LoginContainer}>
-                <Nav.Link href="login">Login</Nav.Link>
-                <span className={AppNavbarCSS.LineSeperator}>|</span>
-                <Nav.Link href="signup">Signup</Nav.Link>
-              </div>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <></>
     )
   }
 }

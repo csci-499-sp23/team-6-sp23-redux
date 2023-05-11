@@ -95,6 +95,9 @@ const Login = (props) => {
           backgroundRepeat: 'no-repeat'
         }}
       >
+        <header>
+          <img id={LoginCSS.AppLogo} src="Images/easyhangoutlogo.png" draggable="false" alt="logo"></img>
+        </header>
         <section className={LoginCSS.LoginContainer}>
           <div className={LoginCSS.LoginDiv}>
             <label className={LoginCSS.LoginTitle}>
