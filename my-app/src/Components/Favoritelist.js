@@ -118,15 +118,45 @@ function Favoritelist({favorites, mostRecentFavorites}) {
         }) // End of first for each loop
     }
     const makeMostRecentTable = () => {
-        return mostRecentFavorites.forEach((item, index) => {
+        let row1 = mostRecentFavorites.slice(0, 5)
+        let row2 = mostRecentFavorites.slice(5, 10)
+        let row3 = mostRecentFavorites.slice(10, 15)
+        let row4 = mostRecentFavorites.slice(15, 20)
+        let rows = [row1, row2, row3, row4]
+        rows = rows.filter((row) => row.length !== 0 )
+
+        return rows.map((row, index) => {
             return(
                 <tr key={index}>
-                    <td>
-                        {item.name}
-                    </td>
-                </tr>
+                {
+                    row.map((hangout, index) => {
+                        return(
+                            <td key={index} className={FavoriteListCSS.MostRecentFavoriteCard}>
+                            {
+                                <FavoriteCard
+                                key={index}
+                                index={index}
+                                title={hangout.name} 
+                                image={hangout.image_url} 
+                                distance={hangout.distance} 
+                                location={hangout.location.display_address[0]}
+                                location2={hangout.location.display_address[1]}
+                                phone={hangout.display_phone}
+                                category={hangout.category}
+                                closed={hangout.is_closed}
+                                details={hangout.details}
+                                rating={hangout.rating}
+                                url={hangout.url}
+                                >
+                                </FavoriteCard>
+                            }
+                            </td>
+                        )
+                    })
+                }
+            </tr>
             )
-        })
+          })
     }
     
     return(
