@@ -1,0 +1,26 @@
+#SegmentedControl {
+    border: 2px solid var(--secondaryColor);
+    border-radius: 0.25em;
+    overflow: hidden;
+    height: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+}
+
+.Button {
+    font-size: 0.8em;
+    height: 100%;
+    width: fit-content;
+    border: none;
+}
+
+.ButtonSelected {
+    background: var(--gradient);
+    color: white;
+    font-size: 0.8em;
+    height: 100%;
+    width: fit-content;
+    border: none;
+}

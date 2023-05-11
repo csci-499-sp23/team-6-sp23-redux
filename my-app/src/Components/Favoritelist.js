@@ -1,11 +1,13 @@
 import FavoriteListCSS from '../Styles/Favoritelist.module.css';
 import FavoriteCard from './FavoriteCard';
+import SegmentedControl from './SubComponents/SegmentedControl';
 import { auth } from '../firebase';
 import { useState } from 'react';
 
-function Favoritelist(props) {
+function Favoritelist({favorites, mostRecentFavorites}) {
     const user = auth.currentUser
     const [dragging, setDragging] = useState(false); // Used to toggle whether the favorite card should be clickable or not while dragging
+    const [selectedSegment, setSelectedSegment] = useState(0);
 
     // Helper function used to capitalize the first letter of each word in a string 
     const toTitleCase = (phrase) => {
@@ -63,8 +65,8 @@ function Favoritelist(props) {
         slider.removeEventListener('click', null, false)
     }
 
-    const makeTable = () => {
-        return props.favorites.sort(function(a,b) {
+    const makeCategoriesTable = () => {
+        return favorites.sort(function(a,b) {
             if(a[0] < b[0]) { return -1; }
             if(a[0] > b[0]) { return 1; }
             return 0;
@@ -115,16 +117,31 @@ function Favoritelist(props) {
                         )
         }) // End of first for each loop
     }
-
+    const makeMostRecentTable = () => {
+        return mostRecentFavorites.forEach((item, index) => {
+            return(
+                <tr key={index}>
+                    <td>
+                        {item.name}
+                    </td>
+                </tr>
+            )
+        })
+    }
     
-
     return(
         <div className={FavoriteListCSS.FavoriteContainer}>
             <div className={FavoriteListCSS.FavoriteTitle}>{user?.displayName}'s Top Favorites</div>
+            
+            <div id={FavoriteListCSS.SegmentedControlContainer}>
+                <SegmentedControl buttonNames={["Recently Added", "Categories"]} selectedSegment={setSelectedSegment}/>
+            </div>
+
             <div className={FavoriteListCSS.TableContainer}>
             <table className={FavoriteListCSS.FavoriteTable}>
                 <tbody>
-                    {props.favorites && makeTable()}
+                    {mostRecentFavorites && selectedSegment === 0 && makeMostRecentTable()}
+                    {favorites && selectedSegment === 1 && makeCategoriesTable()}
                 </tbody>
             </table>
             </div>
