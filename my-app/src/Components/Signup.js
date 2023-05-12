@@ -150,6 +150,9 @@ const Signup = (props) => {
         backgroundRepeat: 'no-repeat'
       }}
     >
+      <header>
+          <img id={LoginCSS.AppLogo} src="Images/easyhangoutlogo.png" draggable="false" alt="logo"></img>
+        </header>
       <section className={LoginCSS.LoginContainer}>
         <div className={LoginCSS.LoginDiv}>
           <label className={LoginCSS.LoginTitle}>
@@ -157,44 +160,47 @@ const Signup = (props) => {
           </label>
           <div>
             <form onSubmit={onSubmit}>
-              <div>
-                <input
-                  type="text"
-                  label="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                  placeholder="Username"
-                  className={LoginCSS.LoginTextBox}
-                />
+              <div className={LoginCSS.InputFields}>
+                <div>
+                  <input
+                    type="text"
+                    label="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                    placeholder="Username"
+                    className={LoginCSS.LoginTextBox}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="email"
+                    label="Email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    placeholder="Email address"
+                    className={LoginCSS.LoginTextBox}
+                  />
+                </div>
+                <div style={{ position: "relative" }}>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    label="Create password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    placeholder="Password"
+                    className={LoginCSS.LoginTextBox}
+                  />
+                  <FontAwesomeIcon
+                    icon={showPassword ? faEyeSlash : faEye}
+                    className={LoginCSS.PasswordToggle}
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                </div>
               </div>
-              <div>
-                <input
-                  type="email"
-                  label="Email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  placeholder="Email address"
-                  className={LoginCSS.LoginTextBox}
-                />
-              </div>
-              <div style={{ position: "relative" }}>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  label="Create password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  placeholder="Password"
-                  className={LoginCSS.LoginTextBox}
-                />
-                <FontAwesomeIcon
-                  icon={showPassword ? faEyeSlash : faEye}
-                  className={LoginCSS.PasswordToggle}
-                  onClick={() => setShowPassword(!showPassword)}
-                />
-              </div>
+              
               <button className={LoginCSS.LoginButton} type="submit">
                 Sign up
               </button>
@@ -204,9 +210,9 @@ const Signup = (props) => {
               Sign up with Google
             </button>
             <p className={LoginCSS.TextLogin}>
-              Already have an account?{' '}
+              
               <NavLink to="/login" className={LoginCSS.LinkLogin}>
-                Sign in
+                Already have an account?{' '}Log in
               </NavLink>
             </p>
           </div>

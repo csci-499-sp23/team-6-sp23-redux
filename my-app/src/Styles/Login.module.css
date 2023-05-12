@@ -1,15 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:600|Work+Sans:400,500,600,700&display=swap');
 
-body {
-  background: rgb(34, 193, 195);
-  background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
-  font-family: "Work Sans", sans-serif;
-}
-
 .login {
-  height: 100vh;
-  width: 100vw;
+  position: fixed;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -18,7 +16,6 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
-  /* background-color: #FFFFFF; */
   background-color: rgba(255, 255, 255, 0.85);
   padding: 30px;
   border-radius: 25px;
@@ -29,11 +26,17 @@ body {
   width: 30%;
 }
 
+.InputFields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin-bottom: 0.8em;
+}
+
 .LoginTextBox {
   width: 80%;
   padding: 10px;
   font-size: 1.3rem;
-  margin-bottom: 10px;
   border: none;
   border-radius: 5px;
   background-color: #ffffff;
@@ -66,8 +69,8 @@ body {
   font-size: 1.3rem;
   color: white;
   font-weight: 700;
-  background: rgb(34, 193, 195);
   background: linear-gradient(90deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+  background: linear-gradient(90deg, #233329 0%, #63D471 100%);
   border: 0px;
   cursor: pointer;
   transition: opacity 0.25s ease-out;
@@ -117,30 +120,34 @@ body {
 }
 
 .TextLogin {
-  font-family: 'Work Sans', sans-serif;
-  font-size: 1.1rem;
-  /* color: #fff; */
-  color: #1a4b73;
-  text-align: center;
-  margin-top: 20px;
+  text-align: left;
+  margin-top: 0.5rem;
+  margin-left: 1.5em;
+}
+
+.ForgotPasswordWrapper {
+  margin-bottom: 0.8em;
+  text-align: left;
+  margin-left: 1.5em;
+  height: 2.2rem;
+  display: flex;
+  justify-content: left;
+  align-items: center;
 }
 
 .LinkLogin {
-  /* color: #fff; */
+  font-family: 'Work Sans', sans-serif;
   color: #1a4b73;
   text-decoration: none;
   cursor: pointer;
   transition: color 0.3s ease;
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 .LinkLogin:hover {
-  color: rgba(253, 187, 45, 1);
+  color: black;
   text-decoration: underline;
-}
-
-.ForgotPasswordWrapper {
-  margin-top: 7px;
-  text-align: center;
 }
 
 .Separator {
@@ -160,19 +167,13 @@ body {
   margin: 0 10px;
 }
 
-.LinkLogin.ForgotPassword {
-  display: block;
-  text-align: left;
-  margin-top: 3px;
-  width: 90%;
-  padding-left: 2.7rem;
-  font-size: 1.5rem;
-}
-
 .LoginTitle {
   text-align: left;
   width: 90%;
   padding-left: 1.5rem;
+  font-weight: bold;
+  font-size: 1.3em;
+  margin-bottom: 0.8em;
 }
 
 .PasswordToggle {
@@ -181,4 +182,12 @@ body {
   top: 40%;
   transform: translateY(-50%);
   cursor: pointer;
+}
+
+#AppLogo {
+  width: 10em;
+  margin-top: 3em;
+  margin-bottom: 0.5em;
+  background-color: rgba(0, 0, 0, 0.05);
+  pointer-events: none;
 }

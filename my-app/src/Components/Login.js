@@ -95,42 +95,48 @@ const Login = (props) => {
           backgroundRepeat: 'no-repeat'
         }}
       >
+        <header>
+          <img id={LoginCSS.AppLogo} src="Images/easyhangoutlogo.png" draggable="false" alt="logo"></img>
+        </header>
         <section className={LoginCSS.LoginContainer}>
           <div className={LoginCSS.LoginDiv}>
             <label className={LoginCSS.LoginTitle}>
               Login
             </label>
             <form onSubmit={onLogin}> {/* Add onSubmit attribute */}
+            <div className={LoginCSS.InputFields}>
               <div>
-                <input
-                  className={LoginCSS.LoginTextBox}
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Email address"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
+                  <input
+                    className={LoginCSS.LoginTextBox}
+                    id="email-address"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="Email address"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
 
-              <div style={{ position: "relative" }}>
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? "text" : "password"} 
-                  required
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  className={LoginCSS.LoginTextBox}
-                />
-                <FontAwesomeIcon
-                  icon={showPassword ? faEyeSlash : faEye} 
-                  className={LoginCSS.PasswordToggle}
-                  onClick={() => setShowPassword(!showPassword)}
-                />
+                <div style={{ position: "relative" }}>
+                  <input
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"} 
+                    required
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    className={LoginCSS.LoginTextBox}
+                  />
+                  <FontAwesomeIcon
+                    icon={showPassword ? faEyeSlash : faEye} 
+                    className={LoginCSS.PasswordToggle}
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                </div>
               </div>
-              <div className="ForgotPasswordWrapper">
-                <NavLink to="/forgot-password" className={`${LoginCSS.LinkLogin} ${LoginCSS.ForgotPassword}`}>
+              
+              <div className={LoginCSS.ForgotPasswordWrapper}>
+                <NavLink to="/forgot-password" className={LoginCSS.LinkLogin}>
                   Forgot password?
                 </NavLink>
               </div>
@@ -147,9 +153,9 @@ const Login = (props) => {
                 </button>
 
             <p className={LoginCSS.TextLogin}>
-              No account yet?{' '}
+              
               <NavLink to="/signup" className={LoginCSS.LinkLogin}>
-                Sign up
+                No account yet?{' '}Register here
               </NavLink>
             </p>
           </div>
