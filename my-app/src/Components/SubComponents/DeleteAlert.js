@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import DeleteAlertCSS from '../../Styles/DeleteAlert.module.css';
 import FavoriteCardCSS from '../../Styles/FavoriteCard.module.css';
 
-function DeleteAlert({deleteHangout, title, category, index}) {
+function DeleteAlert({deleteHangout, title, category, index, isMostRecent, isCategory}) {
     const[show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -26,7 +26,7 @@ function DeleteAlert({deleteHangout, title, category, index}) {
             <Modal.Footer id={DeleteAlertCSS.ModalFooter}>
                 <button id={DeleteAlertCSS.CancelButton} onClick={handleClose}>Cancel</button>
                 <button id={DeleteAlertCSS.DeleteButton} onClick={() => {
-                    deleteHangout(category, index)
+                    deleteHangout(category, index, isMostRecent, isCategory)
                     handleClose()
                 }}>Delete</button>
             </Modal.Footer>

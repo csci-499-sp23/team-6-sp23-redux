@@ -1,4 +1,36 @@
 
+@media (orientation: landscape) {
+  .MostRecentFavoriteCard {
+    display: inline-block;
+    height: 55vh;
+    width: 20vw;
+    padding: 8px;
+    margin-left: 5em;
+  }
+
+  .MostRecentFavoriteCardRow {
+    border-radius: 10px;
+    height: 60vh;
+    width: 100vw;
+  }
+}
+
+@media (orientation: portrait) {
+  .MostRecentFavoriteCard {
+    display: inline-block;
+    height: 20vh;
+    width: 30vw;
+    padding: 8px;
+    margin-left: 2em;
+  }
+
+  .MostRecentFavoriteCardRow {
+    border-radius: 10px;
+    height: 30vh;
+    width: 100vw;
+  }
+}
+  
   .FavoriteImages {
     border-radius: 15px;
   }

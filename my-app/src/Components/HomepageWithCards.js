@@ -17,7 +17,7 @@ function HomepageWithCards(props) {
 
   return (
     <div className={HomepageCSS.Homepage}>
-      <CardDeck className={CardDeckCSS.Container} location={props.location} categories={props.categories} favoriteHangouts={props.favorites} rangeLimit = {props.rangeLimit} ratingLimit ={props.ratingLimit} >
+      <CardDeck className={CardDeckCSS.Container} location={props.location} categories={props.categories} favoriteHangouts={props.favorites} rangeLimit = {props.rangeLimit} ratingLimit ={props.ratingLimit} mostRecentFavorites={props.mostRecentFavorites}>
       </CardDeck>
     </div>
   );

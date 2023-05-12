@@ -8,24 +8,35 @@ function FavoriteCard(props) {
 
     const locationDetail = props.location2 ? props.location + ", \n" + props.location2 : props.location;
         //Delete hangout function, requires category and hangout ID to be passed to it
-    const deleteHangout = async (category, index) => {
-    
+    const deleteHangout = async (category, index, isMostRecent, isCategory) => {
         const db = getFirestore();
         const userID= auth.currentUser?.uid
         const docRef = doc(db, "users", userID)
         const docSnap = await getDoc(docRef);
-        const hangoutObj = docSnap.data().favorites[category][index]  
-                        
-            //checks if this is the last hangout in the category
-        if(docSnap.data().favorites[category].length === 1 ){
-                
+        const favoriteCategory = `favorites.${category}`
+        const mostRecent = 'mostRecentFavorites'
+        const favoriteCategoryLength = docSnap.data().favorites[category].length
+     
+        let hangoutObj;
+
+        if(isMostRecent) {
+            hangoutObj = docSnap.data().mostRecentFavorites[index]
+        }
+        else if(isCategory) {
+            hangoutObj = docSnap.data().favorites[category][index]
+        }
+
+        //checks if this is the last hangout in the category
+        if(favoriteCategoryLength === 1 ) {     
             await updateDoc(docRef, {
-                [`favorites.${category}`]: deleteField()
+                [favoriteCategory]: deleteField(),
+                [mostRecent]: arrayRemove(hangoutObj)
             })
         }
         else {
             await updateDoc(docRef, {
-                [`favorites.${category}`]: arrayRemove(hangoutObj)                    
+                [favoriteCategory]: arrayRemove(hangoutObj), 
+                [mostRecent]: arrayRemove(hangoutObj)                  
             })
         }
     };
@@ -41,7 +52,8 @@ function FavoriteCard(props) {
                 <div className={FavoriteCardCSS.Spacer} /> 
                 <div id={FavoriteCardCSS.Title}>{props.title}</div>
                 <DeleteAlert id={FavoriteCardCSS.DeleteAlert} deleteHangout={deleteHangout}
-                              title={props.title} category={props.category} index={props.index} >
+                              title={props.title} category={props.category} index={props.index} 
+                              isMostRecent={props.isMostRecent} isCategory={props.isCategory}>
                 </DeleteAlert> 
             </div>
 
