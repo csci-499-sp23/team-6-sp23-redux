@@ -20,8 +20,7 @@ function Favoritelist({favorites, mostRecentFavorites}) {
     
     // Function that makes the scrollable rows draggable
     const slideRow = (selectedRow) => {
-        console.log("entered")
-        let slider = document.querySelector(`tbody:nth-child(1) tr:nth-child(${selectedRow}) div`)
+        let slider = document.getElementById(`FavoriteListCSS.FavoriteHangoutContainer${selectedRow}`)
         let mouseDown = false;
         let startX, scrollLeft;
 
@@ -56,8 +55,7 @@ function Favoritelist({favorites, mostRecentFavorites}) {
     
     // Removes the added Event Listeners when exiting the row
     const deInitEventListener = (selectedRow) => {
-        console.log("exited")
-        let slider = document.querySelector(`tbody:nth-child(1) tr:nth-child(${selectedRow}) div`)
+        let slider = document.getElementById(`FavoriteListCSS.FavoriteHangoutContainer${selectedRow}`)
         slider.removeEventListener('mousemove', null, false);
         slider.removeEventListener('mousedown', null, false);
         slider.removeEventListener('mouseup', null, false);
@@ -79,7 +77,7 @@ function Favoritelist({favorites, mostRecentFavorites}) {
                            <tr key={index}>
                             <td key={index} id={FavoriteListCSS.CategoryName}>{toTitleCase(favoritesMap[0])}:</td>
                                 <td>
-                                <div id={index} className={FavoriteListCSS.FavoriteHangoutContainer} 
+                                <div id={`FavoriteListCSS.FavoriteHangoutContainer${selectedRow}`} className={FavoriteListCSS.FavoriteHangoutContainer} 
                                      onMouseOver={() => slideRow(selectedRow)}
                                      onMouseLeave={() => deInitEventListener(selectedRow)}>
                                 {
@@ -103,6 +101,8 @@ function Favoritelist({favorites, mostRecentFavorites}) {
                                                     details={hangout.details}
                                                     rating={hangout.rating}
                                                     url={hangout.url}
+                                                    isMostRecent={false}
+                                                    isCategory={true}
                                                 >
                                                 </FavoriteCard>
                                             }
@@ -118,24 +118,19 @@ function Favoritelist({favorites, mostRecentFavorites}) {
         }) // End of first for each loop
     }
     const makeMostRecentTable = () => {
-        let row1 = mostRecentFavorites.slice(0, 5)
-        let row2 = mostRecentFavorites.slice(5, 10)
-        let row3 = mostRecentFavorites.slice(10, 15)
-        let row4 = mostRecentFavorites.slice(15, 20)
-        let rows = [row1, row2, row3, row4]
-        rows = rows.filter((row) => row.length !== 0 )
-
-        return rows.map((row, index) => {
+        // The index for each card in the database is reversed so we need to set the correct index for deleting the object
+        var i = mostRecentFavorites.length
             return(
-                <tr key={index}>
-                {
-                    row.map((hangout, index) => {
+                <tr className={FavoriteListCSS.MostRecentFavoriteCardRow}>
+                {   
+                    mostRecentFavorites.map((hangout, index) => {
+                        i -= 1
                         return(
-                            <td key={index} className={FavoriteListCSS.MostRecentFavoriteCard}>
+                            <td key={i} className={FavoriteListCSS.MostRecentFavoriteCard}>
                             {
                                 <FavoriteCard
-                                key={index}
-                                index={index}
+                                key={i}
+                                index={i}
                                 title={hangout.name} 
                                 image={hangout.image_url} 
                                 distance={hangout.distance} 
@@ -147,6 +142,8 @@ function Favoritelist({favorites, mostRecentFavorites}) {
                                 details={hangout.details}
                                 rating={hangout.rating}
                                 url={hangout.url}
+                                isMostRecent={true}
+                                isCategory={false}
                                 >
                                 </FavoriteCard>
                             }
@@ -156,7 +153,6 @@ function Favoritelist({favorites, mostRecentFavorites}) {
                 }
             </tr>
             )
-          })
     }
     
     return(
@@ -164,7 +160,7 @@ function Favoritelist({favorites, mostRecentFavorites}) {
             <div className={FavoriteListCSS.FavoriteTitle}>{user?.displayName}'s Top Favorites</div>
             
             <div id={FavoriteListCSS.SegmentedControlContainer}>
-                <SegmentedControl buttonNames={["Recently Added", "Categories"]} selectedSegment={setSelectedSegment}/>
+                <SegmentedControl buttonNames={["Most Recent", "Categories"]} selectedSegment={setSelectedSegment}/>
             </div>
 
             <div className={FavoriteListCSS.TableContainer}>
