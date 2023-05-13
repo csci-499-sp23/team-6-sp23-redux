@@ -59,6 +59,10 @@
         display: flex;
         align-items: center;
     }
+
+    .DeleteCardButton:hover .DeleteButtonImage{
+        background-color: blue;
+    }
   }
   
   @media (orientation: portrait) {
@@ -120,6 +124,10 @@
         align-self: top;
         display: flex;
         align-items: center;
+    }
+
+    .DeleteCardButton:hover .DeleteButtonImage{
+        background-color: blue;
     }
   }
 

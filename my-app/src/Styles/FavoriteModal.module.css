@@ -125,6 +125,11 @@
     width: 100%;
 }
 
+.ModalInfoButton:hover {
+    background-color: black;
+    opacity: 0.5;
+}
+
 .ClipboardIcon{
     color: white;
 }
