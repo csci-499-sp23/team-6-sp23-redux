@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Styles from '../../Styles/SegmentedControl.module.css';
+import propTypes from 'prop-types';
 
-function SegmentedControl({buttonNames, selectedSegment}) {
-    let buttonArray = buttonNames
+function SegmentedControl({buttonNames = [], selectedSegment = () => {}}) {
 
     const [isSelected, setIsSelected] = useState(0);
 
     const handleClick = (e) => {
-        let segment = parseInt(e.target.value)
+        let segment = +(e.target.value)
         setIsSelected(segment)
         selectedSegment(segment)
     }
@@ -16,9 +16,9 @@ function SegmentedControl({buttonNames, selectedSegment}) {
         <React.Fragment>
             <div id={Styles.SegmentedControl}>
                 {
-                    buttonArray.map((title, index) => {
+                    buttonNames.map((title, index) => {
                         return(
-                            <button key={index} className={ isSelected === index ? Styles.ButtonSelected : Styles.Button} 
+                            <button key={title} className={ isSelected === index ? Styles.ButtonSelected : Styles.Button} 
                                     onClick={handleClick} value={index}>{title}
                             </button>
                         )
@@ -28,5 +28,10 @@ function SegmentedControl({buttonNames, selectedSegment}) {
         </React.Fragment>
     )
 }
+
+SegmentedControl.propTypes = {
+    buttonNames: propTypes.arrayOf(propTypes.string).isRequired,
+    selectedSegment: propTypes.func.isRequired
+};
 
 export default SegmentedControl;
