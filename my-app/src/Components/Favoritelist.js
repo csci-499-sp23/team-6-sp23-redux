@@ -1,11 +1,13 @@
 import FavoriteListCSS from '../Styles/Favoritelist.module.css';
 import FavoriteCard from './FavoriteCard';
+import SegmentedControl from './SubComponents/SegmentedControl';
 import { auth } from '../firebase';
 import { useState } from 'react';
 
-function Favoritelist(props) {
+function Favoritelist({favorites, mostRecentFavorites}) {
     const user = auth.currentUser
     const [dragging, setDragging] = useState(false); // Used to toggle whether the favorite card should be clickable or not while dragging
+    const [selectedSegment, setSelectedSegment] = useState(0);
 
     // Helper function used to capitalize the first letter of each word in a string 
     const toTitleCase = (phrase) => {
@@ -18,8 +20,7 @@ function Favoritelist(props) {
     
     // Function that makes the scrollable rows draggable
     const slideRow = (selectedRow) => {
-        console.log("entered")
-        let slider = document.querySelector(`tbody:nth-child(1) tr:nth-child(${selectedRow}) div`)
+        let slider = document.getElementById(`FavoriteListCSS.FavoriteHangoutContainer${selectedRow}`)
         let mouseDown = false;
         let startX, scrollLeft;
 
@@ -54,8 +55,7 @@ function Favoritelist(props) {
     
     // Removes the added Event Listeners when exiting the row
     const deInitEventListener = (selectedRow) => {
-        console.log("exited")
-        let slider = document.querySelector(`tbody:nth-child(1) tr:nth-child(${selectedRow}) div`)
+        let slider = document.getElementById(`FavoriteListCSS.FavoriteHangoutContainer${selectedRow}`)
         slider.removeEventListener('mousemove', null, false);
         slider.removeEventListener('mousedown', null, false);
         slider.removeEventListener('mouseup', null, false);
@@ -63,8 +63,8 @@ function Favoritelist(props) {
         slider.removeEventListener('click', null, false)
     }
 
-    const makeTable = () => {
-        return props.favorites.sort(function(a,b) {
+    const makeCategoriesTable = () => {
+        return favorites.sort(function(a,b) {
             if(a[0] < b[0]) { return -1; }
             if(a[0] > b[0]) { return 1; }
             return 0;
@@ -77,7 +77,7 @@ function Favoritelist(props) {
                            <tr key={index}>
                             <td key={index} id={FavoriteListCSS.CategoryName}>{toTitleCase(favoritesMap[0])}:</td>
                                 <td>
-                                <div id={index} className={FavoriteListCSS.FavoriteHangoutContainer} 
+                                <div id={`FavoriteListCSS.FavoriteHangoutContainer${selectedRow}`} className={FavoriteListCSS.FavoriteHangoutContainer} 
                                      onMouseOver={() => slideRow(selectedRow)}
                                      onMouseLeave={() => deInitEventListener(selectedRow)}>
                                 {
@@ -101,6 +101,8 @@ function Favoritelist(props) {
                                                     details={hangout.details}
                                                     rating={hangout.rating}
                                                     url={hangout.url}
+                                                    isMostRecent={false}
+                                                    isCategory={true}
                                                 >
                                                 </FavoriteCard>
                                             }
@@ -115,16 +117,57 @@ function Favoritelist(props) {
                         )
         }) // End of first for each loop
     }
-
+    const makeMostRecentTable = () => {
+        // The index for each card in the database is reversed so we need to set the correct index for deleting the object
+        var i = mostRecentFavorites.length
+            return(
+                <tr className={FavoriteListCSS.MostRecentFavoriteCardRow}>
+                {   
+                    mostRecentFavorites.map((hangout, index) => {
+                        i -= 1
+                        return(
+                            <td key={i} className={FavoriteListCSS.MostRecentFavoriteCard}>
+                            {
+                                <FavoriteCard
+                                key={i}
+                                index={i}
+                                title={hangout.name} 
+                                image={hangout.image_url} 
+                                distance={hangout.distance} 
+                                location={hangout.location.display_address[0]}
+                                location2={hangout.location.display_address[1]}
+                                phone={hangout.display_phone}
+                                category={hangout.category}
+                                closed={hangout.is_closed}
+                                details={hangout.details}
+                                rating={hangout.rating}
+                                url={hangout.url}
+                                isMostRecent={true}
+                                isCategory={false}
+                                >
+                                </FavoriteCard>
+                            }
+                            </td>
+                        )
+                    })
+                }
+            </tr>
+            )
+    }
     
-
     return(
         <div className={FavoriteListCSS.FavoriteContainer}>
             <div className={FavoriteListCSS.FavoriteTitle}>{user?.displayName}'s Top Favorites</div>
+            
+            <div id={FavoriteListCSS.SegmentedControlContainer}>
+                <SegmentedControl buttonNames={["Most Recent", "Categories"]} selectedSegment={setSelectedSegment}/>
+            </div>
+
             <div className={FavoriteListCSS.TableContainer}>
             <table className={FavoriteListCSS.FavoriteTable}>
                 <tbody>
-                    {props.favorites && makeTable()}
+                    {mostRecentFavorites && selectedSegment === 0 && makeMostRecentTable()}
+                    {favorites && selectedSegment === 1 && makeCategoriesTable()}
                 </tbody>
             </table>
             </div>

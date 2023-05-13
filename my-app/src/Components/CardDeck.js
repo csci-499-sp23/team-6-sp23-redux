@@ -42,14 +42,17 @@ function CardDeck(props) {
           return !favoritesSet.has(hangout.id)
         })
 
-       //Filter based on hangout.rating for yelp rating
-       if (props.ratingLimit > 0)
-       {
-        filteredDeck = filteredDeck.filter ((hangout) => hangout.rating >= props.ratingLimit);
-       }
+        //Filter based on hangout.rating for yelp rating
+        if (props.ratingLimit > 0)
+        {
+          filteredDeck = filteredDeck.filter ((hangout) => hangout.rating >= props.ratingLimit);
+        }
+
+        // Remove potential duplicates that appear from overlapping categories
+        let deck = removeDuplicatesInArray(filteredDeck)
 
         // Start with a shuffled deck
-        let deck = shuffleDeck(filteredDeck)
+        deck = shuffleDeck(deck)
         setHangoutData(deck);
 
         setEmpty(false);
@@ -59,6 +62,18 @@ function CardDeck(props) {
     } 
     
   }, [props, empty]);
+
+  const removeDuplicatesInArray = (array) => {
+    let set = new Set();
+    let newArray = []
+    array.forEach((object) => {
+      if(set.has(object.id) === false) {
+        newArray.push(object)
+      }
+      set.add(object.id)
+    })
+    return newArray
+  }
 
   // return new array with last item removed
   const removeCard = (array) => {
@@ -79,17 +94,25 @@ function CardDeck(props) {
   const saveOnSwipeRight = async(item) => {
     const userRef = doc(db, 'users', userID); 
     const favoriteCategory = `favorites.${item.category}`
+    const mostRecentFavorites = 'mostRecentFavorites'
 
-    await updateDoc(userRef, {
-      [favoriteCategory]: arrayUnion(item)
-    });
-}
-  
-const handleSwipe = (item, swipeDirection) => {
-  //Save item to favourites on swipe right
-  if(swipeDirection === "right") {
-    saveOnSwipeRight(item)
-  }
+    if (props.mostRecentFavorites && props.mostRecentFavorites.length >= 20) {
+      props.mostRecentFavorites.pop() // Removes the last item in the array which is the least recently used item and returns it
+      let newArray = props.mostRecentFavorites.reverse()
+      newArray.push(item)
+
+      await updateDoc(userRef, {
+        // Cannot call arrayUnion and arrayRemove simultaneously on the same field unless using a batch request
+        [favoriteCategory]: arrayUnion(item),
+        [mostRecentFavorites]: newArray
+      });
+    }
+    else {
+      await updateDoc(userRef, {
+        [favoriteCategory]: arrayUnion(item),
+        [mostRecentFavorites]: arrayUnion(item)
+      });
+    }
 }
 
 const nextCard = () => {
@@ -136,7 +159,7 @@ const nextCard = () => {
               <SwipeableCard
                 key={item.key || index}
                 item={item}
-                handleSwipe={handleSwipe}
+                saveOnSwipeRight={saveOnSwipeRight}
                 nextCard={nextCard}
                 title={item.name} 
                 image={item.image_url} 

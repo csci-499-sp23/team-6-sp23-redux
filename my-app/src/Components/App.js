@@ -20,6 +20,7 @@ function App() {
   const [location, setLocation] = useState(""); // user location
   const [preferences, setPreferences] = useState([]); // preferences data
   const [favorites, setFavorites] = useState([]); // list of hangouts the user liked
+  const [mostRecentFavorites, setMostRecentFavorites] = useState([]); // list of the most recent favorited hangouts;
   const [categories, setCategories] = useState([]); // category preferences
   const [isAuthenticated, setIsAuthenticated] = useState(false); // check if user is authenticated
   const [rangeLimit, setRangeLimit] = useState("");
@@ -46,6 +47,11 @@ function App() {
               case "favorites":
                 setFavorites(Object.entries(data[1]))
                 return
+              case "mostRecentFavorites":
+                let mostRecentFavorites = data[1].reverse()
+                mostRecentFavorites = mostRecentFavorites.slice(0, 20) // gets up to the top 20 most recent favorited hangouts
+                setMostRecentFavorites(mostRecentFavorites)
+                return
               default:
                 return 
             }
@@ -69,7 +75,7 @@ function App() {
       authUnsubscribe();
     };
   }, [userID]);
-  
+
   return (
     <div className="App">
       
@@ -79,14 +85,14 @@ function App() {
         <Routes>
           {
             isAuthenticated &&
-            <Route exact path="/" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit = {rangeLimit}/>}/>
+            <Route exact path="/" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit={rangeLimit} ratingLimit={ratingLimit} mostRecentFavorites={mostRecentFavorites}/>}/>
           }
           {
             !isAuthenticated &&
             <Route exact path="/" element={<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
           }
-          <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit = {rangeLimit} ratingLimit = {ratingLimit}/>}/>
-          <Route exact path="/favorites" element={<Favoritelist favorites={favorites} />}/>
+          <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit={rangeLimit} ratingLimit={ratingLimit} mostRecentFavorites={mostRecentFavorites}/>}/>
+          <Route exact path="/favorites" element={<Favoritelist favorites={favorites} mostRecentFavorites={mostRecentFavorites}/>}/>
           <Route exact path = "/login" element = {<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
           <Route exact path = "/signup" element = {<SignUp setNavigated={setNavigated}/>}/>
           <Route exact path="/preferences" element={<Preferences preferences={preferences}/>}/>

@@ -1,3 +1,128 @@
+
+@media (orientation: landscape) {
+    #Title {
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        font-size: 1.1em;
+        font-weight: bold;
+        text-align: center;
+        color: white;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px #000;
+        white-space: pre-wrap;
+        height: 3em;
+        margin-top: 0.5em;
+        line-height: 1em;
+    }
+
+    #BottomContainer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 18%;
+        background: rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #LocationContainer {
+        color: white;
+        font-size: 0.7em;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0.2em;
+        margin-bottom: 0.2em;
+    }
+
+    .DeleteButtonImage {
+        width: 100%;
+        height: 70%;
+        background-color: white;
+        -webkit-mask-box-image: url("https://cdn.discordapp.com/attachments/1070131505743016087/1104985006323011624/thex.png");
+    }
+
+    .DeleteCardButton {
+        margin-top: 8px;
+        margin-right: 8px;
+        border-radius: 25%;
+        border: none;
+        background-color: red;
+        width: 1em;
+        height: 1em;
+        font-weight: bold;
+        align-self: top;
+        display: flex;
+        align-items: center;
+    }
+  }
+  
+  @media (orientation: portrait) {
+    #Title {
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        font-size: 0.75em;
+        font-weight: bold;
+        text-align: center;
+        color: white;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px #000;
+        white-space: pre-wrap;
+        height: 3em;
+        margin-top: 0.5em;
+        line-height: 1em;
+    }
+
+    #BottomContainer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 20%;
+        background: rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #LocationContainer {
+        color: white;
+        font-size: 0.5em;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0.2em;
+        margin-bottom: 0.2em;
+    }
+
+    .DeleteButtonImage {
+        width: 10vw;
+        height: 1vh;
+        background-color: white;
+        -webkit-mask-box-image: url("https://cdn.discordapp.com/attachments/1070131505743016087/1104985006323011624/thex.png");
+    }
+
+    .DeleteCardButton {
+        margin-top: 8px;
+        margin-right: 8px;
+        border-radius: 25%;
+        border: none;
+        background-color: red;
+        width: 1em;
+        height: 1em;
+        font-weight: bold;
+        align-self: top;
+        display: flex;
+        align-items: center;
+    }
+  }
+
 .Container {
     position: relative;
     width: 100%;
@@ -14,31 +139,6 @@
     opacity: 0.9;
     border: none;
 }
-
-#BottomContainer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 18%;
-    background: rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-#LocationContainer {
-    color: white;
-    font-size: 0.7em;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
-}
-
 
 .Detail {
     padding-left: 1em;
@@ -68,44 +168,8 @@
     justify-content: space-between;
 }
 
-#Title {
-    display: flex;
-    justify-content: center;
-    width: 80%;
-    font-size: 1.2em;
-    font-weight: bold;
-    text-align: center;
-    color: white;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px #000;
-    white-space: pre-wrap;
-    height: 3em;
-    margin-top: 0.5em;
-    line-height: 1em;
-}
-
 .DeleteAlert {
     z-index: 1;
-}
-
-.DeleteCardButton {
-    margin-top: 8px;
-    margin-right: 8px;
-    border-radius: 25%;
-    border: none;
-    background-color: red;
-    width: 1em;
-    height: 1em;
-    font-weight: bold;
-    align-self: top;
-    display: flex;
-    align-items: center;
-}
-
-.DeleteButtonImage {
-    width: 100%;
-    height: 70%;
-    background-color: white;
-    -webkit-mask-box-image: url("https://cdn.discordapp.com/attachments/1070131505743016087/1104985006323011624/thex.png");
 }
 
 .Spacer {
