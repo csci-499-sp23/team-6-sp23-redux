@@ -1,11 +1,49 @@
+/* NOTE: - Category Display */
+@media (orientation: landscape) {
+  .FavoriteCard {
+    display: inline-block;
+    height: 55vh;
+    width: 20vw;
+    padding: 8px;
+    pointer-events: auto;
+  }
+  
+  .FavoriteCardDrag {
+    display: inline-block;
+    height: 55vh;
+    width: 20vw;
+    padding: 8px;
+    pointer-events: none;
+  }
+}
+
+@media (orientation: portrait) {
+  .FavoriteCard {
+    display: inline-block;
+    height: 20vh;
+    width: 30vw;
+    padding: 8px;
+    pointer-events: auto;
+  }
+  
+  .FavoriteCardDrag {
+    display: inline-block;
+    height: 20vh;
+    width: 30vw;
+    padding: 8px;
+    pointer-events: none;
+  }
+}
+
+/* NOTE: - Most Recent Display */
 
 @media (orientation: landscape) {
   .MostRecentFavoriteCard {
     display: inline-block;
     height: 55vh;
     width: 20vw;
-    padding: 8px;
-    margin-left: 5em;
+    margin: 16px;
+    margin-left: 9vw;
   }
 
   .MostRecentFavoriteCardRow {
@@ -18,10 +56,10 @@
 @media (orientation: portrait) {
   .MostRecentFavoriteCard {
     display: inline-block;
-    height: 20vh;
+    height: 25vh;
     width: 30vw;
-    padding: 8px;
-    margin-left: 2em;
+    margin: 16px;
+    margin-left: 12.25vw;
   }
 
   .MostRecentFavoriteCardRow {
@@ -30,81 +68,65 @@
     width: 100vw;
   }
 }
-  
-  .FavoriteImages {
-    border-radius: 15px;
-  }
-  .FavoriteTitle {
-    text-align: center;
-    color: white;
-    font-size: 40px;
-    font-weight: bold;
-  }
 
-  .FavoriteTable {
-    color: black;
-    border-collapse: separate;
-    border-spacing: 8px 8px;
-    margin-bottom: 1em;
-    margin-left: 1em;
-  }
-  
-  #CategoryName {
-    font-weight: 600;
-    font-size: 25px;
-    color: white;
-  }
+#FavoriteCardTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5vh;
+  margin-bottom: 2em;
+}
 
-  .TableContainer {
-    height: 100%;
-    width: 100%;
-  }
+.CategoryRowContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  height: 100%;
+  width: 70vw;
+ }
 
-  .FavoriteHangoutContainer {
-    border-radius: 10px;
-    height: 16em;
-    width: 54em;
-    white-space: nowrap;
-    overflow:hidden;
-  }
+.CategoryName {
+  font-weight: 600;
+  font-size: 1.3em;
+  height: 8vh;
+  color: white;
+  display: flex;
+  align-items: center;
+}
 
-  .FavoriteCard {
-    display: inline-block;
-    height: 100%;
-    width: 22%;
-    padding: 8px;
-    pointer-events: auto;
-  }
-  
-  .FavoriteCardDrag {
-    display: inline-block;
-    height: 100%;
-    width: 22%;
-    padding: 8px;
-    pointer-events: none;
-  }
+.CategoryRow {
+  border: 1px solid white;
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  white-space: nowrap;
+  overflow:hidden;
+}
 
-  img:hover{
-    filter: brightness(50%);
-  }
+#MostRecentTable {
+  border-collapse: separate;
+  border-spacing: 0vw 1em;
+}
 
-  #SegmentedControlContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+#PageTitle {
+  text-align: center;
+  color: white;
+  font-size: 1.8em;
+  font-weight: bold;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  /*.FavoriteHangoutContainer::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
+#SegmentedControlContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+}
 
-  .FavoriteHangoutContainer::-webkit-scrollbar-track-piece  {
-    background-color: white;
-  }
-
-  .FavoriteHangoutContainer::-webkit-scrollbar-thumb:horizontal {
-    border-radius: 10px;
-    background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
-  }
-  */
+img:hover{
+  filter: brightness(50%);
+}

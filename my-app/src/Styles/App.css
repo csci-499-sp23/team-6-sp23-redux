@@ -2,9 +2,9 @@
   background-color: #3b4a51;
   font-size: calc(10px + 2vmin);
   color: white;
-  position: fixed;
   height: 100%;
   width: 100%;
+  position: fixed;
   overflow: scroll;
   overflow-x: hidden;
   font-family: 'louis-george-cafe';

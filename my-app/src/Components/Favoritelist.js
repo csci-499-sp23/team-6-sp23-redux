@@ -2,7 +2,7 @@ import FavoriteListCSS from '../Styles/Favoritelist.module.css';
 import FavoriteCard from './FavoriteCard';
 import SegmentedControl from './SubComponents/SegmentedControl';
 import { auth } from '../firebase';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 function Favoritelist({favorites, mostRecentFavorites}) {
     const user = auth.currentUser
@@ -20,7 +20,7 @@ function Favoritelist({favorites, mostRecentFavorites}) {
     
     // Function that makes the scrollable rows draggable
     const slideRow = (selectedRow) => {
-        let slider = document.getElementById(`FavoriteListCSS.FavoriteHangoutContainer${selectedRow}`)
+        let slider = document.getElementById(`FavoriteListCSS.CategoryRow${selectedRow}`)
         let mouseDown = false;
         let startX, scrollLeft;
 
@@ -55,7 +55,7 @@ function Favoritelist({favorites, mostRecentFavorites}) {
     
     // Removes the added Event Listeners when exiting the row
     const deInitEventListener = (selectedRow) => {
-        let slider = document.getElementById(`FavoriteListCSS.FavoriteHangoutContainer${selectedRow}`)
+        let slider = document.getElementById(`FavoriteListCSS.CategoryRow${selectedRow}`)
         slider.removeEventListener('mousemove', null, false);
         slider.removeEventListener('mousedown', null, false);
         slider.removeEventListener('mouseup', null, false);
@@ -64,7 +64,9 @@ function Favoritelist({favorites, mostRecentFavorites}) {
     }
 
     const makeCategoriesTable = () => {
-        return favorites.sort(function(a,b) {
+       return( 
+       <section id={FavoriteListCSS.FavoriteCardTable}>
+        {favorites.sort(function(a,b) {
             if(a[0] < b[0]) { return -1; }
             if(a[0] > b[0]) { return 1; }
             return 0;
@@ -74,62 +76,63 @@ function Favoritelist({favorites, mostRecentFavorites}) {
             //favoritesMap[1] contains the array of hangouts for each category that will be placed in a 2nd column
                         const selectedRow = index + 1
                         return(
-                           <tr key={index}>
-                            <td key={index} id={FavoriteListCSS.CategoryName}>{toTitleCase(favoritesMap[0])}:</td>
-                                <td>
-                                <div id={`FavoriteListCSS.FavoriteHangoutContainer${selectedRow}`} className={FavoriteListCSS.FavoriteHangoutContainer} 
-                                     onMouseOver={() => slideRow(selectedRow)}
-                                     onMouseLeave={() => deInitEventListener(selectedRow)}>
-                                {
-                                    //Table columns for each hangout
-                                    favoritesMap[1].sort().map((hangout, index) => {
-                                        return(  
-                                            <div id={`FavoriteCard${selectedRow}${index}`} key={index} 
-                                                 className={ dragging ? FavoriteListCSS.FavoriteCardDrag : FavoriteListCSS.FavoriteCard}>
-                                            {
-                                                <FavoriteCard
-                                                    key={index}
-                                                    index={index}
-                                                    title={hangout.name} 
-                                                    image={hangout.image_url} 
-                                                    distance={hangout.distance} 
-                                                    location={hangout.location.display_address[0]}
-                                                    location2={hangout.location.display_address[1]}
-                                                    phone={hangout.display_phone}
-                                                    category={hangout.category}
-                                                    closed={hangout.is_closed}
-                                                    details={hangout.details}
-                                                    rating={hangout.rating}
-                                                    url={hangout.url}
-                                                    isMostRecent={false}
-                                                    isCategory={true}
-                                                >
-                                                </FavoriteCard>
-                                            }
-                                            </div>
+                           <div key={index} className={FavoriteListCSS.CategoryRowContainer}>
+                            <div key={index} className={FavoriteListCSS.CategoryName}>{toTitleCase(favoritesMap[0])}</div>
+                            <div id={`FavoriteListCSS.CategoryRow${selectedRow}`} className={FavoriteListCSS.CategoryRow} 
+                                 onMouseOver={() => slideRow(selectedRow)}
+                                 onMouseLeave={() => deInitEventListener(selectedRow)}>
+                            {
+                                //Table columns for each hangout
+                                favoritesMap[1].sort().map((hangout, index) => {
+                                    return(  
+                                        <div id={`FavoriteCard${selectedRow}${index}`} key={index} 
+                                             className={ dragging ? FavoriteListCSS.FavoriteCardDrag : FavoriteListCSS.FavoriteCard}>
+                                        {
+                                            <FavoriteCard
+                                                key={hangout.id}
+                                                index={index}
+                                                title={hangout.name} 
+                                                image={hangout.image_url} 
+                                                distance={hangout.distance} 
+                                                location={hangout.location.display_address[0]}
+                                                location2={hangout.location.display_address[1]}
+                                                phone={hangout.display_phone}
+                                                category={hangout.category}
+                                                closed={hangout.is_closed}
+                                                details={hangout.details}
+                                                rating={hangout.rating}
+                                                url={hangout.url}
+                                                isMostRecent={false}
+                                                isCategory={true}
+                                            />
+                                        }
+                                        </div>
                                            
                                         )
-                                    }) // End of inner for each loop
-                                }
-                                </div>
-                                </td>
-                           </tr> 
+                                }) // End of inner for each loop
+                            }
+                            </div> 
+                           </div> 
                         )
         }) // End of first for each loop
+        }
+        </section>)
     }
     const makeMostRecentTable = () => {
         // The index for each card in the database is reversed so we need to set the correct index for deleting the object
         var i = mostRecentFavorites.length
             return(
+                <table id={FavoriteListCSS.MostRecentTable}>
+                <tbody>
                 <tr className={FavoriteListCSS.MostRecentFavoriteCardRow}>
                 {   
-                    mostRecentFavorites.map((hangout, index) => {
+                    mostRecentFavorites.map((hangout) => {
                         i -= 1
                         return(
                             <td key={i} className={FavoriteListCSS.MostRecentFavoriteCard}>
                             {
                                 <FavoriteCard
-                                key={i}
+                                key={hangout.id}
                                 index={i}
                                 title={hangout.name} 
                                 image={hangout.image_url} 
@@ -144,34 +147,32 @@ function Favoritelist({favorites, mostRecentFavorites}) {
                                 url={hangout.url}
                                 isMostRecent={true}
                                 isCategory={false}
-                                >
-                                </FavoriteCard>
+                                />
                             }
                             </td>
                         )
                     })
                 }
             </tr>
+            </tbody>
+            </table>
             )
     }
     
     return(
-        <div className={FavoriteListCSS.FavoriteContainer}>
-            <div className={FavoriteListCSS.FavoriteTitle}>{user?.displayName}'s Top Favorites</div>
-            
-            <div id={FavoriteListCSS.SegmentedControlContainer}>
-                <SegmentedControl buttonNames={["Most Recent", "Categories"]} selectedSegment={setSelectedSegment}/>
-            </div>
+        <React.Fragment>
+            <header>
+                <div id={FavoriteListCSS.PageTitle}>{user?.displayName}'s Top Favorites</div>
+                
+                <div id={FavoriteListCSS.SegmentedControlContainer}>
+                    <SegmentedControl buttonNames={["Most Recent", "Categories"]} selectedSegment={setSelectedSegment}/>
+                </div>
+            </header>
 
-            <div className={FavoriteListCSS.TableContainer}>
-            <table className={FavoriteListCSS.FavoriteTable}>
-                <tbody>
-                    {mostRecentFavorites && selectedSegment === 0 && makeMostRecentTable()}
-                    {favorites && selectedSegment === 1 && makeCategoriesTable()}
-                </tbody>
-            </table>
-            </div>
-        </div>
+            {mostRecentFavorites && selectedSegment === 0 && makeMostRecentTable()}
+            {favorites && selectedSegment === 1 && makeCategoriesTable()}
+            
+        </React.Fragment>
         
     );    
 }
