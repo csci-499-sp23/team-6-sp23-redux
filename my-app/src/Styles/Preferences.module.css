@@ -11,13 +11,6 @@
     font-family: 'louis-george-cafe';
 }
 
-.PreferencesButtons{
-        text-align: center;
-        height: 40px;
-        border-radius: 8px;
-        background-color: white;
-}
-
 #CategoriesHeader {
     text-align: center;
     font-weight: 600;
@@ -297,3 +290,78 @@ select::-ms-expand { display: none; }
     width: 100%;
   }
 
+@media (orientation: landscape) {
+    @media(max-width: 844px) {
+
+    }
+}
+  
+@media (orientation: portrait) {
+
+    .HeaderText {
+        margin-left: 20%;
+    }
+    
+    .SearchBar {
+        width: 60%;
+    }
+    
+    #LocationInput {
+        font-size: 15px;
+    }
+    
+    .DropdownSelectFrame {
+        width: 60%;
+        font-size: 16px;
+    }
+
+    .ButtonGroup {
+        margin-bottom: 16px;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 4px;
+    }
+    
+    .FirstButton {
+        border-radius: 0px;
+    }
+    
+    .LastButton {
+        border-radius: 0px;
+    }
+    
+    #ButtonInsets {
+        margin-right: 0px;
+        padding: 4px 16px;
+    }
+
+    .ButtonInfoContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.25em;
+    }
+    
+    .customButton {
+        width: 19vw;
+        height: 10vh;
+    }
+    
+    .customButtonActive {
+        width: 19vw;
+        height: 10vh;
+    }
+    
+    .customButtomImage{
+        width: 20px;
+        height: 20px;
+    }
+
+    .ButtonText {
+        font-size: 0.8em;
+    }
+}
