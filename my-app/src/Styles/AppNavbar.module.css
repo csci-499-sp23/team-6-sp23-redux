@@ -1,3 +1,107 @@
+@media (orientation: landscape) {
+  #navLogo{
+    position: relative;
+    width: 20%;
+    height: 20%;
+    pointer-events: none;
+  }
+
+  #RoutesContainer {
+    display: flex;
+  }
+
+  .LinkText {
+    color: white;
+    font-size: 20px;
+  }
+  
+  #ProfileDropdownContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 9em;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+  }
+  
+  #ProfilePicture {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+  }
+  
+  #NavbarUsername {
+    font-size: 1em;
+    color: white;
+  }
+
+  .DropdownItem {
+    color: black;
+    font-size: 1.2em;
+  }
+
+  #NavbarToggle {
+    position: absolute;
+    right: 2em;
+  }
+}
+
+@media (orientation: portrait) {
+  #navLogo{
+    position: relative;
+    width: 10%;
+    height: 10%;
+    pointer-events: none;
+  }
+
+  #RoutesContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 80vw;
+  }
+
+  .LinkText {
+    color: white;
+    font-size: 0.6em;
+  }
+
+  #ProfileDropdownContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 25vw;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    margin-top: 0.4em;
+  }
+  
+  #ProfilePicture {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+  }
+
+  #NavbarUsername {
+    font-size: 12px;
+    color: white;
+  }
+
+  .DropdownItem {
+    color: black;
+    font-size: 0.8em;
+  }
+
+  .DropdownIcon {
+    height: 0.5em;
+  }
+
+  #NavbarToggle {
+    position: absolute;
+    right: 1.5em;
+  }
+}
+
 #Navbar{
     background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
 }
@@ -10,12 +114,6 @@
   align-items: center;
   justify-content: space-evenly;
   height: 3em;
-}
-  
-.navLogo{
-  position: relative;
-  width: 20%;
-  height: 20%;
 }
 
 #welcomeLogo {
@@ -31,47 +129,13 @@
   right: 16px;
 }
 
-#RoutesContainer {
-  display: flex;
-}
-
 .Link {
   margin-top: 0.2em;
   margin-right: 1em;
 }
 
-.LinkText {
-  color: white;
-  font-size: 20px;
-}
-
-#ProfileDropdownContainer {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 9em;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 30px;
-}
-
-#ProfilePicture {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-}
-
-#NavbarUsername {
-  font-size: 1em;
-  color: white;
-}
-
 .DropdownMenu {
   background-color: white;
-}
-
-.DropdownItem {
-  color: black;
-  font-size: 1.2em;
 }
 
 .DropdownItem:hover {

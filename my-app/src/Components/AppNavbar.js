@@ -9,7 +9,7 @@ import { signOutUser } from '../firebase';
 import { useNavigate } from "react-router-dom";
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { auth } from '../firebase';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <button
@@ -50,6 +50,8 @@ function AppNavbar({ isAuthenticated }) {
   const pathReference = ref(storage, profileURLPath);
   const profileImage = document.getElementById(`${AppNavbarCSS.ProfilePicture}`);
 
+  const [hideToggle, setHideToggle] = useState(false);
+
    // Set the profile image from firebase if the user uploaded one
    useEffect(() => {
     if (profileImage !== null) {
@@ -69,9 +71,10 @@ function AppNavbar({ isAuthenticated }) {
       <Navbar id={AppNavbarCSS.Navbar} expand="lg">
         <Container>
           <Navbar.Brand>
-            <img className={AppNavbarCSS.navLogo} src="Images/easyhangoutlogo.png" alt="nav-logo"></img>
+            <img id={AppNavbarCSS.navLogo} src="Images/easyhangoutlogo.png" alt="nav-logo" draggable="false"></img>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" style={hideToggle ? {'display': 'none'} : null} 
+                         onClick={() => setHideToggle(true)} id={AppNavbarCSS.NavbarToggle}/>
           <Navbar.Collapse id="basic-navbar-nav" className={AppNavbarCSS.NavbarCollapse}>
             <Nav className="me-auto">
               <div id={AppNavbarCSS.RoutesContainer}>
@@ -83,7 +86,7 @@ function AppNavbar({ isAuthenticated }) {
                   <div id={AppNavbarCSS.ProfileDropdownContainer}>
                     <img src="https://via.placeholder.com/150" alt="Profile Avatar" width={50} height={50} className="rounded-circle" id={AppNavbarCSS.ProfilePicture} />
                     <div id={AppNavbarCSS.NavbarUsername}>{user?.displayName}</div>
-                    <img src="http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png" alt="Dropdown"></img>
+                    <img src="http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png" className={AppNavbarCSS.DropdownIcon} alt="Dropdown"></img>
                   </div>
                   </Dropdown.Toggle>
                   <Dropdown.Menu className={AppNavbarCSS.DropdownMenu} align={"end"}>
