@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import TinderCard from 'react-tinder-card'
 import Card from './Card.js'
 import CardCSS from "../Styles/Card.module.css"
@@ -8,7 +8,14 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
     const [accepted, setAccepted] = useState(false);
     const [rejected, setRejected] = useState(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    let swipeThresholdValue = screenWidth / 4
+    const [isLeft, setIsLeft] = useState(false);
+    const [isRight, setIsRight] = useState(false);
+    const [intv, setIntv] = useState(null);
+    const [isDragging, setIsDragging] = useState(false);
+
+    const cardRef = useRef(null)
+
+    let swipeThresholdValue = screenWidth / 2.9
 
     window.addEventListener('resize', () => {
         setScreenWidth(window.innerWidth)
@@ -43,7 +50,7 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
         {rejected && <SwipeFeedback accepted={false}/>}
     </>
     )
-    
+
 }
 
 export default SwipeableCard

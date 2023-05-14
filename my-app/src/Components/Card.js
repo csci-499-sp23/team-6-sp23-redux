@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import CardCSS from '../Styles/Card.module.css';
 import { useState, useEffect } from 'react';
 import { getNumLikes } from '../Services/LikesService';
@@ -21,8 +21,7 @@ function Card(props) {
 
   console.log(numberOfLikes)
   //To miles function
-  function toMiles(meters)
-  {
+  function toMiles(meters) {
     return parseInt(meters) * 0.000621371;
   }
 
@@ -43,10 +42,21 @@ function Card(props) {
               <div className={CardCSS.Detail}>{locationDetail}</div>
 
             </div>
-            
-            <div id={CardCSS.DistanceContainer}>
-              <div className={CardCSS.DetailLabel}>Distance: </div>
-              <div className={CardCSS.Detail}>{toMiles(props.distance).toFixed(2)} miles away</div>
+
+
+            <div className={FavoriteModal.DetailsBox}>
+              <div className={FavoriteModal.InfoBox}><span className={FavoriteModal.InfoLabel}>Category</span>
+                <span className={FavoriteModal.InfoDetail}>{(toTitleCase(props.category))}</span>
+              </div>
+
+              <div className={FavoriteModal.InfoBox}><span className={FavoriteModal.InfoLabel}>Location</span>
+                <span className={FavoriteModal.InfoDetail}>{props.location + ' \n' + props.location2}</span>
+                <span className={FavoriteModal.InfoDetail}>{"This location is " + isOpen(props.closed)}</span>
+                <div className={FavoriteModal.urlDiv}><label className={FavoriteModal.urlBox}>{props.url}</label>
+                  <FontAwesomeIcon className={FavoriteModal.ClipboardIcon} icon={faClipboard} onClick={() => navigator.clipboard.writeText(props.url)} /></div>
+
+              </div>
+
             </div>
             
             

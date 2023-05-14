@@ -20,7 +20,12 @@
 .TopCard{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
+.MockLeft{
+    box-shadow: 0 8px 20px 0 rgba(255, 0, 0, 0.7), 0 8px 20px 0 rgba(255, 0, 0, 0.7);
+}
+.MockRight{
+    box-shadow: 0 8px 20px 0 rgba(0, 255, 0, 0.7), 0 8px 20px 0 rgba(0, 255, 0, 0.7);
+}
 .OtherCards{
     display: none;
 }
