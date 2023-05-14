@@ -1,110 +1,131 @@
-
+/* NOTE: - Category Display */
 @media (orientation: landscape) {
-  .MostRecentFavoriteCard {
+  .FavoriteCard {
     display: inline-block;
     height: 55vh;
     width: 20vw;
-    padding: 8px;
-    margin-left: 5em;
-  }
-
-  .MostRecentFavoriteCardRow {
-    border-radius: 10px;
-    height: 60vh;
-    width: 100vw;
-  }
-}
-
-@media (orientation: portrait) {
-  .MostRecentFavoriteCard {
-    display: inline-block;
-    height: 20vh;
-    width: 30vw;
-    padding: 8px;
-    margin-left: 2em;
-  }
-
-  .MostRecentFavoriteCardRow {
-    border-radius: 10px;
-    height: 30vh;
-    width: 100vw;
-  }
-}
-  
-  .FavoriteImages {
-    border-radius: 15px;
-  }
-  .FavoriteTitle {
-    text-align: center;
-    color: white;
-    font-size: 40px;
-    font-weight: bold;
-  }
-
-  .FavoriteTable {
-    color: black;
-    border-collapse: separate;
-    border-spacing: 8px 8px;
-    margin-bottom: 1em;
-    margin-left: 1em;
-  }
-  
-  #CategoryName {
-    font-weight: 600;
-    font-size: 25px;
-    color: white;
-  }
-
-  .TableContainer {
-    height: 100%;
-    width: 100%;
-  }
-
-  .FavoriteHangoutContainer {
-    border-radius: 10px;
-    height: 16em;
-    width: 54em;
-    white-space: nowrap;
-    overflow:hidden;
-  }
-
-  .FavoriteCard {
-    display: inline-block;
-    height: 100%;
-    width: 22%;
     padding: 8px;
     pointer-events: auto;
   }
   
   .FavoriteCardDrag {
     display: inline-block;
-    height: 100%;
-    width: 22%;
+    height: 55vh;
+    width: 20vw;
     padding: 8px;
     pointer-events: none;
   }
+}
 
-  img:hover{
-    filter: brightness(50%);
+@media (orientation: portrait) {
+  .FavoriteCard {
+    display: inline-block;
+    height: 20vh;
+    width: 30vw;
+    padding: 8px;
+    pointer-events: auto;
+  }
+  
+  .FavoriteCardDrag {
+    display: inline-block;
+    height: 20vh;
+    width: 30vw;
+    padding: 8px;
+    pointer-events: none;
+  }
+}
+
+#FavoriteCardTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5vh;
+  margin-bottom: 2em;
+}
+
+.CategoryRowContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  height: 100%;
+  width: 70vw;
+ }
+
+.CategoryName {
+  font-weight: 600;
+  font-size: 1.3em;
+  height: 8vh;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.CategoryRow {
+  border: 1px solid white;
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  white-space: nowrap;
+  overflow:hidden;
+}
+
+/* NOTE: - Most Recent Display */
+
+@media (orientation: landscape) {
+  .MostRecentFavoriteCard {
+    height: 55vh;
+    width: 20vw;
   }
 
-  #SegmentedControlContainer {
+  .MostRecentFavoriteCardRow {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
+    gap: 2em;
+  }
+}
+
+@media (orientation: portrait) {
+  .MostRecentFavoriteCard {
+    height: 20vh;
+    width: 30vw;
   }
 
-  /*.FavoriteHangoutContainer::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+  .MostRecentFavoriteCardRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 0.5em;
   }
+}
 
-  .FavoriteHangoutContainer::-webkit-scrollbar-track-piece  {
-    background-color: white;
-  }
+#MostRecentTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
 
-  .FavoriteHangoutContainer::-webkit-scrollbar-thumb:horizontal {
-    border-radius: 10px;
-    background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
-  }
-  */
+#PageTitle {
+  text-align: center;
+  color: white;
+  font-size: 1.8em;
+  font-weight: bold;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#SegmentedControlContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+}
+
