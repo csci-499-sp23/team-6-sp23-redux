@@ -144,7 +144,7 @@ function Preferences(props) {
 
     // Function used to toggle the category button and update the map accordingly
     const toggleButton = (e) => {
-        let category = e.target.value
+        let category = e.currentTarget.value
         setCategoriesMap({...categoriesMap ,[category]: !categoriesMap[category]})
     }
   
@@ -189,7 +189,7 @@ function Preferences(props) {
     }
 
     const handleMouseOver = (e) => {
-        switch(e.target.id) {
+        switch(e.currentTarget.id) {
             case "1":
                 setIsHovered(1)
                 break
@@ -200,7 +200,7 @@ function Preferences(props) {
                 break
         }
     }
-    
+
     return (
 
         <div className = {PreferencesCSS.PreferencesContainer}>
@@ -273,7 +273,7 @@ function Preferences(props) {
                     <button value={Categories.Restaurant} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Restaurant] ? `${PreferencesCSS.customButtonActive} ${PreferencesCSS.FirstButton}` : `${PreferencesCSS.customButton} ${PreferencesCSS.FirstButton}`} >
                        <div className={PreferencesCSS.ButtonInfoContainer}> 
-                            <img src = "Images/restaurant.png" alt = "restaurant-icon" className = {PreferencesCSS.customButtomImage}></img>
+                            <img src = "Images/restaurant.png" alt = "restaurant-icon" className={ categoriesMap[Categories.Restaurant] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img>
                             <div className={PreferencesCSS.ButtonText}>Restaurants</div> 
                        </div>
                     </button>
@@ -281,7 +281,7 @@ function Preferences(props) {
                     <button value={Categories.Cafe} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Cafe] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
                         <div className={PreferencesCSS.ButtonInfoContainer}>
-                            <img src = "Images/cafe.png" alt = "cafe-icon" className = {PreferencesCSS.customButtomImage}></img> 
+                            <img src = "Images/cafe.png" alt = "cafe-icon" className={ categoriesMap[Categories.Cafe] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img> 
                             <div className={PreferencesCSS.ButtonText}>Cafes</div>
                         </div>
                     </button>
@@ -289,7 +289,7 @@ function Preferences(props) {
                     <button value={Categories.Game} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Game] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
                         <div className={PreferencesCSS.ButtonInfoContainer}>
-                            <img src = "Images/game.png" alt = "game-icon" className = {PreferencesCSS.customButtomImage}></img> 
+                            <img src = "Images/game.png" alt = "game-icon" className={ categoriesMap[Categories.Game] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img> 
                             <div className={PreferencesCSS.ButtonText}>Games</div>
                         </div>
                     </button>
@@ -297,7 +297,7 @@ function Preferences(props) {
                     <button value={Categories.Shopping} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Shopping] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
                         <div className={PreferencesCSS.ButtonInfoContainer}>
-                            <img src = "Images/shopping.png" alt = "shopping-icon" className = {PreferencesCSS.customButtomImage}></img> 
+                            <img src = "Images/shopping.png" alt = "shopping-icon" className={ categoriesMap[Categories.Shopping] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img> 
                             <div className={PreferencesCSS.ButtonText}>Shopping</div>
                         </div>
                     </button>
@@ -305,7 +305,7 @@ function Preferences(props) {
                     <button value={Categories.Spa} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Spa] ? `${PreferencesCSS.customButtonActive} ${PreferencesCSS.LastButton}` : `${PreferencesCSS.customButton} ${PreferencesCSS.LastButton}`} >
                         <div className={PreferencesCSS.ButtonInfoContainer}>
-                            <img src = "Images/spa.png" alt = "spa-icon" className = {PreferencesCSS.customButtomImage}></img>   
+                            <img src = "Images/spa.png" alt = "spa-icon" className={ categoriesMap[Categories.Spa] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img>   
                             <div className={PreferencesCSS.ButtonText}>Spas</div>
                         </div>
                     </button>
@@ -314,57 +314,84 @@ function Preferences(props) {
                 <div className={PreferencesCSS.ButtonGroup}>
                     <button value={Categories.Bowling} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Bowling] ? `${PreferencesCSS.customButtonActive} ${PreferencesCSS.FirstButton}` : `${PreferencesCSS.customButton} ${PreferencesCSS.FirstButton}`} >
-                        <img src = "Images/bowling.png" alt = "bowling-icon" className = {PreferencesCSS.customButtomImage}></img>  Bowling
+                        <div className={PreferencesCSS.ButtonInfoContainer}>
+                            <img src = "Images/bowling.png" alt = "bowling-icon" className={ categoriesMap[Categories.Bowling] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img>  
+                            <div className={PreferencesCSS.ButtonText}>Bowling</div>
+                        </div>
                     </button>
 
                     <button value={Categories.Karaoke} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Karaoke] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
-                        <img src = "Images/karaoke.png" alt = "karaoke-icon" className = {PreferencesCSS.customButtomImage}></img>       Karaoke
+                        <div className={PreferencesCSS.ButtonInfoContainer}>
+                            <img src = "Images/karaoke.png" alt = "karaoke-icon" className={ categoriesMap[Categories.Karaoke] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img>      
+                            <div className={PreferencesCSS.ButtonText}>Karaoke</div>
+                        </div>
                     </button>
 
                     <button value={Categories.Bar} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Bar] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
-                          <img src = "Images/bar.png" alt = "baricon" className = {PreferencesCSS.customButtomImage}></img>    Bars
+                          <div className={PreferencesCSS.ButtonInfoContainer}>
+                            <img src = "Images/bar.png" alt = "baricon" className={ categoriesMap[Categories.Bar] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img>    
+                            <div className={PreferencesCSS.ButtonText}>Bars</div>
+                          </div>
                     </button>
 
                     <button value={Categories.Club} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Club] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
-                        <img src = "Images/club.png" alt = "club-icon" className = {PreferencesCSS.customButtomImage}></img>    Clubs
+                        <div className={PreferencesCSS.ButtonInfoContainer}>
+                            <img src = "Images/club.png" alt = "club-icon" className={ categoriesMap[Categories.Club] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img>    
+                            <div className={PreferencesCSS.ButtonText}>Clubs</div>
+                        </div>
                     </button>
 
                     <button value={Categories.Billiards} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Billiards] ? `${PreferencesCSS.customButtonActive} ${PreferencesCSS.LastButton}` : `${PreferencesCSS.customButton} ${PreferencesCSS.LastButton}`} >
-                         <img src = "Images/pool.png" alt = "pool-icon" className = {PreferencesCSS.customButtomImage}></img>                        Billiards
+                         <div className={PreferencesCSS.ButtonInfoContainer}>
+                            <img src = "Images/pool.png" alt = "pool-icon" className={ categoriesMap[Categories.Billiards] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img>                        
+                            <div className={PreferencesCSS.ButtonText}>Billiards</div>
+                         </div>
                     </button>
                 </div>
 
                 <div className={PreferencesCSS.ButtonGroup}>
                     <button value={Categories.Theater} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Theater] ? `${PreferencesCSS.customButtonActive} ${PreferencesCSS.FirstButton}` : `${PreferencesCSS.customButton} ${PreferencesCSS.FirstButton}`} >
-                        <img src = "Images/theater.png" alt = "theater-icon" className = {PreferencesCSS.customButtomImage}></img>                         Theaters
+                        <div className={PreferencesCSS.ButtonInfoContainer}>
+                            <img src = "Images/theater.png" alt = "theater-icon" className={ categoriesMap[Categories.Theater] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img> 
+                            <div className={PreferencesCSS.ButtonText}>Theaters</div>
+                        </div>
                     </button>
 
                     <button value={Categories.Zoo} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Zoo] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
-                        <img src = "Images/zoo.png" alt = "zoo-icon" className = {PreferencesCSS.customButtomImage}></img>         Zoos
+                        <div className={PreferencesCSS.ButtonInfoContainer}>
+                            <img src = "Images/zoo.png" alt = "zoo-icon" className={ categoriesMap[Categories.Zoo] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img>       
+                            <div className={PreferencesCSS.ButtonText}>Zoos</div>
+                        </div>
                     </button>
 
                     <button value={Categories.Amusement} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Amusement] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
                         <div className={PreferencesCSS.ButtonInfoContainer}>
-                         <img src = "Images/coaster.png" alt = "coaster-icon" className = {PreferencesCSS.customButtomImage}></img>      
-                         <div className={PreferencesCSS.ButtonText}>Theme Parks</div>
+                            <img src = "Images/coaster.png" alt = "coaster-icon" className={ categoriesMap[Categories.Amusement] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img>      
+                            <div className={PreferencesCSS.ButtonText}>Amusement</div>
                          </div>
                     </button>
 
                     <button value={Categories.Park} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Park] ? PreferencesCSS.customButtonActive : PreferencesCSS.customButton} >
-                        <img src = "Images/park.png" alt = "park-icon" className = {PreferencesCSS.customButtomImage}></img>       Parks
+                        <div className={PreferencesCSS.ButtonInfoContainer}>
+                            <img src = "Images/park.png" alt = "park-icon" className={ categoriesMap[Categories.Park] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img>      
+                            <div className={PreferencesCSS.ButtonText}>Parks</div>
+                        </div>
                     </button>
 
                     <button value={Categories.Swimming} onClick={toggleButton} id={PreferencesCSS.ButtonInsets}
                     className={ categoriesMap[Categories.Swimming] ? `${PreferencesCSS.customButtonActive} ${PreferencesCSS.LastButton}` : `${PreferencesCSS.customButton} ${PreferencesCSS.LastButton}`} >
-                        <img src = "Images/swimming.png" alt = "swimming-icon" className = {PreferencesCSS.customButtomImage}></img>     Swimming
+                        <div className={PreferencesCSS.ButtonInfoContainer}>
+                            <img src = "Images/swimming.png" alt = "swimming-icon" className = { categoriesMap[Categories.Swimming] ? PreferencesCSS.customButtonActiveImage : PreferencesCSS.customButtonImage}></img>    
+                            <div className={PreferencesCSS.ButtonText}>Swimming</div>
+                        </div>
                     </button>
                 </div>
             </div>

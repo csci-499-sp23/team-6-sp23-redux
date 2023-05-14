@@ -50,10 +50,6 @@
     border-color: aqua;
 }
 
-.customButton img{
-    filter: grayscale(100%) brightness(0%);
-}
-
 .customButtonActive {
     width: 100%;
     min-width: 50px;
@@ -63,12 +59,24 @@
     border-color: aqua;
 }
 
-.customButtomImage{
+.customButtonImage{
     width: 22px;
     height: 22x;
     margin-right:3px;
     object-fit: fill;
     float:left;
+    filter: grayscale(100%) brightness(0%);
+    pointer-events: none;
+}
+
+.customButtonActiveImage {
+    width: 22px;
+    height: 22x;
+    margin-right:3px;
+    object-fit: fill;
+    float:left;
+    filter: none;
+    pointer-events: none;
 }
 
 .HeaderText {
@@ -293,6 +301,59 @@ select::-ms-expand { display: none; }
 @media (orientation: landscape) {
     @media(max-width: 844px) {
 
+        .HeaderText {
+            margin-left: 20%;
+        }
+
+        .SearchBar {
+            width: 60%;
+        }
+
+        .DropdownSelectFrame {
+            width: 60%;
+        }
+
+        .FirstButton {
+            border-radius: 0px;
+        }
+        
+        .LastButton {
+            border-radius: 0px;
+        }
+
+        #ButtonInsets {
+            padding: 12px 16px;
+        }
+
+        .ButtonInfoContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.25em;
+        }
+        
+        .customButton {
+            width: 11vw;
+            height: 11vw;
+            border-radius: 2vw;
+        }
+        
+        .customButtonActive {
+            width: 11vw;
+            height: 11vw;
+            border-radius: 2vw;
+        }
+        
+        .customButtomImage{
+            width: 20px;
+            height: 20px;
+        }
+    
+        .ButtonText {
+            font-size: 0.8em;
+            text-align: center;
+        }
     }
 }
   
@@ -317,7 +378,6 @@ select::-ms-expand { display: none; }
 
     .ButtonGroup {
         margin-bottom: 16px;
-        border: 1px solid black;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -347,13 +407,15 @@ select::-ms-expand { display: none; }
     }
     
     .customButton {
-        width: 19vw;
-        height: 10vh;
+        width: 18vw;
+        height: 18vw;
+        border-radius: 2vw;
     }
     
     .customButtonActive {
-        width: 19vw;
-        height: 10vh;
+        width: 18vw;
+        height: 18vw;
+        border-radius: 2vw;
     }
     
     .customButtomImage{
@@ -363,5 +425,6 @@ select::-ms-expand { display: none; }
 
     .ButtonText {
         font-size: 0.8em;
+        text-align: center;
     }
 }
