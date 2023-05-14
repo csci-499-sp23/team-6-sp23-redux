@@ -11,13 +11,6 @@
     font-family: 'louis-george-cafe';
 }
 
-.PreferencesButtons{
-        text-align: center;
-        height: 40px;
-        border-radius: 8px;
-        background-color: white;
-}
-
 #CategoriesHeader {
     text-align: center;
     font-weight: 600;
@@ -57,10 +50,6 @@
     border-color: aqua;
 }
 
-.customButton img{
-    filter: grayscale(100%) brightness(0%);
-}
-
 .customButtonActive {
     width: 100%;
     min-width: 50px;
@@ -70,12 +59,24 @@
     border-color: aqua;
 }
 
-.customButtomImage{
+.customButtonImage{
     width: 22px;
     height: 22x;
     margin-right:3px;
     object-fit: fill;
     float:left;
+    filter: grayscale(100%) brightness(0%);
+    pointer-events: none;
+}
+
+.customButtonActiveImage {
+    width: 22px;
+    height: 22x;
+    margin-right:3px;
+    object-fit: fill;
+    float:left;
+    filter: none;
+    pointer-events: none;
 }
 
 .HeaderText {
@@ -297,3 +298,133 @@ select::-ms-expand { display: none; }
     width: 100%;
   }
 
+@media (orientation: landscape) {
+    @media(max-width: 844px) {
+
+        .HeaderText {
+            margin-left: 20%;
+        }
+
+        .SearchBar {
+            width: 60%;
+        }
+
+        .DropdownSelectFrame {
+            width: 60%;
+        }
+
+        .FirstButton {
+            border-radius: 0px;
+        }
+        
+        .LastButton {
+            border-radius: 0px;
+        }
+
+        #ButtonInsets {
+            padding: 12px 16px;
+        }
+
+        .ButtonInfoContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.25em;
+        }
+        
+        .customButton {
+            width: 11vw;
+            height: 11vw;
+            border-radius: 2vw;
+        }
+        
+        .customButtonActive {
+            width: 11vw;
+            height: 11vw;
+            border-radius: 2vw;
+        }
+        
+        .customButtomImage{
+            width: 20px;
+            height: 20px;
+        }
+    
+        .ButtonText {
+            font-size: 0.8em;
+            text-align: center;
+        }
+    }
+}
+  
+@media (orientation: portrait) {
+
+    .HeaderText {
+        margin-left: 20%;
+    }
+    
+    .SearchBar {
+        width: 60%;
+    }
+    
+    #LocationInput {
+        font-size: 15px;
+    }
+    
+    .DropdownSelectFrame {
+        width: 60%;
+        font-size: 16px;
+    }
+
+    .ButtonGroup {
+        margin-bottom: 16px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 4px;
+    }
+    
+    .FirstButton {
+        border-radius: 0px;
+    }
+    
+    .LastButton {
+        border-radius: 0px;
+    }
+    
+    #ButtonInsets {
+        margin-right: 0px;
+        padding: 4px 16px;
+    }
+
+    .ButtonInfoContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.25em;
+    }
+    
+    .customButton {
+        width: 18vw;
+        height: 18vw;
+        border-radius: 2vw;
+    }
+    
+    .customButtonActive {
+        width: 18vw;
+        height: 18vw;
+        border-radius: 2vw;
+    }
+    
+    .customButtomImage{
+        width: 20px;
+        height: 20px;
+    }
+
+    .ButtonText {
+        font-size: 0.8em;
+        text-align: center;
+    }
+}
