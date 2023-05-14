@@ -1,77 +1,238 @@
-:root {
-  --border-color: #eaeaea;
-  --text-color: white;
-  --background-color: #fff;
-  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --font-family: 'louis-george-cafe';
+@media (orientation: landscape) {
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    height: 100%;
+    width: 100%;
+    margin-bottom: 1em;
+  }
+
+  #PageTitle {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    height: 10%;
+  }
+  
+  #FlexContainer {
+    display: flex;
+    width: 90%;
+    height: 90%;
+    justify-content: space-between;
+    padding-bottom: 1em;
+    padding-top: 5vh;
+    margin-top: 5vh;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    gap: 10vw;
+  }
+
+  #LeftContainer {
+    color: black;
+    width: 35%;
+    margin-left: 5em;
+    height: 100%;
+  }
+  
+  #RightContainer {
+    margin-right: 5em;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 0.5em;
+    overflow-y: auto;
+    padding-right: 1em;
+  }
+
+  /* Left Container */
+
+  .profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    background: var(--background-color);
+    height: 100%;
+  }
+
+  .UserInfoContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+
+  #ProfileImage {
+    height: 70%;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+    border-radius: 10px 10px 0px 0px;
+    object-fit: cover;
+    border-bottom: none;
+    pointer-events: none;
+  }
+
+  #Username {
+    font-family: 'louis-george-cafe';
+    font-size: 1.8em;
+    font-weight: bold;
+    position: relative;
+    top: -6%;
+    text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 0px 0px 10px 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 1.6em;
+  }
+
+  #Username::-webkit-scrollbar {
+    height: 0px;
+    width: 0px; 
+    background: transparent;
+    }
+
+  #UserDetailsBox {
+    height: 20%;
+    text-align: left;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 5%;
+    position: relative;
+    bottom: 2.5%;
+  }
+
+  #Location {
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+
+  #Email {
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+
+  #ResetPasswordButton {
+    width: 45%;
+    border: 1px #ccc solid;
+    border-radius: 10px;
+    background-color: white;
+  }
+
+  @media (max-width: 844px) {
+
+    #PageTitle {
+     display: none;
+    }
+
+    #FlexContainer {
+      width: 100%;
+      height: 100%;
+    }
+
+    #LeftContainer {
+      width: 30%;
+      height: 100%;
+    }
+    
+    #RightContainer {
+      width: 50%;
+      height: 100%;
+      gap: 0.5em;
+      padding-right: 1em;
+    }
+
+    #Username {
+      font-size: 1.1em;
+      height: 1.6em;
+    }
+
+    #UserDetailsBox {
+      height: 20%;
+    }
+
+    #Location {
+      font-size: 0.9em;
+      font-weight: 600;
+    }
+  
+    #Email {
+      font-size: 0.9em;
+      font-weight: 600;
+    }
+
+    #ResetPasswordButton {
+      width: 55%;
+    }
+  }
+
+
 }
 
-.profile-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-color);
-  height: 100%;
-  width: 100%;
-  margin-bottom: 1em;
-}
+@media (orientation: portrait) {
 
-.profile-container button, .profile-container input, .profile-container label {
-  height: 2em;
-}
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: top;
+    color: var(--text-color);
+    height: 100%;
+    width: 100%;
+  }
 
-#PageTitle {
-  font-size: 3rem;
-  font-weight: bold;
-  color: white;
-  height: 10%;
-}
+  #PageTitle {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    height: 10vh;
+  }
+  
+  #FlexContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1em;
+    padding-top: 1em;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+  }
 
-#FlexContainer {
-  display: flex;
-  width: 90%;
-  height: 90%;
-  justify-content: space-between;
-  padding-bottom: 1em;
-  padding-top: 1em;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-}
-
-#LeftContainer {
-  color: black;
-  width: 35%;
-  margin-left: 5em;
-  height: 100%;
-}
-
-#RightContainer {
-  margin-right: 5em;
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  gap: 0.5em;
-  overflow-y: scroll;
-  padding-right: 1em;
-}
-
-#RightContainer::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-#RightContainer::-webkit-scrollbar-track-piece {
-  background-color: white;
-}
-
-#RightContainer::-webkit-scrollbar-thumb:vertical {
-  border-radius: 10px;
-  background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
-}
-
-/* Left Container */
+  #LeftContainer {
+    color: black;
+    width: 80vw;
+    height: 45%;
+  }
+  
+  #RightContainer {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    gap: 0.5em;
+    overflow-y: auto;
+    padding-right: 1em;
+  }
+  
+  
+  /* Left Container */
 
 .profile-card {
   display: flex;
@@ -94,7 +255,7 @@
 }
 
 #ProfileImage {
-  height: 70%;
+  height: 60%;
   width: 90%;
   margin-left: 5%;
   margin-top: 5%;
@@ -106,7 +267,7 @@
 
 #Username {
   font-family: 'louis-george-cafe';
-  font-size: 1.8em;
+  font-size: 1.5em;
   font-weight: bold;
   position: relative;
   top: -6%;
@@ -147,6 +308,41 @@
 #Email {
   font-size: 1.1em;
   font-weight: 600;
+}
+
+#ResetPasswordButton {
+  width: 45%;
+  border: 1px #ccc solid;
+  border-radius: 10px;
+  background-color: white;
+}
+
+}
+
+:root {
+  --border-color: #eaeaea;
+  --text-color: white;
+  --background-color: #fff;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --font-family: 'louis-george-cafe';
+}
+
+.profile-container button, .profile-container input, .profile-container label {
+  height: 2em;
+}
+
+#RightContainer::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+#RightContainer::-webkit-scrollbar-track-piece {
+  background-color: white;
+}
+
+#RightContainer::-webkit-scrollbar-thumb:vertical {
+  border-radius: 10px;
+  background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
 }
 
 /* Right Container */
@@ -232,6 +428,7 @@
   border-radius: 10px;
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 .CustomFileButton:hover {
@@ -252,7 +449,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  width: 150px;
+  width: 130px;
   text-align: center;
   font-size: 0.8em;
 }
@@ -343,13 +540,7 @@
 #ResetPasswordBox {
   display: flex;
   justify-content: center;
-}
-
-#ResetPasswordButton {
-  width: 45%;
-  border: 1px #ccc solid;
-  border-radius: 10px;
-  background-color: white;
+  white-space: nowrap;
 }
 
 #ResetPasswordButton:hover {
