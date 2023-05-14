@@ -13,3 +13,8 @@
 .test {
   color: black;
 }
+.error-message{
+  display: block;
+  color: red;
+  font-size: small;
+}
