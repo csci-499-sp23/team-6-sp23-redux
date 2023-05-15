@@ -200,7 +200,6 @@ function Favoritelist({favorites, mostRecentFavorites}) {
                                         closed={hangout.is_closed}
                                         details={hangout.details}
                                         rating={hangout.rating}
-                                        url={hangout.url}
                                         isMostRecent={true}
                                         isCategory={false}
                                     />

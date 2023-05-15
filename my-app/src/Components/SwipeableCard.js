@@ -3,6 +3,7 @@ import TinderCard from 'react-tinder-card'
 import Card from './Card.js'
 import CardCSS from "../Styles/Card.module.css"
 
+
 function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     let swipeThresholdValue = screenWidth / 4

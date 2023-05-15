@@ -1,5 +1,6 @@
 import React from 'react';
 import CardCSS from '../Styles/Card.module.css';
+import FavoriteDetails from './FavoriteDetails';
 
 function Card(props) {
   const locationDetail = props.location2 ? props.location + ", \n" + props.location2 : props.location;
@@ -10,26 +11,33 @@ function Card(props) {
     return parseInt(meters) * 0.000621371;
   }
 
+
   return (
     <React.Fragment>
-        <div className={`${CardCSS.CardContainer} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}>
+      <div className={`${CardCSS.CardContainer} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}>
+         <div className={CardCSS.HangoutDetail}>
+             <FavoriteDetails className={CardCSS.HangoutDetail} {...props}/>
+             </div>
+        
           <img draggable='false' id={CardCSS.Image} src={props.image} alt="hangout-suggestion"></img>
-         
-          <div id={CardCSS.Title}>{props.title}</div>
           
+          <div id={CardCSS.Title}>{props.title}</div>
             <div id={CardCSS.BottomContainer}>
             <div id={CardCSS.LocationContainer}>
               <div className={CardCSS.DetailLabel}>Location: </div>
               <div className={CardCSS.Detail}>{locationDetail}</div>
+
             </div>
             
             <div id={CardCSS.DistanceContainer}>
               <div className={CardCSS.DetailLabel}>Distance: </div>
               <div className={CardCSS.Detail}>{toMiles(props.distance).toFixed(2)} miles away</div>
             </div>
+            
+            
           </div>
-          
         </div>
+
     </React.Fragment>
   );
 };
