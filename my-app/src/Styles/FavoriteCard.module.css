@@ -1,3 +1,57 @@
+.Container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 5%;
+    overflow: hidden;
+}
+
+#Image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+    border: none;
+}
+
+.Detail {
+    padding-left: 1em;
+    padding-right: 1em;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px #000;
+    white-space: pre-wrap;
+    height: 3.6em;
+    line-height: 1.2em;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.FavoriteModal {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+#CardHeader {
+    display: flex;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 2em;
+    justify-content: space-between;
+}
+
+.DeleteAlert {
+    z-index: 1;
+}
+
+.Spacer {
+    width: 1.5em;
+    margin-left: 8px;
+}
+
 
 @media (orientation: landscape) {
     #Title {
@@ -63,6 +117,19 @@
     .DeleteCardButton:hover .DeleteButtonImage{
         background-color: blue;
     }
+
+    @media (max-width: 818px) {
+
+        .DeleteButtonImage {
+            width: 100%;
+            height: 1.25vmax;
+        }
+
+        .DeleteCardButton {
+            width: 3vmax;
+            height: 3vmax;
+        }
+    }
   }
   
   @media (orientation: portrait) {
@@ -106,8 +173,8 @@
     }
 
     .DeleteButtonImage {
-        width: 10vw;
-        height: 1vh;
+        width: 2.25vmax;
+        height: 1vmax;
         background-color: white;
         -webkit-mask-box-image: url("https://cdn.discordapp.com/attachments/1070131505743016087/1104985006323011624/thex.png");
     }
@@ -118,8 +185,8 @@
         border-radius: 25%;
         border: none;
         background-color: red;
-        width: 1em;
-        height: 1em;
+        width: 2.25vmax;
+        height: 2.25vmax;
         font-weight: bold;
         align-self: top;
         display: flex;
@@ -130,58 +197,3 @@
         background-color: blue;
     }
   }
-
-.Container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
-    border-radius: 5%;
-    overflow: hidden;
-}
-
-#Image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 1;
-    border: none;
-}
-
-.Detail {
-    padding-left: 1em;
-    padding-right: 1em;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px #000;
-    white-space: pre-wrap;
-    height: 3.6em;
-    line-height: 1.2em;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-}
-
-.FavoriteModal {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-}
-
-#CardHeader {
-    display: flex;
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 2em;
-    justify-content: space-between;
-}
-
-.DeleteAlert {
-    z-index: 1;
-}
-
-.Spacer {
-    width: 1.5em;
-    margin-left: 8px;
-}
-
