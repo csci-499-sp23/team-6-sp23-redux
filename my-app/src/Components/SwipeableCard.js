@@ -29,7 +29,7 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
         swipeRequirementType="position"
         swipeThreshold={swipeThresholdValue}
         className={`${CardCSS.TinderCard} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}
-        children={<Card {...props}/>}
+        children={<Card {...props} hangoutID={item.id}/>}
         >
         </TinderCard>
     )

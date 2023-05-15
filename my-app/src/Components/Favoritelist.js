@@ -129,6 +129,7 @@ function Favoritelist({favorites, mostRecentFavorites}) {
                                         {
                                             <FavoriteCard
                                                 key={hangout.id}
+                                                id={hangout.id}
                                                 index={index}
                                                 title={hangout.name} 
                                                 image={hangout.image_url} 
@@ -189,6 +190,7 @@ function Favoritelist({favorites, mostRecentFavorites}) {
                                 {
                                     <FavoriteCard
                                         key={hangout.id}
+                                        id={hangout.id}
                                         index={i}
                                         title={hangout.name} 
                                         image={hangout.image_url} 

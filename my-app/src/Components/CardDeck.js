@@ -2,7 +2,7 @@ import { useState, useEffect} from 'react';
 import SwipeableCard from './SwipeableCard';
 import EmptyDeck from './EmptyDeck';
 import { getHangouts } from '../Services/HangoutService';
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, updateDoc, getDoc, setDoc, arrayUnion } from "firebase/firestore";
 import { auth, db } from '../firebase';
 import CardDeckCSS from '../Styles/CardDeck.module.css'
 
@@ -96,6 +96,9 @@ function CardDeck(props) {
     const favoriteCategory = `favorites.${item.category}`
     const mostRecentFavorites = 'mostRecentFavorites'
 
+    const hangoutRef = doc(db, 'hangouts', item.id);
+    const likedUsers = 'likedUsers'
+    
     if (props.mostRecentFavorites && props.mostRecentFavorites.length >= 20) {
       props.mostRecentFavorites.pop() // Removes the last item in the array which is the least recently used item and returns it
       let newArray = props.mostRecentFavorites.reverse()
@@ -106,12 +109,39 @@ function CardDeck(props) {
         [favoriteCategory]: arrayUnion(item),
         [mostRecentFavorites]: newArray
       });
+
+      const hangoutSnap = await getDoc(hangoutRef);
+      // Check to see if the document exists or not
+      if (hangoutSnap.exists()) {
+        await updateDoc(hangoutRef, {
+          [likedUsers]: arrayUnion(userID)
+        });
+      }
+      else {
+        await setDoc(hangoutRef, {
+          [likedUsers]: arrayUnion(userID)
+        });
+      }
+
     }
     else {
       await updateDoc(userRef, {
         [favoriteCategory]: arrayUnion(item),
         [mostRecentFavorites]: arrayUnion(item)
       });
+
+      const hangoutSnap = await getDoc(hangoutRef);
+      // Check to see if the document exists or not
+      if (hangoutSnap.exists()) {
+        await updateDoc(hangoutRef, {
+          [likedUsers]: arrayUnion(userID)
+        });
+      }
+      else {
+        await setDoc(hangoutRef, {
+          [likedUsers]: arrayUnion(userID)
+        });
+      }
     }
 }
 
