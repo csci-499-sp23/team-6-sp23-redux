@@ -30,7 +30,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  margin-bottom: 0.8em;
+  margin-bottom: 0.5em;
 }
 
 .LoginTextBox {
@@ -64,9 +64,11 @@
 
 .LoginButton {
   border-radius: 25px;
-  width: 80%;
-  padding: 10px;
-  font-size: 1.3rem;
+  width: 18vmax;
+  height: 3.6vmax;
+  max-width: 400px;
+  max-height: 80px;
+  font-size: min(1.8vmax, 1.5rem);
   color: white;
   font-weight: 700;
   background: linear-gradient(90deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
@@ -81,22 +83,41 @@
   opacity: 0.8;
 }
 
+
 .GoogleSignInButton {
-  border-radius: 25px;
-  width: 80%;
-  padding: 10px;
-  font-size: 1.3rem;
-  color: #757575;
-  font-weight: 700;
+  position: relative;
+  width: 18vmax;
+  max-width: 400px;
+  max-height: 80px;
+  height: 3.6vmax;
   background-color: white;
-  border: 0px;
-  cursor: pointer;
-  transition: background-color .3s, box-shadow .3s, opacity 0.25s ease-out;
+  border-radius: 15px;
+  border: none;
+  padding: 0;
   margin-bottom: 10px;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+  background-image:url('../../public/Images/btn_google_signin_light_normal_web2x.png');
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  background-position: 16px center;
-  text-align: center;
+
+}
+
+.GoogleSignUpButton {
+  position: relative;
+  width: 18vmax;
+  max-width: 400px;
+  max-height: 80px;
+  height: 3.6vmax;
+  background-color: white;
+  border-radius: 15px;
+  border: none;
+  padding: 0;
+  margin-bottom: 10px;
+  background-image:url('../../public/Images/signupbutton.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
 }
 
 .GoogleSignInButton:hover {
@@ -190,4 +211,30 @@
   margin-bottom: 0.5em;
   background-color: rgba(0, 0, 0, 0.05);
   pointer-events: none;
+}
+
+@media(orientation:landscape) {
+  @media(max-width:915px)
+    {
+    .LoginContainer {
+      width: 80%;
+      padding: 1.1vh;
+    }
+    .LoginTextBox{
+      font-size: 1rem;
+      padding: 4px; 
+    }
+    .LoginButton{
+      margin-bottom: 5px;
+    }
+    .Separator{
+      margin: 5px 0;
+    }
+    #AppLogo{
+      width: 0em;
+      margin-top: 0em;
+      margin-bottom: 0em;
+    }
+  }
+  
 }

@@ -7,6 +7,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
+
 const Login = (props) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -149,7 +150,6 @@ const Login = (props) => {
             </form>
             <div className={LoginCSS.Separator}>or</div>
                 <button className={LoginCSS.GoogleSignInButton} onClick={signInWithGoogle}>
-                  Login with Google
                 </button>
 
             <p className={LoginCSS.TextLogin}>
