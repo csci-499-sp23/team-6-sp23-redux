@@ -31,10 +31,9 @@ function CardDeck(props) {
         })
       })
     }
-
-    initializeFavorites()
     
     if(props.location && props.categories && empty){
+      initializeFavorites()
       getHangouts(props.location, props.categories, toMeters(props.rangeLimit)).then((data) => {
         // Filter the data to remove any locations the user has already liked
 
