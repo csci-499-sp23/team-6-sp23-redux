@@ -31,10 +31,9 @@ function CardDeck(props) {
         })
       })
     }
-
-    initializeFavorites()
     
     if(props.location && props.categories && empty){
+      initializeFavorites()
       getHangouts(props.location, props.categories, toMeters(props.rangeLimit)).then((data) => {
         // Filter the data to remove any locations the user has already liked
 
@@ -49,11 +48,10 @@ function CardDeck(props) {
         }
 
         // Remove potential duplicates that appear from overlapping categories
-        let deck = removeDuplicatesInArray(filteredDeck)
+        const deck = removeDuplicates(filteredDeck)
 
         // Start with a shuffled deck
-        deck = shuffleDeck(deck)
-        setHangoutData(deck);
+        shuffleDeck(deck)
 
         setEmpty(false);
         setDisplayEmptyDeck(false);
@@ -63,7 +61,7 @@ function CardDeck(props) {
     
   }, [props, empty]);
 
-  const removeDuplicatesInArray = (array) => {
+  const removeDuplicates = (array) => {
     let set = new Set();
     let newArray = []
     array.forEach((object) => {
@@ -76,19 +74,20 @@ function CardDeck(props) {
   }
 
   // return new array with last item removed
-  const removeCard = (array) => {
-      array.pop()
+  const removeCard = () => {
+      const cardDeck = hangoutData.slice(0, -1);
+      return cardDeck
     }
   
-  const shuffleDeck = (deck) => {
-    let newDeck = deck.slice()
+  const shuffleDeck = (array) => {
+    let newDeck = array.slice()
     for(let i = newDeck.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       const temp = newDeck[i];
       newDeck[i] = newDeck[j];
       newDeck[j] = temp;
     }
-    return newDeck
+    setHangoutData(newDeck)
   }
 
   const saveOnSwipeRight = async(item) => {
@@ -147,9 +146,9 @@ function CardDeck(props) {
 
 const nextCard = () => {
   // Update the deck
-  removeCard(hangoutData)
-  let shuffledDeck = shuffleDeck(hangoutData)
-  setHangoutData(shuffledDeck)
+  const deck = removeCard()
+  shuffleDeck(deck)
+
   //when deck is about to run out, display the empty deck
   if (hangoutData.length === 1)
   {
