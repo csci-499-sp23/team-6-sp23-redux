@@ -1,60 +1,13 @@
-.Homepage {
-  overflow: hidden;
+#Homepage {
+  width: 100%;
   height: 100%;
 }
 
-.InfoButton {
-  width: 7vh;
-  height: 7vh;
+#CardDeckContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
 }
-
-.InfoTextContainer {
-  font-size: 20px;
-  border: 2px black solid;
-  border-radius: 4px;
-  position: absolute;
-  font-family: sans-serif;
-  font-size: 18px;
-  line-height: 24px;
-  width: 300px;
-  background: orange;
-  border-radius: 40px;
-  padding: 24px;
-  text-align: center;
-  color: #000;
-  list-style-type: none;
-  top: 8px;
-  right: 8px;
-}
-
-  .bubbleBottomRight:before {
-    content: "";
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    border-left: 24px solid transparent;
-    border-right: 12px solid orange;
-    border-top: 12px solid orange;
-    border-bottom: 20px solid transparent;
-    right: 32px;
-    bottom: -24px;
-
-  }
-
-  .InfoButtonContainer {
-    width: 10vh;
-    height: 10vh;
-    float: right;
-    margin-right: 16px;
-    margin-top: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .test {
-    font-size: 50px;
-    color: black;
-    position: absolute;
-    top: 20;
-  }

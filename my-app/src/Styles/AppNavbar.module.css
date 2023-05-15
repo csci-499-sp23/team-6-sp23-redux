@@ -1,3 +1,47 @@
+#Navbar{
+    background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
+}
+
+#WelcomeNavbar {
+  position: absolute;
+  background-color: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 3em;
+}
+
+#welcomeLogo {
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  font-family: 'louis-george-cafe-bold';
+  margin-top: 1em;
+}
+
+.NavbarCollapse {
+  position: absolute;
+  right: 16px;
+}
+
+.Link {
+  margin-top: 0.2em;
+  margin-right: 1em;
+}
+
+.DropdownMenu {
+  background-color: white;
+}
+
+.DropdownItem:hover {
+  background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
+}
+
+.ItemTitle:hover {
+  color: white;
+}
+
 @media (orientation: landscape) {
   #navLogo{
     position: relative;
@@ -43,6 +87,21 @@
   #NavbarToggle {
     position: absolute;
     right: 2em;
+  }
+
+  @media (max-width: 919px) {
+    #navLogo{
+      position: relative;
+      width: 10%;
+      height: 10%;
+      pointer-events: none;
+    }
+
+    #ProfilePicture {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+    }
   }
 }
 
@@ -100,48 +159,4 @@
     position: absolute;
     right: 1.5em;
   }
-}
-
-#Navbar{
-    background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
-}
-
-#WelcomeNavbar {
-  position: absolute;
-  background-color: none;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 3em;
-}
-
-#welcomeLogo {
-  text-align: center;
-  font-size: 50px;
-  font-weight: bold;
-  font-family: 'louis-george-cafe-bold';
-  margin-top: 1em;
-}
-
-.NavbarCollapse {
-  position: absolute;
-  right: 16px;
-}
-
-.Link {
-  margin-top: 0.2em;
-  margin-right: 1em;
-}
-
-.DropdownMenu {
-  background-color: white;
-}
-
-.DropdownItem:hover {
-  background: linear-gradient(to right, #668ac0 20%, #5cb3d9 100% );
-}
-
-.ItemTitle:hover {
-  color: white;
 }

@@ -1,15 +1,22 @@
-.App {
+#App {
   background-color: #3b4a51;
   font-size: calc(10px + 2vmin);
   color: white;
   height: 100%;
   width: 100%;
   position: fixed;
-  overflow: scroll;
-  overflow-x: hidden;
   font-family: 'louis-george-cafe';
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.test {
-  color: black;
+#AppHeader {
+  position: static;
+}
+
+#AppBody {
+  overflow: auto;
+  overflow-x: hidden;
+  height: 100%;
 }
