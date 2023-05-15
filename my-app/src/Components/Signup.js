@@ -206,8 +206,7 @@ const Signup = (props) => {
               </button>
             </form>
             <div className={LoginCSS.Separator}>or</div>
-            <button className={LoginCSS.GoogleSignInButton} onClick={signInWithGoogle}>
-              Sign up with Google
+            <button className={LoginCSS.GoogleSignUpButton} onClick={signInWithGoogle}>
             </button>
             <p className={LoginCSS.TextLogin}>
               
