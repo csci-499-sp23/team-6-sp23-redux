@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 import { Rating } from '@mui/material';
 import React, { useState } from 'react';
-import HangoutDetail from './HangoutDetail';
 
 function Favoritedetails(props) {
 
