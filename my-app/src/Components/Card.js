@@ -1,9 +1,24 @@
 import React from 'react';
 import CardCSS from '../Styles/Card.module.css';
+import { useState, useEffect } from 'react';
+import { getNumLikes } from '../Services/LikesService';
 
 function Card(props) {
   const locationDetail = props.location2 ? props.location + ", \n" + props.location2 : props.location;
+  const [numberOfLikes, setNumberOfLikes] = useState(0);
 
+  useEffect(() => {
+    if(props.hangoutID) {
+      getNumLikes(props.hangoutID).then((res) => {
+        setNumberOfLikes(res)
+      })
+      .catch((error) => {
+        console.log("Error fetching number of likes: ", error)
+      })
+    }
+  }, [props.hangoutID])
+
+  console.log(numberOfLikes)
   //To miles function
   function toMiles(meters)
   {

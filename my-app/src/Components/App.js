@@ -29,10 +29,10 @@ function App() {
 
   // will mount
   useEffect( () => {
-    var unsubscribe;
+    var unsubscribeUser;
     // Event handler used to listen for any changes to user document and return it
     if(userID) {
-      unsubscribe = onSnapshot(doc(db, 'users', userID), (doc) => {
+      unsubscribeUser = onSnapshot(doc(db, 'users', userID), (doc) => {
           var dataArray = Object.entries(doc.data())
           
           dataArray.forEach((data) => {
@@ -56,8 +56,8 @@ function App() {
                 return 
             }
           })
-      }  
-    )};
+      })
+  };
     // Check if user is authenticated
     const authUnsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -69,9 +69,10 @@ function App() {
     });
     // unmount 
     return () => {
-      if (unsubscribe) {
-        unsubscribe();
+      if (unsubscribeUser) {
+        unsubscribeUser();
       }
+
       authUnsubscribe();
     };
   }, [userID]);

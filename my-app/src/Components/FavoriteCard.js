@@ -3,10 +3,25 @@ import FavoriteDetails from './FavoriteDetails';
 import DeleteAlert from './SubComponents/DeleteAlert';
 import { auth } from '../firebase';
 import { arrayRemove, doc, deleteField, getFirestore, getDoc, updateDoc } from "firebase/firestore";
+import { getNumLikes } from '../Services/LikesService';
+import { useState, useEffect } from 'react';
 
 function FavoriteCard(props) {
 
     const locationDetail = props.location2 ? props.location + ", \n" + props.location2 : props.location;
+    const [numberOfLikes, setNumberOfLikes] = useState(0);
+
+    useEffect(() => {
+        if(props.id) {
+          getNumLikes(props.id).then((res) => {
+            setNumberOfLikes(res)
+          })
+          .catch((error) => {
+            console.log("Error fetching number of likes: ", error)
+          })
+        }   
+      }, [props.id])
+      console.log(numberOfLikes)
         //Delete hangout function, requires category and hangout ID to be passed to it
     const deleteHangout = async (category, index, isMostRecent, isCategory) => {
         const db = getFirestore();
@@ -26,19 +41,32 @@ function FavoriteCard(props) {
             hangoutObj = docSnap.data().favorites[category][index]
         }
 
+        const hangoutRef = doc(db, 'hangouts', hangoutObj.id);
+        const likedUsers = 'likedUsers'
+
+
         //checks if this is the last hangout in the category
         if(favoriteCategoryLength === 1 ) {     
             await updateDoc(docRef, {
                 [favoriteCategory]: deleteField(),
                 [mostRecent]: arrayRemove(hangoutObj)
             })
+
+            await updateDoc(hangoutRef, {
+                [likedUsers]: arrayRemove(userID)
+              });
         }
         else {
             await updateDoc(docRef, {
                 [favoriteCategory]: arrayRemove(hangoutObj), 
                 [mostRecent]: arrayRemove(hangoutObj)                  
             })
+
+            await updateDoc(hangoutRef, {
+                [likedUsers]: arrayRemove(userID)
+              });
         }
+
     };
         
     return(
