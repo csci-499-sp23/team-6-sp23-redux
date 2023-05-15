@@ -1,0 +1,80 @@
+.AcceptedContainer {
+    outline: 5px solid green;
+    outline-offset: 2px;
+    border: 2.5px solid green;
+    box-shadow: 0 0 0 2px white;
+    border-radius: 1px;
+    background-color: white;
+    padding: 0px 1em;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.RejectedContainer {
+    outline: 5px solid red;
+    outline-offset: 2px;
+    border: 2.5px solid red;
+    box-shadow: 0 0 0 2px white;
+    border-radius: 1px;
+    background-color: white;
+    padding: 0px 1em;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.AcceptedIconContainer {
+    width: 7vmax;
+    height: 7vmax;
+    border: 3px solid green;
+    border-radius: 3.5vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.RejectedIconContainer {
+    width: 7vmax;
+    height: 7vmax;
+    border: 3px solid red;
+    border-radius: 3.5vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.AcceptedIcon {
+    width: 80%;
+    height: 80%;
+    color: green;
+}
+
+.RejectedIcon {
+    width: 80%;
+    height: 80%;
+    color: red;
+}
+
+.AcceptedMessage {
+    color: green;
+    font-size: 7vmax;
+    font-weight: bold;
+}
+
+.RejectedMessage {
+    color: red;
+    font-size: 7vmax;
+    font-weight: bold;
+}
+
+.Screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
