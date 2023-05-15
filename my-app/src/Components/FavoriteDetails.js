@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 import { Rating } from '@mui/material';
 import React, { useState } from 'react';
-
+import HangoutDetail from './HangoutDetail';
 
 function Favoritedetails(props) {
 
@@ -49,7 +49,8 @@ function Favoritedetails(props) {
             <div className={FavoriteModal.CloseButtonImage}></div>
           </button> 
           <div className={FavoriteModal.ModalImageContainer}>
-              <img className={FavoriteModal.modalImage} src={props.image} alt="Hangout modal" />
+          <img className={FavoriteModal.modalImage} src={props.image} alt="Hangout modal" />
+
           </div>
         </Modal.Header>
         <Modal.Body id={FavoriteModal.ModalBody}>
@@ -59,8 +60,8 @@ function Favoritedetails(props) {
                 <Rating className={FavoriteModal.Rating} defaultValue={0} value={props.rating} precision={0.5} size={"large"} readOnly></Rating>
                 </div>
                 
-                
                 <div className={FavoriteModal.DetailsBox}>
+                  
                   <div className={FavoriteModal.InfoBox}><span className={FavoriteModal.InfoLabel}>Category</span> 
                       <span className={FavoriteModal.InfoDetail}>{(toTitleCase(props.category))}</span>
                   </div>
@@ -89,6 +90,7 @@ function Favoritedetails(props) {
                   
                 </div>
             </div>   
+            
 
         </Modal.Body>
       </Modal>
@@ -102,3 +104,8 @@ function Favoritedetails(props) {
 
 
 export default Favoritedetails;
+
+/*
+<img className={FavoriteModal.modalImage} src={props.image} alt="Hangout modal" />
+
+*/

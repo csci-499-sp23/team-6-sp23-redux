@@ -199,6 +199,7 @@ const nextCard = () => {
                 phone={item.display_phone}
                 rating={item.rating}
                 price={item.price}
+                url={item.url}
                 details={item.categories}
                 isTop={isTop}
                 category={item.category}
