@@ -3,6 +3,7 @@ import CardDeckCSS from '../Styles/CardDeck.module.css'
 import { useEffect } from 'react';
 import CardDeck from './CardDeck';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 function HomepageWithCards(props) {
 
@@ -16,10 +17,12 @@ function HomepageWithCards(props) {
   }, [props.navigated, navigate])
 
   return (
-    <div className={HomepageCSS.Homepage}>
-      <CardDeck className={CardDeckCSS.Container} location={props.location} categories={props.categories} favoriteHangouts={props.favorites} rangeLimit = {props.rangeLimit} ratingLimit ={props.ratingLimit} mostRecentFavorites={props.mostRecentFavorites}>
-      </CardDeck>
-    </div>
+    <React.Fragment>
+      <section id={HomepageCSS.CardDeckContainer}>
+        <CardDeck className={CardDeckCSS.Container} location={props.location} categories={props.categories} favoriteHangouts={props.favorites} rangeLimit = {props.rangeLimit} ratingLimit ={props.ratingLimit} mostRecentFavorites={props.mostRecentFavorites}
+        />
+      </section>
+    </React.Fragment>
   );
 }
   

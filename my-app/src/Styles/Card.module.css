@@ -1,21 +1,21 @@
+.TinderCard {
+    overflow: hidden;
+    border-radius: 1.5vmax;
+}
 
-@media (orientation: landscape) {
-    .TinderCard {
-        position: absolute;
-        width: 30vw;
-        height: 90vh;
-        overflow: hidden;
-    }
-  }
-  
-  @media (orientation: portrait) {
-    .TinderCard {
-        position: absolute;
-        width: 70vw;
-        height: 50vh;
-        overflow: hidden;
-    }
-  }
+.Card {
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: #000000;
+    border: 0.5px black solid;
+    position: relative;
+    border-radius: 1.5vmax;
+    margin: auto;
+    position: relative;
+    width: 30vmax;
+    height: 40vmax;
+}
 
 .TopCard{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -23,19 +23,6 @@
 
 .OtherCards{
     display: none;
-}
-
-.CardContainer{
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    color: #000000;
-    border: 0.5px black solid;
-    position: relative;
-    border-radius: 5%;
-    margin: auto;
 }
 
 .DetailContainer {
@@ -72,7 +59,7 @@
     background-position: center;
     height: 100%;
     width: 100%;
-    opacity: 0.9;
+    opacity: 1;
 }
 
 #BottomContainer {
@@ -123,3 +110,50 @@
     z-index: 1;
 }
 
+@media (orientation: landscape) {
+
+    @media (max-width: 915px) {
+        .TinderCard {
+            border-radius: 1.5vmax;
+        }
+    
+        .Card {
+            border-radius: 1.5vmax;
+            width: 25vmax;
+            height: 35vmax;
+        }
+
+        #LocationContainer {
+            font-size: 0.6em;
+        }
+        
+        #DistanceContainer {
+            font-size: 0.6em;
+        }
+    }
+  }
+  
+  @media (orientation: portrait) {
+    .TinderCard {
+        border-radius: 1.5vmax;
+    }
+
+    .Card {
+        border-radius: 1.5vmax;
+        width: 30vmax;
+        height: 40vmax;
+    }
+
+    #BottomContainer {
+        width: 100%;
+        height: 10vmax;
+    }
+
+    #LocationContainer {
+        font-size: 0.7em;
+    }
+    
+    #DistanceContainer {
+        font-size: 0.7em;
+    }
+  }

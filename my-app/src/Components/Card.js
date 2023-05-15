@@ -8,7 +8,7 @@ function Card(props) {
   const locationDetail = props.location2 ? props.location + ", \n" + props.location2 : props.location;
   const [numberOfLikes, setNumberOfLikes] = useState(0);
 
-  useEffect(() => {
+ useEffect(() => {
     if(props.hangoutID) {
       getNumLikes(props.hangoutID).then((res) => {
         setNumberOfLikes(res)
@@ -29,7 +29,7 @@ function Card(props) {
 
   return (
     <React.Fragment>
-      <div className={`${CardCSS.CardContainer} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}>
+      <div className={`${CardCSS.Card} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}>
          <div className={CardCSS.HangoutDetail}>
              <FavoriteDetails className={CardCSS.HangoutDetail} {...props}/>
              </div>

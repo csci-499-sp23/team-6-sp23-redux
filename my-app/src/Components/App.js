@@ -13,6 +13,7 @@ import { auth, db } from '../firebase';
 import { doc, onSnapshot } from "firebase/firestore";
 import PageTitle from './PageTitle';
 import ForgotPassword from './ForgotPassword';
+import React from 'react';
 
 function App() {
   const userID = auth.currentUser?.uid
@@ -78,30 +79,35 @@ function App() {
   }, [userID]);
 
   return (
-    <div className="App">
-      
+    <>
       <Router>
-        <AppNavbar isAuthenticated={isAuthenticated} username={username} setNavigated={setNavigated} />
-        <PageTitle />
-        <Routes>
-          {
-            isAuthenticated &&
-            <Route exact path="/" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit={rangeLimit} ratingLimit={ratingLimit} mostRecentFavorites={mostRecentFavorites}/>}/>
-          }
-          {
-            !isAuthenticated &&
-            <Route exact path="/" element={<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
-          }
-          <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit={rangeLimit} ratingLimit={ratingLimit} mostRecentFavorites={mostRecentFavorites}/>}/>
-          <Route exact path="/favorites" element={<Favoritelist favorites={favorites} mostRecentFavorites={mostRecentFavorites}/>}/>
-          <Route exact path = "/login" element = {<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
-          <Route exact path = "/signup" element = {<SignUp setNavigated={setNavigated}/>}/>
-          <Route exact path="/preferences" element={<Preferences preferences={preferences}/>}/>
-          <Route exact path="/profile" element={<Profile preferences={preferences} isAuthenticated={isAuthenticated} userLocation={location}/>} />
-          <Route exact path="/forgot-password" element={<ForgotPassword />} />
-        </Routes>
+        <div id="App">
+          <header id="AppHeader">
+            <AppNavbar isAuthenticated={isAuthenticated} username={username} setNavigated={setNavigated} />
+            <PageTitle />
+          </header>
+          <section id="AppBody">
+            <Routes>
+            {
+              isAuthenticated &&
+              <Route exact path="/" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit={rangeLimit} ratingLimit={ratingLimit} mostRecentFavorites={mostRecentFavorites}/>}/>
+            }
+            {
+              !isAuthenticated &&
+              <Route exact path="/" element={<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
+            }
+            <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit={rangeLimit} ratingLimit={ratingLimit} mostRecentFavorites={mostRecentFavorites}/>}/>
+            <Route exact path="/favorites" element={<Favoritelist favorites={favorites} mostRecentFavorites={mostRecentFavorites}/>}/>
+            <Route exact path = "/login" element = {<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
+            <Route exact path = "/signup" element = {<SignUp setNavigated={setNavigated}/>}/>
+            <Route exact path="/preferences" element={<Preferences preferences={preferences}/>}/>
+            <Route exact path="/profile" element={<Profile preferences={preferences} isAuthenticated={isAuthenticated} userLocation={location}/>} />
+            <Route exact path="/forgot-password" element={<ForgotPassword />} />
+           </Routes>
+          </section>
+        </div>
       </Router>    
-    </div>
+    </>
   );
 }
 export default App;
