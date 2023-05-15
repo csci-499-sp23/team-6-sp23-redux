@@ -45,6 +45,32 @@
 
 .DeleteAlert {
     z-index: 1;
+    width: 1.9vmax;
+    height: 1.9vmax;
+    margin-top: 8px;
+    margin-right: 8px;
+}
+
+.DeleteButtonImage {
+    width: 1.9vmax;
+    height: 1.3vmax;
+    background-color: white;
+    -webkit-mask-box-image: url("https://cdn.discordapp.com/attachments/1070131505743016087/1104985006323011624/thex.png");
+}
+
+.DeleteCardButton {
+    border-radius: 25%;
+    border: none;
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.DeleteCardButton:hover .DeleteButtonImage{
+    background-color: blue;
 }
 
 .Spacer {
@@ -93,41 +119,19 @@
         margin-bottom: 0.2em;
     }
 
-    .DeleteButtonImage {
-        width: 100%;
-        height: 70%;
-        background-color: white;
-        -webkit-mask-box-image: url("https://cdn.discordapp.com/attachments/1070131505743016087/1104985006323011624/thex.png");
-    }
-
-    .DeleteCardButton {
-        margin-top: 8px;
-        margin-right: 8px;
-        border-radius: 25%;
-        border: none;
-        background-color: red;
-        width: 1em;
-        height: 1em;
-        font-weight: bold;
-        align-self: top;
-        display: flex;
-        align-items: center;
-    }
-
-    .DeleteCardButton:hover .DeleteButtonImage{
-        background-color: blue;
-    }
-
-    @media (max-width: 818px) {
+    @media (max-width: 915px) {
 
         .DeleteButtonImage {
-            width: 100%;
-            height: 1.25vmax;
+            width: 2.5vmax;
+            height: 1.5vmax;
         }
 
-        .DeleteCardButton {
+        .DeleteAlert {
+            z-index: 1;
             width: 3vmax;
-            height: 3vmax;
+            height: 2.5vmax;
+            margin-top: 8px;
+            margin-right: 8px;
         }
     }
   }
@@ -173,27 +177,15 @@
     }
 
     .DeleteButtonImage {
-        width: 2.25vmax;
+        width: 2vmax;
         height: 1vmax;
-        background-color: white;
-        -webkit-mask-box-image: url("https://cdn.discordapp.com/attachments/1070131505743016087/1104985006323011624/thex.png");
     }
 
-    .DeleteCardButton {
+    .DeleteAlert {
+        z-index: 1;
+        width: 2.5vmax;
+        height: 2vmax;
         margin-top: 8px;
         margin-right: 8px;
-        border-radius: 25%;
-        border: none;
-        background-color: red;
-        width: 2.25vmax;
-        height: 2.25vmax;
-        font-weight: bold;
-        align-self: top;
-        display: flex;
-        align-items: center;
-    }
-
-    .DeleteCardButton:hover .DeleteButtonImage{
-        background-color: blue;
     }
   }

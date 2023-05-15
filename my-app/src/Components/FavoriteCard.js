@@ -79,10 +79,10 @@ function FavoriteCard(props) {
             <div id={FavoriteCardCSS.CardHeader}>
                 <div className={FavoriteCardCSS.Spacer} /> 
                 <div id={FavoriteCardCSS.Title}>{props.title}</div>
-                <DeleteAlert id={FavoriteCardCSS.DeleteAlert} deleteHangout={deleteHangout}
+                <div className={FavoriteCardCSS.DeleteAlert}> <DeleteAlert deleteHangout={deleteHangout}
                               title={props.title} category={props.category} index={props.index} 
                               isMostRecent={props.isMostRecent} isCategory={props.isCategory}>
-                </DeleteAlert> 
+                </DeleteAlert> </div>
             </div>
 
             <img id={FavoriteCardCSS.Image} src={props.image} alt="hangout-suggestion"></img>
