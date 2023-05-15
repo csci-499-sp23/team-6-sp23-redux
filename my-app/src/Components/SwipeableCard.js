@@ -3,7 +3,7 @@ import TinderCard from 'react-tinder-card'
 import Card from './Card.js'
 import CardCSS from "../Styles/Card.module.css"
 
-function SwipeableCard({ handleSwipe, nextCard, item, ...props }) {
+function SwipeableCard({ saveOnSwipeRight, nextCard, item, ...props }) {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [isLeft, setIsLeft] = useState(false);
     const [isRight, setIsRight] = useState(false);
@@ -17,14 +17,23 @@ function SwipeableCard({ handleSwipe, nextCard, item, ...props }) {
     window.addEventListener('resize', () => {
         setScreenWidth(window.innerWidth)
     });
+    
+    const onSwipe = async (direction, item) => {
+        if(props.isTop) {
+            if(direction === "right") {
+                await saveOnSwipeRight(item)
+            }
 
-    const onSwipeRequirementFulfilled = (direction, item) => {
-        handleSwipe(item, direction)
-        nextCard()
-        clearInterval(intv)
-        setIsLeft(false);
-        setIsRight(false);
-        setIsDragging(false)
+            clearInterval(intv)
+            setIsLeft(false);
+            setIsRight(false);
+            setIsDragging(false)
+            nextCard()
+        }
+    }
+
+    const handleIntervalUpdate = (interval) => {
+        setIntv(interval)
     }
 
     const handleChangePositon = (x, width,) => {
@@ -49,33 +58,22 @@ function SwipeableCard({ handleSwipe, nextCard, item, ...props }) {
 
     }
 
-    const handleIntervalUpdate = (interval) => {
-        setIntv(interval)
-    }
-
-
-    /*const onCardLeftScreen = (direction, item) => {
-        //nextCard()
-    }*/
-
-    return (
+    return(
         <TinderCard
-            onSwipeRequirementUnfulfilled={() => {
-                setIsLeft(false);
-                setIsRight(false);
-                clearInterval(intv)
-                setIsDragging(false)
-            }}
-            onSwipeRequirementFulfilled={(direction) => onSwipeRequirementFulfilled(direction, item)}
-            //onCardLeftScreen={(direction) => onCardLeftScreen(direction, item)}
-            preventSwipe={['up', 'down']}
-            swipeRequirementType="position"
-            swipeThreshold={swipeThresholdValue}
-            className={`${CardCSS.TinderCard} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}   ${isRight && isDragging ? CardCSS.MockRight : ''}  ${isLeft && isDragging ? CardCSS.MockLeft : ''}`}
-            children={<Card {...props} handleChangePositon={handleChangePositon} handleIntervalUpdate={handleIntervalUpdate} />}
-
-        >
-        </TinderCard>
+        onSwipeRequirementUnfulfilled={() => {
+            setIsLeft(false);
+            setIsRight(false);
+            clearInterval(intv)
+            setIsDragging(false)
+        }}
+        onSwipe={(direction) => onSwipe(direction, item)}
+        //onSwipeRequirementFulfilled={(direction) => onSwipeRequirementFulfilled(direction, item)}
+        preventSwipe={['up', 'down']}
+        swipeRequirementType="position"
+        swipeThreshold={swipeThresholdValue}
+        className={`${CardCSS.TinderCard} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}   ${isRight && isDragging ? CardCSS.MockRight : ''}  ${isLeft && isDragging ? CardCSS.MockLeft : ''}`}
+        children={<Card {...props} handleChangePositon={handleChangePositon} handleIntervalUpdate={handleIntervalUpdate} />}
+        />
     )
 
 }
