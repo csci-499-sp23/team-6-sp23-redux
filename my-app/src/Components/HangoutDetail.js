@@ -10,8 +10,6 @@ function HangoutDetail(props) {
     const [duration, setDuration] = useState("");
     const [instructions, setInstructions] = useState(null);
 
-    var locationDetail = props.location2 ? props.location + ", " + props.location2 : props.location;
-
     const pickTravelMode = (e) => {
         setTravelModeChanged(travelModeChanged + 1) // causes the map to rerender with the key property
         setTravelMode(e.target.value)
