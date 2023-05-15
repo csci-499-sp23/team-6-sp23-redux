@@ -83,14 +83,15 @@ function Favoritelist({favorites, mostRecentFavorites}) {
         setSwipeStart(e.targetTouches[0].clientX)
     }
 
-    const endSwipe = (selectedRow) => {
+    const endSwipe = (e, selectedRow) => {
+        e.preventDefault()
         if(!swipeStart || !swipeEnd) return
         const distance = swipeStart - swipeEnd
         const isLeftSwipe = distance > minSwipeDistance
         const isRightSwipe = distance < -minSwipeDistance
         if(isLeftSwipe || isRightSwipe) {
             let slider = document.getElementById(`FavoriteListCSS.CategoryRow${selectedRow}`)
-            slider.scrollLeft = distance - minSwipeDistance;
+            slider.scrollLeft = distance;
         }
     }
 
@@ -117,7 +118,7 @@ function Favoritelist({favorites, mostRecentFavorites}) {
                                  onMouseOver={() => {if(!mobileCheck) slideRow(selectedRow)}}
                                  onMouseLeave={() => {if(!mobileCheck) deInitEventListener(selectedRow)}}
                                  onTouchStart={(e) => {if(mobileCheck) startSwipe(e)}}
-                                 onTouchEnd={() => {if(mobileCheck) endSwipe(selectedRow)}}
+                                 onTouchEnd={(e) => {if(mobileCheck) endSwipe(e, selectedRow)}}
                                  onTouchMove={(e) => {if(mobileCheck) swipe(e)}}>
                             {
                                 //Table columns for each hangout
