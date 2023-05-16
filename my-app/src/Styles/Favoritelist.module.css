@@ -68,6 +68,7 @@
   width: 100%;
   white-space: nowrap;
   overflow:hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* NOTE: - Most Recent Display */
