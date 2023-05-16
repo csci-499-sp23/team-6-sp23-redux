@@ -98,8 +98,3 @@ function Favoritedetails(props) {
 
 
 export default Favoritedetails;
-
-/*
-<img className={FavoriteModal.modalImage} src={props.image} alt="Hangout modal" />
-
-*/
