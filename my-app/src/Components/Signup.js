@@ -8,17 +8,13 @@ import { updateProfile } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import {categoryList} from './Exports/categoryList.js';
-
-
+import { Formik } from 'formik';
+import * as yup from "yup";
 
 const Signup = (props) => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState(''); // Added username state
   const [showPassword, setShowPassword] = useState(false);
-
 
   //Helper function for retrieving random elements of an array
   //Select three random categories for the user on account creation
@@ -36,6 +32,7 @@ const Signup = (props) => {
     ratingLimit: "0",
   };
 
+
   const getGeolocation = async () => {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
@@ -50,8 +47,7 @@ const Signup = (props) => {
     });
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async ({email, username, password}) => {
 
     try {
       // Get geolocation before signup
@@ -62,6 +58,7 @@ const Signup = (props) => {
         console.log('Location not shared. Signup denied.');
         return;
       }
+
 
       // Attempt to create a new user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -83,9 +80,9 @@ const Signup = (props) => {
 
         // Update the username in the authentication profile
         try {
-        await updateProfile(userCredential.user, { displayName: username });
+          await updateProfile(userCredential.user, { displayName: username });
         } catch (error) {
-        return { error: "Error updating the username in the authentication profile." };
+          return { error: "Error updating the username in the authentication profile." };
         }
 
         // `doc(db, 'users', userData.uid)` creates a document reference for the 'users' collection,
@@ -112,7 +109,7 @@ const Signup = (props) => {
 
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
-  
+
     try {
       // Get geolocation before signup
       const geolocation = await getGeolocation();
@@ -127,7 +124,7 @@ const Signup = (props) => {
       const user = userCredential.user;
       // Create user data object containing the user's UID, email, and generated username
       const username = user.email.split('@')[0]; // Generate a username from the user's email
-      
+
       const userData = {
         uid: user.uid,
         email: user.email,
@@ -137,7 +134,7 @@ const Signup = (props) => {
           userLocation: geolocation,
         },
       };
-  
+
       // Store information in firestore
       await setDoc(doc(db, 'users', userData.uid), userData);
 
@@ -163,47 +160,76 @@ const Signup = (props) => {
       }}
     >
       <header>
-          <img id={LoginCSS.AppLogo} src="Images/easyhangoutlogo.png" draggable="false" alt="logo"></img>
-        </header>
+        <img id={LoginCSS.AppLogo} src="Images/easyhangoutlogo.png" draggable="false" alt="logo"></img>
+      </header>
       <section className={LoginCSS.LoginContainer}>
         <div className={LoginCSS.LoginDiv}>
           <label className={LoginCSS.LoginTitle}>
-              Sign up
+            Sign up
           </label>
           <div>
-            <form onSubmit={onSubmit}>
-              <div className={LoginCSS.InputFields}>
+            <Formik
+              initialValues={{
+                username:"",
+                email:"",
+                password:""
+              }}
+
+              onSubmit={(values)=>onSubmit(values)}
+              validationSchema={
+                  yup.object().shape({
+                    username:yup.string().required().label('Username'),
+                    email:yup.string().required().email().label('Email'),
+                    password:yup.string().required().max(30).label('Password')
+                  })
+              }
+              >
+              {({
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                values,
+                errors,
+                touched
+              })=>(<>
+                <div className={LoginCSS.InputFields}>
                 <div>
                   <input
                     type="text"
                     label="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
+                    value={values.username}
+                    onChange={handleChange("username")}
+                    onBlur={handleBlur("username")}
                     placeholder="Username"
                     className={LoginCSS.LoginTextBox}
                   />
+                  {touched.username && errors.username && (
+                    <span className='error-message'>{errors.username}</span>
+                  )}
                 </div>
                 <div>
                   <input
                     type="email"
                     label="Email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
+                    value={values.email}
+                    onChange={handleChange("email")}
+                    onBlur={handleBlur("email")}
                     placeholder="Email address"
                     className={LoginCSS.LoginTextBox}
                   />
+                  {touched.email && errors.email && (
+                    <span className='error-message'>{errors.email}</span>
+                  )}
                 </div>
                 <div style={{ position: "relative" }}>
                   <input
                     type={showPassword ? 'text' : 'password'}
                     label="Create password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
+                    value={values.password}
+                    onChange={handleChange("password")}
+                    onBlur={handleBlur("password")}
                     placeholder="Password"
-                    className={LoginCSS.LoginTextBox}
+                    className={LoginCSS.LoginPasswordBox}
                   />
                   <FontAwesomeIcon
                     icon={showPassword ? faEyeSlash : faEye}
@@ -211,17 +237,20 @@ const Signup = (props) => {
                     onClick={() => setShowPassword(!showPassword)}
                   />
                 </div>
+                {touched.password && errors.password && (
+                    <span className='error-message'>{errors.password}</span>
+                  )}
               </div>
-              
-              <button className={LoginCSS.LoginButton} type="submit">
+
+              <button onClick={handleSubmit} className={LoginCSS.LoginButton} type="submit">
                 Sign up
-              </button>
-            </form>
+              </button></>)}
+            </Formik>
             <div className={LoginCSS.Separator}>or</div>
             <button className={LoginCSS.GoogleSignUpButton} onClick={signInWithGoogle}>
             </button>
             <p className={LoginCSS.TextLogin}>
-              
+
               <NavLink to="/login" className={LoginCSS.LinkLogin}>
                 Already have an account?{' '}Log in
               </NavLink>
@@ -231,7 +260,7 @@ const Signup = (props) => {
       </section>
     </main>
   );
-  
+
 };
 
 export default Signup;

@@ -46,6 +46,21 @@
   box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
   transition: box-shadow 0.2s ease-in;
 }
+.LoginPasswordBox{
+  box-sizing: border-box;
+  width: 80%;
+  padding: 10px;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  padding-left: 1.5rem;
+  padding-right: 2.5rem;
+  padding-bottom: 1rem;
+  box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
+  transition: box-shadow 0.2s ease-in;
+}
 
 .LoginTextBox:focus {
   box-shadow: inset 0px -3px 0px 0px rgba(34, 193, 195, 0.7);

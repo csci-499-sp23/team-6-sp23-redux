@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import CardCSS from '../Styles/Card.module.css';
 import { useState, useEffect } from 'react';
 import { getNumLikes } from '../Services/LikesService';
@@ -8,6 +8,7 @@ import {toMiles} from './Exports/distanceConverters.js'
 function Card(props) {
   const locationDetail = props.location2 ? props.location + ", \n" + props.location2 : props.location;
   const [numberOfLikes, setNumberOfLikes] = useState(0);
+  const cardRef = useRef(null);
 
  useEffect(() => {
     if(props.hangoutID) {
@@ -20,11 +21,29 @@ function Card(props) {
     }
   }, [props.hangoutID])
 
+  const onPositionChange = () => {
+    let i = setInterval(() => {
+      if(cardRef.current){
+        let width = cardRef.current.getBoundingClientRect().width
+        let x = cardRef.current.getBoundingClientRect().x
+        props.handleChangePositon(x, width)
+      }
+    }, 500)
+
+    props.handleIntervalUpdate(i)
+  }
   console.log(numberOfLikes)
 
   return (
     <React.Fragment>
-      <div className={`${CardCSS.Card} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}>
+      <div 
+        ref={cardRef}
+        draggable
+        onDragStart={(e) => {
+          e.preventDefault()
+          onPositionChange()
+        }}
+      className={`${CardCSS.Card} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}>
          <div className={CardCSS.HangoutDetail}>
              <FavoriteDetails className={CardCSS.HangoutDetail} {...props}/>
              </div>
