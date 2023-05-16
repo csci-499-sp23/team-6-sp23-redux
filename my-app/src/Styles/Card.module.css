@@ -3,7 +3,43 @@
     border-radius: 1.5vmax;
 }
 
-.Card {
+
+@media (orientation: landscape) {
+    .TinderCard {
+        position: absolute;
+        width: 30vw;
+        height: 90vh;
+        overflow: hidden;
+        border-radius: 5%;
+    }
+  }
+  
+  @media (orientation: portrait) {
+    .TinderCard {
+        position: absolute;
+        width: 70vw;
+        height: 50vh;
+        overflow: hidden;
+        border-radius:5%;
+    }
+  }
+
+.TopCard{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.MockLeft{
+    box-shadow: 0 8px 20px 0 rgba(255, 0, 0, 0.7), 0 8px 20px 0 rgba(255, 0, 0, 0.7);
+}
+.MockRight{
+    box-shadow: 0 8px 20px 0 rgba(0, 255, 0, 0.7), 0 8px 20px 0 rgba(0, 255, 0, 0.7);
+}
+.OtherCards{
+    display: none;
+}
+
+.Card{
+    width: 100%;
+    height: 100%;
     align-items: center;
     justify-content: center;
     overflow: hidden;

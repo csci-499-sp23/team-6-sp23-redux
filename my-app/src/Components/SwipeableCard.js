@@ -15,7 +15,7 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
 
     const cardRef = useRef(null)
 
-    let swipeThresholdValue = screenWidth / 2.9
+    let swipeThresholdValue = screenWidth / 4
 
     window.addEventListener('resize', () => {
         setScreenWidth(window.innerWidth)
@@ -33,22 +33,61 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
             setTimeout(() => {
                 nextCard()
             }, 1500)
+
+            clearInterval(intv)
+            setIsLeft(false);
+            setIsRight(false);
+            setIsDragging(false)
+            nextCard()
         }
+    }
+
+    const handleIntervalUpdate = (interval) => {
+        setIntv(interval)
+    }
+
+    const handleChangePositon = (x, width,) => {
+        let screenW = window.innerWidth
+        let halfScreenWidth = (screenW / 2);
+
+        if (x > (halfScreenWidth)) {
+            setIsLeft(false);
+            setIsRight(true);
+            setIsDragging(true)
+
+        } else if (x < (halfScreenWidth - width)) {
+            setIsLeft(true);
+            setIsRight(false);
+            setIsDragging(true)
+
+        } else {
+            setIsLeft(false);
+            setIsRight(false);
+            setIsDragging(false)
+        }
+
     }
 
     return(
     <>
         <TinderCard
+        onSwipeRequirementUnfulfilled={() => {
+            setIsLeft(false);
+            setIsRight(false);
+            clearInterval(intv)
+            setIsDragging(false)
+        }}
         onSwipe={(direction) => onSwipe(direction, item)}
         preventSwipe={['up', 'down']}
         swipeRequirementType="position"
         swipeThreshold={swipeThresholdValue}
-        className={`${CardCSS.TinderCard} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}
-        children={<Card {...props} hangoutID={item.id}/>}
+        className={`${CardCSS.TinderCard} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}   ${isRight && isDragging ? CardCSS.MockRight : ''}  ${isLeft && isDragging ? CardCSS.MockLeft : ''}`}
+        children={<Card {...props} handleChangePositon={handleChangePositon} handleIntervalUpdate={handleIntervalUpdate} />}
        />
         {accepted && <SwipeFeedback accepted={true}/>}
         {rejected && <SwipeFeedback accepted={false}/>}
     </>
+        
     )
 
 }
