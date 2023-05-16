@@ -1,5 +1,5 @@
 import FavoriteCardCSS from '../Styles/FavoriteCard.module.css';
-import FavoriteDetails from './FavoriteDetails';
+import HangoutDetails from './HangoutDetails';
 import DeleteAlert from './SubComponents/DeleteAlert';
 import { auth } from '../firebase';
 import { arrayRemove, doc, deleteField, getFirestore, getDoc, updateDoc } from "firebase/firestore";
@@ -21,7 +21,7 @@ function FavoriteCard(props) {
           })
         }   
       }, [props.id])
-      console.log(numberOfLikes)
+
         //Delete hangout function, requires category and hangout ID to be passed to it
     const deleteHangout = async (category, index, isMostRecent, isCategory) => {
         const db = getFirestore();
@@ -73,16 +73,18 @@ function FavoriteCard(props) {
         <div className={FavoriteCardCSS.Container}>
             
             <div className={FavoriteCardCSS.FavoriteModal}>
-                <FavoriteDetails className={FavoriteCardCSS.FavoriteModal} {...props}/>
+                <HangoutDetails className={FavoriteCardCSS.FavoriteModal} {...props} numberOfLikes={numberOfLikes}/>
             </div>
 
             <div id={FavoriteCardCSS.CardHeader}>
                 <div className={FavoriteCardCSS.Spacer} /> 
                 <div id={FavoriteCardCSS.Title}>{props.title}</div>
-                <div className={FavoriteCardCSS.DeleteAlert}> <DeleteAlert deleteHangout={deleteHangout}
-                              title={props.title} category={props.category} index={props.index} 
-                              isMostRecent={props.isMostRecent} isCategory={props.isCategory}>
-                </DeleteAlert> </div>
+                <div className={FavoriteCardCSS.DeleteAlert}> 
+                    <DeleteAlert deleteHangout={deleteHangout}
+                                 title={props.title} category={props.category} index={props.index} 
+                                 isMostRecent={props.isMostRecent} isCategory={props.isCategory}>
+                    </DeleteAlert> 
+                </div>
             </div>
 
             <img id={FavoriteCardCSS.Image} src={props.image} alt="hangout-suggestion"></img>
@@ -98,8 +100,4 @@ function FavoriteCard(props) {
     )
 }
 
-export default FavoriteCard;
- /*<button className={FavoriteCardCSS.DeleteCardButton} size="sm" 
-                        onClick={() => <DeleteAlert deleteHangout={deleteHangout}></DeleteAlert> deleteHangout(props.category,props.index)} >
-                        <div className={FavoriteCardCSS.DeleteButtonImage}></div>
-                        </button>*/   
+export default FavoriteCard; 

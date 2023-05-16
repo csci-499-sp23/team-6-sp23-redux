@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import CardCSS from '../Styles/Card.module.css';
 import { useState, useEffect } from 'react';
 import { getNumLikes } from '../Services/LikesService';
-import FavoriteDetails from './FavoriteDetails';
+import HangoutDetails from './HangoutDetails';
 import {toMiles} from './Exports/distanceConverters.js'
 
 function Card(props) {
@@ -45,8 +45,8 @@ function Card(props) {
         }}
       className={`${CardCSS.Card} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}>
          <div className={CardCSS.HangoutDetail}>
-             <FavoriteDetails className={CardCSS.HangoutDetail} {...props}/>
-             </div>
+             <HangoutDetails className={CardCSS.HangoutDetail} {...props}/>
+         </div>
         
           <img draggable='false' id={CardCSS.Image} src={props.image} alt="hangout-suggestion"></img>
           
@@ -72,26 +72,3 @@ function Card(props) {
 };
 
 export default Card;
-
-/*{showCardDetails ?
-        <div className={CardCSS.DetailContainer}>
-          <HangoutDetail
-              className={CardCSS.DetailContainer} 
-              title={props.title} 
-              image={props.image} 
-              distance={props.distance}
-              phone={props.phone || "N/A"} 
-              location={props.location}
-              location2={props.location2}
-              details={props.details}
-              rating={props.rating}
-              price={props.price}
-              closed={props.closed}
-              latitude={props.latitude}
-              longitude={props.longitude}
-              userLatitude={props.userLatitude}
-              userLongitude={props.userLongitude}
-            />
-        </div>
-        : null
-      }*/ 

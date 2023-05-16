@@ -97,7 +97,7 @@ function App() {
               <Route exact path="/" element={<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
             }
             <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit={rangeLimit} ratingLimit={ratingLimit} mostRecentFavorites={mostRecentFavorites}/>}/>
-            <Route exact path="/favorites" element={<Favoritelist favorites={favorites} mostRecentFavorites={mostRecentFavorites}/>}/>
+            <Route exact path="/favorites" element={<Favoritelist favorites={favorites} mostRecentFavorites={mostRecentFavorites} userLocation={location}/>}/>
             <Route exact path = "/login" element = {<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
             <Route exact path = "/signup" element = {<SignUp setNavigated={setNavigated}/>}/>
             <Route exact path="/preferences" element={<Preferences preferences={preferences}/>}/>
