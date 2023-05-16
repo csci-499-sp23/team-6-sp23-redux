@@ -7,7 +7,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { updateProfile } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import {categoryList} from './Exports/categoryList.js';
+import {categoryList} from '../Exports/categoryList.js';
 import { Formik } from 'formik';
 import * as yup from "yup";
 

@@ -7,6 +7,7 @@ import { Rating } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import MapView from './MapView';
 import { getNumLikes } from '../Services/LikesService';
+import { toTitleCase, formatNumber } from '../Exports/Functions';
 
 function HangoutDetails(props) {
   
@@ -27,15 +28,6 @@ function HangoutDetails(props) {
     }
   }, [props.hangoutID])
 
-  //helper function for captailiazing (same one was the one in FavoriteLists.s)
-  const toTitleCase = (phrase) => {
-    return phrase
-      .toLowerCase()
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
-  };
-
   const isOpen = (status) => {
     if(!status){
       return "Open"
@@ -45,22 +37,6 @@ function HangoutDetails(props) {
     }
   }
 
-  const formatNumber = (number) => {
-    if (number >= 1000000000) {
-      return (number / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
-    }
-
-    if (number >= 1000000) {
-      return (number / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-    }
-
-    if (number >= 1000) {
-      return (number/1000).toFixed(1).replace(/\.0$/, '') + 'K';
-    }
-
-    return number;
-  }
-  
   return (
     <div id={HangoutDetailsCSS.HangoutDetailsContainer}>
   

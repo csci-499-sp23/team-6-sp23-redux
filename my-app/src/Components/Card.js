@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import CardCSS from '../Styles/Card.module.css';
 import HangoutDetails from './HangoutDetails';
-import {toMiles} from './Exports/distanceConverters.js'
+import {toMiles} from '../Exports/Functions.js'
 
 function Card(props) {
   const locationDetail = props.location2 ? props.location + ", \n" + props.location2 : props.location;
@@ -20,7 +20,7 @@ function Card(props) {
 
     props.handleIntervalUpdate(i)
   }
-  
+
   return (
     <React.Fragment>
       <div 
