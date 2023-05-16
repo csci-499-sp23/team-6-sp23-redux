@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import SwipeableCard from './SwipeableCard';
 import EmptyDeck from './EmptyDeck';
 import { getHangouts } from '../Services/HangoutService';
@@ -7,23 +7,22 @@ import { auth, db } from '../firebase';
 import CardDeckCSS from '../Styles/CardDeck.module.css'
 
 function CardDeck(props) {
-  
+
   const [hangoutData, setHangoutData] = useState([]);
   const [empty, setEmpty] = useState(true);
-  const [displayEmptyDeck, setDisplayEmptyDeck] = useState (false);
+  const [displayEmptyDeck, setDisplayEmptyDeck] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const userID = auth.currentUser?.uid
 
-  function toMeters(miles)
-  {
+  function toMeters(miles) {
     return parseInt(Math.floor(parseInt(miles) * 1609.34));
   }
 
 
-  useEffect( () => {
+  useEffect(() => {
     // Initialize a set with the ids of all of the user's favorited hangout locations
-    const favoritesSet = new Set(); 
+    const favoritesSet = new Set();
     const initializeFavorites = () => {
       props.favoriteHangouts.forEach((map) => {
         map[1].forEach((hangout) => {
@@ -57,8 +56,8 @@ function CardDeck(props) {
         setDisplayEmptyDeck(false);
         setLoading(false);
       })
-    } 
-    
+    }
+
   }, [props, empty]);
 
   const removeDuplicates = (array) => {
@@ -79,9 +78,10 @@ function CardDeck(props) {
       return cardDeck
     }
   
-  const shuffleDeck = (array) => {
-    let newDeck = array.slice()
-    for(let i = newDeck.length - 1; i > 0; i--) {
+
+  const shuffleDeck = (deck) => {
+    let newDeck = deck.slice()
+    for (let i = newDeck.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       const temp = newDeck[i];
       newDeck[i] = newDeck[j];
@@ -90,8 +90,8 @@ function CardDeck(props) {
     setHangoutData(newDeck)
   }
 
-  const saveOnSwipeRight = async(item) => {
-    const userRef = doc(db, 'users', userID); 
+  const saveOnSwipeRight = async (item) => {
+    const userRef = doc(db, 'users', userID);
     const favoriteCategory = `favorites.${item.category}`
     const mostRecentFavorites = 'mostRecentFavorites'
 
@@ -154,7 +154,7 @@ const nextCard = () => {
   {
     setDisplayEmptyDeck(true);
   }
-}
+  }
 
     //Display for waiting on the fetch request
     if (loading) {

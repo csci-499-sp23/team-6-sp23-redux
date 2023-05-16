@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 import { Rating } from '@mui/material';
 import React, { useState } from 'react';
+import toTitleCase from '../Utils/Text';
 
 function Favoritedetails(props) {
 
@@ -14,13 +15,7 @@ function Favoritedetails(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   //helper function for captailiazing (same one was the one in FavoriteLists.s)
-  const toTitleCase = (phrase) => {
-    return phrase
-      .toLowerCase()
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
-  };
+  
 
   const isOpen = (status) => {
     if(!status){
