@@ -206,12 +206,11 @@
 }
 
 .PasswordToggle {
-  /* right: calc(15% - 5px); */
-  /* top: 40%; */
-  /* transform: translateY(-50%); */
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  transform: translateY(-50%);
   cursor: pointer;
-  padding-top: -10px;
-  padding-right: 10px;
 }
 
 .LoginPasswordBox {
