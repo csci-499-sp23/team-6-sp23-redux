@@ -44,14 +44,14 @@ function Card(props) {
           onPositionChange()
         }}
       className={`${CardCSS.Card} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}>
-         <div className={CardCSS.HangoutDetail}>
-             <HangoutDetails className={CardCSS.HangoutDetail} {...props}/>
-         </div>
         
           <img draggable='false' id={CardCSS.Image} src={props.image} alt="hangout-suggestion"></img>
           
           <div id={CardCSS.Title}>{props.title}</div>
             <div id={CardCSS.BottomContainer}>
+             <div className={CardCSS.HangoutDetail}>
+               <HangoutDetails className={CardCSS.HangoutDetail} {...props}/>
+             </div>
             <div id={CardCSS.LocationContainer}>
               <div className={CardCSS.DetailLabel}>Location: </div>
               <div className={CardCSS.Detail}>{locationDetail}</div>
