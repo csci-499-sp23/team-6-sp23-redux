@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, {useState} from "react";
 import TinderCard from 'react-tinder-card'
 import Card from './Card.js'
 import CardCSS from "../Styles/Card.module.css"
@@ -13,8 +13,6 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
     const [intv, setIntv] = useState(null);
     const [isDragging, setIsDragging] = useState(false);
 
-    const cardRef = useRef(null)
-
     let swipeThresholdValue = screenWidth / 4
 
     window.addEventListener('resize', () => {
@@ -28,17 +26,18 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
                 setAccepted(true)
             }
             else if(direction === "left") {
+                
                 setRejected(true)
             }
             setTimeout(() => {
                 nextCard()
+                clearInterval(intv)
+                setIsLeft(false);
+                setIsRight(false);
+                setIsDragging(false)
             }, 1500)
 
-            clearInterval(intv)
-            setIsLeft(false);
-            setIsRight(false);
-            setIsDragging(false)
-            nextCard()
+            
         }
     }
 
