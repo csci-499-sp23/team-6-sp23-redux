@@ -148,6 +148,7 @@
     background-color: transparent;
     height: 100%;
     width: 100%;
+    border: transparent;
 }
 
 .ModalInfoButton:hover {
@@ -200,7 +201,7 @@
 
   @media(orientation: landscape) {
     @media(max-width: 915px) {
-
+        
     }
   }
 
