@@ -129,7 +129,7 @@ const Login = (props) => {
                   {errorMessage.email && <span className="error-message">{errorMessage.email}</span>}
                 </div>
 
-                <div style={{ position: "relative" }}>
+                <div className={LoginCSS.LoginPasswordBox}>
                   <input
                     id="password"
                     name="password"
