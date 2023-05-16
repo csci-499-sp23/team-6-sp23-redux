@@ -9,8 +9,10 @@ function Favoritelist({favorites, mostRecentFavorites, userLocation}) {
     const user = auth.currentUser
     const [dragging, setDragging] = useState(false); // Used to toggle whether the favorite card should be clickable or not while dragging
     const [selectedSegment, setSelectedSegment] = useState(0);
-    const [swipeStart, setSwipeStart] = useState(null);
-    const [swipeEnd, setSwipeEnd] = useState(null);
+    const [swipeStartX, setSwipeStartX] = useState(null);
+    const [swipeEndX, setSwipeEndX] = useState(null);
+    const [swipeStartY, setSwipeStartY] = useState(null);
+    const [swipeEndY, setSwipeEndY] = useState(null);
     const minSwipeDistance = 50
     
     // Used to check if the browser is mobile or web for slide/swipe events
@@ -71,24 +73,35 @@ function Favoritelist({favorites, mostRecentFavorites, userLocation}) {
 
     // Function that makes the scrollable rows draggable
     const startSwipe = (e) => {
-        setSwipeEnd(null)
-        setSwipeStart(e.targetTouches[0].clientX)
+        setSwipeEndX(null)
+        setSwipeEndY(null)
+        setSwipeStartX(e.targetTouches[0].clientX)
+        setSwipeStartY(e.targetTouches[0].clientY)
     }
 
-    const endSwipe = (e, selectedRow) => {
-        e.preventDefault()
-        if(!swipeStart || !swipeEnd) return
-        const distance = swipeStart - swipeEnd
-        const isLeftSwipe = distance > minSwipeDistance
-        const isRightSwipe = distance < -minSwipeDistance
-        if(isLeftSwipe || isRightSwipe) {
+    const endSwipe = (selectedRow) => {
+        if(!swipeStartX || !swipeEndX) return
+        const distanceX = swipeStartX - swipeEndX
+        const distanceY = swipeStartY - swipeEndY
+        const isLeftSwipe = distanceX > minSwipeDistance
+        const isRightSwipe = distanceX < -minSwipeDistance
+
+        // Move the slider to the left
+        if(isRightSwipe && Math.abs(distanceX) > distanceY) {
             let slider = document.getElementById(`FavoriteListCSS.CategoryRow${selectedRow}`)
-            slider.scrollLeft = distance;
+            slider.scrollLeft = -distanceX;
+        }
+
+        // Move the slider to the right
+        if(isLeftSwipe & distanceX > distanceY) {
+            let slider = document.getElementById(`FavoriteListCSS.CategoryRow${selectedRow}`)
+            slider.scrollLeft = distanceX;
         }
     }
 
     const swipe = (e) => {
-        setSwipeEnd(e.targetTouches[0].clientX)
+        setSwipeEndX(e.targetTouches[0].clientX)
+        setSwipeEndY(e.targetTouches[0].clientY)
     }
 
     const makeCategoriesTable = () => {
@@ -110,7 +123,7 @@ function Favoritelist({favorites, mostRecentFavorites, userLocation}) {
                                  onMouseOver={() => {if(!mobileCheck) slideRow(selectedRow)}}
                                  onMouseLeave={() => {if(!mobileCheck) deInitEventListener(selectedRow)}}
                                  onTouchStart={(e) => {if(mobileCheck) startSwipe(e)}}
-                                 onTouchEnd={(e) => {if(mobileCheck) endSwipe(e, selectedRow)}}
+                                 onTouchEnd={() => {if(mobileCheck) endSwipe(selectedRow)}}
                                  onTouchMove={(e) => {if(mobileCheck) swipe(e)}}>
                             {
                                 //Table columns for each hangout
