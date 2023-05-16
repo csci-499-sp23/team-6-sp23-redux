@@ -66,7 +66,7 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
         }
 
     }
-
+    
     return(
     <>
         <TinderCard
@@ -81,7 +81,7 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
         swipeRequirementType="position"
         swipeThreshold={swipeThresholdValue}
         className={`${CardCSS.TinderCard} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}   ${isRight && isDragging ? CardCSS.MockRight : ''}  ${isLeft && isDragging ? CardCSS.MockLeft : ''}`}
-        children={<Card {...props} handleChangePositon={handleChangePositon} handleIntervalUpdate={handleIntervalUpdate} />}
+        children={<Card {...props} handleChangePositon={handleChangePositon} handleIntervalUpdate={handleIntervalUpdate} itemID={item.id} />}
        />
         {accepted && <SwipeFeedback accepted={true}/>}
         {rejected && <SwipeFeedback accepted={false}/>}

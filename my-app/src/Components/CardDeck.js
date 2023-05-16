@@ -5,7 +5,7 @@ import { getHangouts } from '../Services/HangoutService';
 import { doc, updateDoc, getDoc, setDoc, arrayUnion } from "firebase/firestore";
 import { auth, db } from '../firebase';
 import CardDeckCSS from '../Styles/CardDeck.module.css'
-import {toMeters} from "./Exports/distanceConverters.js"
+import {toMeters} from "../Exports/Functions.js"
 
 function CardDeck(props) {
 

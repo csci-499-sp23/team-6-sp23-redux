@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 import { Rating } from '@mui/material';
 import React, { useState } from 'react';
-import toTitleCase from '../Utils/Text';
+import { toTitleCase } from '../Exports/Functions.js';
 
 function Favoritedetails(props) {
 
