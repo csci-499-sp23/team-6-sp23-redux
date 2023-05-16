@@ -4,7 +4,7 @@ import SegmentedControl from './SubComponents/SegmentedControl';
 import { auth } from '../firebase';
 import React, { useState } from 'react';
 
-function Favoritelist({favorites, mostRecentFavorites}) {
+function Favoritelist({favorites, mostRecentFavorites, userLocation}) {
     const user = auth.currentUser
     const [dragging, setDragging] = useState(false); // Used to toggle whether the favorite card should be clickable or not while dragging
     const [selectedSegment, setSelectedSegment] = useState(0);
@@ -136,6 +136,10 @@ function Favoritelist({favorites, mostRecentFavorites}) {
                                                 distance={hangout.distance} 
                                                 location={hangout.location.display_address[0]}
                                                 location2={hangout.location.display_address[1]}
+                                                latitude={hangout.coordinates.latitude}
+                                                longitude={hangout.coordinates.longitude}
+                                                userLatitude={parseFloat(userLocation.split(',')[0])}
+                                                userLongitude={parseFloat(userLocation.split(',')[1])}
                                                 phone={hangout.display_phone}
                                                 category={hangout.category}
                                                 closed={hangout.is_closed}
@@ -197,11 +201,16 @@ function Favoritelist({favorites, mostRecentFavorites}) {
                                         distance={hangout.distance} 
                                         location={hangout.location.display_address[0]}
                                         location2={hangout.location.display_address[1]}
+                                        latitude={hangout.coordinates.latitude}
+                                        longitude={hangout.coordinates.longitude}
+                                        userLatitude={parseFloat(userLocation.split(',')[0])}
+                                        userLongitude={parseFloat(userLocation.split(',')[1])}
                                         phone={hangout.display_phone}
                                         category={hangout.category}
                                         closed={hangout.is_closed}
                                         details={hangout.details}
                                         rating={hangout.rating}
+                                        url={hangout.url}
                                         isMostRecent={true}
                                         isCategory={false}
                                     />

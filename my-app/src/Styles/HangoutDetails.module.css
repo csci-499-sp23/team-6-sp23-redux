@@ -1,4 +1,4 @@
-#FavoriteDetailsContainer {
+#HangoutDetailsContainer {
     height: 100%;
     width: 100%;
 }
@@ -7,69 +7,96 @@
     text-align: center;
 }
 
+/* MARK: - Header */
 #ModalHeader {
     padding: 0 !important;
     margin: 0 !important;
-    height: 20em !important;
-    width: 31.2em !important;
     overflow: hidden;
+    background-color: var(--backgroundColor);
+    border-bottom: 0 none !important;
 }
 
-.ModalImageContainer {
-    height: 100%;
+.HeaderContainer {
     width: 100%;
-    align-self: center;
-}
-
-.modalImage{
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-}
-
-#TitleBox {
     display: flex;
-    justify-content: space-between;
-    margin: 0px 1em auto;
+    flex-direction: column;
 }
 
 #ModalTitle {
-    overflow-x: auto;
+    text-align: center;
 }
 
 #TitleText {
-    align-self: center;
-    font-weight: bold;
+    font-size: 1.5em;
+    color: white;
 }
 
-#ModalBody {
-    height: 17em;
-    width: 100%;
+.RatingContainer {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 0 !important;
-    margin: 0 !important;
-    border-radius: 6px;
-}
-
-
-.ModalInfo{
-    text-align: left;
-    width: 100%;
-    height: 100%;
-    margin-top: 0.5em;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .Rating {
     color: var(--secondaryColor) !important;
-    padding-top: 0.5%;
+    margin-left: 1vmax;
 }
+
+.LikesContainer {
+    border: 1px solid white;
+    border-radius: 0.25vmax;
+    padding: 0px 8px;
+    color: white;
+    margin-right: 1vmax;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5vmax;
+}
+
+/* MARK: - Body */
+
+#ModalBody {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: var(--backgroundColor);
+    padding-top: 1vmax !important; 
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+    padding-bottom: 1vmax !important;
+    gap: 1vmax;
+}
+
+.LeftContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.RightContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.ModalImageContainer {
+    height: 14.25vmax;
+    width: 100%;
+    align-self: center;
+}
+
+.ModalImage{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 5%;
+}
+
 
 .DetailsBox {
     display: flex;
@@ -77,13 +104,11 @@
     justify-content: space-evenly;
     height: 100%;
     background-color: var(--backgroundColor);
-    margin-top: 1em;
 }
 
 .InfoBox {
     display: flex;
     flex-direction: column;
-    margin-left: 1em;
 }
 
 .InfoLabel {
@@ -130,6 +155,13 @@
     opacity: 0.5;
 }
 
+/* MARK: - Footer */
+
+#ModalFooter {
+    background-color: var(--backgroundColor);
+    border-top: 0 none !important;
+}
+
 .ClipboardIcon{
     color: white;
 }
@@ -139,7 +171,7 @@
 }
 
 .urlBox{
-    width:80%;
+    width: 80%;
     overflow-x: auto;
     white-space: nowrap;
     overflow-y: hidden;
@@ -148,6 +180,7 @@
 .urlBox::-webkit-scrollbar  {
     background-color: #3b4a51;
     width: 0.7em;
+    height: 0.45em;
     background: transparent;
   }
 
@@ -157,9 +190,20 @@
   }
 
   .urlDiv{
-      display:flex;
-      justify-content: space-evenly;
-      align-items: center;
-      margin-right: 1em;
-    
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-right: 1em;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media(orientation: landscape) {
+    @media(max-width: 915px) {
+
+    }
+  }
+
+  @media(orientation: portrait) {
+
   }

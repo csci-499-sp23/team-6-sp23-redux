@@ -299,7 +299,7 @@ select::-ms-expand { display: none; }
   }
 
 @media (orientation: landscape) {
-    @media(max-width: 844px) {
+    @media(max-width: 915px) {
 
         .HeaderText {
             margin-left: 20%;
