@@ -221,7 +221,7 @@ const Signup = (props) => {
                     <span className='error-message'>{errors.email}</span>
                   )}
                 </div>
-                <div style={{ position: "relative" }}>
+                <div className={LoginCSS.LoginPasswordBox}>
                   <input
                     type={showPassword ? 'text' : 'password'}
                     label="Create password"
@@ -229,7 +229,7 @@ const Signup = (props) => {
                     onChange={handleChange("password")}
                     onBlur={handleBlur("password")}
                     placeholder="Password"
-                    className={LoginCSS.LoginPasswordBox}
+                    className={`${LoginCSS.LoginTextBox} ${LoginCSS.LoginPasswordInput}`}
                   />
                   <FontAwesomeIcon
                     icon={showPassword ? faEyeSlash : faEye}
