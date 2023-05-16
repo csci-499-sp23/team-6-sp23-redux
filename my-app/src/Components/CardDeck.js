@@ -5,6 +5,7 @@ import { getHangouts } from '../Services/HangoutService';
 import { doc, updateDoc, getDoc, setDoc, arrayUnion } from "firebase/firestore";
 import { auth, db } from '../firebase';
 import CardDeckCSS from '../Styles/CardDeck.module.css'
+import {toMeters} from "./Exports/distanceConverters.js"
 
 function CardDeck(props) {
   
@@ -14,11 +15,6 @@ function CardDeck(props) {
   const [loading, setLoading] = useState(true);
 
   const userID = auth.currentUser?.uid
-
-  function toMeters(miles)
-  {
-    return parseInt(Math.floor(parseInt(miles) * 1609.34));
-  }
 
 
   useEffect( () => {
