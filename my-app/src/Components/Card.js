@@ -1,25 +1,13 @@
 import React, {useRef} from 'react';
 import CardCSS from '../Styles/Card.module.css';
-import { useState, useEffect } from 'react';
-import { getNumLikes } from '../Services/LikesService';
 import HangoutDetails from './HangoutDetails';
 import {toMiles} from './Exports/distanceConverters.js'
 
 function Card(props) {
   const locationDetail = props.location2 ? props.location + ", \n" + props.location2 : props.location;
-  const [numberOfLikes, setNumberOfLikes] = useState(0);
   const cardRef = useRef(null);
 
- useEffect(() => {
-    if(props.hangoutID) {
-      getNumLikes(props.hangoutID).then((res) => {
-        setNumberOfLikes(res)
-      })
-      .catch((error) => {
-        console.log("Error fetching number of likes: ", error)
-      })
-    }
-  }, [props.hangoutID])
+ 
 
   const onPositionChange = () => {
     let i = setInterval(() => {
@@ -32,8 +20,7 @@ function Card(props) {
 
     props.handleIntervalUpdate(i)
   }
-  console.log(numberOfLikes)
-
+  
   return (
     <React.Fragment>
       <div 
@@ -50,7 +37,7 @@ function Card(props) {
           <div id={CardCSS.Title}>{props.title}</div>
             <div id={CardCSS.BottomContainer}>
              <div className={CardCSS.HangoutDetail}>
-               <HangoutDetails className={CardCSS.HangoutDetail} {...props}/>
+               <HangoutDetails className={CardCSS.HangoutDetail} {...props} hangoutID={props.itemID}/>
              </div>
             <div id={CardCSS.LocationContainer}>
               <div className={CardCSS.DetailLabel}>Location: </div>

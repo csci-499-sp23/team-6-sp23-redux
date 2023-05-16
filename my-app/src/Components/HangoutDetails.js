@@ -4,16 +4,29 @@ import HangoutDetailsCSS from '../Styles/HangoutDetails.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { Rating } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MapView from './MapView';
+import { getNumLikes } from '../Services/LikesService';
 
 function HangoutDetails(props) {
   
   const [show, setShow] = useState(false);
   const [copied, setCopied] = useState(false);
-
+  const [numberOfLikes, setNumberOfLikes] = useState(0);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    if(props.hangoutID) {
+      getNumLikes(props.hangoutID).then((res) => {
+        setNumberOfLikes(res)
+      })
+      .catch((error) => {
+        console.log("Error fetching number of likes: ", error)
+      })
+    }
+  }, [props.hangoutID])
+
   //helper function for captailiazing (same one was the one in FavoriteLists.s)
   const toTitleCase = (phrase) => {
     return phrase
@@ -47,7 +60,7 @@ function HangoutDetails(props) {
 
     return number;
   }
-                     
+  
   return (
     <div id={HangoutDetailsCSS.HangoutDetailsContainer}>
   
@@ -68,7 +81,7 @@ function HangoutDetails(props) {
               <Rating className={HangoutDetailsCSS.Rating} defaultValue={0} value={props.rating} precision={0.5} size={"large"} readOnly></Rating>
               <div className={HangoutDetailsCSS.LikesContainer}>
                 <FontAwesomeIcon icon={faThumbsUp} className={HangoutDetailsCSS.LikesIcon}></FontAwesomeIcon>
-                <div className={HangoutDetailsCSS.LikesNumber}>{formatNumber(props.numberOfLikes)}</div>
+                <div className={HangoutDetailsCSS.LikesNumber}>{formatNumber(numberOfLikes)}</div>
               </div>
             </div>  
           </div>
