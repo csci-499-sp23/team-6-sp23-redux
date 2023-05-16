@@ -6,6 +6,7 @@ import Alert from './SubComponents/Alert';
 import { auth, db } from '../firebase';
 import { doc, updateDoc } from "firebase/firestore";
 import axios from 'axios';
+import {categoryList} from './Exports/categoryList.js';
 
 function Preferences(props) {
     //NOTE: Preferences should not be accessible unless user is logged in
@@ -27,11 +28,6 @@ function Preferences(props) {
     const [isHovered, setIsHovered] = useState(null);
 
     const buttonVariant = "outline-info"
-
-    // List of all the current queryable categories
-    const categoryList = ["restaurants", "cafes", "games", "shopping", "spa",
-                          "bowling", "karaoke", "bars", "clubs", "billiards",
-                          "theaters", "zoo", "amusement parks", "parks", "beach and pool"]
 
     // Enum for category values
     const Categories = Object.freeze({

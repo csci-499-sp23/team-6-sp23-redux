@@ -7,21 +7,30 @@ import { doc, setDoc } from 'firebase/firestore';
 import { updateProfile } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import {categoryList} from './Exports/categoryList.js';
 import { Formik } from 'formik';
 import * as yup from "yup";
-
-//defaultPreferences object for new users
-export const defaultPreferences = {
-  categories: ['restaurants', 'theaters', 'clubs'],
-  userLocation: "",
-  rangeLimit: "0",
-  ratingLimit: "0",
-};
 
 const Signup = (props) => {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
+
+  //Helper function for retrieving random elements of an array
+  //Select three random categories for the user on account creation
+  const getRandomCategories = (array) => {
+    const shuffled = array.sort(() => 0.5 - Math.random()); 
+    return shuffled.slice(0, 3); 
+  };
+
+  const randomCategories = getRandomCategories(categoryList);
+
+  const defaultPreferences = {
+    categories: randomCategories,
+    userLocation: "",
+    rangeLimit: "0",
+    ratingLimit: "0",
+  };
 
 
   const getGeolocation = async () => {

@@ -3,6 +3,7 @@ import CardCSS from '../Styles/Card.module.css';
 import { useState, useEffect } from 'react';
 import { getNumLikes } from '../Services/LikesService';
 import FavoriteDetails from './FavoriteDetails';
+import {toMiles} from './Exports/distanceConverters.js'
 
 function Card(props) {
   const locationDetail = props.location2 ? props.location + ", \n" + props.location2 : props.location;
@@ -32,12 +33,6 @@ function Card(props) {
     props.handleIntervalUpdate(i)
   }
   console.log(numberOfLikes)
-  //To miles function
-  function toMiles(meters)
-  {
-    return parseInt(meters) * 0.000621371;
-  }
-
 
   return (
     <React.Fragment>
