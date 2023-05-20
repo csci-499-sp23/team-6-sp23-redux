@@ -54,9 +54,9 @@ function FavoriteCard(props) {
         }
 
     };
-        
+
     return(
-        <div className={FavoriteCardCSS.Container}>
+        <div className={`${props.style} ${FavoriteCardCSS.Container}`}>
             
             <div className={FavoriteCardCSS.FavoriteModal}>
                 <HangoutDetails className={FavoriteCardCSS.FavoriteModal} {...props} hangoutID={props.id}/>

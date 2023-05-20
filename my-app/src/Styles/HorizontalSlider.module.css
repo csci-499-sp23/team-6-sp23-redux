@@ -1,0 +1,19 @@
+.Container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px;
+}
+
+.DragItem {
+    display: inline-block;
+    pointer-events: none;
+    flex: 0 0 auto;
+}
+
+.Item {
+    display: inline-block;
+    pointer-events: auto;
+    flex: 0 0 auto;
+}

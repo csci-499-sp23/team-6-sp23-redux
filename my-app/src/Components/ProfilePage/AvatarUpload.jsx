@@ -59,7 +59,7 @@ function UploadImage() {
   return (
     <div id={ProfileCSS.UploadImageContainer}>
       <div id={ProfileCSS.FileName}>{ image ? image.name : "N/A"}</div>
-      <label for={ProfileCSS.ChooseFileButton} className={ProfileCSS.CustomFileButton}>
+      <label htmlFor={ProfileCSS.ChooseFileButton} className={ProfileCSS.CustomFileButton}>
       <FontAwesomeIcon id={ProfileCSS.UploadFileIcon} icon={faCloudArrowUp}></FontAwesomeIcon>Choose File</label>
       <input id={ProfileCSS.ChooseFileButton} type="file" onChange={handleChange} />
       <button id={ProfileCSS.UploadFileButton} onClick={handleUpload}>Upload</button>

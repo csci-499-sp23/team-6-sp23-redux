@@ -207,9 +207,6 @@
 
 
 .PasswordToggle {
-  /* right: calc(15% - 5px); */
-  /* top: 40%; */
-  /* transform: translateY(-50%); */
   cursor: pointer;
   padding-top: -10px;
   padding-right: 10px;

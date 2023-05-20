@@ -5,8 +5,7 @@ import CardCSS from "../Styles/Card.module.css"
 import SwipeFeedback from "./SubComponents/SwipeFeedback.js";
 
 function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
-    const [accepted, setAccepted] = useState(false);
-    const [rejected, setRejected] = useState(false);
+    const [showFeedback, setShowFeedback] = useState({show: false, accept: null});
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [isLeft, setIsLeft] = useState(false);
     const [isRight, setIsRight] = useState(false);
@@ -23,18 +22,18 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
         if(props.isTop) {
             if(direction === "right") {
                 await saveOnSwipeRight(item)
-                setAccepted(true)
+                setShowFeedback({show: true, accept: true})
             }
             else if(direction === "left") {
-                
-                setRejected(true)
+                setShowFeedback({show: true, accept: false})
             }
+        
             setTimeout(() => {
-                nextCard()
                 clearInterval(intv)
                 setIsLeft(false);
                 setIsRight(false);
                 setIsDragging(false)
+                nextCard()
             }, 1500)
 
             
@@ -69,7 +68,7 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
     
     return(
     <>
-        <TinderCard
+      <TinderCard
         onSwipeRequirementUnfulfilled={() => {
             setIsLeft(false);
             setIsRight(false);
@@ -82,9 +81,8 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
         swipeThreshold={swipeThresholdValue}
         className={`${CardCSS.TinderCard} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}   ${isRight && isDragging ? CardCSS.MockRight : ''}  ${isLeft && isDragging ? CardCSS.MockLeft : ''}`}
         children={<Card {...props} handleChangePositon={handleChangePositon} handleIntervalUpdate={handleIntervalUpdate} itemID={item.id} />}
-       />
-        {accepted && <SwipeFeedback accepted={true}/>}
-        {rejected && <SwipeFeedback accepted={false}/>}
+      />
+      { showFeedback.show && <SwipeFeedback hide={setShowFeedback} accept={showFeedback.accept} style={CardCSS.Feedback}/>}
     </>
         
     )

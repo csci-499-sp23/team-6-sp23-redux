@@ -8,7 +8,7 @@ import Preferences from './Preferences';
 import Profile from './Profile';
 import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { auth, db } from '../firebase';
 import { doc, onSnapshot } from "firebase/firestore";
 import PageTitle from './PageTitle';
@@ -26,7 +26,12 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // check if user is authenticated
   const [rangeLimit, setRangeLimit] = useState("");
   const [ratingLimit, setRatingLimit] = useState("")
-  const [username, setUsername] = useState(''); 
+  const [username, setUsername] = useState('');
+  
+  const memoizedPreferences = useMemo(() => preferences, [preferences]);
+  const memoizedFavorites = useMemo(() => favorites, [favorites]);
+  const memoizedMostRecentFavorites = useMemo(() => mostRecentFavorites, [mostRecentFavorites]);
+  const memoizedCategories = useMemo(() => categories, [categories]);
 
   // will mount
   useEffect( () => {
@@ -90,18 +95,18 @@ function App() {
             <Routes>
             {
               isAuthenticated &&
-              <Route exact path="/" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit={rangeLimit} ratingLimit={ratingLimit} mostRecentFavorites={mostRecentFavorites}/>}/>
+              <Route exact path="/" element={<HomepageWithCards location={location} navigated={navigated} categories={memoizedCategories} favorites={memoizedFavorites} rangeLimit={rangeLimit} ratingLimit={ratingLimit} mostRecentFavorites={memoizedMostRecentFavorites}/>}/>
             }
             {
               !isAuthenticated &&
               <Route exact path="/" element={<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
             }
-            <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={categories} favorites={favorites} rangeLimit={rangeLimit} ratingLimit={ratingLimit} mostRecentFavorites={mostRecentFavorites}/>}/>
-            <Route exact path="/favorites" element={<Favoritelist favorites={favorites} mostRecentFavorites={mostRecentFavorites} userLocation={location}/>}/>
+            <Route exact path="/homepage" element={<HomepageWithCards location={location} navigated={navigated} categories={memoizedCategories} favorites={memoizedFavorites} rangeLimit={rangeLimit} ratingLimit={ratingLimit} mostRecentFavorites={memoizedMostRecentFavorites}/>}/>
+            <Route exact path="/favorites" element={<Favoritelist favorites={memoizedFavorites} mostRecentFavorites={memoizedMostRecentFavorites} userLocation={location}/>}/>
             <Route exact path = "/login" element = {<Login setUsername={setUsername} setNavigated={setNavigated}/>}/>
             <Route exact path = "/signup" element = {<SignUp setNavigated={setNavigated}/>}/>
-            <Route exact path="/preferences" element={<Preferences preferences={preferences}/>}/>
-            <Route exact path="/profile" element={<Profile preferences={preferences} isAuthenticated={isAuthenticated} userLocation={location}/>} />
+            <Route exact path="/preferences" element={<Preferences preferences={memoizedPreferences}/>}/>
+            <Route exact path="/profile" element={<Profile preferences={memoizedPreferences} isAuthenticated={isAuthenticated} userLocation={location}/>} />
             <Route exact path="/forgot-password" element={<ForgotPassword />} />
            </Routes>
           </section>

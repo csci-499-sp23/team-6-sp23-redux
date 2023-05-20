@@ -30,7 +30,7 @@ function Card(props) {
           e.preventDefault()
           onPositionChange()
         }}
-      className={`${CardCSS.Card} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}`}>
+      className={`${CardCSS.Card} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)} ${props.style}`}>
         
           <img draggable='false' id={CardCSS.Image} src={props.image} alt="hangout-suggestion"></img>
           

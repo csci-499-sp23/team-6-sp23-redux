@@ -1,37 +1,15 @@
 /* NOTE: - Category Display */
 @media (orientation: landscape) {
   .FavoriteCard {
-    display: inline-block;
     height: 55vh;
     width: 20vw;
-    padding: 8px;
-    pointer-events: auto;
-  }
-  
-  .FavoriteCardDrag {
-    display: inline-block;
-    height: 55vh;
-    width: 20vw;
-    padding: 8px;
-    pointer-events: none;
   }
 }
 
 @media (orientation: portrait) {
   .FavoriteCard {
-    display: inline-block;
     height: 20vh;
     width: 30vw;
-    padding: 8px;
-    pointer-events: auto;
-  }
-  
-  .FavoriteCardDrag {
-    display: inline-block;
-    height: 20vh;
-    width: 30vw;
-    padding: 8px;
-    pointer-events: none;
   }
 }
 
@@ -64,11 +42,6 @@
 .CategoryRow {
   border: 1px solid white;
   border-radius: 10px;
-  height: 100%;
-  width: 100%;
-  white-space: nowrap;
-  overflow:hidden;
-  -webkit-overflow-scrolling: touch;
 }
 
 /* NOTE: - Most Recent Display */
