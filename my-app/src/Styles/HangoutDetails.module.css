@@ -201,10 +201,28 @@
 
   @media(orientation: landscape) {
     @media(max-width: 915px) {
+        #TitleText {
+            font-size: 1.2em;
+        }
+
+        .ModalImageContainer {
+            height: 14.25vmax;
+        }
+
+        .InfoLabel {
+            font-size: 1em;
+            width: 5em;
+        }
         
+        .InfoDetail {
+            font-size: 0.8em;
+        }
+
+        .urlBox {
+            font-size: 0.8em;
+        }
     }
   }
 
   @media(orientation: portrait) {
-
   }

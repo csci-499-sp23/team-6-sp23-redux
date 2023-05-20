@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import ZStack from './SubComponents/ZStack';
 import SwipeableCard from './SwipeableCard';
+import Loading from './Loading';
 import EmptyDeck from './EmptyDeck';
 import { getHangouts } from '../Services/HangoutService';
 import { doc, updateDoc, getDoc, setDoc, arrayUnion } from "firebase/firestore";
@@ -18,7 +19,7 @@ function CardDeck(props) {
   const userID = auth.currentUser?.uid
 
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Initialize a set with the ids of all of the user's favorited hangout locations
     const favoritesSet = new Set();
     const initializeFavorites = () => {
@@ -56,7 +57,7 @@ function CardDeck(props) {
       })
     }
 
-  }, [props, empty]);
+  }, [props.favoriteHangouts, props.location, props.categories, props.rangeLimit, props.ratingLimit, empty]);
 
   const removeDuplicates = (array) => {
     let set = new Set();
@@ -154,6 +155,7 @@ const nextCard = () => {
   }
 }
 
+
 const loadDeck = () => {
   let deck = []
   hangoutData.forEach(function(item, index){
@@ -192,25 +194,15 @@ const loadDeck = () => {
 return (
       <>
        { hangoutData.length > 0 ?
-          <ZStack style={CardDeckCSS.CardDeckContainer} items={loadDeck()}>
-          </ZStack>
+          <ZStack style={CardDeckCSS.CardDeckContainer} items={loadDeck()}/>
           :
         //Display for waiting on the fetch request
          loading ?
-          <div className= {CardDeckCSS.loader_container}>
-            <div className={CardDeckCSS.loader}></div>
-            <div className={CardDeckCSS.loader_text}> 
-              Loading
-            <br></br>
-              <div className={CardDeckCSS.loader_subtext}>If loading is slow, try less categories.</div>
-            </div>
-          </div>
+          <Loading/>
          :
          //Display for when no cards left
          displayEmptyDeck ?
-         <div>
-          <EmptyDeck setEmpty = {setEmpty} setLoading = {setLoading}></EmptyDeck>
-         </div>
+          <EmptyDeck setEmpty={setEmpty} setLoading={setLoading}/>
          :
          null
        }

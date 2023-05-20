@@ -116,6 +116,13 @@
     z-index: 1;
 }
 
+.Feedback {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 @media (orientation: landscape) {
 
     @media (max-width: 915px) {

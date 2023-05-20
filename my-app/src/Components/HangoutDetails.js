@@ -4,7 +4,7 @@ import HangoutDetailsCSS from '../Styles/HangoutDetails.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { Rating } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import MapView from './MapView';
 import { getNumLikes } from '../Services/LikesService';
 import { toTitleCase, formatNumber } from '../Exports/Functions';
@@ -17,8 +17,17 @@ function HangoutDetails(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  useEffect(() => {
-    if(props.hangoutID) {
+  const [isMobilePortrait] = useState(() => {
+    return window.matchMedia("(orientation: portrait").matches;
+  })
+
+  const [isMobileLandscape] = useState(() => {
+    let width = 915
+    return window.matchMedia(`(orientation: landscape) and (max-width: ${width}px)`).matches;
+  })
+
+  useMemo(() => {
+    if(props.hangoutID && show) {
       getNumLikes(props.hangoutID).then((res) => {
         setNumberOfLikes(res)
       })
@@ -26,7 +35,7 @@ function HangoutDetails(props) {
         console.log("Error fetching number of likes: ", error)
       })
     }
-  }, [props.hangoutID])
+  }, [props.hangoutID, show])
 
   const isOpen = (status) => {
     if(!status){
@@ -45,7 +54,8 @@ function HangoutDetails(props) {
         onHide={handleClose}
         keyboard={false}
         className={HangoutDetailsCSS.ModalContainer}
-        size={"lg"}
+        size={ isMobileLandscape ? "lg" : isMobilePortrait ? "lg" : "lg"}
+        centered
       >
         <Modal.Header id={HangoutDetailsCSS.ModalHeader}>
           <button className={HangoutDetailsCSS.ModalCloseButton} onClick={handleClose}>
