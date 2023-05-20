@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import ZStack from './SubComponents/ZStack';
 import SwipeableCard from './SwipeableCard';
 import EmptyDeck from './EmptyDeck';
 import { getHangouts } from '../Services/HangoutService';
@@ -151,66 +152,70 @@ const nextCard = () => {
   {
     setDisplayEmptyDeck(true);
   }
-  }
+}
 
-    //Display for waiting on the fetch request
-    if (loading) {
-      return (
-        <div className= {CardDeckCSS.loader_container}>
-          <div className={CardDeckCSS.loader}></div>
-          <div className={CardDeckCSS.loader_text}> 
-            Loading
-          <br></br>
-            <div className={CardDeckCSS.loader_subtext}>If loading is slow, try less categories.</div>
+const loadDeck = () => {
+  let deck = []
+  hangoutData.forEach(function(item, index){
+    let isTop = index === hangoutData.length - 1
+    deck.push (
+      <SwipeableCard
+        style={CardDeckCSS.Card}
+        key={item.key || index}
+        item={item}
+        saveOnSwipeRight={saveOnSwipeRight}
+        nextCard={nextCard}
+        title={item.name} 
+        image={item.image_url} 
+        distance={item.distance} 
+        location={item.location.display_address[0]}
+        location2={item.location.display_address[1]}
+        phone={item.display_phone}
+        rating={item.rating}
+        price={item.price}
+        url={item.url}
+        details={item.categories}
+        isTop={isTop}
+        category={item.category}
+        closed={item.is_closed}
+        latitude={item.coordinates.latitude}
+        longitude={item.coordinates.longitude}
+        userLatitude={parseFloat(props.location.split(',')[0])}
+        userLongitude={parseFloat(props.location.split(',')[1])}
+      >
+      </SwipeableCard>
+    )
+  })
+  return deck
+}
+
+return (
+      <>
+       { hangoutData.length > 0 ?
+          <ZStack style={CardDeckCSS.CardDeckContainer} items={loadDeck()}>
+          </ZStack>
+          :
+        //Display for waiting on the fetch request
+         loading ?
+          <div className= {CardDeckCSS.loader_container}>
+            <div className={CardDeckCSS.loader}></div>
+            <div className={CardDeckCSS.loader_text}> 
+              Loading
+            <br></br>
+              <div className={CardDeckCSS.loader_subtext}>If loading is slow, try less categories.</div>
+            </div>
           </div>
-        </div>
-      )
-    }
-
-    //Display for when no cards left
-    if (displayEmptyDeck) {
-      return (
-        <div>
+         :
+         //Display for when no cards left
+         displayEmptyDeck ?
+         <div>
           <EmptyDeck setEmpty = {setEmpty} setLoading = {setLoading}></EmptyDeck>
-        </div>
-      )
-    }
-
-    return (
-      <div className={CardDeckCSS.CardDeckContainer}>
-        { hangoutData.length > 0 &&
-          hangoutData.map(function(item, index){
-            let isTop = index === hangoutData.length - 1
-            return (
-              <SwipeableCard
-                key={item.key || index}
-                item={item}
-                saveOnSwipeRight={saveOnSwipeRight}
-                nextCard={nextCard}
-                title={item.name} 
-                image={item.image_url} 
-                distance={item.distance} 
-                location={item.location.display_address[0]}
-                location2={item.location.display_address[1]}
-                phone={item.display_phone}
-                rating={item.rating}
-                price={item.price}
-                url={item.url}
-                details={item.categories}
-                isTop={isTop}
-                category={item.category}
-                closed={item.is_closed}
-                latitude={item.coordinates.latitude}
-                longitude={item.coordinates.longitude}
-                userLatitude={parseFloat(props.location.split(',')[0])}
-                userLongitude={parseFloat(props.location.split(',')[1])}
-              >
-              </SwipeableCard>
-            )
-          })
-        }
-      </div>
+         </div>
+         :
+         null
+       }
+      </>
     );
-  }
+}
   
   export default CardDeck;

@@ -63,3 +63,24 @@
       transform: rotate(360deg);
     }
   }
+
+  @media (orientation: landscape) {
+    .Card {
+      width: 30vmax;
+      height: 40vmax;
+    }
+
+    @media (max-width: 915px) {
+      .Card {
+        width: 25vmax;
+        height: 35vmax;
+      }
+    }
+  }
+  
+  @media (orientation: portrait) {
+    .Card {
+      width: 30vmax;
+      height: 40vmax;
+    }
+  }
