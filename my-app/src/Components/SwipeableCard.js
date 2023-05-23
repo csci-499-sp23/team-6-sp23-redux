@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import TinderCard from 'react-tinder-card'
+import SwipeableComponent from "./SubComponents/SwipeableComponent.js";
 import Card from './Card.js'
 import CardCSS from "../Styles/Card.module.css"
 import SwipeFeedback from "./SubComponents/SwipeFeedback.js";
@@ -27,16 +27,14 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
             else if(direction === "left") {
                 setShowFeedback({show: true, accept: false})
             }
-        
+            
             setTimeout(() => {
                 clearInterval(intv)
                 setIsLeft(false);
                 setIsRight(false);
                 setIsDragging(false)
                 nextCard()
-            }, 1500)
-
-            
+            }, 1500)   
         }
     }
 
@@ -52,7 +50,7 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
             setIsLeft(false);
             setIsRight(true);
             setIsDragging(true)
-
+    
         } else if (x < (halfScreenWidth - width)) {
             setIsLeft(true);
             setIsRight(false);
@@ -65,22 +63,18 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
         }
 
     }
-    
+
+    const onTap = () => {
+    }
+     
     return(
     <>
-      <TinderCard
-        onSwipeRequirementUnfulfilled={() => {
-            setIsLeft(false);
-            setIsRight(false);
-            clearInterval(intv)
-            setIsDragging(false)
-        }}
+      <SwipeableComponent 
         onSwipe={(direction) => onSwipe(direction, item)}
-        preventSwipe={['up', 'down']}
-        swipeRequirementType="position"
+        onTap={onTap}
         swipeThreshold={swipeThresholdValue}
-        className={`${CardCSS.TinderCard} ${(props.isTop ? CardCSS.TopCard : CardCSS.OtherCards)}   ${isRight && isDragging ? CardCSS.MockRight : ''}  ${isLeft && isDragging ? CardCSS.MockLeft : ''}`}
-        children={<Card {...props} handleChangePositon={handleChangePositon} handleIntervalUpdate={handleIntervalUpdate} itemID={item.id} />}
+        child={<Card {...props} handleChangePositon={handleChangePositon} handleIntervalUpdate={handleIntervalUpdate} 
+                     itemID={item.id} dragStyle={(isRight && isDragging) ? CardCSS.MockRight : (isLeft && isDragging) ? CardCSS.MockLeft : null}/>}
       />
       { showFeedback.show && <SwipeFeedback hide={setShowFeedback} accept={showFeedback.accept} style={CardCSS.Feedback}/>}
     </>
@@ -90,3 +84,4 @@ function SwipeableCard({saveOnSwipeRight, nextCard, item, ...props}) {
 }
 
 export default SwipeableCard
+

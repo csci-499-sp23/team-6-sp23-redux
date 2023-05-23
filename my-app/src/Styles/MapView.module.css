@@ -9,7 +9,7 @@
 }
 
 #Map {
-    height: 60%;
+    height: 30vh;
     width: 100%;
     border-radius: 5%;
     order: 1;
@@ -17,7 +17,7 @@
 }
 
 #MapDetailsContainer {
-    height: 40%;
+    height: 20vh;
     width: 100%;
     background-color: var(--backgroundColor);
     color: white;
@@ -129,7 +129,40 @@ li {
     @media(max-width: 915px) {
         .TransitOptions {
             gap: 0.2em;
-        }    
+        }
+        
+        .WalkingButton{
+            background-size:50%;
+            display: inline-block;
+            padding: 0;
+            width: 20%;
+        }
+        .BicyclingButton {
+            background-size:50%;
+            width: 20%;
+        }
+        .TransitButton{
+            background-size:50%;
+            display: inline-block;
+            padding: 0;
+            width: 20%;
+        }
+        .DrivingButton{
+            background-size:50%;
+            display: inline-block;
+            padding: 0;
+            width: 20%;
+        }
+        
+        .MapDuration {
+            font-size: 0.9em;
+            color: var(--secondaryColor);
+            text-align: center;
+        }
+        
+        .MapInstructions {
+            font-size: 0.7em;
+        }
     }
   }
 
@@ -166,5 +199,14 @@ li {
         width: 20%;
     }
     
+    .MapDuration {
+        font-size: 1em;
+        color: var(--secondaryColor);
+        text-align: center;
+    }
+    
+    .MapInstructions {
+        font-size: 0.8em;
+    }
 
   }

@@ -65,12 +65,11 @@ function FavoriteCard(props) {
             <div id={FavoriteCardCSS.CardHeader}>
                 <div className={FavoriteCardCSS.Spacer} /> 
                 <div id={FavoriteCardCSS.Title}>{props.title}</div>
-                <div className={FavoriteCardCSS.DeleteAlert}> 
-                    <DeleteAlert deleteHangout={deleteHangout}
-                                 title={props.title} category={props.category} index={props.index} 
-                                 isMostRecent={props.isMostRecent} isCategory={props.isCategory}>
-                    </DeleteAlert> 
-                </div>
+                <DeleteAlert deleteHangout={deleteHangout}
+                             title={props.title} category={props.category} index={props.index} 
+                             isMostRecent={props.isMostRecent} isCategory={props.isCategory}
+                             style={FavoriteCardCSS.DeleteAlert}>
+                </DeleteAlert>    
             </div>
 
             <img id={FavoriteCardCSS.Image} src={props.image} alt="hangout-suggestion"></img>
