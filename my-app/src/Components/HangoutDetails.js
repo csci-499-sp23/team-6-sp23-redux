@@ -9,11 +9,12 @@ import MapView from './MapView';
 import { getNumLikes } from '../Services/LikesService';
 import { toTitleCase, formatNumber } from '../Exports/Functions';
 
-function HangoutDetails(props) {
+function HangoutDetails({...props}) {
   
   const [show, setShow] = useState(false);
   const [copied, setCopied] = useState(false);
   const [numberOfLikes, setNumberOfLikes] = useState(0);
+  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -47,8 +48,8 @@ function HangoutDetails(props) {
   }
 
   return (
-    <div id={HangoutDetailsCSS.HangoutDetailsContainer}>
-  
+    <div id={`${HangoutDetailsCSS.HangoutDetailsContainer}`}>
+      { !show && <button className={HangoutDetailsCSS.ModalInfoButton}  onClick={handleShow} size="sm"></button>  }
       <Modal
         show={show}
         onHide={handleClose}
@@ -123,8 +124,7 @@ function HangoutDetails(props) {
         </Modal.Footer>
 
       </Modal>
-      <button className={HangoutDetailsCSS.ModalInfoButton}  onClick={handleShow} size="sm">
-      </button> 
+     
     </div>
 
   );

@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import DeleteAlertCSS from '../../Styles/DeleteAlert.module.css';
 import FavoriteCardCSS from '../../Styles/FavoriteCard.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-function DeleteAlert({deleteHangout, title, category, index, isMostRecent, isCategory}) {
+function DeleteAlert({style, deleteHangout, title, category, index, isMostRecent, isCategory}) {
     const[show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     return(
-        <React.Fragment>
-            <button className={FavoriteCardCSS.DeleteCardButton} size="sm" onClick={handleShow}>
-                <div className={FavoriteCardCSS.DeleteButtonImage}></div>
-            </button>
+        <div className={style}>
+
+        <FontAwesomeIcon onClick={handleShow} icon={faXmark} color='white' className={FavoriteCardCSS.XMark}/>
+
         <Modal show={show} onHide={handleClose} id={DeleteAlertCSS.AlertContainer}>
             <Modal.Header>
                 <Modal.Title id={DeleteAlertCSS.ModalTitle}>{title}</Modal.Title>
@@ -32,7 +34,7 @@ function DeleteAlert({deleteHangout, title, category, index, isMostRecent, isCat
             </Modal.Footer>
 
         </Modal>
-        </React.Fragment>
+        </div>
     )
 }
 
