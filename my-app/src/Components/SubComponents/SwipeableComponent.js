@@ -116,14 +116,16 @@ function SwipeableComponent({ onSwipe = () => {}, onTap = () => {}, swipeThresho
             x: prevPosition.x + deltaX,
             y: prevPosition.y + deltaY,
         }));
-
+        
+        let swipeX = initialPosition.x - mouseX
         let component = componentRef.current
-        if( mouseX < swipeThreshold && deltaX < 0) {
+
+        if( swipeX > swipeThreshold && deltaX < 0) {
             let direction = 'left';
             component.style.display = 'none';
             onSwipe(direction);
         }
-        else if (mouseX/3 > swipeThreshold && deltaX > 0) {
+        else if (swipeX < -swipeThreshold && deltaX > 0) {
             let direction = 'right';
             component.style.display = 'none';
             onSwipe(direction);
@@ -133,7 +135,10 @@ function SwipeableComponent({ onSwipe = () => {}, onTap = () => {}, swipeThresho
 
     const handleMouseUp = () => {
         setMousePressed(false);
-      
+        setInitialPosition({x: 0, y:0});
+        setMouseX(0);
+        setMouseY(0);
+
         if(position.x === 0 && position.y === 0) {
             onTap()
             return
@@ -141,9 +146,6 @@ function SwipeableComponent({ onSwipe = () => {}, onTap = () => {}, swipeThresho
 
         let component = componentRef.current
         component.style.transition = 'transform 0.75s ease-out'
-        setMouseX(0);
-        setMouseY(0);
-        setInitialPosition({x: 0, y:0});
         setPosition({x:0, y:0});
     }
 

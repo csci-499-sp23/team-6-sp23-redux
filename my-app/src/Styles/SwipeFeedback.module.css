@@ -27,8 +27,8 @@
 }
 
 .AcceptedIconContainer {
-    width: 7vmax;
-    height: 7vmax;
+    width: 5vmax;
+    height: 5vmax;
     border: 3px solid green;
     border-radius: 3.5vmax;
     display: flex;
@@ -37,8 +37,8 @@
 }
 
 .RejectedIconContainer {
-    width: 7vmax;
-    height: 7vmax;
+    width: 5vmax;
+    height: 5vmax;
     border: 3px solid red;
     border-radius: 3.5vmax;
     display: flex;
@@ -60,12 +60,14 @@
 
 .AcceptedMessage {
     color: green;
-    font-size: 7vmax;
+    font-size: 5vmax;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .RejectedMessage {
     color: red;
-    font-size: 7vmax;
+    font-size: 5vmax;
     font-weight: bold;
+    white-space: nowrap;
 }
