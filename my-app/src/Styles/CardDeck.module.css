@@ -8,8 +8,8 @@
 
   @media (orientation: landscape) {
     .Card {
-      width: 30vmax;
-      height: 40vmax;
+      width: 25vmax;
+      height: 35vmax;
     }
 
     @media (max-width: 915px) {
@@ -24,5 +24,12 @@
     .Card {
       width: 30vmax;
       height: 40vmax;
+    }
+
+    @media (max-width: 360px) {
+      .Card {
+        width: 25vmax;
+        height: 35vmax;
+      }
     }
   }

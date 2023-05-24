@@ -162,4 +162,14 @@
     #DistanceContainer {
         font-size: 0.7em;
     }
+
+    @media (max-width: 360px) {
+        #LocationContainer {
+            font-size: 0.65em;
+        }
+        
+        #DistanceContainer {
+            font-size: 0.65em;
+        }
+      }
   }

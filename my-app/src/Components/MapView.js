@@ -21,7 +21,6 @@ function MapView(props) {
             setDuration(durationData)
             setInstructions(instructionsData)
         }
-        console.log(instructionsData)
     }, [setDuration, setInstructions]);
 
     return(
