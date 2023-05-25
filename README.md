@@ -18,7 +18,7 @@ EasyHangOut is a web application designed to make finding recreational spots to 
 
 ### Desktop View
 
-<p float="left">
+<!-- <p float="left">
  <img src='https://hackmd.io/_uploads/rkCZSBhS3.gif' width=450 alt='Spring #1' />
  <img src='https://hackmd.io/_uploads/H1XMBB3Bh.gif' width=450 alt='Spring #2' />
  <img src='https://hackmd.io/_uploads/BkFzBH2Sh.gif' width=450 alt='Spring #3' />
@@ -26,7 +26,28 @@ EasyHangOut is a web application designed to make finding recreational spots to 
  <img src='https://hackmd.io/_uploads/HJfQHSnHn.gif' width=450 alt='Spring #5' />
  <img src='https://hackmd.io/_uploads/H1OmrSnrh.gif' width=450 alt='Spring #6' />
  <img src='https://hackmd.io/_uploads/S1C7Sr2H2.gif' width=450 alt='Spring #7' />
-</p>
+</p> -->
+
+
+<table>
+  <tr>
+    <td><img src='https://hackmd.io/_uploads/rkCZSBhS3.gif' width=450 alt='Spring #1' /></td>
+    <td><img src='https://hackmd.io/_uploads/H1XMBB3Bh.gif' width=450 alt='Spring #2' /></td>
+  </tr>
+  <tr>
+    <td><img src='https://hackmd.io/_uploads/BkFzBH2Sh.gif' width=450 alt='Spring #3' /></td>
+    <td><img src='https://hackmd.io/_uploads/rkpfSH3S3.gif' width=450 alt='Spring #4' /></td>
+  </tr>
+  <tr>
+    <td><img src='https://hackmd.io/_uploads/HJfQHSnHn.gif' width=450 alt='Spring #5' /></td>
+    <td><img src='https://hackmd.io/_uploads/H1OmrSnrh.gif' width=450 alt='Spring #6' /></td>
+  </tr>
+  <tr>
+    <td><img src='https://hackmd.io/_uploads/S1C7Sr2H2.gif' width=450 alt='Spring #7' /></td>
+    <td></td>
+  </tr>
+</table>
+
 
 ## Getting Started
 
